@@ -49,6 +49,11 @@ import AdminDashboard from "./pages/admin/Dashboard";
 import AdminLeads from "./pages/admin/Leads";
 import AdminStudents from "./pages/admin/Students";
 import AdminApplications from "./pages/admin/Applications";
+import AdminTasks from "./pages/admin/Tasks";
+import AdminConsultations from "./pages/admin/Consultations";
+import AdminMessages from "./pages/admin/Messages";
+import AdminReports from "./pages/admin/Reports";
+import AdminSettings from "./pages/admin/Settings";
 
 // Student App Portal
 import StudentLayout from "./layouts/StudentLayout";
@@ -135,12 +140,17 @@ const App = () => (
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           
-          {/* Admin Portal */}
+{/* Admin Portal */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="leads" element={<AdminLeads />} />
             <Route path="students" element={<AdminStudents />} />
             <Route path="applications" element={<AdminApplications />} />
+            <Route path="tasks" element={<AdminTasks />} />
+            <Route path="consultations" element={<AdminConsultations />} />
+            <Route path="messages" element={<AdminMessages />} />
+            <Route path="reports" element={<AdminReports />} />
+            <Route path="settings" element={<AdminSettings />} />
           </Route>
           
           {/* Catch-all */}

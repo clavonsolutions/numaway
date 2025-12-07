@@ -29,7 +29,9 @@ const AdminLayout = () => {
     { label: "Students", href: "/admin/students", icon: GraduationCap },
     { label: "Applications", href: "/admin/applications", icon: FileText },
     { label: "Tasks", href: "/admin/tasks", icon: Calendar },
+    { label: "Consultations", href: "/admin/consultations", icon: Calendar },
     { label: "Messages", href: "/admin/messages", icon: MessageSquare },
+    { label: "Reports", href: "/admin/reports", icon: FileText },
     { label: "Settings", href: "/admin/settings", icon: Settings },
   ];
 
