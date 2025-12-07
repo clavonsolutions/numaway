@@ -31,10 +31,18 @@ const Universities = () => {
                   <div className="h-40 bg-muted relative">
                     <img src={uni.image} alt={uni.name} className="w-full h-full object-cover" />
                     <div className="absolute top-3 right-3 bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1"><Trophy className="w-3 h-3" />#{uni.ranking}</div>
+                    {uni.logo && (
+                      <div className="absolute bottom-3 left-3 w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center p-1">
+                        <img src={uni.logo} alt={`${uni.name} logo`} className="w-full h-full object-contain" />
+                      </div>
+                    )}
                   </div>
                   <div className="p-6">
                     <h3 className="text-lg font-display font-semibold mb-2 group-hover:text-secondary transition-colors">{uni.name}</h3>
-                    <p className="text-muted-foreground text-sm flex items-center gap-1 mb-3"><MapPin className="w-4 h-4" />{uni.city}, {uni.country}</p>
+                    <p className="text-muted-foreground text-sm flex items-center gap-1 mb-3">
+                      <span className="text-lg">{uni.countryFlag}</span>
+                      <MapPin className="w-4 h-4" />{uni.city}, {uni.country}
+                    </p>
                     <div className="flex flex-wrap gap-2">
                       <span className="text-xs bg-muted px-2 py-1 rounded">{uni.type}</span>
                       <span className="text-xs bg-muted px-2 py-1 rounded">{uni.internationalStudents} Intl</span>

@@ -31,11 +31,11 @@ const UniversityCompareTable = ({ initialUniversities = [] }: CompareTableProps)
 
   const compareFields = [
     { key: "ranking", label: "World Ranking", icon: Trophy, render: (u: University) => `#${u.ranking}` },
-    { key: "country", label: "Country", icon: MapPin, render: (u: University) => u.country },
+    { key: "country", label: "Country", icon: MapPin, render: (u: University) => `${u.countryFlag} ${u.country}` },
     { key: "type", label: "Type", icon: GraduationCap, render: (u: University) => u.type },
     { key: "tuition", label: "Tuition (avg/year)", icon: DollarSign, render: (u: University) => u.tuitionRange },
     { key: "acceptance", label: "Acceptance Rate", icon: Award, render: (u: University) => u.acceptanceRate || "N/A" },
-    { key: "students", label: "Students", icon: Briefcase, render: (u: University) => u.students?.toLocaleString() || "N/A" },
+    { key: "students", label: "Students", icon: Briefcase, render: (u: University) => u.students || "N/A" },
     { key: "founded", label: "Founded", icon: Calendar, render: (u: University) => u.founded || "N/A" },
   ];
 
@@ -58,11 +58,19 @@ const UniversityCompareTable = ({ initialUniversities = [] }: CompareTableProps)
             >
               <X className="w-4 h-4" />
             </button>
-            <div className="w-12 h-12 bg-gradient-hero rounded-xl flex items-center justify-center mb-3">
-              <GraduationCap className="w-6 h-6 text-primary-foreground" />
-            </div>
+            {uni.logo ? (
+              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm p-1">
+                <img src={uni.logo} alt={uni.name} className="w-full h-full object-contain" />
+              </div>
+            ) : (
+              <div className="w-12 h-12 bg-gradient-hero rounded-xl flex items-center justify-center mb-3">
+                <GraduationCap className="w-6 h-6 text-primary-foreground" />
+              </div>
+            )}
             <h3 className="font-display font-bold text-sm mb-1 pr-6">{uni.name}</h3>
-            <p className="text-xs text-muted-foreground">{uni.country}</p>
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
+              <span>{uni.countryFlag}</span> {uni.country}
+            </p>
           </motion.div>
         ))}
 
@@ -98,7 +106,9 @@ const UniversityCompareTable = ({ initialUniversities = [] }: CompareTableProps)
                       className="w-full p-2 text-left hover:bg-muted rounded-lg transition-colors"
                     >
                       <div className="font-medium text-sm">{uni.name}</div>
-                      <div className="text-xs text-muted-foreground">{uni.country}</div>
+                      <div className="text-xs text-muted-foreground flex items-center gap-1">
+                        <span>{uni.countryFlag}</span> {uni.country}
+                      </div>
                     </button>
                   ))}
                 </div>

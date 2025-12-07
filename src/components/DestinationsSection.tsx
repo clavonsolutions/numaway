@@ -75,7 +75,7 @@ const DestinationsSection = () => {
           {countries.map((country, index) => (
             <motion.a
               key={country.code}
-              href={`/countries/${country.code}`}
+              href={`/countries/${country.code === "uk" ? "united-kingdom" : country.code === "usa" ? "united-states" : country.code}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

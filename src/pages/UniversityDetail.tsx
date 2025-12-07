@@ -18,10 +18,20 @@ const UniversityDetail = () => {
           <img src={uni.image} alt={uni.name} className="absolute inset-0 w-full h-full object-cover opacity-30" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary to-transparent" />
           <div className="container mx-auto px-4 h-full flex items-end pb-8 relative z-10">
-            <div className="text-primary-foreground">
-              <div className="flex items-center gap-2 mb-2"><Trophy className="w-5 h-5 text-secondary" /><span className="text-secondary font-semibold">#{uni.ranking} {uni.rankingSource}</span></div>
-              <h1 className="text-3xl lg:text-5xl font-display font-bold mb-2">{uni.name}</h1>
-              <p className="flex items-center gap-2 text-primary-foreground/70"><MapPin className="w-4 h-4" />{uni.city}, {uni.country}</p>
+            <div className="flex items-end gap-6">
+              {uni.logo && (
+                <div className="w-20 h-20 bg-white rounded-xl shadow-lg flex items-center justify-center p-2 shrink-0">
+                  <img src={uni.logo} alt={`${uni.name} logo`} className="w-full h-full object-contain" />
+                </div>
+              )}
+              <div className="text-primary-foreground">
+                <div className="flex items-center gap-2 mb-2"><Trophy className="w-5 h-5 text-secondary" /><span className="text-secondary font-semibold">#{uni.ranking} {uni.rankingSource}</span></div>
+                <h1 className="text-3xl lg:text-5xl font-display font-bold mb-2">{uni.name}</h1>
+                <p className="flex items-center gap-2 text-primary-foreground/70">
+                  <span className="text-2xl">{uni.countryFlag}</span>
+                  <MapPin className="w-4 h-4" />{uni.city}, {uni.country}
+                </p>
+              </div>
             </div>
           </div>
         </section>
