@@ -1,9 +1,10 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
+import PageHero from "@/components/PageHero";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { ScrollReveal } from "@/hooks/useScrollAnimation";
 
 const faqs = [
   { 
@@ -51,26 +52,23 @@ const faqs = [
 const FAQ = () => (
   <div className="min-h-screen bg-background">
     <Header />
-    <main className="pt-20">
-      <section className="py-24 bg-gradient-hero text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-4xl lg:text-6xl font-display font-bold mb-6">
-            Frequently Asked Questions
-          </motion.h1>
-          <p className="text-xl text-primary-foreground/70 max-w-2xl mx-auto">
-            Everything you need to know about studying abroad with NUMAWAY. Can't find your answer? Contact us.
-          </p>
-        </div>
-      </section>
+    <main>
+      <PageHero
+        title="Frequently Asked"
+        titleHighlight="Questions"
+        description="Everything you need to know about studying abroad with NUMAWAY. Can't find your answer? Contact us."
+      />
 
       <section className="py-24">
         <div className="container mx-auto px-4 max-w-3xl">
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, i) => (
-              <AccordionItem key={i} value={`faq-${i}`} className="bg-card rounded-xl shadow-soft px-6">
-                <AccordionTrigger className="text-left font-display font-semibold">{faq.q}</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">{faq.a}</AccordionContent>
-              </AccordionItem>
+              <ScrollReveal key={i} animation="fade-up" delay={i * 0.05}>
+                <AccordionItem value={`faq-${i}`} className="bg-card rounded-xl shadow-soft px-6 border-none hover:shadow-card transition-shadow">
+                  <AccordionTrigger className="text-left font-display font-semibold hover:text-secondary transition-colors">{faq.q}</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">{faq.a}</AccordionContent>
+                </AccordionItem>
+              </ScrollReveal>
             ))}
           </Accordion>
         </div>
@@ -78,16 +76,21 @@ const FAQ = () => (
 
       <section className="py-16 bg-muted/50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl font-display font-bold mb-4">Still Have Questions?</h2>
-          <p className="text-muted-foreground mb-6">Our team is here to help. Book a free consultation or send us a message.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" asChild>
-              <a href="/consultation">Book Free Consultation <ArrowRight className="w-4 h-4" /></a>
-            </Button>
-            <Button variant="outline" asChild>
-              <a href="/contact">Contact Us</a>
-            </Button>
-          </div>
+          <ScrollReveal animation="fade-up">
+            <h2 className="text-2xl font-display font-bold mb-4">Still Have Questions?</h2>
+            <p className="text-muted-foreground mb-6">Our team is here to help. Book a free consultation or send us a message.</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button variant="hero" asChild>
+                <a href="/consultation" className="gap-2">
+                  Book Free Consultation 
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </Button>
+              <Button variant="outline" asChild>
+                <a href="/contact">Contact Us</a>
+              </Button>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </main>
