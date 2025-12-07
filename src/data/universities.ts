@@ -3,6 +3,7 @@ export interface University {
   slug: string;
   country: string;
   countrySlug: string;
+  countryFlag: string;
   city: string;
   ranking: number;
   rankingSource: string;
@@ -31,6 +32,7 @@ export const universities: University[] = [
     slug: "university-of-oxford",
     country: "United Kingdom",
     countrySlug: "united-kingdom",
+    countryFlag: "🇬🇧",
     city: "Oxford",
     ranking: 1,
     rankingSource: "THE World University Rankings 2024",
@@ -55,7 +57,7 @@ export const universities: University[] = [
     entryRequirements: ["Strong academics (A*A*A)", "Admissions test", "Interview", "Personal statement"],
     applicationDeadlines: "October 15 (UCAS)",
     image: "https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=800",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Oxford-University-Circlet.svg/150px-Oxford-University-Circlet.svg.png",
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/7/75/University_of_Oxford_coat_of_arms.svg/200px-University_of_Oxford_coat_of_arms.svg.png",
     featured: true
   },
   {
@@ -63,6 +65,7 @@ export const universities: University[] = [
     slug: "university-of-cambridge",
     country: "United Kingdom",
     countrySlug: "united-kingdom",
+    countryFlag: "🇬🇧",
     city: "Cambridge",
     ranking: 2,
     rankingSource: "THE World University Rankings 2024",
@@ -87,7 +90,7 @@ export const universities: University[] = [
     entryRequirements: ["Excellent grades (A*A*A)", "Admissions assessment", "Interview"],
     applicationDeadlines: "October 15 (UCAS)",
     image: "https://images.unsplash.com/photo-1580491934340-b4e0f20aa75c?w=800",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg/150px-Coat_of_Arms_of_the_University_of_Cambridge.svg.png",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg/200px-Coat_of_Arms_of_the_University_of_Cambridge.svg.png",
     featured: true
   },
   {
@@ -95,6 +98,7 @@ export const universities: University[] = [
     slug: "imperial-college-london",
     country: "United Kingdom",
     countrySlug: "united-kingdom",
+    countryFlag: "🇬🇧",
     city: "London",
     ranking: 6,
     rankingSource: "QS World University Rankings 2024",
@@ -119,7 +123,7 @@ export const universities: University[] = [
     entryRequirements: ["A*A*A-AAA", "Relevant subjects", "Personal statement", "Interview (some courses)"],
     applicationDeadlines: "January 31 (UCAS), October 15 (Medicine)",
     image: "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?w=800",
-    logo: "",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Imperial_College_London_crest.svg/200px-Imperial_College_London_crest.svg.png",
     featured: true
   },
   {
@@ -127,6 +131,7 @@ export const universities: University[] = [
     slug: "university-of-manchester",
     country: "United Kingdom",
     countrySlug: "united-kingdom",
+    countryFlag: "🇬🇧",
     city: "Manchester",
     ranking: 32,
     rankingSource: "QS World University Rankings 2024",
@@ -151,7 +156,7 @@ export const universities: University[] = [
     entryRequirements: ["AAA-ABB", "GCSE Maths and English", "Personal statement"],
     applicationDeadlines: "January 31 (UCAS)",
     image: "https://images.unsplash.com/photo-1576495199011-eb94736d05d6?w=800",
-    logo: "",
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/2/28/Manchester_University_coat_of_arms.svg/200px-Manchester_University_coat_of_arms.svg.png",
     featured: true
   },
   {
@@ -159,6 +164,7 @@ export const universities: University[] = [
     slug: "university-of-toronto",
     country: "Canada",
     countrySlug: "canada",
+    countryFlag: "🇨🇦",
     city: "Toronto",
     ranking: 21,
     rankingSource: "QS World University Rankings 2024",
@@ -183,7 +189,7 @@ export const universities: University[] = [
     entryRequirements: ["Strong academic record", "English proficiency", "Supplemental application (some programs)"],
     applicationDeadlines: "January 15",
     image: "https://images.unsplash.com/photo-1569025591259-6b5f2c7bc8bf?w=800",
-    logo: "",
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/200px-Utoronto_coa.svg.png",
     featured: true
   },
   {
@@ -191,6 +197,7 @@ export const universities: University[] = [
     slug: "mcgill-university",
     country: "Canada",
     countrySlug: "canada",
+    countryFlag: "🇨🇦",
     city: "Montreal",
     ranking: 30,
     rankingSource: "QS World University Rankings 2024",
@@ -215,7 +222,7 @@ export const universities: University[] = [
     entryRequirements: ["Strong grades", "English proficiency", "Program-specific requirements"],
     applicationDeadlines: "January 15",
     image: "https://images.unsplash.com/photo-1610901157620-340856d0a50f?w=800",
-    logo: "",
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/2/29/McGill_University_CoA.svg/200px-McGill_University_CoA.svg.png",
     featured: true
   },
   {
@@ -223,6 +230,7 @@ export const universities: University[] = [
     slug: "harvard-university",
     country: "United States",
     countrySlug: "united-states",
+    countryFlag: "🇺🇸",
     city: "Cambridge, MA",
     ranking: 4,
     rankingSource: "QS World University Rankings 2024",
@@ -247,7 +255,7 @@ export const universities: University[] = [
     entryRequirements: ["Exceptional academics", "SAT/ACT", "Essays", "Recommendations", "Interview"],
     applicationDeadlines: "January 1 (Regular), November 1 (Early Action)",
     image: "https://images.unsplash.com/photo-1562774053-701939374585?w=800",
-    logo: "",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Harvard_University_coat_of_arms.svg/200px-Harvard_University_coat_of_arms.svg.png",
     featured: true
   },
   {
@@ -255,6 +263,7 @@ export const universities: University[] = [
     slug: "mit",
     country: "United States",
     countrySlug: "united-states",
+    countryFlag: "🇺🇸",
     city: "Cambridge, MA",
     ranking: 1,
     rankingSource: "QS World University Rankings 2024",
@@ -279,7 +288,7 @@ export const universities: University[] = [
     entryRequirements: ["Exceptional academics", "SAT/ACT", "Strong STEM background", "Essays"],
     applicationDeadlines: "January 1 (Regular), November 1 (Early Action)",
     image: "https://images.unsplash.com/photo-1564979395477-c9ea545ce8e8?w=800",
-    logo: "",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/200px-MIT_logo.svg.png",
     featured: true
   },
   {
@@ -287,6 +296,7 @@ export const universities: University[] = [
     slug: "university-of-melbourne",
     country: "Australia",
     countrySlug: "australia",
+    countryFlag: "🇦🇺",
     city: "Melbourne",
     ranking: 14,
     rankingSource: "QS World University Rankings 2024",
@@ -311,7 +321,7 @@ export const universities: University[] = [
     entryRequirements: ["Strong academic record", "English proficiency", "Prerequisites"],
     applicationDeadlines: "October 31 / April 30",
     image: "https://images.unsplash.com/photo-1567521464027-f127ff144326?w=800",
-    logo: "",
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/University_of_Melbourne_coat_of_arms.svg/200px-University_of_Melbourne_coat_of_arms.svg.png",
     featured: true
   },
   {
@@ -319,6 +329,7 @@ export const universities: University[] = [
     slug: "tu-munich",
     country: "Germany",
     countrySlug: "germany",
+    countryFlag: "🇩🇪",
     city: "Munich",
     ranking: 37,
     rankingSource: "QS World University Rankings 2024",
@@ -343,7 +354,7 @@ export const universities: University[] = [
     entryRequirements: ["Strong grades", "German/English proficiency", "Program requirements"],
     applicationDeadlines: "May 31 / November 30",
     image: "https://images.unsplash.com/photo-1571659058083-be1f4e5e9cf7?w=800",
-    logo: "",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/TUM_Logo_extern_mt.svg/200px-TUM_Logo_extern_mt.svg.png",
     featured: true
   }
 ];

@@ -49,7 +49,20 @@ const CountryDetail = () => {
                 {unis.length > 0 && (
                   <div>
                     <h2 className="text-2xl font-display font-bold mb-6">Top Universities</h2>
-                    <div className="grid sm:grid-cols-2 gap-4">{unis.slice(0, 4).map(u => <a key={u.slug} href={`/universities/${u.slug}`} className="p-4 bg-card rounded-lg shadow-soft hover:shadow-card transition-shadow">{u.name}</a>)}</div>
+                    <div className="grid sm:grid-cols-2 gap-4">{unis.slice(0, 4).map(u => (
+                      <a key={u.slug} href={`/universities/${u.slug}`} className="p-4 bg-card rounded-lg shadow-soft hover:shadow-card transition-shadow flex items-center gap-3">
+                        {u.logo ? (
+                          <div className="w-10 h-10 bg-white rounded-lg shadow flex items-center justify-center p-1 shrink-0">
+                            <img src={u.logo} alt={u.name} className="w-full h-full object-contain" />
+                          </div>
+                        ) : (
+                          <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                            <GraduationCap className="w-5 h-5 text-primary" />
+                          </div>
+                        )}
+                        <span className="font-medium">{u.name}</span>
+                      </a>
+                    ))}</div>
                   </div>
                 )}
               </div>
