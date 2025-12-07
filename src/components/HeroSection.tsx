@@ -28,9 +28,10 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center bg-gradient-hero overflow-hidden pt-20">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse-soft" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1.5s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-foreground/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-secondary/30 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/25 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1.5s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 left-1/4 w-64 h-64 bg-secondary/20 rounded-full blur-2xl animate-float" />
       </div>
 
       {/* Grid pattern overlay */}
@@ -49,10 +50,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-full px-4 py-2 mb-8"
+            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-8"
           >
             <Sparkles className="w-4 h-4 text-secondary" />
-            <span className="text-sm font-medium text-primary-foreground">
+            <span className="text-sm font-medium text-white">
               Human Counsellors + AI Intelligence
             </span>
           </motion.div>
@@ -62,11 +63,11 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-display font-bold text-primary-foreground leading-tight mb-6"
+            className="text-4xl sm:text-5xl lg:text-7xl font-display font-bold text-white leading-tight mb-6"
           >
             Your intelligent pathway to
             <br />
-            <span className="text-gradient-gold">global education.</span>
+            <span className="text-gradient-teal">global education.</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -74,7 +75,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg sm:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-10"
+            className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-10"
           >
             We help students in Nigeria and across Africa discover the right country, 
             university and course – with expert counsellors, powerful AI tools and a 
@@ -114,14 +115,14 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-wrap items-center justify-center gap-3"
           >
-            <span className="text-sm text-primary-foreground/60">Popular:</span>
+            <span className="text-sm text-white/70">Popular:</span>
             {destinations.map((dest) => (
               <a
                 key={dest.slug}
                 href={`/countries/${dest.slug}`}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-primary-foreground/10 hover:bg-primary-foreground/20 border border-primary-foreground/20 rounded-full text-sm text-primary-foreground transition-all hover:scale-105"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full text-sm text-white transition-all hover:scale-105"
               >
-                <span>{dest.flag}</span>
+                <span className="text-lg">{dest.flag}</span>
                 <span>{dest.name}</span>
               </a>
             ))}
@@ -132,7 +133,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex flex-wrap justify-center gap-8 sm:gap-16 mt-16 pt-16 border-t border-primary-foreground/10"
+            className="flex flex-wrap justify-center gap-8 sm:gap-16 mt-16 pt-16 border-t border-white/10"
           >
             {[
               { number: "50+", label: "Partner Universities" },
@@ -144,7 +145,7 @@ const HeroSection = () => {
                 <div className="text-3xl sm:text-4xl font-display font-bold text-secondary mb-1">
                   {stat.number}
                 </div>
-                <div className="text-sm text-primary-foreground/60">{stat.label}</div>
+                <div className="text-sm text-white/70">{stat.label}</div>
               </div>
             ))}
           </motion.div>
