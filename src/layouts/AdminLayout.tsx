@@ -59,9 +59,11 @@ const AdminLayout = () => {
         {/* Logo */}
         <div className="h-16 flex items-center justify-between px-4 border-b border-primary-foreground/10">
           <Link to="/admin" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-gold rounded-xl flex items-center justify-center">
-              <span className="font-display font-bold text-primary text-lg">N</span>
-            </div>
+            <img 
+              src="/favicon.png" 
+              alt="NUMAWAY Admin" 
+              className="w-10 h-10 rounded-xl object-contain"
+            />
             {isSidebarOpen && (
               <span className="font-display font-bold text-lg">Admin</span>
             )}

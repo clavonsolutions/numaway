@@ -29,12 +29,13 @@ const Footer = () => {
     ],
     company: [
       { label: "About NUMAWAY", href: "/about" },
-      { label: "Why NUMAWAY", href: "/why-numaway" },
-      { label: "Our Team", href: "/team" },
+      { label: "Why NUMAWAY", href: "/about/why-numaway" },
+      { label: "Our Team", href: "/about/team" },
       { label: "Careers", href: "/careers" },
       { label: "Resources", href: "/resources" },
       { label: "Contact Us", href: "/contact" },
       { label: "FAQs", href: "/faq" },
+      { label: "Admin Portal", href: "/admin" },
     ],
     legal: [
       { label: "Privacy Policy", href: "/privacy-policy" },
@@ -63,7 +64,8 @@ const Footer = () => {
               <img 
                 src={numawayLogo} 
                 alt="NUMAWAY Education" 
-                className="h-12 w-auto brightness-0 invert"
+                className="h-12 w-auto"
+                style={{ filter: 'drop-shadow(0 0 1px rgba(255,255,255,0.5))' }}
               />
             </a>
             <p className="text-primary-foreground/70 mb-6 leading-relaxed">

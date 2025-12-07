@@ -29,12 +29,12 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
       icon: MapPin,
       links: [
         { label: "All Countries", href: "/countries" },
-        { label: "United Kingdom", href: "/countries/uk" },
-        { label: "United States", href: "/countries/usa" },
-        { label: "Canada", href: "/countries/canada" },
-        { label: "Australia", href: "/countries/australia" },
-        { label: "Germany", href: "/countries/germany" },
-        { label: "Ireland", href: "/countries/ireland" },
+        { label: "🇬🇧 United Kingdom", href: "/countries/united-kingdom" },
+        { label: "🇺🇸 United States", href: "/countries/united-states" },
+        { label: "🇨🇦 Canada", href: "/countries/canada" },
+        { label: "🇦🇺 Australia", href: "/countries/australia" },
+        { label: "🇩🇪 Germany", href: "/countries/germany" },
+        { label: "🇮🇪 Ireland", href: "/countries/ireland" },
       ],
     },
     {
@@ -77,10 +77,10 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
       icon: Briefcase,
       links: [
         { label: "All Services", href: "/services" },
-        { label: "Admissions Consulting", href: "/services/admissions" },
-        { label: "Visa Support", href: "/services/visa" },
-        { label: "Scholarships", href: "/services/scholarships" },
-        { label: "Accommodation", href: "/accommodation" },
+        { label: "Study Abroad Counselling", href: "/services/study-abroad-counselling" },
+        { label: "Application Support", href: "/services/application-support" },
+        { label: "Visa Preparation", href: "/services/visa-preparation" },
+        { label: "Accommodation", href: "/services/accommodation-landing" },
       ],
     },
   ];
@@ -120,9 +120,11 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
             <div className="sticky top-0 bg-background/95 backdrop-blur-sm border-b border-border z-10">
               <div className="flex items-center justify-between p-4">
                 <a href="/" className="flex items-center gap-2" onClick={onClose}>
-                  <div className="w-8 h-8 bg-gradient-gold rounded-lg flex items-center justify-center">
-                    <span className="font-display font-bold text-primary text-sm">N</span>
-                  </div>
+                  <img 
+                    src="/favicon.png" 
+                    alt="NUMAWAY" 
+                    className="h-8 w-8 rounded-lg object-contain"
+                  />
                   <span className="font-display font-bold text-lg">NUMAWAY</span>
                 </a>
                 <button

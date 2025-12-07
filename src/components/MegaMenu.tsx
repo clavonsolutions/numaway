@@ -118,19 +118,19 @@ const MegaMenu = ({ activeMenu, onMenuChange }: MegaMenuProps) => {
           {
             title: "Our Services",
             links: [
-              { label: "Admissions Consulting", href: "/services/admissions" },
-              { label: "Visa & Immigration", href: "/services/visa" },
-              { label: "Scholarships Guidance", href: "/services/scholarships" },
-              { label: "Accommodation Search", href: "/accommodation" },
-              { label: "Pre-departure Support", href: "/services/pre-departure" },
-              { label: "AI-Powered Profiling", href: "/services/ai-profiling" },
+              { label: "Study Abroad Counselling", href: "/services/study-abroad-counselling" },
+              { label: "Application Support", href: "/services/application-support" },
+              { label: "Visa Preparation", href: "/services/visa-preparation" },
+              { label: "Accommodation Support", href: "/services/accommodation-landing" },
+              { label: "Scholarship Guidance", href: "/services/scholarships-funding" },
+              { label: "Exams Support", href: "/services/exams-support" },
             ],
           },
           {
-            title: "For Parents",
+            title: "More",
             links: [
-              { label: "Parent Advisory", href: "/services/parent-advisory" },
-              { label: "Safety & Support", href: "/services/safety" },
+              { label: "Offer Decision Support", href: "/services/offer-decision-support" },
+              { label: "AI Genie", href: "/genie" },
             ],
           },
         ],
