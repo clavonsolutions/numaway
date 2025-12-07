@@ -50,6 +50,14 @@ import AdminLeads from "./pages/admin/Leads";
 import AdminStudents from "./pages/admin/Students";
 import AdminApplications from "./pages/admin/Applications";
 
+// Student App Portal
+import StudentLayout from "./layouts/StudentLayout";
+import StudentDashboard from "./pages/app/Dashboard";
+import StudentApplications from "./pages/app/Applications";
+import StudentDocuments from "./pages/app/Documents";
+import StudentProfile from "./pages/app/Profile";
+import GenieChat from "./pages/app/Genie";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -109,8 +117,14 @@ const App = () => (
           <Route path="/careers" element={<Careers />} />
           <Route path="/careers/:slug" element={<CareerDetail />} />
           
-          {/* App & Genie */}
-          <Route path="/app" element={<AppPage />} />
+          {/* Student App Portal */}
+          <Route path="/app" element={<StudentLayout />}>
+            <Route index element={<StudentDashboard />} />
+            <Route path="applications" element={<StudentApplications />} />
+            <Route path="documents" element={<StudentDocuments />} />
+            <Route path="genie" element={<GenieChat />} />
+            <Route path="profile" element={<StudentProfile />} />
+          </Route>
           <Route path="/genie" element={<GeniePage />} />
           
           {/* Search */}
