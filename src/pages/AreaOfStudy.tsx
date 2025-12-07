@@ -9,7 +9,22 @@ const AreaOfStudy = () => {
   const { slug } = useParams();
   const area = getAreaBySlug(slug || "");
   const areaCourses = getCoursesByArea(slug || "");
-  if (!area) return <div className="min-h-screen flex items-center justify-center">Area not found</div>;
+  if (!area) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pt-20 flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <span className="text-6xl mb-4 block">📖</span>
+            <h1 className="text-4xl font-display font-bold mb-4">Area of Study Not Found</h1>
+            <p className="text-muted-foreground mb-8">The area of study you're looking for doesn't exist.</p>
+            <Button asChild><a href="/courses">View All Courses</a></Button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

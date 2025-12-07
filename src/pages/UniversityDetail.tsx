@@ -8,7 +8,22 @@ import { MapPin, Trophy, Users, Calendar, CheckCircle } from "lucide-react";
 const UniversityDetail = () => {
   const { slug } = useParams();
   const uni = getUniversityBySlug(slug || "");
-  if (!uni) return <div className="min-h-screen flex items-center justify-center">University not found</div>;
+  if (!uni) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pt-20 flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <span className="text-6xl mb-4 block">🎓</span>
+            <h1 className="text-4xl font-display font-bold mb-4">University Not Found</h1>
+            <p className="text-muted-foreground mb-8">The university you're looking for doesn't exist.</p>
+            <Button asChild><a href="/universities">View All Universities</a></Button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

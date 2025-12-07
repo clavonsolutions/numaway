@@ -11,7 +11,22 @@ const CountryDetail = () => {
   const country = getCountryBySlug(slug || "");
   const unis = getUniversitiesByCountry(slug || "");
 
-  if (!country) return <div className="min-h-screen flex items-center justify-center">Country not found</div>;
+  if (!country) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pt-20 flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <span className="text-6xl mb-4 block">🌍</span>
+            <h1 className="text-4xl font-display font-bold mb-4">Country Not Found</h1>
+            <p className="text-muted-foreground mb-8">The country you're looking for doesn't exist.</p>
+            <Button asChild><a href="/countries">View All Countries</a></Button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

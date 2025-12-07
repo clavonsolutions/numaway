@@ -8,7 +8,22 @@ import { Clock, CreditCard, Calendar, CheckCircle } from "lucide-react";
 const ExamDetail = () => {
   const { slug } = useParams();
   const exam = getExamBySlug(slug || "");
-  if (!exam) return <div className="min-h-screen flex items-center justify-center">Exam not found</div>;
+  if (!exam) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pt-20 flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <span className="text-6xl mb-4 block">📝</span>
+            <h1 className="text-4xl font-display font-bold mb-4">Exam Not Found</h1>
+            <p className="text-muted-foreground mb-8">The exam you're looking for doesn't exist.</p>
+            <Button asChild><a href="/exams">View All Exams</a></Button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -47,7 +62,7 @@ const ExamDetail = () => {
                   <h3 className="font-display font-bold mb-4">Ready to Register?</h3>
                   <p className="text-muted-foreground text-sm mb-6">We can help you register and prepare for {exam.name}.</p>
                   <Button variant="hero" className="w-full mb-3" asChild><a href="/consultation">Get Help Registering</a></Button>
-                  <Button variant="outline" className="w-full" asChild><a href="/services/test-prep">Test Prep Services</a></Button>
+                  <Button variant="outline" className="w-full" asChild><a href="/services/exams-support">Test Prep Services</a></Button>
                 </div>
               </div>
             </div>

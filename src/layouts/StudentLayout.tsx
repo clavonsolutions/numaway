@@ -20,9 +20,11 @@ const StudentLayout = () => {
       <header className="bg-card border-b border-border sticky top-0 z-50">
         <div className="flex items-center justify-between px-4 lg:px-6 h-16">
           <Link to="/app" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">N</span>
-            </div>
+            <img 
+              src="/favicon.png" 
+              alt="NUMAWAY" 
+              className="w-8 h-8 rounded-lg object-contain"
+            />
             <span className="font-display font-bold text-lg">NUMAWAY</span>
           </Link>
           
