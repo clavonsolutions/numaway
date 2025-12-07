@@ -6,96 +6,105 @@
 
 @layer base {
   :root {
-    /* NUMAWAY Brand Colors */
-    --background: 40 33% 98%;
-    --foreground: 222 47% 11%;
+    /* NUMAWAY Brand Colors - Teal & Navy */
+    --background: 0 0% 100%;
+    --foreground: 200 60% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 200 60% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 200 60% 15%;
 
-    /* Deep Navy - Trust & Education */
-    --primary: 222 60% 18%;
-    --primary-foreground: 40 33% 98%;
+    /* Deep Navy - Primary brand color */
+    --primary: 200 60% 20%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Warm Gold - Aspiration & Success */
-    --secondary: 38 92% 50%;
-    --secondary-foreground: 222 60% 18%;
+    /* Teal - Secondary brand color */
+    --secondary: 173 58% 39%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 200 20% 96%;
+    --muted-foreground: 200 15% 46%;
 
-    /* Teal accent for highlights */
-    --accent: 173 80% 40%;
+    /* Lighter teal accent */
+    --accent: 173 45% 55%;
     --accent-foreground: 0 0% 100%;
+
+    /* Gold for CTAs and highlights */
+    --gold: 38 92% 50%;
+    --gold-foreground: 200 60% 15%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 222 60% 18%;
+    --border: 200 20% 91%;
+    --input: 200 20% 91%;
+    --ring: 173 58% 39%;
 
     --radius: 0.75rem;
 
-    /* Custom tokens */
-    --gradient-hero: linear-gradient(135deg, hsl(222 60% 18%) 0%, hsl(222 45% 28%) 100%);
+    /* Custom NUMAWAY tokens */
+    --gradient-hero: linear-gradient(135deg, hsl(200 60% 20%) 0%, hsl(200 50% 28%) 100%);
+    --gradient-teal: linear-gradient(135deg, hsl(173 58% 39%) 0%, hsl(173 45% 50%) 100%);
     --gradient-gold: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(28 90% 55%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(40 33% 98%) 100%);
-    --shadow-soft: 0 4px 20px -4px hsl(222 60% 18% / 0.1);
-    --shadow-card: 0 10px 40px -10px hsl(222 60% 18% / 0.15);
-    --shadow-glow: 0 0 60px hsl(38 92% 50% / 0.3);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(200 20% 98%) 100%);
+    --shadow-soft: 0 4px 20px -4px hsl(200 60% 20% / 0.1);
+    --shadow-card: 0 10px 40px -10px hsl(200 60% 20% / 0.15);
+    --shadow-glow: 0 0 60px hsl(173 58% 39% / 0.3);
+    --shadow-gold: 0 0 40px hsl(38 92% 50% / 0.4);
 
     /* Sidebar defaults */
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-foreground: 200 60% 20%;
+    --sidebar-primary: 200 60% 20%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 173 58% 39%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 200 20% 91%;
+    --sidebar-ring: 173 58% 39%;
   }
 
   .dark {
-    --background: 222 47% 8%;
-    --foreground: 40 33% 98%;
+    --background: 200 50% 8%;
+    --foreground: 0 0% 98%;
 
-    --card: 222 47% 11%;
-    --card-foreground: 40 33% 98%;
+    --card: 200 50% 11%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 40 33% 98%;
+    --popover: 200 50% 11%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 38 92% 50%;
-    --primary-foreground: 222 60% 18%;
+    --primary: 173 58% 39%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 222 30% 25%;
-    --secondary-foreground: 40 33% 98%;
+    --secondary: 200 40% 25%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 222 30% 18%;
-    --muted-foreground: 220 14% 70%;
+    --muted: 200 30% 18%;
+    --muted-foreground: 200 14% 70%;
 
-    --accent: 173 80% 40%;
+    --accent: 173 45% 55%;
     --accent-foreground: 0 0% 100%;
+
+    --gold: 38 92% 50%;
+    --gold-foreground: 200 60% 15%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 222 30% 20%;
-    --input: 222 30% 20%;
-    --ring: 38 92% 50%;
+    --border: 200 30% 20%;
+    --input: 200 30% 20%;
+    --ring: 173 58% 39%;
 
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 38 92% 50%;
-    --sidebar-primary-foreground: 222 60% 18%;
-    --sidebar-accent: 222 30% 15%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 222 30% 20%;
-    --sidebar-ring: 38 92% 50%;
+    --sidebar-background: 200 50% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 173 58% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 200 30% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 200 30% 20%;
+    --sidebar-ring: 173 58% 39%;
   }
 }
 
@@ -123,8 +132,17 @@
     background-image: var(--gradient-gold);
   }
 
+  .text-gradient-teal {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-teal);
+  }
+
   .bg-gradient-hero {
     background-image: var(--gradient-hero);
+  }
+
+  .bg-gradient-teal {
+    background-image: var(--gradient-teal);
   }
 
   .bg-gradient-gold {
@@ -141,6 +159,10 @@
 
   .shadow-glow {
     box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
   }
 
   .animate-float {

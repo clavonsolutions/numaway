@@ -25,7 +25,7 @@ const Header = () => {
               <img 
                 src={numawayLogo} 
                 alt="NUMAWAY Education - Study Abroad Support for Nigerian Students" 
-                className="h-10 sm:h-12 w-auto"
+                className="h-12 sm:h-14 w-auto object-contain"
               />
             </a>
 
