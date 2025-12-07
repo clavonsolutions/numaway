@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, MapPin, GraduationCap, BookOpen, FileText, Briefcase, ArrowRight } from "lucide-react";
 import { countries } from "@/data/countries";
@@ -6,9 +5,10 @@ import { countries } from "@/data/countries";
 interface MegaMenuProps {
   activeMenu: string | null;
   onMenuChange: (menu: string | null) => void;
+  isScrolled?: boolean;
 }
 
-const MegaMenu = ({ activeMenu, onMenuChange }: MegaMenuProps) => {
+const MegaMenu = ({ activeMenu, onMenuChange, isScrolled = true }: MegaMenuProps) => {
   const menuItems = [
     {
       id: "destinations",
@@ -150,15 +150,19 @@ const MegaMenu = ({ activeMenu, onMenuChange }: MegaMenuProps) => {
           onMouseLeave={() => onMenuChange(null)}
         >
           <button
-            className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+            className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 ${
               activeMenu === item.id
-                ? "text-foreground bg-muted"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                ? isScrolled 
+                  ? "text-foreground bg-muted" 
+                  : "text-white bg-white/15"
+                : isScrolled
+                  ? "text-muted-foreground hover:text-foreground hover:bg-muted"
+                  : "text-white/80 hover:text-white hover:bg-white/10"
             }`}
           >
             {item.label}
             <ChevronDown
-              className={`w-4 h-4 transition-transform ${
+              className={`w-4 h-4 transition-transform duration-300 ${
                 activeMenu === item.id ? "rotate-180" : ""
               }`}
             />
@@ -167,26 +171,26 @@ const MegaMenu = ({ activeMenu, onMenuChange }: MegaMenuProps) => {
           <AnimatePresence>
             {activeMenu === item.id && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.15 }}
-                className="absolute top-full left-0 mt-2 w-[480px] bg-card rounded-2xl shadow-card border border-border overflow-hidden z-50"
+                initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+                className="absolute top-full left-0 mt-3 w-[500px] bg-card/95 backdrop-blur-xl rounded-2xl shadow-elevated border border-border/50 overflow-hidden z-50"
               >
                 {/* Countries Grid */}
                 {item.id === "destinations" && item.content.featured && (
                   <div className="p-6">
-                    <p className="text-sm text-muted-foreground mb-4">
+                    <p className="text-sm text-muted-foreground mb-5">
                       {item.content.description}
                     </p>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-2">
                       {item.content.featured.map((country) => (
                         <a
                           key={country.slug}
                           href={`/countries/${country.slug}`}
-                          className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors group"
+                          className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted/80 transition-all duration-300 group hover:-translate-y-0.5"
                         >
-                          <span className="text-2xl">{country.flag}</span>
+                          <span className="text-2xl group-hover:scale-110 transition-transform">{country.flag}</span>
                           <div>
                             <div className="font-medium group-hover:text-secondary transition-colors">
                               {country.name}
@@ -200,10 +204,10 @@ const MegaMenu = ({ activeMenu, onMenuChange }: MegaMenuProps) => {
                     </div>
                     <a
                       href={item.content.allLink}
-                      className="flex items-center justify-center gap-2 mt-4 py-3 text-sm font-medium text-secondary hover:underline"
+                      className="flex items-center justify-center gap-2 mt-5 py-3 text-sm font-medium text-secondary hover:text-secondary/80 transition-colors group"
                     >
                       {item.content.allLabel}
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </a>
                   </div>
                 )}
@@ -211,18 +215,18 @@ const MegaMenu = ({ activeMenu, onMenuChange }: MegaMenuProps) => {
                 {/* Sections Grid */}
                 {item.content.sections && (
                   <div className="p-6">
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-2 gap-8">
                       {item.content.sections.map((section, index) => (
                         <div key={index}>
-                          <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+                          <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
                             {section.title}
                           </h4>
-                          <ul className="space-y-2">
+                          <ul className="space-y-2.5">
                             {section.links.map((link) => (
                               <li key={link.href}>
                                 <a
                                   href={link.href}
-                                  className="block text-sm text-foreground hover:text-secondary transition-colors"
+                                  className="block text-sm text-foreground hover:text-secondary transition-colors hover:translate-x-1 transform duration-200"
                                 >
                                   {link.label}
                                 </a>
@@ -232,13 +236,13 @@ const MegaMenu = ({ activeMenu, onMenuChange }: MegaMenuProps) => {
                         </div>
                       ))}
                     </div>
-                    <div className="mt-6 pt-4 border-t border-border">
+                    <div className="mt-6 pt-5 border-t border-border/50">
                       <a
                         href={item.content.allLink}
-                        className="flex items-center gap-2 text-sm font-medium text-secondary hover:underline"
+                        className="flex items-center gap-2 text-sm font-medium text-secondary hover:text-secondary/80 transition-colors group"
                       >
                         {item.content.allLabel}
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </a>
                     </div>
                   </div>
@@ -252,7 +256,11 @@ const MegaMenu = ({ activeMenu, onMenuChange }: MegaMenuProps) => {
       {/* Resources Link (no mega menu) */}
       <a
         href="/resources"
-        className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
+        className={`px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 ${
+          isScrolled
+            ? "text-muted-foreground hover:text-foreground hover:bg-muted"
+            : "text-white/80 hover:text-white hover:bg-white/10"
+        }`}
       >
         Resources
       </a>
