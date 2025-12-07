@@ -34,6 +34,7 @@ const Footer = () => {
       { label: "Blog", href: "/resources" },
       { label: "Contact Us", href: "/contact" },
       { label: "FAQs", href: "/faq" },
+      { label: "Admin Portal", href: "/admin" },
     ],
     legal: [
       { label: "Privacy Policy", href: "/privacy-policy" },

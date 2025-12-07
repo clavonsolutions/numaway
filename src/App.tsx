@@ -43,6 +43,13 @@ import Disclaimer from "./pages/Disclaimer";
 import Scholarships from "./pages/Scholarships";
 import Search from "./pages/Search";
 
+// Admin
+import AdminLayout from "./layouts/AdminLayout";
+import AdminDashboard from "./pages/admin/Dashboard";
+import AdminLeads from "./pages/admin/Leads";
+import AdminStudents from "./pages/admin/Students";
+import AdminApplications from "./pages/admin/Applications";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -113,6 +120,14 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          
+          {/* Admin Portal */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="leads" element={<AdminLeads />} />
+            <Route path="students" element={<AdminStudents />} />
+            <Route path="applications" element={<AdminApplications />} />
+          </Route>
           
           {/* Catch-all */}
           <Route path="*" element={<NotFound />} />
