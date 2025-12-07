@@ -36,6 +36,12 @@ import Cookies from "./pages/Cookies";
 import Sitemap from "./pages/Sitemap";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Team from "./pages/Team";
+import WhyNumaway from "./pages/WhyNumaway";
+import ForgotPassword from "./pages/ForgotPassword";
+import Disclaimer from "./pages/Disclaimer";
+import Scholarships from "./pages/Scholarships";
+import Search from "./pages/Search";
 
 const queryClient = new QueryClient();
 
@@ -51,17 +57,21 @@ const App = () => (
           
           {/* About & Legal */}
           <Route path="/about" element={<About />} />
+          <Route path="/about/team" element={<Team />} />
+          <Route path="/about/why-numaway" element={<WhyNumaway />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/cookies" element={<Cookies />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/faq" element={<FAQ />} />
           
           {/* Services */}
           <Route path="/services" element={<Services />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
+          <Route path="/scholarships" element={<Scholarships />} />
           
           {/* Countries */}
           <Route path="/countries" element={<Countries />} />
@@ -96,9 +106,13 @@ const App = () => (
           <Route path="/app" element={<AppPage />} />
           <Route path="/genie" element={<GeniePage />} />
           
+          {/* Search */}
+          <Route path="/search" element={<Search />} />
+          
           {/* Auth */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           
           {/* Catch-all */}
           <Route path="*" element={<NotFound />} />
