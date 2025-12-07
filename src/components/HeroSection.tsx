@@ -1,9 +1,28 @@
 import { motion } from "framer-motion";
 import { Search, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
-  const countries = ["UK", "USA", "Canada", "Australia", "Germany", "Ireland"];
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const destinations = [
+    { name: "United Kingdom", flag: "🇬🇧", slug: "united-kingdom" },
+    { name: "Canada", flag: "🇨🇦", slug: "canada" },
+    { name: "United States", flag: "🇺🇸", slug: "united-states" },
+    { name: "Australia", flag: "🇦🇺", slug: "australia" },
+    { name: "Germany", flag: "🇩🇪", slug: "germany" },
+    { name: "Ireland", flag: "🇮🇪", slug: "ireland" },
+  ];
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center bg-gradient-hero overflow-hidden pt-20">
@@ -34,7 +53,7 @@ const HeroSection = () => {
           >
             <Sparkles className="w-4 h-4 text-secondary" />
             <span className="text-sm font-medium text-primary-foreground">
-              AI-Powered Education Guidance
+              Human Counsellors + AI Intelligence
             </span>
           </motion.div>
 
@@ -45,9 +64,9 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-7xl font-display font-bold text-primary-foreground leading-tight mb-6"
           >
-            Your Global Education
+            Your intelligent pathway to
             <br />
-            <span className="text-gradient-gold">Journey Starts Here</span>
+            <span className="text-gradient-gold">global education.</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -57,12 +76,14 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg sm:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-10"
           >
-            Discover world-class universities, find the perfect course, and get expert
-            guidance for your study abroad dreams. Powered by AI, delivered by humans.
+            We help students in Nigeria and across Africa discover the right country, 
+            university and course – with expert counsellors, powerful AI tools and a 
+            seamless end-to-end process.
           </motion.p>
 
           {/* Search Bar */}
-          <motion.div
+          <motion.form
+            onSubmit={handleSearch}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -73,16 +94,18 @@ const HeroSection = () => {
                 <Search className="w-5 h-5 text-muted-foreground" />
                 <input
                   type="text"
-                  placeholder="Search universities, courses, or countries..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search universities, courses or countries…"
                   className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground py-3"
                 />
               </div>
-              <Button variant="hero" size="lg" className="hidden sm:flex">
+              <Button type="submit" variant="hero" size="lg" className="hidden sm:flex">
                 Search
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </div>
-          </motion.div>
+          </motion.form>
 
           {/* Popular destinations */}
           <motion.div
@@ -92,13 +115,14 @@ const HeroSection = () => {
             className="flex flex-wrap items-center justify-center gap-3"
           >
             <span className="text-sm text-primary-foreground/60">Popular:</span>
-            {countries.map((country) => (
+            {destinations.map((dest) => (
               <a
-                key={country}
-                href={`/countries/${country.toLowerCase()}`}
-                className="px-4 py-2 bg-primary-foreground/10 hover:bg-primary-foreground/20 border border-primary-foreground/20 rounded-full text-sm text-primary-foreground transition-all hover:scale-105"
+                key={dest.slug}
+                href={`/countries/${dest.slug}`}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary-foreground/10 hover:bg-primary-foreground/20 border border-primary-foreground/20 rounded-full text-sm text-primary-foreground transition-all hover:scale-105"
               >
-                {country}
+                <span>{dest.flag}</span>
+                <span>{dest.name}</span>
               </a>
             ))}
           </motion.div>
@@ -112,9 +136,9 @@ const HeroSection = () => {
           >
             {[
               { number: "50+", label: "Partner Universities" },
-              { number: "10K+", label: "Students Placed" },
+              { number: "10K+", label: "Students Guided" },
               { number: "15+", label: "Countries" },
-              { number: "98%", label: "Success Rate" },
+              { number: "98%", label: "Visa Success Rate" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="text-3xl sm:text-4xl font-display font-bold text-secondary mb-1">

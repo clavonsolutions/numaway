@@ -4,6 +4,7 @@ import { Search, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MobileNav from "./MobileNav";
 import MegaMenu from "./MegaMenu";
+import numawayLogo from "@/assets/numaway-logo.png";
 
 const Header = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -20,13 +21,12 @@ const Header = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <a href="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-gold rounded-xl flex items-center justify-center shadow-soft">
-                <span className="font-display font-bold text-primary text-lg">N</span>
-              </div>
-              <span className="font-display font-bold text-xl text-foreground">
-                NUMAWAY
-              </span>
+            <a href="/" className="flex items-center">
+              <img 
+                src={numawayLogo} 
+                alt="NUMAWAY Education - Study Abroad Support for Nigerian Students" 
+                className="h-10 sm:h-12 w-auto"
+              />
             </a>
 
             {/* Desktop Navigation - Mega Menu */}
@@ -46,7 +46,7 @@ const Header = () => {
                 <a href="/login">Login</a>
               </Button>
               <Button variant="gold" size="sm" className="hidden sm:inline-flex" asChild>
-                <a href="/consultation">Free Consultation</a>
+                <a href="/consultation">Book Free Consultation</a>
               </Button>
               
               {/* Mobile Menu Button */}
