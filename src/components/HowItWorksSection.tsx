@@ -1,36 +1,37 @@
 import { motion } from "framer-motion";
-import { Search, UserCheck, FileText, Plane } from "lucide-react";
+import { UserCheck, Sparkles, FileText, Plane, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const steps = [
   {
-    icon: Search,
+    icon: UserCheck,
     number: "01",
-    title: "Explore",
-    description: "Browse universities, courses, and countries that match your goals and preferences.",
+    title: "Understand You",
+    description: "We learn your background, grades, goals, budget and timeline.",
     color: "text-secondary",
     bgColor: "bg-secondary/10",
   },
   {
-    icon: UserCheck,
+    icon: Sparkles,
     number: "02",
-    title: "Get Matched",
-    description: "Our AI-powered system and expert counsellors find the perfect programs for you.",
+    title: "Explore Options (with Genie)",
+    description: "Use our AI Genie and expert counsellors to discover the best-fit countries, universities and courses.",
     color: "text-accent",
     bgColor: "bg-accent/10",
   },
   {
     icon: FileText,
     number: "03",
-    title: "Apply",
-    description: "Submit applications with our streamlined process. We handle the complex paperwork.",
+    title: "Build a Winning Application",
+    description: "We help you prepare documents, apply to multiple options and track every decision.",
     color: "text-primary",
     bgColor: "bg-primary/10",
   },
   {
     icon: Plane,
     number: "04",
-    title: "Fly & Thrive",
-    description: "Get visa support, pre-departure guidance, and arrive ready to succeed abroad.",
+    title: "Visa, Accommodation & Travel",
+    description: "We guide you through visa preparation, housing options and pre-departure planning.",
     color: "text-secondary",
     bgColor: "bg-secondary/10",
   },
@@ -49,14 +50,14 @@ const HowItWorksSection = () => {
           className="text-center mb-16"
         >
           <span className="inline-block text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
-            How It Works
+            How NUMAWAY Works
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-foreground mb-4">
-            Your Journey in 4 Simple Steps
+            A Simple, Guided Journey
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            From dreaming to departure, we guide you every step of the way with
-            transparent support and zero hidden fees.
+            From idea to arrival – we guide you every step of the way with structured 
+            support and complete transparency.
           </p>
         </motion.div>
 
@@ -100,6 +101,21 @@ const HowItWorksSection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mt-12"
+        >
+          <Button variant="hero" size="lg" asChild>
+            <a href="/consultation">
+              Book a Free Consultation
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </Button>
+        </motion.div>
       </div>
     </section>
   );
