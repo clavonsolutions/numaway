@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { UserCheck, Sparkles, FileText, Plane, ArrowRight, ArrowLeft, Check } from "lucide-react";
+import { UserCheck, Sparkles, FileText, Plane, ArrowRight, ArrowLeft, Check, Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const steps = [
@@ -64,9 +64,37 @@ const steps = [
 
 const HowItWorksSection = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const nextStep = () => setCurrentStep((c) => Math.min(steps.length - 1, c + 1));
+  const nextStep = useCallback(() => {
+    setCurrentStep((c) => (c + 1) % steps.length);
+  }, []);
+  
   const prevStep = () => setCurrentStep((c) => Math.max(0, c - 1));
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying || isPaused) return;
+
+    const interval = setInterval(() => {
+      nextStep();
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, isPaused, nextStep]);
+
+  const handleStepClick = (index: number) => {
+    setCurrentStep(index);
+    setIsAutoPlaying(false);
+  };
+
+  const toggleAutoPlay = () => {
+    setIsAutoPlaying(!isAutoPlaying);
+    if (!isAutoPlaying) {
+      setIsPaused(false);
+    }
+  };
 
   return (
     <section className="py-24 bg-gradient-to-br from-muted/30 via-background to-muted/50 overflow-hidden">
@@ -116,7 +144,9 @@ const HowItWorksSection = () => {
                 return (
                   <motion.button
                     key={step.title}
-                    onClick={() => setCurrentStep(index)}
+                    onClick={() => handleStepClick(index)}
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
                     className="flex flex-col items-center group cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -236,7 +266,11 @@ const HowItWorksSection = () => {
           </AnimatePresence>
 
           {/* Navigation Buttons */}
-          <div className="flex items-center justify-between mt-8">
+          <div 
+            className="flex items-center justify-between mt-8"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             <Button
               variant="outline"
               size="lg"
@@ -248,27 +282,48 @@ const HowItWorksSection = () => {
               Previous
             </Button>
 
-            <div className="flex items-center gap-2">
-              {steps.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentStep(idx)}
-                  className={`
-                    w-2.5 h-2.5 rounded-full transition-all duration-300
-                    ${idx === currentStep 
-                      ? "bg-primary w-8" 
-                      : "bg-border hover:bg-muted-foreground"
-                    }
-                  `}
-                />
-              ))}
+            <div className="flex items-center gap-3">
+              {/* Auto-play toggle */}
+              <button
+                onClick={toggleAutoPlay}
+                className={`
+                  w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300
+                  ${isAutoPlaying 
+                    ? "bg-secondary/20 text-secondary" 
+                    : "bg-muted text-muted-foreground hover:bg-muted-foreground/20"
+                  }
+                `}
+                title={isAutoPlaying ? "Pause auto-play" : "Resume auto-play"}
+              >
+                {isAutoPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+              </button>
+
+              {/* Progress dots */}
+              <div className="flex items-center gap-2">
+                {steps.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleStepClick(idx)}
+                    className={`
+                      h-2.5 rounded-full transition-all duration-300
+                      ${idx === currentStep 
+                        ? "bg-secondary w-8" 
+                        : "bg-border hover:bg-muted-foreground w-2.5"
+                      }
+                    `}
+                  />
+                ))}
+              </div>
             </div>
 
             {currentStep < steps.length - 1 ? (
               <Button
                 variant="hero"
                 size="lg"
-                onClick={nextStep}
+                onClick={() => {
+                  nextStep();
+                  setIsAutoPlaying(false);
+                }}
                 className="gap-2"
               >
                 Next Step

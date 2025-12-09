@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Search, ArrowRight, Sparkles, Star, Smartphone, BookOpen, Brain, FileCheck } from "lucide-react";
+import { Search, ArrowRight, Sparkles, Star, BookOpen, Brain, FileCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -303,148 +303,177 @@ const HeroSection = () => {
         </div>
       </section>
 
-      {/* App Showcase Section */}
-      <section className="py-24 bg-gradient-to-b from-background via-muted/30 to-background relative overflow-hidden">
-        {/* Background decorations */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-secondary/5 blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gold/5 blur-3xl" />
+      {/* App Showcase Section - Stripe-inspired */}
+      <section className="py-24 lg:py-32 bg-gradient-to-b from-muted/40 via-background to-background relative overflow-hidden">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 pointer-events-none opacity-30">
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--border)) 1px, transparent 0)`,
+              backgroundSize: '40px 40px'
+            }}
+          />
         </div>
 
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <div className="inline-flex items-center gap-2 bg-secondary/10 border border-secondary/20 rounded-full px-4 py-2 mb-6">
-              <Smartphone className="w-4 h-4 text-secondary" />
-              <span className="text-sm font-medium text-secondary">NUMAWAY App</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-foreground mb-6">
-              Apply with <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-accent">confidence</span>
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Our app empowers you to make smart academic decisions with AI-powered tools and expert guidance.
-            </p>
-          </motion.div>
-
-          {/* App Features Grid */}
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto mb-16">
-            {appFeatures.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-6 hover:border-secondary/30 hover:shadow-xl hover:shadow-secondary/5 transition-all duration-300"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <feature.icon className="w-6 h-6 text-secondary" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Phone Mockup with CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative max-w-4xl mx-auto"
-          >
-            <div className="bg-gradient-to-br from-primary/5 via-secondary/5 to-gold/5 rounded-3xl p-8 lg:p-12 border border-border/50">
-              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-                {/* Phone Mockup */}
-                <div className="relative flex-shrink-0">
-                  <div className="relative w-[240px] h-[480px] bg-gradient-to-b from-gray-900 to-gray-800 rounded-[3rem] p-3 shadow-2xl">
-                    {/* Phone frame */}
-                    <div className="absolute top-6 left-1/2 -translate-x-1/2 w-20 h-6 bg-gray-900 rounded-full z-10" />
-                    {/* Screen */}
-                    <div className="w-full h-full bg-gradient-to-b from-secondary to-primary rounded-[2.5rem] overflow-hidden">
-                      <div className="p-4 pt-10">
-                        <div className="bg-white/20 backdrop-blur rounded-xl p-3 mb-3">
-                          <div className="flex items-center gap-2 text-white text-xs mb-2">
-                            <Search className="w-3 h-3" />
-                            <span className="opacity-70">Find courses...</span>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Phone Mockup - Left Side */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+              className="relative flex justify-center lg:justify-end order-2 lg:order-1"
+            >
+              <div className="relative">
+                {/* Phone Device */}
+                <div className="relative w-[280px] sm:w-[300px] h-[560px] sm:h-[600px]">
+                  {/* Phone Frame */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e] via-[#16213e] to-[#0f0f23] rounded-[3rem] shadow-2xl shadow-primary/20">
+                    {/* Dynamic Island */}
+                    <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-7 bg-black rounded-full z-20" />
+                    
+                    {/* Screen bezel */}
+                    <div className="absolute inset-2.5 bg-gradient-to-b from-secondary via-secondary/90 to-primary rounded-[2.5rem] overflow-hidden">
+                      {/* App UI Inside Phone */}
+                      <div className="p-5 pt-12 h-full flex flex-col">
+                        {/* Search Bar */}
+                        <div className="bg-white/15 backdrop-blur-md rounded-xl p-3.5 mb-4 border border-white/10">
+                          <div className="flex items-center gap-2.5 text-white/80 text-sm">
+                            <Search className="w-4 h-4" />
+                            <span>Find courses...</span>
                           </div>
                         </div>
-                        <div className="space-y-2">
-                          {['MSc Data Science', 'MBA Finance', 'BSc Computer Science'].map((course, i) => (
-                            <div key={i} className="bg-white/10 backdrop-blur rounded-lg p-3">
-                              <div className="text-white text-xs font-medium">{course}</div>
-                              <div className="text-white/60 text-[10px] mt-1">Top Universities</div>
-                            </div>
+
+                        {/* Course Cards */}
+                        <div className="space-y-3 flex-1">
+                          {[
+                            { name: 'MSc Data Science', badge: 'Popular' },
+                            { name: 'MBA Finance', badge: null },
+                            { name: 'BSc Computer Science', badge: null }
+                          ].map((course, i) => (
+                            <motion.div 
+                              key={i} 
+                              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/5"
+                              initial={{ opacity: 0, y: 10 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.3 + i * 0.1 }}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <div className="text-white text-sm font-medium">{course.name}</div>
+                                  <div className="text-white/50 text-xs mt-1">Top Universities</div>
+                                </div>
+                                {course.badge && (
+                                  <span className="text-[10px] px-2 py-1 bg-gold/20 text-gold rounded-full font-medium">
+                                    {course.badge}
+                                  </span>
+                                )}
+                              </div>
+                            </motion.div>
                           ))}
                         </div>
                       </div>
                     </div>
                   </div>
-                  {/* Floating elements */}
-                  <motion.div
-                    className="absolute -right-6 top-20 bg-white rounded-xl shadow-lg p-3 border"
-                    animate={{ y: [0, -8, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                        <FileCheck className="w-4 h-4 text-green-600" />
-                      </div>
-                      <div>
-                        <div className="text-xs font-medium text-foreground">Easy to get in</div>
-                        <div className="text-[10px] text-muted-foreground">6,790 courses</div>
-                      </div>
-                    </div>
-                  </motion.div>
-                  <motion.div
-                    className="absolute -left-6 bottom-32 bg-white rounded-xl shadow-lg p-3 border"
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  >
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
-                        <Brain className="w-4 h-4 text-orange-600" />
-                      </div>
-                      <div>
-                        <div className="text-xs font-medium text-foreground">AI Recommendations</div>
-                        <div className="text-[10px] text-muted-foreground">Personalized</div>
-                      </div>
-                    </div>
-                  </motion.div>
                 </div>
 
-                {/* Content */}
-                <div className="flex-1 text-center lg:text-left">
-                  <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4">
-                    An all-in-one app for your study-abroad needs
-                  </h3>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    Search courses, track applications, connect with counsellors, and get AI-powered recommendations — all in one beautiful app designed for African students.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <Button variant="hero" size="lg" className="gap-2" asChild>
-                      <a href="/app">
-                        Try the App
-                        <ArrowRight className="w-4 h-4" />
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="lg" className="gap-2" asChild>
-                      <a href="/consultation">
-                        Book Consultation
-                      </a>
-                    </Button>
+                {/* Floating Badge - Top Right */}
+                <motion.div
+                  className="absolute -right-4 sm:-right-8 top-16 sm:top-24 bg-card rounded-2xl shadow-elevated p-4 border border-border/80 max-w-[160px]"
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center flex-shrink-0">
+                      <FileCheck className="w-5 h-5 text-green-600" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-foreground">Easy to get in</div>
+                      <div className="text-xs text-muted-foreground">6,790 courses</div>
+                    </div>
                   </div>
-                </div>
+                </motion.div>
+
+                {/* Floating Badge - Bottom Left */}
+                <motion.div
+                  className="absolute -left-4 sm:-left-8 bottom-24 sm:bottom-32 bg-card rounded-2xl shadow-elevated p-4 border border-border/80 max-w-[180px]"
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary/20 to-secondary/10 flex items-center justify-center flex-shrink-0">
+                      <Brain className="w-5 h-5 text-secondary" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-foreground">AI Recommendations</div>
+                      <div className="text-xs text-muted-foreground">Personalized</div>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            {/* Content - Right Side */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
+              className="order-1 lg:order-2"
+            >
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-foreground mb-6 leading-tight">
+                An all-in-one app for your study-abroad needs
+              </h2>
+              <p className="text-lg text-muted-foreground mb-10 leading-relaxed max-w-xl">
+                Search courses, track applications, connect with counsellors, and get AI-powered recommendations — all in one beautiful app designed for African students.
+              </p>
+
+              {/* Feature List */}
+              <div className="space-y-5 mb-10">
+                {appFeatures.map((feature, index) => (
+                  <motion.div
+                    key={feature.title}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
+                    className="flex items-start gap-4"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
+                      <feature.icon className="w-5 h-5 text-secondary" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-1">{feature.title}</h4>
+                      <p className="text-sm text-muted-foreground">{feature.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button variant="hero" size="lg" className="gap-2 shadow-lg shadow-secondary/20" asChild>
+                  <a href="/app">
+                    Try the App
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="gap-2 border-secondary/30 text-secondary hover:bg-secondary/5 hover:border-secondary/50" 
+                  asChild
+                >
+                  <a href="/consultation">
+                    Book Consultation
+                  </a>
+                </Button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </>
