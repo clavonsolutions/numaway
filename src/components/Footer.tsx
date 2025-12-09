@@ -97,7 +97,7 @@ const Footer = () => {
               <img 
                 src={numawayLogo} 
                 alt="NUMAWAY Education" 
-                className="h-14 w-auto transition-transform duration-300 group-hover:scale-105 brightness-0 invert"
+                className="h-14 w-auto transition-transform duration-300 group-hover:scale-105 brightness-0 invert drop-shadow-[0_2px_8px_rgba(255,255,255,0.2)]"
               />
             </a>
             <p className="text-white/70 mb-6 leading-relaxed text-base">

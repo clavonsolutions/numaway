@@ -40,11 +40,11 @@ const Header = () => {
                 <img 
                   src={numawayLogo} 
                   alt="NUMAWAY Education - Study Abroad Support for Nigerian Students" 
-                  className="h-12 sm:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                  style={{ 
-                    filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.15))',
-                    mixBlendMode: 'multiply'
-                  }}
+                  className={`h-12 sm:h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 ${
+                    isScrolled 
+                      ? '' 
+                      : 'brightness-0 invert drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]'
+                  }`}
                 />
               </div>
             </a>
