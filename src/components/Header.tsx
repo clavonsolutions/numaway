@@ -42,7 +42,8 @@ const Header = () => {
                   alt="NUMAWAY Education - Study Abroad Support for Nigerian Students" 
                   className="h-12 sm:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                   style={{ 
-                    filter: isScrolled ? 'none' : 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
+                    filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.15))',
+                    mixBlendMode: 'multiply'
                   }}
                 />
               </div>
