@@ -23,6 +23,7 @@ import AreaOfStudy from "./pages/AreaOfStudy";
 import Exams from "./pages/Exams";
 import ExamDetail from "./pages/ExamDetail";
 import Accommodation from "./pages/Accommodation";
+import Loans from "./pages/Loans";
 import Resources from "./pages/Resources";
 import ResourceDetail from "./pages/ResourceDetail";
 import Careers from "./pages/Careers";
@@ -117,8 +118,9 @@ const App = () => (
           <Route path="/exams" element={<Exams />} />
           <Route path="/exams/:slug" element={<ExamDetail />} />
           
-          {/* Accommodation */}
+          {/* Accommodation & Loans */}
           <Route path="/accommodation" element={<Accommodation />} />
+          <Route path="/loans" element={<Loans />} />
           
           {/* Resources */}
           <Route path="/resources" element={<Resources />} />

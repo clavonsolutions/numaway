@@ -1,8 +1,11 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Home, Shield, MapPin, Wifi, Building, Users, AlertTriangle, ArrowRight, CheckCircle } from "lucide-react";
+import { ScrollReveal } from "@/hooks/useScrollAnimation";
+import { Link } from "react-router-dom";
 
 const accommodationTypes = [
   {
@@ -38,67 +41,62 @@ const accommodationTypes = [
 const Accommodation = () => (
   <div className="min-h-screen bg-background">
     <Header />
-    <main className="pt-20">
-      <section className="py-24 bg-gradient-hero text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-4xl lg:text-6xl font-display font-bold mb-6">
-            Accommodation & Landing Support
-          </motion.h1>
-          <p className="text-xl text-primary-foreground/70 max-w-2xl mx-auto">
-            We help you understand your options and make safer, smarter choices about where you'll live.
-          </p>
-        </div>
-      </section>
+    <PageHero
+      title="Student"
+      titleHighlight="Accommodation"
+      description="We help you understand your options and make safer, smarter choices about where you'll live during your studies abroad."
+    />
 
+    <main>
       {/* Types of Accommodation */}
       <section className="py-24">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-display font-bold text-center mb-4">Types of Accommodation</h2>
-          <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            Understanding your options is the first step to making a good decision.
-          </p>
+          <ScrollReveal>
+            <h2 className="text-3xl lg:text-4xl font-display font-bold text-center mb-4">Types of Accommodation</h2>
+            <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+              Understanding your options is the first step to making a good decision.
+            </p>
+          </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-6">
             {accommodationTypes.map((type, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-card p-6 rounded-2xl shadow-soft"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <type.icon className="w-6 h-6 text-secondary" />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-bold mb-2">{type.title}</h3>
-                    <p className="text-muted-foreground text-sm mb-4">{type.description}</p>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-xs font-semibold text-secondary mb-2">Pros</p>
-                        <ul className="space-y-1">
-                          {type.pros.map((pro, j) => (
-                            <li key={j} className="flex items-center gap-1 text-xs text-muted-foreground">
-                              <CheckCircle className="w-3 h-3 text-secondary" /> {pro}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <p className="text-xs font-semibold text-muted-foreground mb-2">Consider</p>
-                        <ul className="space-y-1">
-                          {type.cons.map((con, j) => (
-                            <li key={j} className="flex items-center gap-1 text-xs text-muted-foreground">
-                              <AlertTriangle className="w-3 h-3" /> {con}
-                            </li>
-                          ))}
-                        </ul>
+              <ScrollReveal key={i} delay={i * 0.1}>
+                <motion.div 
+                  whileHover={{ y: -5 }}
+                  className="bg-card p-6 rounded-2xl shadow-soft h-full"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <type.icon className="w-6 h-6 text-secondary" />
+                    </div>
+                    <div>
+                      <h3 className="font-display font-bold mb-2">{type.title}</h3>
+                      <p className="text-muted-foreground text-sm mb-4">{type.description}</p>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-xs font-semibold text-secondary mb-2">Pros</p>
+                          <ul className="space-y-1">
+                            {type.pros.map((pro, j) => (
+                              <li key={j} className="flex items-center gap-1 text-xs text-muted-foreground">
+                                <CheckCircle className="w-3 h-3 text-secondary" /> {pro}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-muted-foreground mb-2">Consider</p>
+                          <ul className="space-y-1">
+                            {type.cons.map((con, j) => (
+                              <li key={j} className="flex items-center gap-1 text-xs text-muted-foreground">
+                                <AlertTriangle className="w-3 h-3" /> {con}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
