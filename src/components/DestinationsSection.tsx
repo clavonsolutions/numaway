@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { AnimatedCounter } from "@/hooks/useAnimatedCounter";
 
 const countries = [
   {
@@ -97,7 +98,7 @@ const DestinationsSection = () => {
                   {country.name}
                 </h3>
                 <p className="text-muted-foreground">
-                  {country.universities}+ Universities
+                  <AnimatedCounter end={country.universities} suffix="+" duration={1500} /> Universities
                 </p>
               </div>
             </motion.a>
