@@ -42,6 +42,9 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Disclaimer from "./pages/Disclaimer";
 import Scholarships from "./pages/Scholarships";
 import Search from "./pages/Search";
+import ForStudents from "./pages/ForStudents";
+import ForAgents from "./pages/ForAgents";
+import ForInstitutions from "./pages/ForInstitutions";
 
 // Admin
 import AdminLayout from "./layouts/AdminLayout";
@@ -87,6 +90,9 @@ const App = () => (
           <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/for-students" element={<ForStudents />} />
+          <Route path="/for-agents" element={<ForAgents />} />
+          <Route path="/for-institutions" element={<ForInstitutions />} />
           
           {/* Services */}
           <Route path="/services" element={<Services />} />
