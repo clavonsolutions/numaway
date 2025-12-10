@@ -183,18 +183,18 @@ const AppShowcaseSection = () => {
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center lg:items-start">
           {/* Phone Mockup - Left Side */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-            className="relative flex flex-col items-center lg:sticky lg:top-24 w-full lg:w-auto"
+            className="relative flex flex-col items-center lg:sticky lg:top-24 w-full lg:w-auto flex-shrink-0"
           >
             <div className="relative">
-              {/* Secondary phone - behind */}
-              <div className="absolute -left-8 top-8 w-[200px] h-[400px] hidden lg:block">
+              {/* Secondary phone - behind (hidden on mobile) */}
+              <div className="absolute -left-8 top-8 w-[180px] h-[360px] hidden xl:block">
                 <div className="w-full h-full bg-gradient-to-b from-[#1a1a2e] via-[#16213e] to-[#0f0f23] rounded-[2.5rem] shadow-xl opacity-60 transform -rotate-6">
                   <div className="absolute inset-2 bg-muted rounded-[2rem] flex items-center justify-center">
                     <div className="text-muted-foreground/50 text-sm text-center p-4">
@@ -206,7 +206,7 @@ const AppShowcaseSection = () => {
               </div>
 
               {/* Main Phone Device */}
-              <div className="relative w-[280px] sm:w-[300px] h-[560px] sm:h-[600px] z-10">
+              <div className="relative w-[240px] sm:w-[260px] md:w-[280px] h-[480px] sm:h-[520px] md:h-[560px] z-10">
                 {/* Phone Frame */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e] via-[#16213e] to-[#0f0f23] rounded-[3rem] shadow-2xl shadow-primary/20">
                   {/* Dynamic Island */}
@@ -335,31 +335,34 @@ const AppShowcaseSection = () => {
           </motion.div>
 
           {/* Feature Cards - Horizontal Scroll */}
-          <div className="flex-1 relative min-w-0">
+          <div className="flex-1 relative min-w-0 w-full">
             {/* Scroll buttons */}
-            <div className="flex justify-end gap-2 mb-4">
-              <button
-                onClick={() => scroll('left')}
-                disabled={!canScrollLeft}
-                className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all ${
-                  canScrollLeft 
-                    ? 'border-border hover:bg-muted text-foreground' 
-                    : 'border-muted text-muted-foreground cursor-not-allowed'
-                }`}
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => scroll('right')}
-                disabled={!canScrollRight}
-                className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all ${
-                  canScrollRight 
-                    ? 'border-border hover:bg-muted text-foreground' 
-                    : 'border-muted text-muted-foreground cursor-not-allowed'
-                }`}
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
+            <div className="flex justify-between sm:justify-end gap-2 mb-4">
+              <span className="text-sm text-muted-foreground sm:hidden">Swipe to explore</span>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => scroll('left')}
+                  disabled={!canScrollLeft}
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full border flex items-center justify-center transition-all ${
+                    canScrollLeft 
+                      ? 'border-border hover:bg-muted text-foreground' 
+                      : 'border-muted text-muted-foreground cursor-not-allowed'
+                  }`}
+                >
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
+                <button
+                  onClick={() => scroll('right')}
+                  disabled={!canScrollRight}
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full border flex items-center justify-center transition-all ${
+                    canScrollRight 
+                      ? 'border-border hover:bg-muted text-foreground' 
+                      : 'border-muted text-muted-foreground cursor-not-allowed'
+                  }`}
+                >
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
+              </div>
             </div>
 
             {/* Scrollable container */}

@@ -241,15 +241,16 @@ const HeroSection = () => {
             </div>
 
             {/* Right Content - Student Cards Stack */}
+            {/* Desktop version */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              className="relative hidden lg:flex justify-center items-center h-[550px]"
+              className="relative hidden lg:flex justify-center items-center h-[450px] xl:h-[550px]"
             >
               {students.map((student, index) => {
                 const offset = index - 2;
-                const xOffset = offset * 85;
+                const xOffset = offset * 70;
                 const zIndex = 5 - Math.abs(offset);
                 const scale = 1 - Math.abs(offset) * 0.08;
                 const opacity = 1 - Math.abs(offset) * 0.15;
@@ -259,8 +260,8 @@ const HeroSection = () => {
                     key={index}
                     className="absolute rounded-3xl overflow-hidden shadow-2xl"
                     style={{
-                      width: '220px',
-                      height: '320px',
+                      width: '180px',
+                      height: '260px',
                       zIndex,
                       transform: `translateX(${xOffset}px) scale(${scale})`,
                       opacity,
@@ -279,18 +280,47 @@ const HeroSection = () => {
                       alt={`Student in ${student.country}`}
                       className="w-full h-full object-cover"
                     />
-                    {/* Overlay gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-                    {/* Country badge */}
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md rounded-full px-3 py-2 w-fit">
-                        <span className="text-lg">{student.flag}</span>
-                        <span className="text-white text-sm font-medium">{student.country}</span>
+                    <div className="absolute bottom-3 left-3 right-3">
+                      <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-md rounded-full px-2.5 py-1.5 w-fit">
+                        <span className="text-sm">{student.flag}</span>
+                        <span className="text-white text-xs font-medium">{student.country}</span>
                       </div>
                     </div>
                   </motion.div>
                 );
               })}
+            </motion.div>
+
+            {/* Mobile/Tablet version - horizontal scroll */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex lg:hidden gap-3 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide"
+            >
+              {students.slice(0, 4).map((student, index) => (
+                <motion.div
+                  key={index}
+                  className="flex-shrink-0 w-[140px] sm:w-[160px] h-[200px] sm:h-[220px] rounded-2xl overflow-hidden shadow-xl snap-center"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                >
+                  <img
+                    src={student.image}
+                    alt={`Student in ${student.country}`}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-2 left-2 right-2">
+                    <div className="flex items-center gap-1 bg-white/20 backdrop-blur-md rounded-full px-2 py-1 w-fit">
+                      <span className="text-sm">{student.flag}</span>
+                      <span className="text-white text-[10px] font-medium">{student.country}</span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </div>
