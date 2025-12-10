@@ -14,6 +14,7 @@ import {
   CheckCircle2
 } from "lucide-react";
 import institutionsImage from "@/assets/journey-institutions.jpg";
+import { AnimatedCounter } from "@/hooks/useAnimatedCounter";
 
 const ForInstitutions = () => {
   const benefits = [
@@ -139,19 +140,53 @@ const ForInstitutions = () => {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-3xl sm:text-4xl font-bold text-foreground mb-2">{stat.value}</div>
-                <div className="text-muted-foreground">{stat.label}</div>
-              </motion.div>
-            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+                <AnimatedCounter end={10000} suffix="+" duration={2000} />
+              </div>
+              <div className="text-muted-foreground">Active Students</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-center"
+            >
+              <div className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+                <AnimatedCounter end={15} suffix="+" duration={1500} />
+              </div>
+              <div className="text-muted-foreground">Countries</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-center"
+            >
+              <div className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+                <AnimatedCounter end={95} suffix="%" duration={1800} />
+              </div>
+              <div className="text-muted-foreground">Satisfaction Rate</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-center"
+            >
+              <div className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+                <AnimatedCounter end={500} suffix="+" duration={2000} />
+              </div>
+              <div className="text-muted-foreground">Partner Institutions</div>
+            </motion.div>
           </div>
         </div>
       </section>

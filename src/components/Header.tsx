@@ -37,15 +37,17 @@ const Header = () => {
             {/* Logo */}
             <a href="/" className="flex items-center group">
               <div className="relative">
-                <img 
-                  src={numawayLogo} 
-                  alt="NUMAWAY Education - Study Abroad Support for Nigerian Students" 
-                  className={`h-12 sm:h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 ${
-                    isScrolled 
-                      ? '' 
-                      : 'brightness-0 invert drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]'
-                  }`}
-                />
+                {isScrolled ? (
+                  <img 
+                    src={numawayLogo} 
+                    alt="NUMAWAY Education" 
+                    className="h-12 sm:h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105"
+                  />
+                ) : (
+                  <span className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight transition-all duration-300 group-hover:scale-105">
+                    NUMAWAY
+                  </span>
+                )}
               </div>
             </a>
 
