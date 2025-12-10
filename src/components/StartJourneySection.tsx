@@ -52,7 +52,7 @@ const StartJourneySection = () => {
         </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
           {journeyCards.map((card, index) => (
             <motion.div
               key={card.id}

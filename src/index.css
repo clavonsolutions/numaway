@@ -425,3 +425,13 @@
   background: hsl(179 75% 41% / 0.2);
   color: hsl(215 70% 15%);
 }
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

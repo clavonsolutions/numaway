@@ -58,13 +58,13 @@ const StatsSection = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className={`w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/10 flex items-center justify-center`}>
-                <stat.icon className={`w-7 h-7 ${stat.color}`} />
+              <div className={`w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-xl sm:rounded-2xl bg-white/10 flex items-center justify-center`}>
+                <stat.icon className={`w-5 h-5 sm:w-7 sm:h-7 ${stat.color}`} />
               </div>
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2">
                 <AnimatedCounter end={stat.value} suffix={stat.suffix} duration={2000} />
               </div>
-              <div className="text-white/70 font-medium">{stat.label}</div>
+              <div className="text-white/70 text-sm sm:text-base font-medium">{stat.label}</div>
             </motion.div>
           ))}
         </div>
