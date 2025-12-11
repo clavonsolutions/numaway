@@ -39,9 +39,7 @@ const Header = () => {
               <img 
                 src={numawayLogo} 
                 alt="NUMAWAY Education" 
-                className={`h-10 sm:h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105 ${
-                  isScrolled ? "" : "brightness-0 invert"
-                }`}
+                className="h-10 sm:h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105 rounded-lg"
               />
             </a>
 
