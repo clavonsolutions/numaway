@@ -250,13 +250,14 @@ const HeroSection = () => {
             >
               {students.map((student, index) => {
                 const offset = index - 2;
-                const xOffset = offset * 80;
+                // Wider spacing so each card is ~70% visible
+                const xOffset = offset * 130;
                 const zIndex = 5 - Math.abs(offset);
-                // Subtle height differences like reference
-                const heights = [240, 280, 320, 280, 240];
-                const widths = [140, 160, 180, 160, 140];
-                const yOffsets = [35, 15, 0, 15, 35];
-                const rotation = offset * 1.5;
+                // Subtle height differences
+                const heights = [260, 290, 320, 290, 260];
+                const widths = [150, 165, 180, 165, 150];
+                const yOffsets = [25, 10, 0, 10, 25];
+                const rotation = offset * 2;
 
                 return (
                   <motion.div
@@ -325,11 +326,11 @@ const HeroSection = () => {
             >
               {students.slice(0, 5).map((student, index) => {
                 const offset = index - 2;
-                const xOffset = offset * 48;
+                const xOffset = offset * 70;
                 const zIndex = 5 - Math.abs(offset);
-                const heights = [160, 185, 210, 185, 160];
-                const widths = [85, 100, 115, 100, 85];
-                const yOffsets = [22, 10, 0, 10, 22];
+                const heights = [170, 190, 210, 190, 170];
+                const widths = [90, 105, 120, 105, 90];
+                const yOffsets = [18, 8, 0, 8, 18];
                 const rotation = offset * 2;
 
                 return (
