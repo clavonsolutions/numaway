@@ -4,7 +4,7 @@ import { Search, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MobileNav from "./MobileNav";
 import MegaMenu from "./MegaMenu";
-import numawayLogo from "@/assets/numaway-logo.png";
+import numawayLogo from "@/assets/numaway-logo.svg";
 
 const Header = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -36,19 +36,13 @@ const Header = () => {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <a href="/" className="flex items-center group">
-              <div className="relative">
-                {isScrolled ? (
-                  <img 
-                    src={numawayLogo} 
-                    alt="NUMAWAY Education" 
-                    className="h-12 sm:h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105"
-                  />
-                ) : (
-                  <span className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight transition-all duration-300 group-hover:scale-105">
-                    NUMAWAY
-                  </span>
-                )}
-              </div>
+              <img 
+                src={numawayLogo} 
+                alt="NUMAWAY Education" 
+                className={`h-10 sm:h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105 ${
+                  isScrolled ? "" : "brightness-0 invert"
+                }`}
+              />
             </a>
 
             {/* Desktop Navigation - Mega Menu */}
