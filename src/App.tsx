@@ -11,7 +11,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Consultation from "./pages/Consultation";
 import Services from "./pages/Services";
-import ServiceDetail from "./pages/ServiceDetail";
+import ServiceDomainDetail from "./pages/ServiceDomainDetail";
 import Countries from "./pages/Countries";
 import CountryDetail from "./pages/CountryDetail";
 import Universities from "./pages/Universities";
@@ -97,7 +97,7 @@ const App = () => (
           
           {/* Services */}
           <Route path="/services" element={<Services />} />
-          <Route path="/services/:slug" element={<ServiceDetail />} />
+          <Route path="/services/:slug" element={<ServiceDomainDetail />} />
           <Route path="/scholarships" element={<Scholarships />} />
           
           {/* Countries */}
