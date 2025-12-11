@@ -240,87 +240,129 @@ const HeroSection = () => {
               </motion.div>
             </div>
 
-            {/* Right Content - Student Cards Stack */}
+            {/* Right Content - Student Cards Fan Gallery */}
             {/* Desktop version */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              className="relative hidden lg:flex justify-center items-center h-[450px] xl:h-[550px]"
+              className="relative hidden lg:flex justify-center items-center h-[480px] xl:h-[560px]"
             >
               {students.map((student, index) => {
                 const offset = index - 2;
-                const xOffset = offset * 70;
+                const xOffset = offset * 85;
                 const zIndex = 5 - Math.abs(offset);
-                const scale = 1 - Math.abs(offset) * 0.08;
-                const opacity = 1 - Math.abs(offset) * 0.15;
+                const scale = index === 2 ? 1 : (1 - Math.abs(offset) * 0.1);
+                const heightMultiplier = index === 2 ? 1 : (0.85 - Math.abs(offset) * 0.05);
+                const yOffset = index === 2 ? 0 : (Math.abs(offset) * 25);
+                const rotation = offset * 2;
 
                 return (
                   <motion.div
                     key={index}
-                    className="absolute rounded-3xl overflow-hidden shadow-2xl"
+                    className="absolute rounded-[28px] overflow-hidden cursor-pointer"
                     style={{
-                      width: '180px',
-                      height: '260px',
+                      width: index === 2 ? '200px' : '160px',
+                      height: index === 2 ? '320px' : `${280 * heightMultiplier}px`,
                       zIndex,
-                      transform: `translateX(${xOffset}px) scale(${scale})`,
-                      opacity,
+                      boxShadow: index === 2 
+                        ? '0 25px 60px -15px rgba(0,0,0,0.4), 0 10px 30px -10px rgba(0,0,0,0.3)' 
+                        : '0 15px 40px -10px rgba(0,0,0,0.3), 0 5px 20px -5px rgba(0,0,0,0.2)',
                     }}
-                    initial={{ opacity: 0, y: 50, x: xOffset }}
-                    animate={{ opacity, y: 0, x: xOffset }}
-                    transition={{ duration: 0.6, delay: 0.4 + index * 0.1, ease: [0.4, 0, 0.2, 1] }}
+                    initial={{ opacity: 0, y: 80, x: xOffset, rotate: rotation, scale: 0.8 }}
+                    animate={{ 
+                      opacity: 1, 
+                      y: yOffset, 
+                      x: xOffset, 
+                      rotate: rotation,
+                      scale,
+                    }}
+                    transition={{ 
+                      duration: 0.8, 
+                      delay: 0.4 + index * 0.08, 
+                      ease: [0.25, 0.46, 0.45, 0.94] 
+                    }}
                     whileHover={{ 
-                      scale: scale * 1.05, 
+                      scale: scale * 1.08, 
+                      y: yOffset - 15,
                       zIndex: 10,
-                      transition: { duration: 0.3 }
+                      rotate: 0,
+                      boxShadow: '0 35px 70px -15px rgba(0,0,0,0.5), 0 15px 40px -10px rgba(0,0,0,0.4)',
+                      transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }
                     }}
+                  >
+                    <motion.img
+                      src={student.image}
+                      alt={`Student in ${student.country}`}
+                      className="w-full h-full object-cover"
+                      initial={{ scale: 1.1 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 1.2, delay: 0.5 + index * 0.08, ease: "easeOut" }}
+                    />
+                    {/* Subtle gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/5" />
+                    {/* Ring border effect */}
+                    <div className="absolute inset-0 rounded-[28px] ring-1 ring-white/20 ring-inset" />
+                  </motion.div>
+                );
+              })}
+              
+              {/* Floating animation layer */}
+              <motion.div
+                className="absolute inset-0 pointer-events-none"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </motion.div>
+
+            {/* Mobile/Tablet version - staggered fan */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="relative flex lg:hidden justify-center items-center h-[320px] sm:h-[380px]"
+            >
+              {students.slice(0, 5).map((student, index) => {
+                const offset = index - 2;
+                const xOffset = offset * 50;
+                const zIndex = 5 - Math.abs(offset);
+                const scale = index === 2 ? 1 : (0.9 - Math.abs(offset) * 0.08);
+                const heightBase = index === 2 ? 240 : 200;
+                const yOffset = index === 2 ? 0 : (Math.abs(offset) * 20);
+                const rotation = offset * 3;
+
+                return (
+                  <motion.div
+                    key={index}
+                    className="absolute rounded-2xl overflow-hidden"
+                    style={{
+                      width: index === 2 ? '130px' : '100px',
+                      height: `${heightBase * scale}px`,
+                      zIndex,
+                      boxShadow: index === 2 
+                        ? '0 20px 50px -10px rgba(0,0,0,0.4)' 
+                        : '0 10px 30px -5px rgba(0,0,0,0.3)',
+                    }}
+                    initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                    animate={{ 
+                      opacity: 1, 
+                      y: yOffset, 
+                      x: xOffset, 
+                      rotate: rotation,
+                      scale,
+                    }}
+                    transition={{ duration: 0.5, delay: 0.3 + index * 0.08 }}
                   >
                     <img
                       src={student.image}
                       alt={`Student in ${student.country}`}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-                    <div className="absolute bottom-3 left-3 right-3">
-                      <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-md rounded-full px-2.5 py-1.5 w-fit">
-                        <span className="text-sm">{student.flag}</span>
-                        <span className="text-white text-xs font-medium">{student.country}</span>
-                      </div>
-                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/5" />
+                    <div className="absolute inset-0 rounded-2xl ring-1 ring-white/20 ring-inset" />
                   </motion.div>
                 );
               })}
-            </motion.div>
-
-            {/* Mobile/Tablet version - horizontal scroll */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex lg:hidden gap-3 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide"
-            >
-              {students.slice(0, 4).map((student, index) => (
-                <motion.div
-                  key={index}
-                  className="flex-shrink-0 w-[140px] sm:w-[160px] h-[200px] sm:h-[220px] rounded-2xl overflow-hidden shadow-xl snap-center"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                >
-                  <img
-                    src={student.image}
-                    alt={`Student in ${student.country}`}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-2 left-2 right-2">
-                    <div className="flex items-center gap-1 bg-white/20 backdrop-blur-md rounded-full px-2 py-1 w-fit">
-                      <span className="text-sm">{student.flag}</span>
-                      <span className="text-white text-[10px] font-medium">{student.country}</span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
             </motion.div>
           </div>
         </div>
