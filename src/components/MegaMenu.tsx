@@ -39,10 +39,12 @@ const MegaMenu = ({ activeMenu, onMenuChange, isScrolled = true }: MegaMenuProps
           {
             title: "By Country",
             links: [
-              { label: "UK Universities", href: "/universities?country=uk" },
-              { label: "US Universities", href: "/universities?country=usa" },
-              { label: "Canadian Universities", href: "/universities?country=canada" },
-              { label: "Australian Universities", href: "/universities?country=australia" },
+              { label: "🇬🇧 UK Universities", href: "/universities?country=uk" },
+              { label: "🇺🇸 US Universities", href: "/universities?country=usa" },
+              { label: "🇨🇦 Canadian Universities", href: "/universities?country=canada" },
+              { label: "🇦🇺 Australian Universities", href: "/universities?country=australia" },
+              { label: "🇩🇪 German Universities", href: "/universities?country=germany" },
+              { label: "🇮🇪 Irish Universities", href: "/universities?country=ireland" },
             ],
           },
         ],
