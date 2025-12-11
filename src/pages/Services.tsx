@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { serviceDomains } from "@/data/serviceDomains";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, Phone, MessageCircle, Shield, Clock, DollarSign, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle, Phone, MessageCircle, Shield, Clock, DollarSign, Sparkles, Users, Building2, School, Globe } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -13,10 +13,53 @@ const Services = () => (
     <Header />
     <main>
       <PageHero
-        title="Services designed for your"
-        titleHighlight="entire journey"
-        description="From choosing a country to settling into your new city, NUMAWAY offers structured, transparent services tailored to Nigerian students. Our consultation and student support are completely free."
+        title="NUMAWAY"
+        titleHighlight="Services"
+        description="A complete ecosystem built to guide, support, and empower every step of your global education journey."
       />
+
+      {/* Intro Section */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <ScrollReveal animation="fade-up">
+              <p className="text-lg text-foreground leading-relaxed mb-8">
+                NUMAWAY EDUCATION delivers a full spectrum of student, university, digital, compliance, and advisory services 
+                designed to remove confusion and increase clarity in the global admissions process. Powered by intelligent 
+                systems and world-class operations, NUMAWAY ensures every student and partner receives accurate, timely, 
+                and ethical support.
+              </p>
+              
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
+                <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full shadow-soft">
+                  <Users className="w-4 h-4 text-secondary" />
+                  <span className="text-sm font-medium">Students</span>
+                </div>
+                <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full shadow-soft">
+                  <Users className="w-4 h-4 text-secondary" />
+                  <span className="text-sm font-medium">Parents</span>
+                </div>
+                <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full shadow-soft">
+                  <Building2 className="w-4 h-4 text-secondary" />
+                  <span className="text-sm font-medium">Universities</span>
+                </div>
+                <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full shadow-soft">
+                  <School className="w-4 h-4 text-secondary" />
+                  <span className="text-sm font-medium">Schools & Communities</span>
+                </div>
+                <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full shadow-soft">
+                  <Globe className="w-4 h-4 text-secondary" />
+                  <span className="text-sm font-medium">Governments & Partners</span>
+                </div>
+              </div>
+
+              <p className="text-muted-foreground">
+                Our services span the entire global mobility journey, from career guidance to post-arrival support.
+              </p>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
 
       {/* Free Consultation Banner */}
       <section className="py-8 bg-secondary/10 border-y border-secondary/20">
@@ -61,7 +104,7 @@ const Services = () => (
                 <div className={`group relative overflow-hidden rounded-3xl bg-card shadow-soft hover:shadow-card transition-all ${i % 2 === 0 ? '' : 'lg:flex-row-reverse'}`}>
                   <div className="grid lg:grid-cols-2 gap-0">
                     {/* Image Side */}
-                    <div className={`relative h-64 lg:h-auto min-h-[300px] ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
+                    <div className={`relative h-64 lg:h-auto min-h-[350px] ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
                       <img 
                         src={domain.image} 
                         alt={domain.title}
@@ -83,11 +126,12 @@ const Services = () => (
 
                     {/* Content Side */}
                     <div className={`p-8 lg:p-12 ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
+                      <p className="text-secondary font-semibold text-sm mb-2">{domain.header}</p>
                       <h3 className="text-2xl lg:text-3xl font-display font-bold mb-2 group-hover:text-secondary transition-colors">
                         {domain.title}
                       </h3>
-                      <p className="text-secondary font-medium mb-4">{domain.tagline}</p>
-                      <p className="text-muted-foreground mb-6">{domain.description}</p>
+                      <p className="text-muted-foreground text-sm mb-2">{domain.subheader}</p>
+                      <p className="text-foreground mb-6">{domain.description}</p>
 
                       {/* Sub-services preview */}
                       <div className="grid sm:grid-cols-2 gap-3 mb-8">
@@ -107,7 +151,7 @@ const Services = () => (
                       <div className="flex flex-wrap gap-3">
                         <Button variant="hero" asChild>
                           <Link to={`/services/${domain.slug}`}>
-                            Explore Services <ArrowRight className="w-4 h-4" />
+                            Explore All {domain.subServices.length} Services <ArrowRight className="w-4 h-4" />
                           </Link>
                         </Button>
                         <Button variant="outline" asChild>
@@ -164,7 +208,7 @@ const Services = () => (
               </h2>
               <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
                 Our consultation is completely free. No pressure, no hidden fees — just honest guidance 
-                from experts who've helped thousands of Nigerian students achieve their dreams.
+                from experts who've helped thousands of students achieve their dreams.
               </p>
               
               <div className="flex flex-wrap justify-center gap-4 mb-12">

@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getServiceDomainBySlug, serviceDomains } from "@/data/serviceDomains";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ArrowRight, Phone, MessageCircle, Shield, Clock, DollarSign, ChevronRight } from "lucide-react";
+import { CheckCircle, ArrowRight, Phone, MessageCircle, Shield, Clock, DollarSign, ChevronRight, Users, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import {
@@ -40,14 +40,14 @@ const ServiceDomainDetail = () => {
       <Header />
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative min-h-[60vh] flex items-center">
+        <section className="relative min-h-[70vh] flex items-center">
           <div className="absolute inset-0">
             <img 
               src={domain.image} 
               alt={domain.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/95 to-primary/70" />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/85 to-primary/70" />
           </div>
           
           <div className="container mx-auto px-4 relative z-10 py-20">
@@ -55,7 +55,7 @@ const ServiceDomainDetail = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-3 mb-6"
+                className="flex flex-wrap items-center gap-3 mb-6"
               >
                 <span className="inline-flex items-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground rounded-full text-sm font-medium">
                   <domain.icon className="w-4 h-4" />
@@ -67,6 +67,15 @@ const ServiceDomainDetail = () => {
                   </span>
                 )}
               </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 }}
+                className="text-secondary font-semibold text-lg mb-2"
+              >
+                {domain.header}
+              </motion.p>
 
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
@@ -81,9 +90,9 @@ const ServiceDomainDetail = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="text-xl text-secondary font-medium mb-4"
+                className="text-xl text-primary-foreground/90 font-medium mb-4"
               >
-                {domain.tagline}
+                {domain.subheader}
               </motion.p>
 
               <motion.p
@@ -122,20 +131,35 @@ const ServiceDomainDetail = () => {
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 text-center text-sm">
               <div className="flex items-center gap-2">
                 <DollarSign className="w-4 h-4 text-secondary" />
-                <span>Free Consultation</span>
+                <span className="font-medium">Free Consultation</span>
               </div>
               <div className="flex items-center gap-2">
                 <Shield className="w-4 h-4 text-secondary" />
-                <span>No Hidden Fees</span>
+                <span className="font-medium">No Hidden Fees</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-secondary" />
-                <span>24hr Response</span>
+                <span className="font-medium">24hr Response</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-secondary" />
-                <span>Expert Support</span>
+                <span className="font-medium">Expert Support</span>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Count Overview */}
+        <section className="py-12 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-2 rounded-full text-sm font-medium mb-4">
+                <Sparkles className="w-4 h-4" />
+                {domain.subServices.length} Services Included
+              </div>
+              <p className="text-muted-foreground">
+                Everything you need for {domain.title.toLowerCase()}, delivered with excellence and backed by our free consultation promise.
+              </p>
             </div>
           </div>
         </section>
@@ -145,7 +169,7 @@ const ServiceDomainDetail = () => {
           <div className="container mx-auto px-4">
             <ScrollReveal animation="fade-up" className="text-center mb-16">
               <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
-                What's Included in {domain.title}
+                What's Included
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Comprehensive services designed to support every aspect of your journey.
@@ -154,29 +178,51 @@ const ServiceDomainDetail = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {domain.subServices.map((sub, i) => (
-                <ScrollReveal key={i} animation="fade-up" delay={i * 0.05}>
-                  <div className="group bg-card rounded-2xl p-8 shadow-soft hover:shadow-card transition-all h-full">
-                    <div className="w-14 h-14 bg-secondary/10 group-hover:bg-secondary rounded-xl flex items-center justify-center mb-6 transition-colors">
-                      <sub.icon className="w-7 h-7 text-secondary group-hover:text-secondary-foreground transition-colors" />
+                <ScrollReveal key={sub.id} animation="fade-up" delay={i * 0.05}>
+                  <div className="group bg-card rounded-2xl p-8 shadow-soft hover:shadow-card transition-all h-full flex flex-col">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-14 h-14 bg-secondary/10 group-hover:bg-secondary rounded-xl flex items-center justify-center transition-colors">
+                        <sub.icon className="w-7 h-7 text-secondary group-hover:text-secondary-foreground transition-colors" />
+                      </div>
+                      <span className="text-xs font-mono text-muted-foreground bg-muted px-2 py-1 rounded">
+                        {sub.id}
+                      </span>
                     </div>
+                    
                     <h3 className="text-xl font-display font-semibold mb-3 group-hover:text-secondary transition-colors">
                       {sub.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm mb-6">{sub.description}</p>
                     
-                    <ul className="space-y-2">
-                      {sub.features.slice(0, 4).map((feature, j) => (
+                    <p className="text-muted-foreground text-sm mb-4 flex-grow">
+                      {sub.shortDescription}
+                    </p>
+
+                    {sub.whoItsFor && (
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground mb-4">
+                        <Users className="w-3 h-3" />
+                        <span>For: {sub.whoItsFor}</span>
+                      </div>
+                    )}
+                    
+                    <ul className="space-y-2 mb-6">
+                      {sub.features.slice(0, 3).map((feature, j) => (
                         <li key={j} className="flex items-start gap-2 text-sm">
                           <CheckCircle className="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
                           <span>{feature}</span>
                         </li>
                       ))}
-                      {sub.features.length > 4 && (
+                      {sub.features.length > 3 && (
                         <li className="text-sm text-muted-foreground pl-6">
-                          +{sub.features.length - 4} more
+                          +{sub.features.length - 3} more features
                         </li>
                       )}
                     </ul>
+
+                    <Button variant="outline" size="sm" className="w-full mt-auto" asChild>
+                      <Link to={sub.ctaLink}>
+                        {sub.ctaText} <ArrowRight className="w-3 h-3 ml-1" />
+                      </Link>
+                    </Button>
                   </div>
                 </ScrollReveal>
               ))}
@@ -188,30 +234,50 @@ const ServiceDomainDetail = () => {
         <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <ScrollReveal animation="fade-up" className="max-w-4xl mx-auto">
-              <h2 className="text-2xl font-display font-bold mb-8 text-center">
-                Complete Feature List
+              <h2 className="text-2xl font-display font-bold mb-4 text-center">
+                Complete Service Details
               </h2>
+              <p className="text-muted-foreground text-center mb-8">
+                Expand each service to see the full details and all included features.
+              </p>
               
               <Accordion type="single" collapsible className="space-y-4">
                 {domain.subServices.map((sub, i) => (
-                  <AccordionItem key={i} value={`item-${i}`} className="bg-card rounded-xl shadow-soft px-6">
-                    <AccordionTrigger className="text-left font-semibold">
+                  <AccordionItem key={sub.id} value={`item-${i}`} className="bg-card rounded-xl shadow-soft px-6 border-none">
+                    <AccordionTrigger className="text-left font-semibold hover:no-underline">
                       <div className="flex items-center gap-3">
                         <sub.icon className="w-5 h-5 text-secondary" />
-                        {sub.title}
+                        <div>
+                          <span className="block">{sub.title}</span>
+                          <span className="text-xs font-normal text-muted-foreground">{sub.id}</span>
+                        </div>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent>
-                      <p className="text-muted-foreground mb-4">{sub.description}</p>
-                      <ul className="grid sm:grid-cols-2 gap-2">
+                    <AccordionContent className="pt-4">
+                      <p className="text-foreground mb-4 font-medium">{sub.longDescription}</p>
+                      
+                      {sub.whoItsFor && (
+                        <div className="flex items-center gap-2 text-sm text-secondary mb-4 bg-secondary/10 px-3 py-2 rounded-lg w-fit">
+                          <Users className="w-4 h-4" />
+                          <span>Perfect for: {sub.whoItsFor}</span>
+                        </div>
+                      )}
+
+                      <h4 className="font-semibold text-sm mb-3">What's included:</h4>
+                      <ul className="grid sm:grid-cols-2 gap-2 mb-6">
                         {sub.features.map((feature, j) => (
                           <li key={j} className="flex items-start gap-2 text-sm">
                             <CheckCircle className="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
                             <span>{feature}</span>
                           </li>
-                        ))
-                        }
+                        ))}
                       </ul>
+
+                      <Button variant="secondary" size="sm" asChild>
+                        <Link to={sub.ctaLink}>
+                          {sub.ctaText} <ArrowRight className="w-3 h-3 ml-1" />
+                        </Link>
+                      </Button>
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -230,6 +296,15 @@ const ServiceDomainDetail = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <ScrollReveal animation="fade-up">
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  className="w-20 h-20 bg-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-6"
+                >
+                  <Sparkles className="w-10 h-10 text-secondary" />
+                </motion.div>
+
                 <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
                   Ready to Get Started?
                 </h2>
@@ -257,7 +332,7 @@ const ServiceDomainDetail = () => {
                 </div>
 
                 <p className="text-sm text-primary-foreground/60">
-                  Or email us at <a href="mailto:hello@numaway.com" className="underline hover:text-secondary">hello@numaway.com</a>
+                  Or email us at <a href="mailto:hello@numaway.com" className="underline hover:text-secondary transition-colors">hello@numaway.com</a>
                 </p>
               </ScrollReveal>
             </div>
@@ -273,7 +348,7 @@ const ServiceDomainDetail = () => {
               </h2>
               
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {otherDomains.map((d, i) => (
+                {otherDomains.map((d) => (
                   <Link 
                     key={d.slug} 
                     to={`/services/${d.slug}`}
@@ -295,7 +370,7 @@ const ServiceDomainDetail = () => {
 
               <div className="text-center mt-8">
                 <Button variant="outline" asChild>
-                  <Link to="/services">View All Services</Link>
+                  <Link to="/services">View All 9 Service Domains</Link>
                 </Button>
               </div>
             </ScrollReveal>
