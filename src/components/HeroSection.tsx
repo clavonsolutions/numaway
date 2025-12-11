@@ -250,59 +250,60 @@ const HeroSection = () => {
             >
               {students.map((student, index) => {
                 const offset = index - 2;
-                const xOffset = offset * 85;
+                const xOffset = offset * 80;
                 const zIndex = 5 - Math.abs(offset);
-                const scale = index === 2 ? 1 : (1 - Math.abs(offset) * 0.1);
-                const heightMultiplier = index === 2 ? 1 : (0.85 - Math.abs(offset) * 0.05);
-                const yOffset = index === 2 ? 0 : (Math.abs(offset) * 25);
-                const rotation = offset * 2;
+                // Subtle height differences like reference
+                const heights = [240, 280, 320, 280, 240];
+                const widths = [140, 160, 180, 160, 140];
+                const yOffsets = [35, 15, 0, 15, 35];
+                const rotation = offset * 1.5;
 
                 return (
                   <motion.div
                     key={index}
-                    className="absolute rounded-[28px] overflow-hidden cursor-pointer"
+                    className="absolute rounded-[24px] overflow-hidden cursor-pointer"
                     style={{
-                      width: index === 2 ? '200px' : '160px',
-                      height: index === 2 ? '320px' : `${280 * heightMultiplier}px`,
+                      width: `${widths[index]}px`,
+                      height: `${heights[index]}px`,
                       zIndex,
                       boxShadow: index === 2 
-                        ? '0 25px 60px -15px rgba(0,0,0,0.4), 0 10px 30px -10px rgba(0,0,0,0.3)' 
-                        : '0 15px 40px -10px rgba(0,0,0,0.3), 0 5px 20px -5px rgba(0,0,0,0.2)',
+                        ? '0 25px 60px -15px rgba(0,0,0,0.35), 0 10px 30px -10px rgba(0,0,0,0.25)' 
+                        : '0 15px 40px -10px rgba(0,0,0,0.25), 0 5px 20px -5px rgba(0,0,0,0.15)',
                     }}
-                    initial={{ opacity: 0, y: 80, x: xOffset, rotate: rotation, scale: 0.8 }}
+                    initial={{ opacity: 0, y: 60, x: xOffset, rotate: rotation, scale: 0.9 }}
                     animate={{ 
                       opacity: 1, 
-                      y: yOffset, 
+                      y: yOffsets[index], 
                       x: xOffset, 
                       rotate: rotation,
-                      scale,
+                      scale: 1,
                     }}
                     transition={{ 
-                      duration: 0.8, 
+                      duration: 0.7, 
                       delay: 0.4 + index * 0.08, 
                       ease: [0.25, 0.46, 0.45, 0.94] 
                     }}
                     whileHover={{ 
-                      scale: scale * 1.08, 
-                      y: yOffset - 15,
+                      scale: 1.05, 
+                      y: yOffsets[index] - 10,
                       zIndex: 10,
                       rotate: 0,
-                      boxShadow: '0 35px 70px -15px rgba(0,0,0,0.5), 0 15px 40px -10px rgba(0,0,0,0.4)',
-                      transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }
+                      boxShadow: '0 30px 60px -15px rgba(0,0,0,0.4), 0 15px 35px -10px rgba(0,0,0,0.3)',
+                      transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }
                     }}
                   >
                     <motion.img
                       src={student.image}
                       alt={`Student in ${student.country}`}
                       className="w-full h-full object-cover"
-                      initial={{ scale: 1.1 }}
+                      initial={{ scale: 1.05 }}
                       animate={{ scale: 1 }}
-                      transition={{ duration: 1.2, delay: 0.5 + index * 0.08, ease: "easeOut" }}
+                      transition={{ duration: 1, delay: 0.5 + index * 0.08, ease: "easeOut" }}
                     />
                     {/* Subtle gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/5" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-white/5" />
                     {/* Ring border effect */}
-                    <div className="absolute inset-0 rounded-[28px] ring-1 ring-white/20 ring-inset" />
+                    <div className="absolute inset-0 rounded-[24px] ring-1 ring-white/15 ring-inset" />
                   </motion.div>
                 );
               })}
@@ -320,36 +321,36 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="relative flex lg:hidden justify-center items-center h-[320px] sm:h-[380px]"
+              className="relative flex lg:hidden justify-center items-center h-[280px] sm:h-[320px]"
             >
               {students.slice(0, 5).map((student, index) => {
                 const offset = index - 2;
-                const xOffset = offset * 50;
+                const xOffset = offset * 48;
                 const zIndex = 5 - Math.abs(offset);
-                const scale = index === 2 ? 1 : (0.9 - Math.abs(offset) * 0.08);
-                const heightBase = index === 2 ? 240 : 200;
-                const yOffset = index === 2 ? 0 : (Math.abs(offset) * 20);
-                const rotation = offset * 3;
+                const heights = [160, 185, 210, 185, 160];
+                const widths = [85, 100, 115, 100, 85];
+                const yOffsets = [22, 10, 0, 10, 22];
+                const rotation = offset * 2;
 
                 return (
                   <motion.div
                     key={index}
-                    className="absolute rounded-2xl overflow-hidden"
+                    className="absolute rounded-xl overflow-hidden"
                     style={{
-                      width: index === 2 ? '130px' : '100px',
-                      height: `${heightBase * scale}px`,
+                      width: `${widths[index]}px`,
+                      height: `${heights[index]}px`,
                       zIndex,
                       boxShadow: index === 2 
-                        ? '0 20px 50px -10px rgba(0,0,0,0.4)' 
-                        : '0 10px 30px -5px rgba(0,0,0,0.3)',
+                        ? '0 18px 40px -10px rgba(0,0,0,0.35)' 
+                        : '0 10px 25px -5px rgba(0,0,0,0.25)',
                     }}
-                    initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                    initial={{ opacity: 0, y: 40, scale: 0.9 }}
                     animate={{ 
                       opacity: 1, 
-                      y: yOffset, 
+                      y: yOffsets[index], 
                       x: xOffset, 
                       rotate: rotation,
-                      scale,
+                      scale: 1,
                     }}
                     transition={{ duration: 0.5, delay: 0.3 + index * 0.08 }}
                   >
@@ -358,8 +359,8 @@ const HeroSection = () => {
                       alt={`Student in ${student.country}`}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/5" />
-                    <div className="absolute inset-0 rounded-2xl ring-1 ring-white/20 ring-inset" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-white/5" />
+                    <div className="absolute inset-0 rounded-xl ring-1 ring-white/15 ring-inset" />
                   </motion.div>
                 );
               })}
