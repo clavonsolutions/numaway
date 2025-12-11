@@ -301,10 +301,17 @@ const HeroSection = () => {
                       animate={{ scale: 1 }}
                       transition={{ duration: 1, delay: 0.5 + index * 0.08, ease: "easeOut" }}
                     />
-                    {/* Subtle gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-white/5" />
+                    {/* Gradient overlay for badge visibility */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-white/5" />
                     {/* Ring border effect */}
                     <div className="absolute inset-0 rounded-[24px] ring-1 ring-white/15 ring-inset" />
+                    {/* Country badge */}
+                    <div className="absolute bottom-3 left-3 right-3">
+                      <div className="flex items-center gap-1.5 bg-white/90 backdrop-blur-md rounded-full px-2.5 py-1.5 w-fit shadow-lg">
+                        <span className="text-sm">{student.flag}</span>
+                        <span className="text-foreground text-xs font-semibold">{student.country}</span>
+                      </div>
+                    </div>
                   </motion.div>
                 );
               })}
@@ -360,8 +367,15 @@ const HeroSection = () => {
                       alt={`Student in ${student.country}`}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-white/5" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-white/5" />
                     <div className="absolute inset-0 rounded-xl ring-1 ring-white/15 ring-inset" />
+                    {/* Country badge */}
+                    <div className="absolute bottom-2 left-2 right-2">
+                      <div className="flex items-center gap-1 bg-white/90 backdrop-blur-md rounded-full px-2 py-1 w-fit shadow-md">
+                        <span className="text-xs">{student.flag}</span>
+                        <span className="text-foreground text-[10px] font-semibold">{student.country}</span>
+                      </div>
+                    </div>
                   </motion.div>
                 );
               })}

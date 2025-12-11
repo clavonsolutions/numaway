@@ -479,6 +479,181 @@ export const countries: Country[] = [
       "Travel to China",
       "Register with local police"
     ]
+  },
+  {
+    name: "New Zealand",
+    slug: "new-zealand",
+    flag: "🇳🇿",
+    universities: 25,
+    students: "110,000+",
+    description: "New Zealand offers world-class education in a stunning natural environment. Known for its welcoming culture and excellent quality of life.",
+    whyStudy: [
+      "High-quality education system",
+      "Beautiful natural environment",
+      "Safe and friendly society",
+      "Post-study work visa up to 3 years",
+      "Pathway to permanent residency"
+    ],
+    livingCost: "NZD 15,000 - 20,000 per year",
+    visaInfo: "Student visa requires offer of place, proof of funds, and health insurance.",
+    workRights: "20 hours/week during term, full-time during holidays",
+    postStudyVisa: "Post-Study Work Visa: 1-3 years",
+    scholarships: ["New Zealand Excellence Awards", "University scholarships"],
+    topUniversities: ["University of Auckland", "University of Otago", "Victoria University", "University of Canterbury"],
+    topCourses: ["Agriculture", "Environmental Science", "Engineering", "Business", "Tourism"],
+    applicationSteps: [
+      "Research programs",
+      "Apply to university",
+      "Receive offer letter",
+      "Apply for student visa",
+      "Arrange accommodation",
+      "Travel to New Zealand"
+    ]
+  },
+  {
+    name: "Sweden",
+    slug: "sweden",
+    flag: "🇸🇪",
+    universities: 40,
+    students: "40,000+",
+    description: "Sweden offers innovative education and a high quality of life. Known for sustainability, technology, and progressive values.",
+    whyStudy: [
+      "High-quality, innovative education",
+      "Many English-taught programs",
+      "Strong tech and startup scene",
+      "Sustainable living",
+      "Work permit extension after studies"
+    ],
+    livingCost: "SEK 96,000 - 120,000 per year",
+    visaInfo: "Residence permit required for studies longer than 3 months.",
+    workRights: "No limit during studies",
+    postStudyVisa: "6-month extension to seek employment",
+    scholarships: ["Swedish Institute Scholarships", "University scholarships"],
+    topUniversities: ["KTH Royal Institute", "Lund University", "Uppsala University", "Stockholm University"],
+    topCourses: ["Engineering", "IT", "Design", "Business", "Environmental Science"],
+    applicationSteps: [
+      "Apply via universityadmissions.se",
+      "Submit documents",
+      "Receive admission",
+      "Apply for residence permit",
+      "Travel to Sweden"
+    ]
+  },
+  {
+    name: "Poland",
+    slug: "poland",
+    flag: "🇵🇱",
+    universities: 70,
+    students: "85,000+",
+    description: "Poland offers quality European education at very affordable prices. Growing economy and central European location make it attractive.",
+    whyStudy: [
+      "Very affordable tuition and living",
+      "EU member state",
+      "Many English-taught programs",
+      "Rich culture and history",
+      "Growing economy"
+    ],
+    livingCost: "€5,000 - €8,000 per year",
+    visaInfo: "Student visa or national visa required for non-EU students.",
+    workRights: "No limit for registered students",
+    postStudyVisa: "9 months to seek employment",
+    scholarships: ["Polish Government Scholarships", "Erasmus+", "University scholarships"],
+    topUniversities: ["University of Warsaw", "Jagiellonian University", "Warsaw University of Technology"],
+    topCourses: ["Medicine", "Engineering", "Business", "IT", "Architecture"],
+    applicationSteps: [
+      "Apply to university",
+      "Receive acceptance letter",
+      "Apply for student visa",
+      "Travel to Poland",
+      "Register residence"
+    ]
+  },
+  {
+    name: "Japan",
+    slug: "japan",
+    flag: "🇯🇵",
+    universities: 80,
+    students: "300,000+",
+    description: "Japan combines cutting-edge technology with rich cultural heritage. Excellent for those interested in technology, anime, and Asian culture.",
+    whyStudy: [
+      "World-class technology and research",
+      "Unique cultural experience",
+      "Safe and clean environment",
+      "Growing English-taught programs",
+      "Part-time work opportunities"
+    ],
+    livingCost: "JPY 1,200,000 - 1,800,000 per year",
+    visaInfo: "Student visa (ryugaku) required, sponsored by educational institution.",
+    workRights: "28 hours/week with permission",
+    postStudyVisa: "Job-seeking visa available",
+    scholarships: ["MEXT Scholarship", "JASSO Scholarship", "University scholarships"],
+    topUniversities: ["University of Tokyo", "Kyoto University", "Osaka University", "Waseda University"],
+    topCourses: ["Engineering", "Technology", "Business", "Japanese Language", "Animation"],
+    applicationSteps: [
+      "Apply to university or language school",
+      "Receive Certificate of Eligibility",
+      "Apply for student visa",
+      "Travel to Japan",
+      "Register residence"
+    ]
+  },
+  {
+    name: "South Korea",
+    slug: "south-korea",
+    flag: "🇰🇷",
+    universities: 60,
+    students: "160,000+",
+    description: "South Korea offers high-quality education and is a hub for technology, K-pop, and innovation. Growing destination for international students.",
+    whyStudy: [
+      "Top-ranked universities in Asia",
+      "Hub for technology and innovation",
+      "Affordable compared to Western countries",
+      "Rich culture (K-pop, K-drama)",
+      "Government scholarships available"
+    ],
+    livingCost: "KRW 12,000,000 - 18,000,000 per year",
+    visaInfo: "D-2 student visa required for degree programs.",
+    workRights: "20 hours/week with permission",
+    postStudyVisa: "Job-seeking visa (D-10) available",
+    scholarships: ["Korean Government Scholarship (KGSP)", "University scholarships"],
+    topUniversities: ["Seoul National University", "KAIST", "Yonsei University", "Korea University"],
+    topCourses: ["Engineering", "Business", "Korean Language", "IT", "Design"],
+    applicationSteps: [
+      "Apply to university",
+      "Receive admission letter",
+      "Apply for D-2 visa",
+      "Travel to South Korea",
+      "Register with immigration"
+    ]
+  },
+  {
+    name: "Switzerland",
+    slug: "switzerland",
+    flag: "🇨🇭",
+    universities: 30,
+    students: "50,000+",
+    description: "Switzerland is home to world-renowned universities and offers exceptional quality of life. Ideal for finance, hospitality, and research.",
+    whyStudy: [
+      "Top-ranked universities (ETH Zurich)",
+      "Multilingual environment",
+      "High quality of life",
+      "Strong finance and hospitality sectors",
+      "Safe and beautiful country"
+    ],
+    livingCost: "CHF 20,000 - 28,000 per year",
+    visaInfo: "Student visa required for non-EU/EFTA nationals.",
+    workRights: "15 hours/week during term",
+    postStudyVisa: "6-month extension for job search",
+    scholarships: ["Swiss Government Excellence Scholarships", "ETH Zurich scholarships"],
+    topUniversities: ["ETH Zurich", "EPFL", "University of Zurich", "University of Geneva"],
+    topCourses: ["Finance", "Hospitality", "Engineering", "Business", "Sciences"],
+    applicationSteps: [
+      "Apply to university",
+      "Receive admission",
+      "Apply for student visa",
+      "Arrange accommodation",
+      "Travel to Switzerland"
+    ]
   }
 ];
 
