@@ -28,8 +28,8 @@ const faqs = [
     a: "Many countries allow students to work part-time under certain conditions. We provide high-level guidance, but you should always check official government sources for the most current rules." 
   },
   { 
-    q: "What is NUMAWAY Genie?", 
-    a: "Genie is our AI-powered assistant that handles quick questions, planning, basic comparisons and reminders 24/7. It complements our human counsellors – when things are complex or high-stakes, we always involve a human expert." 
+    q: "What is NUMAWAY Sage?", 
+    a: "Sage is our AI-powered assistant that handles quick questions, planning, basic comparisons and reminders 24/7. It complements our human counsellors – when things are complex or high-stakes, we always involve a human expert." 
   },
   { 
     q: "When should I start the application process?", 

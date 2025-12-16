@@ -25,7 +25,7 @@ const WhyNumaway = () => {
     {
       icon: Sparkles,
       title: "AI-Powered Guidance",
-      description: "Our NUMAWAY Genie uses advanced AI to match you with universities and courses that truly fit your profile and goals.",
+      description: "Our NUMAWAY Sage uses advanced AI to match you with universities and courses that truly fit your profile and goals.",
     },
     {
       icon: Users,
@@ -252,7 +252,7 @@ const WhyNumaway = () => {
                   </a>
                 </Button>
                 <Button variant="hero-outline" size="xl" asChild>
-                  <a href="/genie">Try NUMAWAY Genie</a>
+                  <a href="/sage">Try NUMAWAY Sage</a>
                 </Button>
               </div>
             </motion.div>

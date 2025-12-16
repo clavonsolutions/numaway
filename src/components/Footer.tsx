@@ -108,7 +108,7 @@ const Footer = () => {
             {/* AI Badge */}
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-2 mb-6">
               <Sparkles className="w-4 h-4 text-gold" />
-              <span className="text-sm text-white/80">Powered by AI Genie</span>
+              <span className="text-sm text-white/80">Powered by AI Sage</span>
             </div>
 
             {/* Contact Info */}
