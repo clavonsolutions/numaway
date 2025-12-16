@@ -131,7 +131,7 @@ const Scholarships = () => {
               <a href="/consultation">Find Scholarships</a>
             </Button>
             <Button variant="glass" size="lg" className="border-white/20 text-white hover:bg-white/15" asChild>
-              <a href="/genie">Ask NUMAWAY Genie</a>
+              <a href="/sage">Ask NUMAWAY Sage</a>
             </Button>
           </div>
           

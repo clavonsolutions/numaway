@@ -119,16 +119,16 @@ const ServiceDetail = () => {
                   </div>
                 </div>
 
-                {/* Genie & App Support */}
+                {/* Sage & App Support */}
                 <div className="bg-gradient-to-r from-secondary/10 to-accent/10 rounded-xl p-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center flex-shrink-0">
                       <Sparkles className="w-6 h-6 text-secondary-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-display font-bold mb-2">How Genie & the NUMAWAY App Support This</h3>
+                      <h3 className="font-display font-bold mb-2">How Sage & the NUMAWAY App Support This</h3>
                       <p className="text-muted-foreground text-sm">
-                        Genie can generate checklists, timelines and quick answers related to this service. 
+                        Sage can generate checklists, timelines and quick answers related to this service. 
                         The NUMAWAY App keeps track of your progress and lets you message your counsellor anytime.
                       </p>
                     </div>

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Sparkles, MessageSquare, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const GenieSection = () => {
+const SageSection = () => {
   return (
     <section className="py-24 bg-gradient-hero relative overflow-hidden">
       {/* Decorative elements */}
@@ -28,7 +28,7 @@ const GenieSection = () => {
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-primary-foreground mb-6">
-              Meet <span className="text-gradient-gold">NUMAWAY Genie</span>
+              Meet <span className="text-gradient-gold">NUMAWAY Sage</span>
             </h2>
             
             <p className="text-lg text-primary-foreground/70 mb-8">
@@ -63,7 +63,7 @@ const GenieSection = () => {
             </ul>
 
             <Button variant="hero" size="lg">
-              Try Genie Now
+              Try Sage Now
               <ArrowRight className="w-4 h-4" />
             </Button>
           </motion.div>
@@ -83,7 +83,7 @@ const GenieSection = () => {
                   <Sparkles className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-display font-semibold text-foreground">NUMAWAY Genie</h4>
+                  <h4 className="font-display font-semibold text-foreground">NUMAWAY Sage</h4>
                   <span className="text-sm text-accent flex items-center gap-1">
                     <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
                     Online
@@ -99,7 +99,7 @@ const GenieSection = () => {
                   </div>
                   <div className="bg-muted rounded-2xl rounded-tl-none p-4 max-w-[80%]">
                     <p className="text-sm text-foreground">
-                      Hello! I'm your NUMAWAY Genie 👋 How can I help you today with your study abroad journey?
+                      Hello! I'm your NUMAWAY Sage 👋 How can I help you today with your study abroad journey?
                     </p>
                   </div>
                 </div>
@@ -151,4 +151,4 @@ const GenieSection = () => {
   );
 };
 
-export default GenieSection;
+export default SageSection;

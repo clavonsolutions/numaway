@@ -7,7 +7,7 @@ import { Smartphone, Sparkles, CheckCircle, ArrowRight, Clock, MessageCircle, Fi
 const features = [
   { icon: Clock, title: "Track Applications", description: "Track your applications from 'idea' to 'enrolled' in real time" },
   { icon: MessageCircle, title: "Chat with Counsellor", description: "Chat securely with your assigned counsellor anytime" },
-  { icon: Sparkles, title: "Use Genie", description: "Get quick answers and planning help from your AI assistant" },
+  { icon: Sparkles, title: "Use Sage", description: "Get quick answers and planning help from your AI assistant" },
   { icon: Bell, title: "Deadline Reminders", description: "Never miss an exam, document or application deadline again" },
   { icon: FileText, title: "Document Storage", description: "Store documents safely and access them anytime, anywhere" }
 ];

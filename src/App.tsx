@@ -29,7 +29,7 @@ import ResourceDetail from "./pages/ResourceDetail";
 import Careers from "./pages/Careers";
 import CareerDetail from "./pages/CareerDetail";
 import AppPage from "./pages/AppPage";
-import GeniePage from "./pages/GeniePage";
+import SagePage from "./pages/SagePage";
 import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
@@ -65,7 +65,7 @@ import StudentDashboard from "./pages/app/Dashboard";
 import StudentApplications from "./pages/app/Applications";
 import StudentDocuments from "./pages/app/Documents";
 import StudentProfile from "./pages/app/Profile";
-import GenieChat from "./pages/app/Genie";
+import SageChat from "./pages/app/Sage";
 
 const queryClient = new QueryClient();
 
@@ -135,10 +135,10 @@ const App = () => (
             <Route index element={<StudentDashboard />} />
             <Route path="applications" element={<StudentApplications />} />
             <Route path="documents" element={<StudentDocuments />} />
-            <Route path="genie" element={<GenieChat />} />
+            <Route path="sage" element={<SageChat />} />
             <Route path="profile" element={<StudentProfile />} />
           </Route>
-          <Route path="/genie" element={<GeniePage />} />
+          <Route path="/sage" element={<SagePage />} />
           
           {/* Search */}
           <Route path="/search" element={<Search />} />

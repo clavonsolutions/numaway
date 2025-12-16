@@ -228,14 +228,14 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
                 </a>
               </div>
 
-              {/* AI Genie Promo */}
+              {/* AI Sage Promo */}
               <div className="pb-8">
                 <a
-                  href="/genie"
+                  href="/sage"
                   onClick={onClose}
                   className="block p-4 bg-gradient-gold text-secondary-foreground rounded-xl"
                 >
-                  <div className="font-semibold mb-1">✨ Try NUMAWAY Genie</div>
+                  <div className="font-semibold mb-1">✨ Try NUMAWAY Sage</div>
                   <p className="text-sm opacity-80">
                     AI-powered study abroad guidance
                   </p>

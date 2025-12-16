@@ -24,12 +24,12 @@ const suggestedQuestions = [
   { icon: MessageSquare, text: "Explain visa requirements for Canada" },
 ];
 
-const GenieChat = () => {
+const SageChat = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       role: "assistant",
-      content: "Hello! I'm NUMAWAY Genie, your AI-powered study abroad counsellor. I can help you with university recommendations, document review, scholarship search, and answer any questions about studying abroad. How can I assist you today?",
+      content: "Hello! I'm NUMAWAY Sage, your AI-powered study abroad counsellor. I can help you with university recommendations, document review, scholarship search, and answer any questions about studying abroad. How can I assist you today?",
       timestamp: new Date(),
     },
   ]);
@@ -105,7 +105,7 @@ const GenieChat = () => {
           <Sparkles className="w-6 h-6 text-white" />
         </div>
         <div>
-          <h1 className="text-xl font-display font-bold">NUMAWAY Genie</h1>
+          <h1 className="text-xl font-display font-bold">NUMAWAY Sage</h1>
           <p className="text-sm text-muted-foreground">Your AI Study Abroad Counsellor</p>
         </div>
         <Badge variant="secondary" className="ml-auto">Beta</Badge>
@@ -215,7 +215,7 @@ const GenieChat = () => {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Ask Genie anything about studying abroad..."
+              placeholder="Ask Sage anything about studying abroad..."
               className="pr-20"
             />
             <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-1">
@@ -229,11 +229,11 @@ const GenieChat = () => {
           </div>
         </div>
         <p className="text-xs text-center text-muted-foreground mt-2">
-          Genie may make mistakes. Always verify important information.
+          Sage may make mistakes. Always verify important information.
         </p>
       </div>
     </div>
   );
 };
 
-export default GenieChat;
+export default SageChat;

@@ -117,7 +117,7 @@ const Accommodation = () => (
                   "Help you estimate realistic budgets for your chosen city",
                   "Share trusted partners or platforms where applicable",
                   "Guide you on what to look out for (contracts, deposits, safety)",
-                  "Generate a 'first 30 days' landing checklist via Genie"
+                  "Generate a 'first 30 days' landing checklist via Sage"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />

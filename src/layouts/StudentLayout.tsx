@@ -7,7 +7,7 @@ const navItems = [
   { icon: Home, label: "Dashboard", path: "/app" },
   { icon: FileText, label: "Applications", path: "/app/applications" },
   { icon: Upload, label: "Documents", path: "/app/documents" },
-  { icon: Sparkles, label: "Genie", path: "/app/genie" },
+  { icon: Sparkles, label: "Sage", path: "/app/sage" },
   { icon: User, label: "Profile", path: "/app/profile" },
 ];
 
