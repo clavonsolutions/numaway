@@ -46,7 +46,7 @@ const StartJourneySection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-foreground">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-foreground">
             Start your journey with us
           </h2>
         </motion.div>

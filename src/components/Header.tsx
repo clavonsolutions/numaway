@@ -34,72 +34,75 @@ const Header = () => {
         }`}
       >
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <a href="/" className="flex items-center group">
+          <div className="flex items-center justify-between h-16 lg:h-18">
+            {/* Logo - Left side */}
+            <a href="/" className="flex items-center group flex-shrink-0">
               <img 
                 src={numawayLogo} 
                 alt="NUMAWAY Education" 
-                className="h-10 sm:h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105 rounded-lg"
+                className="h-9 sm:h-10 w-auto object-contain transition-all duration-300 group-hover:scale-105 rounded-lg"
               />
             </a>
 
-            {/* Desktop Navigation - Mega Menu */}
-            <MegaMenu 
-              activeMenu={activeMegaMenu} 
-              onMenuChange={setActiveMegaMenu}
-              isScrolled={isScrolled}
-            />
+            {/* Navigation + Actions - Right side */}
+            <div className="flex items-center gap-1">
+              {/* Desktop Navigation - Mega Menu */}
+              <MegaMenu 
+                activeMenu={activeMegaMenu} 
+                onMenuChange={setActiveMegaMenu}
+                isScrolled={isScrolled}
+              />
 
-            {/* CTA Buttons */}
-            <div className="flex items-center gap-2">
-              {/* Theme Toggle */}
-              <ThemeToggle isScrolled={isScrolled} />
-              
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className={`hidden md:flex transition-colors ${
-                  isScrolled 
-                    ? "text-foreground hover:bg-muted" 
-                    : "text-white/90 hover:bg-white/10 hover:text-white"
-                }`} 
-                asChild
-              >
-                <a href="/search">
-                  <Search className="w-4 h-4" />
-                </a>
-              </Button>
-              <Button 
-                variant={isScrolled ? "outline" : "glass"} 
-                size="sm" 
-                className={`hidden sm:flex ${
-                  !isScrolled ? "border-white/20 text-white hover:bg-white/10" : ""
-                }`}
-                asChild
-              >
-                <a href="/login">Login</a>
-              </Button>
-              <Button 
-                variant="gold" 
-                size="sm" 
-                className="hidden sm:inline-flex shadow-gold/30 shadow-lg hover:shadow-gold/50 transition-shadow" 
-                asChild
-              >
-                <a href="/consultation">Book Free Consultation</a>
-              </Button>
-              
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsMobileNavOpen(true)}
-                className={`lg:hidden w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-300 ${
-                  isScrolled 
-                    ? "hover:bg-muted text-foreground" 
-                    : "hover:bg-white/10 text-white"
-                }`}
-              >
-                <Menu className="w-6 h-6" />
-              </button>
+              {/* CTA Buttons */}
+              <div className="flex items-center gap-1.5 ml-2">
+                {/* Theme Toggle */}
+                <ThemeToggle isScrolled={isScrolled} />
+                
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className={`hidden md:flex transition-colors h-9 w-9 p-0 ${
+                    isScrolled 
+                      ? "text-foreground hover:bg-muted" 
+                      : "text-white/90 hover:bg-white/10 hover:text-white"
+                  }`} 
+                  asChild
+                >
+                  <a href="/search">
+                    <Search className="w-4 h-4" />
+                  </a>
+                </Button>
+                <Button 
+                  variant={isScrolled ? "outline" : "glass"} 
+                  size="sm" 
+                  className={`hidden sm:flex h-9 text-sm ${
+                    !isScrolled ? "border-white/20 text-white hover:bg-white/10" : ""
+                  }`}
+                  asChild
+                >
+                  <a href="/login">Log in</a>
+                </Button>
+                <Button 
+                  variant="hero" 
+                  size="sm" 
+                  className="hidden sm:inline-flex h-9 text-sm px-4" 
+                  asChild
+                >
+                  <a href="/consultation">Sign up</a>
+                </Button>
+                
+                {/* Mobile Menu Button */}
+                <button
+                  onClick={() => setIsMobileNavOpen(true)}
+                  className={`lg:hidden w-9 h-9 flex items-center justify-center rounded-lg transition-all duration-300 ${
+                    isScrolled 
+                      ? "hover:bg-muted text-foreground" 
+                      : "hover:bg-white/10 text-white"
+                  }`}
+                >
+                  <Menu className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           </div>
         </div>

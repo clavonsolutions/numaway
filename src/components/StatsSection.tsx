@@ -95,7 +95,7 @@ const StatsSection = () => {
                 </motion.div>
 
                 {/* Counter */}
-                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-3 tracking-tight">
+                <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 tracking-tight">
                   <AnimatedCounter end={stat.value} suffix={stat.suffix} duration={2000} />
                 </div>
 

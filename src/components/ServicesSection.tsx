@@ -134,7 +134,7 @@ const ServicesSection = () => {
               Our Services
             </motion.span>
             <motion.h2 
-              className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-foreground mb-6"
+              className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-foreground mb-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -144,7 +144,7 @@ const ServicesSection = () => {
               <span className="text-gradient-gold"> Study Abroad</span>
             </motion.h2>
             <motion.p 
-              className="text-lg text-muted-foreground mb-8"
+              className="text-base text-muted-foreground mb-7"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

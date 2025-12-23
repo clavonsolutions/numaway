@@ -84,7 +84,7 @@ const CTASection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-primary-foreground mb-6 leading-tight"
+                className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-primary-foreground mb-5 leading-tight"
               >
                 Ready to start your
                 <span className="block sm:inline"> </span>
@@ -98,7 +98,7 @@ const CTASection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
-                className="text-lg lg:text-xl text-primary-foreground/70 mb-12 max-w-2xl mx-auto leading-relaxed"
+                className="text-base lg:text-lg text-primary-foreground/70 mb-10 max-w-2xl mx-auto leading-relaxed"
               >
                 Whether you're still exploring or already decided on a country, our team and tools 
                 are ready to support you. Book a free consultation – no obligations, no hidden fees.

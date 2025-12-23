@@ -107,13 +107,13 @@ const HowItWorksSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="inline-block text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
+          <span className="inline-block text-sm font-semibold text-secondary uppercase tracking-wider mb-3">
             How NUMAWAY Works
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-foreground mb-3">
             A Simple, Guided Journey
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
             From idea to arrival – we guide you every step of the way with structured 
             support and complete transparency.
           </p>
@@ -234,11 +234,11 @@ const HowItWorksSection = () => {
                       })()}
                     </motion.div>
 
-                    <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-4">
+                    <h3 className="text-xl md:text-2xl font-display font-bold text-foreground mb-3">
                       Step {currentStep + 1}: {steps[currentStep].title}
                     </h3>
 
-                    <p className="text-muted-foreground text-lg leading-relaxed">
+                    <p className="text-muted-foreground text-base leading-relaxed">
                       {steps[currentStep].description}
                     </p>
                   </div>
