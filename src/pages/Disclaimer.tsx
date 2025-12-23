@@ -9,13 +9,13 @@ const Disclaimer = () => {
       <Header />
       <main className="pt-20">
         {/* Hero */}
-        <section className="py-24 bg-gradient-hero text-primary-foreground">
+        <section className="py-20 bg-gradient-hero text-primary-foreground">
           <div className="container mx-auto px-4 text-center">
             <Breadcrumbs
               items={[{ label: "Disclaimer" }]}
-              className="mb-8 justify-center text-primary-foreground/70"
+              className="mb-6 justify-center text-primary-foreground/70"
             />
-            <h1 className="text-4xl lg:text-5xl font-display font-bold mb-4">
+            <h1 className="text-3xl lg:text-4xl font-display font-bold mb-3">
               Disclaimer
             </h1>
             <p className="text-primary-foreground/70">Last updated: December 2024</p>
@@ -23,123 +23,137 @@ const Disclaimer = () => {
         </section>
 
         {/* Content */}
-        <section className="py-16">
-          <div className="container mx-auto px-4 max-w-3xl">
-            <div className="prose prose-lg max-w-none">
-              <h2>1. General Information</h2>
-              <p>
-                The information provided on the NUMAWAY website and through our services is for 
-                general informational purposes only. While we strive to keep the information 
-                up-to-date and accurate, we make no representations or warranties of any kind, 
-                express or implied, about the completeness, accuracy, reliability, suitability, 
-                or availability of the information, products, services, or related graphics 
-                contained on the website.
+        <section className="py-14">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="prose prose-lg max-w-none dark:prose-invert">
+              <p className="lead text-lg text-muted-foreground mb-8">
+                This Disclaimer applies to all users of NUMAWAY Education's website, platforms, applications, services, tools, and related materials (collectively, the "Services"). By accessing or using NUMAWAY, you acknowledge and agree to the terms set out in this Disclaimer.
               </p>
 
-              <h2>2. Educational Guidance</h2>
+              <h2>1. General Information Only</h2>
               <p>
-                NUMAWAY provides educational counselling and guidance services. Our recommendations 
-                are based on the information you provide and our understanding of various 
-                educational institutions and programs. However:
+                All information provided by NUMAWAY Education ("NUMAWAY", "we", "our", "us") is for general informational and advisory purposes only.
               </p>
+              <p>While we strive to ensure accuracy and relevance, information may change due to:</p>
               <ul>
-                <li>
-                  We do not guarantee admission to any university or educational program.
-                </li>
-                <li>
-                  University requirements, fees, and policies can change at any time.
-                </li>
-                <li>
-                  The final decision on admissions rests solely with the respective institutions.
-                </li>
-                <li>
-                  We recommend verifying all information directly with the educational institutions.
-                </li>
+                <li>Institutional policy updates</li>
+                <li>Government or regulatory changes</li>
+                <li>Visa and immigration rule changes</li>
+                <li>Scholarship availability and eligibility changes</li>
+              </ul>
+              <p>NUMAWAY does not warrant that all information is complete, current, or error-free at all times.</p>
+
+              <h2>2. No Guarantee of Outcomes</h2>
+              <p className="font-semibold">NUMAWAY does not guarantee:</p>
+              <ul>
+                <li>Admission to any university, college, or program</li>
+                <li>Receipt of scholarships, funding, or financial aid</li>
+                <li>Approval of visas, residence permits, or immigration applications</li>
+                <li>Academic success, graduation, employment, salary levels, or career outcomes</li>
+              </ul>
+              <p>All final decisions are made independently by universities, institutions, test providers, and government authorities.</p>
+
+              <h2>3. Admissions & Academic Decisions</h2>
+              <p>Universities and educational institutions:</p>
+              <ul>
+                <li>Set their own eligibility criteria</li>
+                <li>Review applications independently</li>
+                <li>May change requirements without notice</li>
+              </ul>
+              <p>NUMAWAY's role is advisory and facilitative. We do not influence or control institutional decisions.</p>
+
+              <h2>4. Visa & Immigration Guidance</h2>
+              <p>Any visa or immigration-related guidance provided by NUMAWAY:</p>
+              <ul>
+                <li>Is non-legal guidance only</li>
+                <li>Does not constitute legal advice</li>
+                <li>Should not replace official embassy, consulate, or immigration authority information</li>
+              </ul>
+              <p className="font-semibold">
+                Visa decisions are made solely by government authorities. NUMAWAY has no authority over visa approvals or refusals.
+              </p>
+
+              <h2>5. Scholarships & Funding</h2>
+              <p>Scholarship information is provided based on publicly available or partner-supplied data.</p>
+              <ul>
+                <li>Availability, eligibility, and deadlines may change</li>
+                <li>Scholarships are awarded by third parties</li>
+                <li>NUMAWAY does not control selection decisions</li>
+              </ul>
+              <p>Students are responsible for verifying scholarship details directly with providers.</p>
+
+              <h2>6. AI-Powered Tools & Recommendations (NUMAWAY Sage)</h2>
+              <p>
+                NUMAWAY uses AI-enabled tools (including NUMAWAY Sage) to support guidance, recommendations, and insights.
+              </p>
+              <p>You acknowledge that:</p>
+              <ul>
+                <li>AI outputs are supportive and informational</li>
+                <li>AI recommendations are not guarantees or predictions</li>
+                <li>Final decisions must be made by the user and third parties</li>
+                <li>AI tools do not replace human judgment, official sources, or professional advice</li>
+              </ul>
+              <p className="font-semibold">
+                NUMAWAY is not liable for actions taken solely based on AI-generated outputs.
+              </p>
+
+              <h2>7. Third-Party Content & Links</h2>
+              <p>NUMAWAY may include links to third-party websites, platforms, or resources.</p>
+              <ul>
+                <li>Such links are provided for convenience only</li>
+                <li>NUMAWAY does not control or endorse third-party content</li>
+                <li>We are not responsible for third-party policies, accuracy, or availability</li>
+              </ul>
+              <p>Users access third-party services at their own risk.</p>
+
+              <h2>8. Testimonials & Success Stories</h2>
+              <p>Any testimonials, case studies, or success stories displayed on NUMAWAY platforms:</p>
+              <ul>
+                <li>Reflect individual experiences</li>
+                <li>Do not represent typical or guaranteed outcomes</li>
+                <li>Are not promises of future results</li>
+              </ul>
+              <p>Individual outcomes vary based on multiple factors.</p>
+
+              <h2>9. Financial Information</h2>
+              <p>Any cost estimates, tuition ranges, living expense figures, or financial guidance:</p>
+              <ul>
+                <li>Are indicative only</li>
+                <li>May vary by location, institution, and personal circumstances</li>
+                <li>Should not be relied upon as exact or binding figures</li>
+              </ul>
+              <p>Users are responsible for confirming final costs directly with institutions and providers.</p>
+
+              <h2>10. Limitation of Liability</h2>
+              <p>To the maximum extent permitted by law:</p>
+              <ul>
+                <li>NUMAWAY shall not be liable for direct, indirect, incidental, or consequential losses</li>
+                <li>This includes losses arising from reliance on information, delays, refusals, or third-party actions</li>
+                <li>Liability, where applicable, is limited as outlined in our Terms of Service</li>
               </ul>
 
-              <h2>3. Visa and Immigration</h2>
-              <p>
-                NUMAWAY is not a legal firm and does not provide legal advice. Information 
-                provided about visa requirements and immigration processes is for guidance only:
-              </p>
+              <h2>11. Regulatory & Jurisdictional Considerations</h2>
+              <p>NUMAWAY operates as an education advisory and technology-enabled platform.</p>
               <ul>
-                <li>
-                  Immigration rules and requirements are subject to change without notice.
-                </li>
-                <li>
-                  Visa approval is at the sole discretion of the respective embassy or immigration authority.
-                </li>
-                <li>
-                  We do not guarantee visa approval.
-                </li>
-                <li>
-                  For specific legal advice, please consult a licensed immigration lawyer.
-                </li>
+                <li>We are not a government body, accrediting agency, or immigration authority</li>
+                <li>Services may vary by country and jurisdiction</li>
+                <li>Local laws and regulations may apply depending on user location</li>
               </ul>
 
-              <h2>4. Financial Information</h2>
-              <p>
-                All financial information provided, including tuition fees, living costs, 
-                and scholarship amounts, are estimates and may vary. We recommend:
-              </p>
+              <h2>12. Updates to This Disclaimer</h2>
+              <p>NUMAWAY may update this Disclaimer periodically to reflect:</p>
               <ul>
-                <li>
-                  Confirming all fees directly with the educational institution.
-                </li>
-                <li>
-                  Budgeting for additional unexpected expenses.
-                </li>
-                <li>
-                  Consulting with a financial advisor for major financial decisions.
-                </li>
+                <li>Legal or regulatory changes</li>
+                <li>Service updates</li>
+                <li>Operational changes</li>
               </ul>
+              <p>Updates will be published on this page with a revised "Last Updated" date.</p>
 
-              <h2>5. Third-Party Links</h2>
-              <p>
-                Our website may contain links to external websites. We have no control over 
-                the content, privacy policies, or practices of these sites and are not 
-                responsible for their content or availability.
-              </p>
-
-              <h2>6. AI-Powered Features</h2>
-              <p>
-                NUMAWAY uses AI technology (including NUMAWAY Genie) to provide personalized 
-                recommendations. While our AI is designed to be helpful:
-              </p>
+              <h2>13. Contact Information</h2>
+              <p>For questions regarding this Disclaimer:</p>
               <ul>
-                <li>
-                  AI recommendations should not replace professional advice.
-                </li>
-                <li>
-                  AI may occasionally provide inaccurate or outdated information.
-                </li>
-                <li>
-                  Always verify AI-generated information with official sources.
-                </li>
-              </ul>
-
-              <h2>7. Limitation of Liability</h2>
-              <p>
-                In no event shall NUMAWAY Education Technology, its directors, employees, 
-                or affiliates be liable for any indirect, incidental, special, consequential, 
-                or punitive damages arising out of or related to your use of our services.
-              </p>
-
-              <h2>8. Accuracy of Information</h2>
-              <p>
-                We make every effort to ensure that the information on our website is accurate 
-                and up-to-date. However, we cannot guarantee that all information is current 
-                at all times. University rankings, fees, requirements, and other details 
-                are subject to change.
-              </p>
-
-              <h2>9. Contact Us</h2>
-              <p>
-                If you have any questions about this disclaimer, please contact us at:
-              </p>
-              <ul>
-                <li>Email: legal@numaway.com</li>
-                <li>Address: 123 Education Street, Victoria Island, Lagos, Nigeria</li>
+                <li><strong>Email:</strong> <a href="mailto:legal@numawayeducation.com">legal@numawayeducation.com</a></li>
+                <li><strong>Website:</strong> <a href="https://numawayeducation.com">https://numawayeducation.com</a></li>
               </ul>
             </div>
           </div>
