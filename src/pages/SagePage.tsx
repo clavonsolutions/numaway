@@ -2,7 +2,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Sparkles, MessageSquare, GraduationCap, FileCheck, CreditCard, ArrowRight, Clock, Users } from "lucide-react";
+import { MessageSquare, GraduationCap, FileCheck, CreditCard, ArrowRight, Clock, Users } from "lucide-react";
+import SageIcon from "@/components/icons/SageIcon";
 
 const features = [
   { icon: GraduationCap, title: "University Matching", desc: "\"Which country is right for me?\" Get personalized suggestions based on your profile." },
@@ -21,7 +22,7 @@ const SagePage = () => (
         <div className="container mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <div className="w-20 h-20 bg-gradient-gold rounded-full flex items-center justify-center mx-auto mb-6 shadow-glow">
-              <Sparkles className="w-10 h-10 text-primary" />
+              <SageIcon className="text-primary" size={48} />
             </div>
             <h1 className="text-4xl lg:text-6xl font-display font-bold mb-6">
               Meet <span className="text-gradient-gold">Sage</span>

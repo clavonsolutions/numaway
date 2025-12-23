@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Sparkles, MessageSquare, ArrowRight } from "lucide-react";
+import { MessageSquare, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
+import SageIcon from "@/components/icons/SageIcon";
 const SageSection = () => {
   return (
     <section className="py-24 bg-gradient-hero relative overflow-hidden">
@@ -21,7 +21,7 @@ const SageSection = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="inline-flex items-center gap-2 bg-secondary/20 rounded-full px-4 py-2 mb-6">
-              <Sparkles className="w-4 h-4 text-secondary" />
+              <SageIcon className="text-secondary" size={18} />
               <span className="text-sm font-medium text-primary-foreground">
                 AI-Powered Assistant
               </span>
@@ -80,7 +80,7 @@ const SageSection = () => {
               {/* Chat Header */}
               <div className="flex items-center gap-3 pb-4 border-b border-border mb-4">
                 <div className="w-12 h-12 bg-gradient-gold rounded-full flex items-center justify-center">
-                  <Sparkles className="w-6 h-6 text-primary" />
+                  <SageIcon className="text-primary" size={28} />
                 </div>
                 <div>
                   <h4 className="font-display font-semibold text-foreground">NUMAWAY Sage</h4>
@@ -95,7 +95,7 @@ const SageSection = () => {
               <div className="space-y-4">
                 <div className="flex gap-3">
                   <div className="w-8 h-8 bg-gradient-gold rounded-full flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="w-4 h-4 text-primary" />
+                    <SageIcon className="text-primary" size={18} />
                   </div>
                   <div className="bg-muted rounded-2xl rounded-tl-none p-4 max-w-[80%]">
                     <p className="text-sm text-foreground">
@@ -114,7 +114,7 @@ const SageSection = () => {
 
                 <div className="flex gap-3">
                   <div className="w-8 h-8 bg-gradient-gold rounded-full flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="w-4 h-4 text-primary" />
+                    <SageIcon className="text-primary" size={18} />
                   </div>
                   <div className="bg-muted rounded-2xl rounded-tl-none p-4 max-w-[80%]">
                     <p className="text-sm text-foreground">
