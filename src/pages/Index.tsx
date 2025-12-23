@@ -11,6 +11,9 @@ import StartJourneySection from "@/components/StartJourneySection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import FindMyPathWizard from "@/components/FindMyPathWizard";
+import TrustCenterSection from "@/components/TrustCenterSection";
+import WhyNumawaySection from "@/components/WhyNumawaySection";
 
 const Index = () => {
   return (
@@ -18,12 +21,15 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
+        <FindMyPathWizard />
         <DestinationsSection />
         <StatsSection />
+        <WhyNumawaySection />
         <HowItWorksSection />
         <ServicesSection />
         <AppShowcaseSection />
         <SageSection />
+        <TrustCenterSection />
         <TestimonialsSection />
         <StartJourneySection />
         <CTASection />

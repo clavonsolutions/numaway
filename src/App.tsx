@@ -42,6 +42,8 @@ import Team from "./pages/Team";
 import WhyNumaway from "./pages/WhyNumaway";
 import ForgotPassword from "./pages/ForgotPassword";
 import Disclaimer from "./pages/Disclaimer";
+import Complaints from "./pages/Complaints";
+import FraudPrevention from "./pages/FraudPrevention";
 import Scholarships from "./pages/Scholarships";
 import Search from "./pages/Search";
 import ForStudents from "./pages/ForStudents";
@@ -106,6 +108,8 @@ const App = () => {
           <Route path="/terms" element={<Terms />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/complaints" element={<Complaints />} />
+          <Route path="/fraud-prevention" element={<FraudPrevention />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/for-students" element={<ForStudents />} />
