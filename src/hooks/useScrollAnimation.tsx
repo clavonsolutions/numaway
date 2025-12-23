@@ -44,6 +44,7 @@ interface ScrollRevealProps {
   animation?: "fade-up" | "fade-in" | "slide-left" | "slide-right" | "scale-in" | "fade-in-up";
   delay?: number;
   duration?: number;
+  id?: string;
 }
 
 export const ScrollReveal = ({ 
@@ -51,7 +52,8 @@ export const ScrollReveal = ({
   className = "", 
   animation = "fade-up",
   delay = 0,
-  duration = 0.6
+  duration = 0.6,
+  id
 }: ScrollRevealProps) => {
   const { ref, isVisible } = useScrollAnimation();
 
@@ -87,6 +89,7 @@ export const ScrollReveal = ({
   return (
     <div
       ref={ref}
+      id={id}
       className={className}
       style={{
         ...styles.initial,
