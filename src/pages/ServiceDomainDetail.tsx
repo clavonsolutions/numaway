@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getServiceDomainBySlug, serviceDomains } from "@/data/serviceDomains";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ArrowRight, Phone, MessageCircle, Shield, Clock, DollarSign, ChevronRight, Users, Sparkles } from "lucide-react";
+import { CheckCircle, ArrowRight, Phone, MessageCircle, Shield, Clock, DollarSign, ChevronRight, Users, Sparkles, XCircle, Timer, Award, TrendingUp, AlertTriangle, Target, Heart, FileCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import {
@@ -34,6 +34,78 @@ const ServiceDomainDetail = () => {
   }
 
   const otherDomains = serviceDomains.filter(d => d.slug !== slug).slice(0, 4);
+
+  // Domain-specific turnaround times
+  const domainTurnarounds: Record<string, { primary: string; range: string }> = {
+    "student-services": { primary: "24–48 hours", range: "Initial consultation to full support" },
+    "university-partnerships": { primary: "2–3 business days", range: "Partner onboarding and setup" },
+    "digital-services": { primary: "Instant", range: "AI and portal access" },
+    "compliance-services": { primary: "3–5 business days", range: "Document verification and QC" },
+    "community-services": { primary: "1–2 business days", range: "Community access and engagement" },
+    "consulting-services": { primary: "5–10 business days", range: "Report delivery and advisory" },
+    "events-services": { primary: "Varies", range: "Event-specific timelines" },
+    "premium-services": { primary: "Priority: 24 hours", range: "Accelerated VIP processing" },
+    "future-services": { primary: "Coming Soon", range: "Join waitlist for early access" }
+  };
+
+  // Domain-specific "What We Don't Do"
+  const domainWhatWeDontDo: Record<string, string[]> = {
+    "student-services": [
+      "We do NOT guarantee admission to any university",
+      "We do NOT provide licensed immigration or legal advice",
+      "We do NOT write fake documents, statements, or references",
+      "We do NOT book flights, hotels, or make travel arrangements",
+      "We do NOT process payments to universities on your behalf"
+    ],
+    "university-partnerships": [
+      "We do NOT send unqualified or unscreened students",
+      "We do NOT guarantee enrollment numbers",
+      "We do NOT engage in fraudulent or unethical recruitment",
+      "We do NOT share student data without proper consent"
+    ],
+    "digital-services": [
+      "AI recommendations should always be verified with a counsellor",
+      "We do NOT guarantee AI-generated content is 100% accurate",
+      "Portal access does NOT replace human advisory support"
+    ],
+    "compliance-services": [
+      "We do NOT certify documents as legally verified",
+      "We do NOT provide legal compliance advice",
+      "We do NOT guarantee regulatory approval"
+    ],
+    "community-services": [
+      "We do NOT guarantee job placements or outcomes",
+      "We do NOT provide financial advice to parents",
+      "Community connections are peer-based, not professional services"
+    ],
+    "consulting-services": [
+      "We do NOT guarantee policy changes or outcomes",
+      "We do NOT implement solutions without institutional buy-in",
+      "Advisory recommendations are guidance, not mandates"
+    ],
+    "events-services": [
+      "We do NOT guarantee event attendance numbers",
+      "We do NOT guarantee admissions from event participation",
+      "Content co-production requires partner collaboration"
+    ],
+    "premium-services": [
+      "Premium services do NOT guarantee admission or visa approval",
+      "VIP support does NOT bypass university or embassy requirements",
+      "Accelerated processing does NOT mean shortcuts or compromises"
+    ],
+    "future-services": [
+      "Future services are subject to development timelines",
+      "Features may change before official launch",
+      "Early access does NOT guarantee specific features"
+    ]
+  };
+
+  const currentTurnaround = domainTurnarounds[slug || ""] || { primary: "Varies", range: "Service-dependent" };
+  const currentWhatWeDontDo = domainWhatWeDontDo[slug || ""] || [
+    "We don't make guarantees we can't keep",
+    "We don't take shortcuts with your future",
+    "We don't compromise on honesty or ethics"
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -125,25 +197,25 @@ const ServiceDomainDetail = () => {
           </div>
         </section>
 
-        {/* Free Consultation Banner */}
+        {/* Quick Stats Banner */}
         <section className="py-6 bg-secondary/10 border-y border-secondary/20">
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 text-center text-sm">
               <div className="flex items-center gap-2">
+                <Timer className="w-4 h-4 text-secondary" />
+                <span className="font-medium">Turnaround: {currentTurnaround.primary}</span>
+              </div>
+              <div className="flex items-center gap-2">
                 <DollarSign className="w-4 h-4 text-secondary" />
-                <span className="font-medium">Free Consultation</span>
+                <span className="font-medium">{domain.isFree ? "Free for Students" : "Transparent Pricing"}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Shield className="w-4 h-4 text-secondary" />
                 <span className="font-medium">No Hidden Fees</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-secondary" />
-                <span className="font-medium">24hr Response</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-secondary" />
-                <span className="font-medium">Expert Support</span>
+                <Award className="w-4 h-4 text-secondary" />
+                <span className="font-medium">97% Satisfaction Rate</span>
               </div>
             </div>
           </div>
@@ -161,6 +233,156 @@ const ServiceDomainDetail = () => {
                 Everything you need for {domain.title.toLowerCase()}, delivered with excellence and backed by our free consultation promise.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Turnaround & Evidence Section */}
+        <section className="py-16 bg-card">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Turnaround Time */}
+                <ScrollReveal animation="fade-up">
+                  <div className="bg-gradient-to-br from-secondary/10 to-accent/10 rounded-2xl p-8 h-full">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center">
+                        <Timer className="w-6 h-6 text-secondary-foreground" />
+                      </div>
+                      <h3 className="text-xl font-display font-bold">Turnaround Time</h3>
+                    </div>
+                    <p className="text-3xl font-bold text-secondary mb-2">{currentTurnaround.primary}</p>
+                    <p className="text-muted-foreground text-sm mb-4">{currentTurnaround.range}</p>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-secondary" />
+                        <span>VIP clients receive priority processing</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-secondary" />
+                        <span>Peak season timelines communicated upfront</span>
+                      </li>
+                    </ul>
+                  </div>
+                </ScrollReveal>
+
+                {/* Evidence of Excellence */}
+                <ScrollReveal animation="fade-up" delay={0.1}>
+                  <div className="bg-card rounded-2xl p-8 shadow-soft h-full">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center">
+                        <TrendingUp className="w-6 h-6 text-accent" />
+                      </div>
+                      <h3 className="text-xl font-display font-bold">Evidence of Excellence</h3>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="text-center p-3 bg-muted/50 rounded-lg">
+                        <div className="text-2xl font-bold text-secondary">10,000+</div>
+                        <div className="text-xs text-muted-foreground">Students Helped</div>
+                      </div>
+                      <div className="text-center p-3 bg-muted/50 rounded-lg">
+                        <div className="text-2xl font-bold text-secondary">97%</div>
+                        <div className="text-xs text-muted-foreground">Satisfaction Rate</div>
+                      </div>
+                      <div className="text-center p-3 bg-muted/50 rounded-lg">
+                        <div className="text-2xl font-bold text-secondary">150+</div>
+                        <div className="text-xs text-muted-foreground">Partner Universities</div>
+                      </div>
+                      <div className="text-center p-3 bg-muted/50 rounded-lg">
+                        <div className="text-2xl font-bold text-secondary">85%</div>
+                        <div className="text-xs text-muted-foreground">Visa Success</div>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* What We DON'T Do */}
+        <section className="py-16 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <ScrollReveal animation="fade-up" className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <AlertTriangle className="w-6 h-6 text-destructive" />
+                  <h2 className="text-2xl lg:text-3xl font-display font-bold">
+                    What We <span className="text-destructive">Don't</span> Do
+                  </h2>
+                </div>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  Transparency means being honest about our limits. Here's what this service domain doesn't cover.
+                </p>
+              </div>
+
+              <div className="bg-card rounded-2xl p-6 shadow-soft border-l-4 border-destructive">
+                <ul className="grid md:grid-cols-2 gap-4">
+                  {currentWhatWeDontDo.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <XCircle className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0" />
+                      <span className="text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-6 text-center">
+                <p className="text-sm text-muted-foreground">
+                  We focus on what we do best: honest guidance, structured support, and intelligent tools that empower informed decisions.
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* Pricing Philosophy */}
+        <section className="py-16 bg-card">
+          <div className="container mx-auto px-4">
+            <ScrollReveal animation="fade-up" className="max-w-4xl mx-auto">
+              <div className="text-center mb-10">
+                <h2 className="text-2xl lg:text-3xl font-display font-bold mb-4">
+                  How This Service Is Priced
+                </h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  We believe in transparent pricing with no hidden fees or surprises.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="bg-muted/50 rounded-2xl p-6 text-center">
+                  <div className="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <DollarSign className="w-6 h-6 text-secondary" />
+                  </div>
+                  <h3 className="font-semibold mb-2">Commission-Based</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {domain.isFree 
+                      ? "Free for students applying to partner universities. We're paid by institutions, not you."
+                      : "Partner institutions pay us, keeping costs transparent and predictable."
+                    }
+                  </p>
+                </div>
+
+                <div className="bg-muted/50 rounded-2xl p-6 text-center">
+                  <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <FileCheck className="w-6 h-6 text-accent" />
+                  </div>
+                  <h3 className="font-semibold mb-2">Service Fees</h3>
+                  <p className="text-sm text-muted-foreground">
+                    For non-partner universities or premium services, transparent fees are explained upfront before you proceed.
+                  </p>
+                </div>
+
+                <div className="bg-muted/50 rounded-2xl p-6 text-center">
+                  <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <Heart className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold mb-2">Your Interest First</h3>
+                  <p className="text-sm text-muted-foreground">
+                    We never push options that don't fit you. Recommendations are based on your profile, not our revenue.
+                  </p>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
         </section>
 
