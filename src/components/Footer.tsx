@@ -45,6 +45,8 @@ const Footer = () => {
       { label: "Terms of Service", href: "/terms" },
       { label: "Cookie Policy", href: "/cookies" },
       { label: "Disclaimer", href: "/disclaimer" },
+      { label: "Complaints", href: "/complaints" },
+      { label: "Fraud Prevention", href: "/fraud-prevention" },
     ],
   };
 
