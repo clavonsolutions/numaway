@@ -5,10 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
-  Sparkles, Send, Mic, Paperclip, User, Bot, 
+  Send, Mic, Paperclip, User, Bot, 
   GraduationCap, FileCheck, CreditCard, MessageSquare,
   ThumbsUp, ThumbsDown, Copy, RotateCcw
 } from "lucide-react";
+import SageIcon from "@/components/icons/SageIcon";
 
 interface Message {
   id: string;
@@ -102,7 +103,7 @@ const SageChat = () => {
       {/* Header */}
       <div className="flex items-center gap-3 pb-4 border-b">
         <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/30">
-          <Sparkles className="w-6 h-6 text-white" />
+          <SageIcon className="text-white" size={28} />
         </div>
         <div>
           <h1 className="text-xl font-display font-bold">NUMAWAY Sage</h1>
@@ -129,7 +130,7 @@ const SageChat = () => {
                 {message.role === "user" ? (
                   <User className="w-4 h-4 text-primary-foreground" />
                 ) : (
-                  <Sparkles className="w-4 h-4 text-white" />
+                  <SageIcon className="text-white" size={18} />
                 )}
               </div>
               <div className={`max-w-[80%] ${message.role === "user" ? "text-right" : ""}`}>
@@ -168,7 +169,7 @@ const SageChat = () => {
             className="flex gap-3"
           >
             <div className="w-8 h-8 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-white" />
+              <SageIcon className="text-white" size={18} />
             </div>
             <Card className="p-4 bg-muted/50">
               <div className="flex gap-1">
