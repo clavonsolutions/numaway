@@ -74,11 +74,11 @@ const DestinationsSection = () => {
             <Globe className="w-4 h-4" />
             Study Destinations
           </motion.span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-foreground mb-5">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-foreground mb-4">
             Explore Top Study{" "}
             <span className="text-gradient-teal">Destinations</span>
           </h2>
-          <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto">
             Discover world-class education opportunities across the globe. Each destination
             offers unique programs and experiences tailored for Nigerian students.
           </p>

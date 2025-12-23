@@ -64,13 +64,13 @@ const TestimonialsSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="inline-block text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
+          <span className="inline-block text-sm font-semibold text-secondary uppercase tracking-wider mb-3">
             Success Stories
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-foreground mb-3">
             Students Love NUMAWAY
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
             Join thousands of Nigerian students who have achieved their global education
             dreams with our support.
           </p>

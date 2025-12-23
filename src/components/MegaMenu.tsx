@@ -133,7 +133,7 @@ const MegaMenu = ({ activeMenu, onMenuChange, isScrolled = true }: MegaMenuProps
             links: [
               { label: "Accommodation", href: "/accommodation" },
               { label: "Interest-Free Loans", href: "/loans" },
-              { label: "AI Genie", href: "/genie" },
+              { label: "AI Sage", href: "/sage" },
             ],
           },
         ],
@@ -144,7 +144,7 @@ const MegaMenu = ({ activeMenu, onMenuChange, isScrolled = true }: MegaMenuProps
   ];
 
   return (
-    <nav className="hidden lg:flex items-center gap-1">
+    <nav className="hidden lg:flex items-center">
       {menuItems.map((item) => (
         <div
           key={item.id}
@@ -153,7 +153,7 @@ const MegaMenu = ({ activeMenu, onMenuChange, isScrolled = true }: MegaMenuProps
           onMouseLeave={() => onMenuChange(null)}
         >
           <button
-            className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 ${
+            className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
               activeMenu === item.id
                 ? isScrolled 
                   ? "text-foreground bg-muted" 
@@ -165,7 +165,7 @@ const MegaMenu = ({ activeMenu, onMenuChange, isScrolled = true }: MegaMenuProps
           >
             {item.label}
             <ChevronDown
-              className={`w-4 h-4 transition-transform duration-300 ${
+              className={`w-3.5 h-3.5 transition-transform duration-300 ${
                 activeMenu === item.id ? "rotate-180" : ""
               }`}
             />
@@ -259,7 +259,7 @@ const MegaMenu = ({ activeMenu, onMenuChange, isScrolled = true }: MegaMenuProps
       {/* Resources Link (no mega menu) */}
       <a
         href="/resources"
-        className={`px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 ${
+        className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
           isScrolled
             ? "text-muted-foreground hover:text-foreground hover:bg-muted"
             : "text-white/80 hover:text-white hover:bg-white/10"

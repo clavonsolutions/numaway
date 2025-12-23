@@ -200,7 +200,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-white leading-[1.08] tracking-tight mb-6"
+                className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-white leading-[1.1] tracking-tight mb-5"
               >
                 Study Abroad.
                 <br />
@@ -214,7 +214,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
-                className="text-lg sm:text-xl text-white/70 max-w-lg mb-8 leading-relaxed"
+                className="text-base sm:text-lg text-white/70 max-w-lg mb-7 leading-relaxed"
               >
                 From courses to countries, find what you need in a moment. 
                 Expert guidance for Nigerian students seeking global education.

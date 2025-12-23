@@ -135,7 +135,7 @@ const PageHero = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-[1.1] tracking-tight mb-6"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white leading-[1.15] tracking-tight mb-5"
           >
             {title}
             {titleHighlight && (
@@ -156,7 +156,7 @@ const PageHero = ({
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
-              className="text-base sm:text-lg lg:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed"
+              className="text-sm sm:text-base lg:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed"
             >
               {description}
             </motion.p>
