@@ -57,6 +57,16 @@ const HeroSection = () => {
     }
   };
 
+  // Generate floating particles
+  const particles = Array.from({ length: 30 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 4 + 2,
+    duration: Math.random() * 10 + 15,
+    delay: Math.random() * 5,
+  }));
+
   return (
     <>
       {/* Main Hero Section */}
@@ -64,62 +74,98 @@ const HeroSection = () => {
         {/* Modern gradient background */}
         <div className="absolute inset-0 bg-gradient-hero" />
         
-        {/* Gradient glow overlay */}
-        <div 
+        {/* Animated gradient overlay */}
+        <motion.div 
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse 100% 70% at 50% -10%, hsl(179 75% 41% / 0.3), transparent 60%)'
+            background: 'radial-gradient(ellipse 100% 70% at 50% -10%, hsl(179 75% 41% / 0.35), transparent 60%)'
           }}
+          animate={{ 
+            opacity: [0.8, 1, 0.8],
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
         
-        {/* Secondary glow */}
-        <div 
+        {/* Secondary glow with animation */}
+        <motion.div 
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse 60% 40% at 80% 80%, hsl(40 68% 55% / 0.12), transparent 50%)'
+            background: 'radial-gradient(ellipse 60% 40% at 80% 80%, hsl(40 68% 55% / 0.15), transparent 50%)'
           }}
+          animate={{ 
+            opacity: [0.6, 1, 0.6],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
 
-        {/* Animated orbs */}
+        {/* Floating particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {particles.map((particle) => (
+            <motion.div
+              key={particle.id}
+              className="absolute rounded-full bg-secondary/30"
+              style={{
+                left: `${particle.x}%`,
+                top: `${particle.y}%`,
+                width: particle.size,
+                height: particle.size,
+              }}
+              animate={{
+                y: [-20, 20, -20],
+                x: [-10, 10, -10],
+                opacity: [0.2, 0.6, 0.2],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: particle.duration,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: particle.delay,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Animated orbs with enhanced glow */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div 
-            className="absolute w-[800px] h-[800px] rounded-full"
+            className="absolute w-[800px] h-[800px] rounded-full blur-3xl"
             style={{
-              background: 'radial-gradient(circle, hsl(179 75% 41% / 0.15) 0%, transparent 60%)',
+              background: 'radial-gradient(circle, hsl(179 75% 41% / 0.2) 0%, transparent 60%)',
               top: '-20%',
               left: '-15%',
             }}
-            animate={{ y: [0, 40, 0], scale: [1, 1.05, 1] }}
+            animate={{ y: [0, 40, 0], scale: [1, 1.08, 1] }}
             transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
           />
           
           <motion.div 
-            className="absolute w-[500px] h-[500px] rounded-full"
+            className="absolute w-[600px] h-[600px] rounded-full blur-3xl"
             style={{
-              background: 'radial-gradient(circle, hsl(40 68% 55% / 0.12) 0%, transparent 60%)',
-              top: '40%',
+              background: 'radial-gradient(circle, hsl(40 68% 55% / 0.15) 0%, transparent 60%)',
+              top: '35%',
               right: '-10%',
             }}
-            animate={{ y: [0, -50, 0], x: [0, 30, 0] }}
+            animate={{ y: [0, -50, 0], x: [0, 30, 0], scale: [1, 1.05, 1] }}
             transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
           />
 
           <motion.div 
-            className="absolute w-[300px] h-[300px] rounded-full"
+            className="absolute w-[400px] h-[400px] rounded-full blur-2xl"
             style={{
-              background: 'radial-gradient(circle, hsl(195 82% 71% / 0.15) 0%, transparent 60%)',
-              bottom: '15%',
-              left: '15%',
+              background: 'radial-gradient(circle, hsl(195 82% 71% / 0.18) 0%, transparent 60%)',
+              bottom: '10%',
+              left: '10%',
             }}
             animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
           />
 
-          {/* Mesh grid */}
-          <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+          {/* Mesh grid with better visibility */}
+          <svg className="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <pattern id="hero-grid" width="80" height="80" patternUnits="userSpaceOnUse">
-                <path d="M 80 0 L 0 0 0 80" fill="none" stroke="white" strokeWidth="0.5"/>
+              <pattern id="hero-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="0.5"/>
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#hero-grid)" />
@@ -130,19 +176,23 @@ const HeroSection = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
             <div className="text-left">
-              {/* Badge */}
+              {/* Enhanced Badge with animated border */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-5 py-2.5 mb-6 shadow-lg"
+                className="relative inline-flex mb-6 group"
               >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
-                </span>
-                <span className="text-sm font-medium text-white/90">Human Counsellors + AI Intelligence</span>
-                <Sparkles className="w-4 h-4 text-gold animate-pulse-soft" />
+                {/* Animated gradient border */}
+                <div className="absolute -inset-[1px] rounded-full bg-gradient-to-r from-secondary via-gold to-accent opacity-75 blur-[2px] group-hover:opacity-100 transition-opacity" />
+                <div className="relative inline-flex items-center gap-3 bg-primary/80 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 shadow-xl">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary shadow-glow"></span>
+                  </span>
+                  <span className="text-sm font-semibold text-white tracking-wide">Human Counsellors + AI Intelligence</span>
+                  <Sparkles className="w-4 h-4 text-gold animate-pulse" />
+                </div>
               </motion.div>
 
               {/* Headline */}
