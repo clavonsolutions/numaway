@@ -4,6 +4,7 @@ import { Search, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MobileNav from "./MobileNav";
 import MegaMenu from "./MegaMenu";
+import ThemeToggle from "./ThemeToggle";
 import numawayLogo from "@/assets/numaway-logo.svg";
 
 const Header = () => {
@@ -51,7 +52,10 @@ const Header = () => {
             />
 
             {/* CTA Buttons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              {/* Theme Toggle */}
+              <ThemeToggle isScrolled={isScrolled} />
+              
               <Button 
                 variant="ghost" 
                 size="sm" 
