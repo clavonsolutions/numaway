@@ -3,8 +3,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getServiceBySlug, services } from "@/data/services";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ArrowRight, Users, Sparkles } from "lucide-react";
+import { CheckCircle, ArrowRight, Users, Sparkles, XCircle, Timer, Shield, Clock, Award, DollarSign, TrendingUp, AlertTriangle, Target, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const ServiceDetail = () => {
@@ -26,6 +27,69 @@ const ServiceDetail = () => {
       </div>
     );
   }
+
+  // Service-specific turnaround times
+  const turnaroundTimes: Record<string, { estimate: string; note: string }> = {
+    "study-abroad-counselling": { estimate: "24–48 hours", note: "Initial consultation booking" },
+    "application-support": { estimate: "2–4 business days", note: "Per application review" },
+    "offer-decision-support": { estimate: "1–2 business days", note: "Offer comparison analysis" },
+    "visa-preparation": { estimate: "5–7 business days", note: "Complete visa document prep" },
+    "accommodation-landing": { estimate: "3–5 business days", note: "Housing guidance report" },
+    "exams-support": { estimate: "2–3 business days", note: "Exam planning consultation" },
+    "scholarships-funding": { estimate: "5–7 business days", note: "Scholarship matching report" },
+    "genie": { estimate: "Instant", note: "24/7 AI availability" }
+  };
+
+  // Service-specific "What We Don't Do"
+  const whatWeDontDo: Record<string, string[]> = {
+    "study-abroad-counselling": [
+      "We don't guarantee admission to any university",
+      "We don't make decisions for you—we inform and guide",
+      "We don't push schools that pay us more over schools that fit you"
+    ],
+    "application-support": [
+      "We don't write your statements for you (we coach and refine)",
+      "We don't submit applications without your review and approval",
+      "We don't fabricate any information in your applications"
+    ],
+    "offer-decision-support": [
+      "We don't choose your offer for you—we help you understand options",
+      "We don't negotiate fees with universities on your behalf",
+      "We don't guarantee scholarship amounts or discounts"
+    ],
+    "visa-preparation": [
+      "We do NOT provide licensed immigration advice",
+      "We do NOT guarantee visa approval",
+      "We do NOT handle embassy appointments or submissions directly"
+    ],
+    "accommodation-landing": [
+      "We do NOT book accommodation on your behalf",
+      "We do NOT guarantee specific housing availability",
+      "We do NOT handle rental payments or deposits"
+    ],
+    "exams-support": [
+      "We do NOT offer intensive exam tutoring",
+      "We do NOT register you for exams",
+      "We do NOT guarantee specific score improvements"
+    ],
+    "scholarships-funding": [
+      "We do NOT guarantee any scholarship awards",
+      "We do NOT fabricate eligibility criteria",
+      "We do NOT promise full funding for any student"
+    ],
+    "genie": [
+      "Genie does not replace human counsellors for complex decisions",
+      "Genie does not verify documents or process applications",
+      "Genie recommendations should always be verified with your counsellor"
+    ]
+  };
+
+  const currentTurnaround = turnaroundTimes[slug || ""] || { estimate: "2–5 business days", note: "Standard processing" };
+  const currentWhatWeDontDo = whatWeDontDo[slug || ""] || [
+    "We don't make guarantees we can't keep",
+    "We don't take shortcuts with your future",
+    "We don't compromise on honesty or ethics"
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -62,6 +126,30 @@ const ServiceDetail = () => {
           </div>
         </section>
 
+        {/* Quick Stats Bar */}
+        <section className="py-6 bg-secondary/10 border-y border-secondary/20">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 text-center text-sm">
+              <div className="flex items-center gap-2">
+                <Timer className="w-4 h-4 text-secondary" />
+                <span className="font-medium">Turnaround: {currentTurnaround.estimate}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <DollarSign className="w-4 h-4 text-secondary" />
+                <span className="font-medium">Free Consultation</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-secondary" />
+                <span className="font-medium">Transparent Process</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Award className="w-4 h-4 text-secondary" />
+                <span className="font-medium">97% Satisfaction</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-3 gap-12">
@@ -69,102 +157,193 @@ const ServiceDetail = () => {
               <div className="lg:col-span-2 space-y-12">
                 {/* Who Is It For */}
                 {service.whoIsItFor && service.whoIsItFor.length > 0 && (
+                  <ScrollReveal animation="fade-up">
+                    <div>
+                      <h2 className="text-2xl font-display font-bold mb-6 flex items-center gap-2">
+                        <Users className="w-6 h-6 text-secondary" />
+                        Who This Service Is For
+                      </h2>
+                      <div className="bg-muted/50 rounded-xl p-6">
+                        <p className="text-muted-foreground mb-4">This service is ideal if:</p>
+                        <ul className="space-y-3">
+                          {service.whoIsItFor.map((item, i) => (
+                            <li key={i} className="flex items-start gap-3">
+                              <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                )}
+
+                {/* What's Included */}
+                <ScrollReveal animation="fade-up">
+                  <div>
+                    <h2 className="text-2xl font-display font-bold mb-6">What's Included</h2>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {service.features.map((f, i) => (
+                        <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-lg shadow-soft">
+                          <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                          <span>{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </ScrollReveal>
+
+                {/* How It Works */}
+                <ScrollReveal animation="fade-up">
+                  <div>
+                    <h2 className="text-2xl font-display font-bold mb-6">How It Works</h2>
+                    <div className="space-y-4">
+                      {service.howItWorks.map((step) => (
+                        <div key={step.step} className="flex gap-4 p-4 bg-card rounded-lg shadow-soft">
+                          <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-secondary-foreground font-bold flex-shrink-0">
+                            {step.step}
+                          </div>
+                          <div>
+                            <h4 className="font-semibold">{step.title}</h4>
+                            <p className="text-muted-foreground text-sm">{step.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </ScrollReveal>
+
+                {/* Turnaround Time */}
+                <ScrollReveal animation="fade-up">
+                  <div className="bg-gradient-to-r from-secondary/10 to-accent/10 rounded-xl p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center flex-shrink-0">
+                        <Timer className="w-6 h-6 text-secondary-foreground" />
+                      </div>
+                      <div>
+                        <h3 className="font-display font-bold mb-2">Expected Turnaround Time</h3>
+                        <p className="text-2xl font-bold text-secondary mb-1">{currentTurnaround.estimate}</p>
+                        <p className="text-muted-foreground text-sm">
+                          {currentTurnaround.note}. Times may vary during peak admission seasons. VIP clients receive priority processing.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+
+                {/* What We DON'T Do */}
+                <ScrollReveal animation="fade-up">
                   <div>
                     <h2 className="text-2xl font-display font-bold mb-6 flex items-center gap-2">
-                      <Users className="w-6 h-6 text-secondary" />
-                      Who This Service Is For
+                      <AlertTriangle className="w-6 h-6 text-destructive" />
+                      What We <span className="text-destructive">Don't</span> Do
                     </h2>
-                    <div className="bg-muted/50 rounded-xl p-6">
-                      <p className="text-muted-foreground mb-4">This service is ideal if:</p>
+                    <div className="bg-muted/50 rounded-xl p-6 border-l-4 border-destructive">
+                      <p className="text-muted-foreground mb-4 text-sm">Honesty means being clear about our limits:</p>
                       <ul className="space-y-3">
-                        {service.whoIsItFor.map((item, i) => (
+                        {currentWhatWeDontDo.map((item, i) => (
                           <li key={i} className="flex items-start gap-3">
-                            <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                            <XCircle className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0" />
                             <span>{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
                   </div>
-                )}
-
-                {/* What's Included */}
-                <div>
-                  <h2 className="text-2xl font-display font-bold mb-6">What's Included</h2>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {service.features.map((f, i) => (
-                      <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-lg shadow-soft">
-                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
-                        <span>{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* How It Works */}
-                <div>
-                  <h2 className="text-2xl font-display font-bold mb-6">How It Works</h2>
-                  <div className="space-y-4">
-                    {service.howItWorks.map((step) => (
-                      <div key={step.step} className="flex gap-4 p-4 bg-card rounded-lg shadow-soft">
-                        <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-secondary-foreground font-bold flex-shrink-0">
-                          {step.step}
-                        </div>
-                        <div>
-                          <h4 className="font-semibold">{step.title}</h4>
-                          <p className="text-muted-foreground text-sm">{step.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                </ScrollReveal>
 
                 {/* Sage & App Support */}
-                <div className="bg-gradient-to-r from-secondary/10 to-accent/10 rounded-xl p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Sparkles className="w-6 h-6 text-secondary-foreground" />
-                    </div>
-                    <div>
-                      <h3 className="font-display font-bold mb-2">How Sage & the NUMAWAY App Support This</h3>
-                      <p className="text-muted-foreground text-sm">
-                        Sage can generate checklists, timelines and quick answers related to this service. 
-                        The NUMAWAY App keeps track of your progress and lets you message your counsellor anytime.
-                      </p>
+                <ScrollReveal animation="fade-up">
+                  <div className="bg-gradient-to-r from-secondary/10 to-accent/10 rounded-xl p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center flex-shrink-0">
+                        <Sparkles className="w-6 h-6 text-secondary-foreground" />
+                      </div>
+                      <div>
+                        <h3 className="font-display font-bold mb-2">How Sage & the NUMAWAY App Support This</h3>
+                        <p className="text-muted-foreground text-sm">
+                          Sage can generate checklists, timelines and quick answers related to this service. 
+                          The NUMAWAY App keeps track of your progress and lets you message your counsellor anytime.
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </ScrollReveal>
+
+                {/* Evidence & Success Stories */}
+                <ScrollReveal animation="fade-up">
+                  <div>
+                    <h2 className="text-2xl font-display font-bold mb-6 flex items-center gap-2">
+                      <TrendingUp className="w-6 h-6 text-secondary" />
+                      Evidence of Impact
+                    </h2>
+                    <div className="grid sm:grid-cols-3 gap-4 mb-6">
+                      <div className="bg-card rounded-xl p-4 text-center shadow-soft">
+                        <div className="text-2xl font-bold text-secondary">97%</div>
+                        <div className="text-sm text-muted-foreground">Student Satisfaction</div>
+                      </div>
+                      <div className="bg-card rounded-xl p-4 text-center shadow-soft">
+                        <div className="text-2xl font-bold text-secondary">10,000+</div>
+                        <div className="text-sm text-muted-foreground">Students Helped</div>
+                      </div>
+                      <div className="bg-card rounded-xl p-4 text-center shadow-soft">
+                        <div className="text-2xl font-bold text-secondary">150+</div>
+                        <div className="text-sm text-muted-foreground">University Partners</div>
+                      </div>
+                    </div>
+                    <div className="bg-card rounded-xl p-6 shadow-soft">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                          <Heart className="w-6 h-6 text-secondary" />
+                        </div>
+                        <div>
+                          <p className="italic text-muted-foreground mb-2">
+                            "The structured approach made everything less overwhelming. I knew exactly what to expect and when."
+                          </p>
+                          <p className="text-sm font-medium">— NUMAWAY Student</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
 
                 {/* Outcomes */}
                 {service.outcomes && service.outcomes.length > 0 && (
-                  <div>
-                    <h2 className="text-2xl font-display font-bold mb-6">What You Walk Away With</h2>
-                    <div className="bg-card rounded-xl p-6 shadow-soft">
-                      <ul className="space-y-3">
-                        {service.outcomes.map((outcome, i) => (
-                          <li key={i} className="flex items-start gap-3">
-                            <CheckCircle className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
-                            <span>{outcome}</span>
-                          </li>
-                        ))}
-                      </ul>
+                  <ScrollReveal animation="fade-up">
+                    <div>
+                      <h2 className="text-2xl font-display font-bold mb-6 flex items-center gap-2">
+                        <Target className="w-6 h-6 text-secondary" />
+                        What You Walk Away With
+                      </h2>
+                      <div className="bg-card rounded-xl p-6 shadow-soft">
+                        <ul className="space-y-3">
+                          {service.outcomes.map((outcome, i) => (
+                            <li key={i} className="flex items-start gap-3">
+                              <CheckCircle className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                              <span>{outcome}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
+                  </ScrollReveal>
                 )}
 
                 {/* FAQs */}
                 {service.faqs && service.faqs.length > 0 && (
-                  <div>
-                    <h2 className="text-2xl font-display font-bold mb-6">Frequently Asked Questions</h2>
-                    <Accordion type="single" collapsible className="space-y-3">
-                      {service.faqs.map((faq, i) => (
-                        <AccordionItem key={i} value={`faq-${i}`} className="bg-card rounded-xl shadow-soft px-6">
-                          <AccordionTrigger className="text-left font-semibold">{faq.question}</AccordionTrigger>
-                          <AccordionContent className="text-muted-foreground">{faq.answer}</AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
-                  </div>
+                  <ScrollReveal animation="fade-up">
+                    <div>
+                      <h2 className="text-2xl font-display font-bold mb-6">Frequently Asked Questions</h2>
+                      <Accordion type="single" collapsible className="space-y-3">
+                        {service.faqs.map((faq, i) => (
+                          <AccordionItem key={i} value={`faq-${i}`} className="bg-card rounded-xl shadow-soft px-6">
+                            <AccordionTrigger className="text-left font-semibold">{faq.question}</AccordionTrigger>
+                            <AccordionContent className="text-muted-foreground">{faq.answer}</AccordionContent>
+                          </AccordionItem>
+                        ))}
+                      </Accordion>
+                    </div>
+                  </ScrollReveal>
                 )}
               </div>
 
@@ -175,6 +354,18 @@ const ServiceDetail = () => {
                   <p className="text-muted-foreground mb-6">
                     Ready to begin? Book a free consultation to discuss your needs.
                   </p>
+
+                  {/* Pricing Info */}
+                  <div className="bg-secondary/10 rounded-lg p-4 mb-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <DollarSign className="w-5 h-5 text-secondary" />
+                      <span className="font-semibold">Pricing</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Free for most students applying to partner universities. Service fees apply for non-partner schools or premium options.
+                    </p>
+                  </div>
+
                   <Button variant="hero" className="w-full mb-3" asChild>
                     <Link to="/consultation">
                       Book Consultation <ArrowRight className="w-4 h-4" />
@@ -184,8 +375,17 @@ const ServiceDetail = () => {
                     <Link to="/contact">Contact Us</Link>
                   </Button>
 
+                  {/* Turnaround Quick View */}
+                  <div className="mt-6 pt-6 border-t border-border">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Clock className="w-4 h-4 text-secondary" />
+                      <span className="text-sm font-medium">Turnaround Time</span>
+                    </div>
+                    <p className="text-lg font-bold text-secondary">{currentTurnaround.estimate}</p>
+                  </div>
+
                   {/* Other Services */}
-                  <div className="mt-8 pt-6 border-t border-border">
+                  <div className="mt-6 pt-6 border-t border-border">
                     <h4 className="font-semibold mb-4">Other Services</h4>
                     <div className="space-y-2">
                       {services
