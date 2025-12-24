@@ -5,10 +5,25 @@ import SageIcon from "@/components/icons/SageIcon";
 const SageSection = () => {
   return (
     <section className="py-24 bg-gradient-hero relative overflow-hidden">
-      {/* Decorative elements */}
+      {/* Diagonal divider at top */}
+      <div className="absolute -top-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "100px" }}>
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" className="absolute bottom-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,100 1440,50 1440,100 0,100" fill="hsl(var(--primary) / 0.95)" />
+        </svg>
+      </div>
+      
+      {/* Diagonal divider at bottom */}
+      <div className="absolute -bottom-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "100px" }}>
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" className="absolute top-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 1440,50 1440,100 0,100" fill="hsl(var(--background))" />
+          <line x1="0" y1="0" x2="1440" y2="50" stroke="hsl(var(--secondary) / 0.08)" strokeWidth="1" />
+        </svg>
+      </div>
+
+      {/* Decorative elements - softer */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse-soft" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">

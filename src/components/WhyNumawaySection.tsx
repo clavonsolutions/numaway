@@ -54,8 +54,15 @@ const differentiators = [
 const WhyNumawaySection = () => {
   return (
     <section className="py-16 lg:py-24 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+      {/* Diagonal divider at bottom */}
+      <div className="absolute -bottom-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "80px" }}>
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="absolute top-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 1440,50 1440,80 0,80" fill="hsl(var(--background))" />
+        </svg>
+      </div>
+
+      {/* Background - softer */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent" />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}

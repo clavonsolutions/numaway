@@ -101,16 +101,31 @@ const cardVariants = {
 const ServicesSection = () => {
   return (
     <section className="py-24 bg-background relative overflow-hidden">
-      {/* Background decorations */}
+      {/* Diagonal divider at top */}
+      <div className="absolute -top-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "90px" }}>
+        <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="absolute bottom-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,90 1440,40 1440,90 0,90" fill="hsl(var(--background))" />
+          <line x1="0" y1="88" x2="1440" y2="38" stroke="hsl(var(--secondary) / 0.05)" strokeWidth="1" />
+        </svg>
+      </div>
+      
+      {/* Diagonal divider at bottom */}
+      <div className="absolute -bottom-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "80px" }}>
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="absolute top-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 1440,40 1440,80 0,80" fill="hsl(var(--muted) / 0.15)" />
+        </svg>
+      </div>
+
+      {/* Background decorations - softer */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
-          className="absolute -top-40 -right-40 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
+          className="absolute -top-40 -right-40 w-80 h-80 bg-secondary/3 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-gold/5 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.65, 0.5] }}
+          className="absolute -bottom-40 -left-40 w-80 h-80 bg-gold/3 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.45, 0.3] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
       </div>

@@ -35,12 +35,24 @@ const stats = [
 
 const StatsSection = () => {
   return (
-    <section className="py-20 lg:py-24 bg-primary relative overflow-hidden">
-      {/* Animated gradient overlay */}
+    <section className="py-20 lg:py-24 bg-primary/95 relative overflow-hidden">
+      {/* Diagonal dividers */}
+      <div className="absolute -top-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "100px" }}>
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" className="absolute bottom-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,100 1440,40 1440,100 0,100" fill="hsl(var(--primary) / 0.95)" />
+        </svg>
+      </div>
+      <div className="absolute -bottom-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "100px" }}>
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" className="absolute top-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 1440,60 1440,100 0,100" fill="hsl(var(--background))" />
+        </svg>
+      </div>
+
+      {/* Animated gradient overlay - softer */}
       <motion.div 
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse 80% 50% at 20% 20%, hsl(179 75% 41% / 0.15), transparent 50%)'
+          background: 'radial-gradient(ellipse 80% 50% at 20% 20%, hsl(179 75% 41% / 0.08), transparent 50%)'
         }}
         animate={{ opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -48,14 +60,14 @@ const StatsSection = () => {
       <motion.div 
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse 60% 40% at 80% 80%, hsl(40 68% 55% / 0.1), transparent 50%)'
+          background: 'radial-gradient(ellipse 60% 40% at 80% 80%, hsl(40 68% 55% / 0.06), transparent 50%)'
         }}
         animate={{ opacity: [0.3, 0.8, 0.3] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       />
 
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-[0.08]">
+      {/* Background pattern - more subtle */}
+      <div className="absolute inset-0 opacity-[0.04]">
         <div 
           className="absolute inset-0"
           style={{

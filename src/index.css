@@ -24,8 +24,13 @@
     --secondary: 179 75% 41%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 20% 96%;
+    --muted: 210 20% 97%;
     --muted-foreground: 215 15% 46%;
+
+    /* Section backgrounds - softer, more transparent */
+    --section-light: 210 25% 98% / 0.5;
+    --section-muted: 210 20% 96% / 0.3;
+    --section-accent: 179 75% 41% / 0.03;
 
     /* Sky Blue accent #77D1F2 */
     --accent: 195 82% 71%;

@@ -36,7 +36,22 @@ const journeyCards = [
 
 const StartJourneySection = () => {
   return (
-    <section className="py-20 lg:py-28 bg-muted/30">
+    <section className="py-20 lg:py-28 bg-muted/15 relative overflow-hidden">
+      {/* Diagonal divider at top */}
+      <div className="absolute -top-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "80px" }}>
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="absolute bottom-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,80 1440,30 1440,80 0,80" fill="hsl(var(--muted) / 0.15)" />
+        </svg>
+      </div>
+      
+      {/* Diagonal divider at bottom */}
+      <div className="absolute -bottom-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "80px" }}>
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="absolute top-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 1440,50 1440,80 0,80" fill="hsl(var(--background))" />
+          <line x1="0" y1="0" x2="1440" y2="50" stroke="hsl(var(--secondary) / 0.06)" strokeWidth="1" />
+        </svg>
+      </div>
+      
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <motion.div

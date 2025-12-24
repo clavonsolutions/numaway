@@ -103,8 +103,8 @@ const FindMyPathWizard = () => {
 
   return (
     <section className="py-16 lg:py-24 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
+      {/* Background - softer */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-secondary/3" />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto">

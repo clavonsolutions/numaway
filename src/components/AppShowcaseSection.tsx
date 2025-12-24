@@ -154,9 +154,16 @@ const AppShowcaseSection = () => {
   };
 
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-b from-muted/40 via-background to-background relative overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-30">
+    <section className="py-24 lg:py-32 bg-gradient-to-b from-muted/20 via-background to-background relative overflow-hidden">
+      {/* Diagonal divider at top */}
+      <div className="absolute -top-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "80px" }}>
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="absolute bottom-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,80 1440,30 1440,80 0,80" fill="hsl(var(--muted) / 0.2)" />
+        </svg>
+      </div>
+
+      {/* Subtle background pattern - softer */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
         <div 
           className="absolute inset-0"
           style={{

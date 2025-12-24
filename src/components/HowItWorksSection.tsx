@@ -97,7 +97,14 @@ const HowItWorksSection = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-br from-muted/30 via-background to-muted/50 overflow-hidden">
+    <section className="py-24 bg-gradient-to-br from-muted/15 via-background to-muted/25 overflow-hidden relative">
+      {/* Diagonal divider at top */}
+      <div className="absolute -top-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "80px" }}>
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="absolute bottom-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,80 1440,30 1440,80 0,80" fill="hsl(var(--background))" />
+        </svg>
+      </div>
+      
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <motion.div
