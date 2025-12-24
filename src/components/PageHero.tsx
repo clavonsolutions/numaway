@@ -176,10 +176,27 @@ const PageHero = ({
         </div>
       </div>
 
-      {/* Bottom wave */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 60" className="w-full h-auto fill-background" preserveAspectRatio="none">
-          <path d="M0,30 C360,50 720,10 1080,35 C1260,48 1380,40 1440,30 L1440,60 L0,60 Z" />
+      {/* Bottom diagonal divider - Stripe-inspired */}
+      <div className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none z-10" style={{ height: "120px" }}>
+        <svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          className="absolute bottom-0 w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <polygon
+            points="0,40 1440,80 1440,120 0,120"
+            fill="hsl(var(--background))"
+            className="transition-colors duration-300"
+          />
+          <line 
+            x1="0" 
+            y1="38" 
+            x2="1440" 
+            y2="78" 
+            stroke="hsl(var(--secondary) / 0.15)" 
+            strokeWidth="2"
+          />
         </svg>
       </div>
     </section>

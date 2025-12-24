@@ -83,10 +83,44 @@ const Footer = () => {
         />
       </div>
 
-      {/* Top wave */}
-      <div className="absolute top-0 left-0 right-0 transform -translate-y-1">
-        <svg viewBox="0 0 1440 60" className="w-full h-auto fill-background" preserveAspectRatio="none">
-          <path d="M0,30 C360,60 720,0 1080,40 C1260,55 1380,45 1440,30 L1440,0 L0,0 Z" />
+      {/* Top diagonal divider with Stripe-style layered stripes */}
+      <div className="absolute top-0 left-0 right-0 transform -translate-y-1 overflow-hidden pointer-events-none z-10" style={{ height: "180px" }}>
+        <svg
+          viewBox="0 0 1440 180"
+          preserveAspectRatio="none"
+          className="absolute top-0 w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Main diagonal from background */}
+          <polygon
+            points="0,0 1440,100 1440,0"
+            fill="hsl(var(--background))"
+            className="transition-colors duration-300"
+          />
+          {/* Cyan/secondary stripe - left corner */}
+          <polygon
+            points="0,0 0,80 200,0"
+            fill="hsl(var(--secondary))"
+            className="transition-colors duration-300"
+          />
+          {/* Primary stripe - overlapping */}
+          <polygon
+            points="120,0 80,50 280,50 240,0"
+            fill="hsl(var(--primary) / 0.8)"
+            className="transition-colors duration-300"
+          />
+          {/* Accent stripe - right corner */}
+          <polygon
+            points="1200,0 1440,0 1440,60"
+            fill="hsl(var(--accent) / 0.6)"
+            className="transition-colors duration-300"
+          />
+          {/* Secondary stripe on right */}
+          <polygon
+            points="1300,0 1260,40 1380,40 1420,0"
+            fill="hsl(var(--secondary) / 0.5)"
+            className="transition-colors duration-300"
+          />
         </svg>
       </div>
 
