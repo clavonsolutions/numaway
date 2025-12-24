@@ -433,10 +433,11 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 80" className="w-full h-auto fill-background" preserveAspectRatio="none">
-            <path d="M0,40 C360,70 720,10 1080,45 C1260,60 1380,50 1440,35 L1440,80 L0,80 Z" />
+        {/* Bottom diagonal divider - Stripe-inspired */}
+        <div className="absolute -bottom-1 left-0 right-0" style={{ height: "100px" }}>
+          <svg viewBox="0 0 1440 100" className="w-full h-full fill-background" preserveAspectRatio="none">
+            <polygon points="0,40 1440,80 1440,100 0,100" />
+            <line x1="0" y1="40" x2="1440" y2="80" stroke="hsl(179 75% 41% / 0.1)" strokeWidth="1" />
           </svg>
         </div>
       </section>

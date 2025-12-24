@@ -61,13 +61,27 @@ const commitments = [
 
 const TrustCenterSection = () => {
   return (
-    <section className="py-16 lg:py-24 relative overflow-hidden bg-muted/30">
-      {/* Background decorations */}
+    <section className="py-16 lg:py-24 relative overflow-hidden bg-muted/15">
+      {/* Diagonal divider at top */}
+      <div className="absolute -top-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "80px" }}>
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="absolute bottom-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,80 1440,30 1440,80 0,80" fill="hsl(var(--muted) / 0.15)" />
+        </svg>
+      </div>
+      
+      {/* Diagonal divider at bottom */}
+      <div className="absolute -bottom-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "80px" }}>
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="absolute top-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 1440,50 1440,80 0,80" fill="hsl(var(--background))" />
+        </svg>
+      </div>
+
+      {/* Background decorations - softer */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
-          className="absolute w-[600px] h-[600px] rounded-full opacity-30"
+          className="absolute w-[600px] h-[600px] rounded-full opacity-20"
           style={{
-            background: 'radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%)',
             top: '-20%',
             right: '-10%',
           }}

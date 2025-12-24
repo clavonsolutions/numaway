@@ -49,11 +49,18 @@ const countries = [
 
 const DestinationsSection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-b from-background via-muted/30 to-background relative overflow-hidden">
-      {/* Background decoration */}
+    <section className="py-24 lg:py-32 bg-gradient-to-b from-background via-muted/15 to-background relative overflow-hidden">
+      {/* Diagonal divider at top */}
+      <div className="absolute -top-1 left-0 right-0 w-full overflow-hidden z-10" style={{ height: "80px" }}>
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="absolute bottom-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,80 1440,30 1440,80 0,80" fill="hsl(var(--background))" />
+        </svg>
+      </div>
+
+      {/* Background decoration - softer */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-secondary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-secondary/3 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold/3 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
