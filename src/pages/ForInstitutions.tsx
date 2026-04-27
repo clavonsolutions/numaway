@@ -1,5 +1,7 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -68,6 +70,12 @@ const ForInstitutions = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="For Universities and Institutions: Recruit with Numaway"
+      description="Numaway connects African and European students with your institution. Learn about our university partnership programme."
+      canonical="/for-institutions"
+    />
+
       <Header />
       
       {/* Hero Section */}
@@ -80,7 +88,7 @@ const ForInstitutions = () => {
           }}
         />
         
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+        <div className="container-default relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -138,7 +146,7 @@ const ForInstitutions = () => {
 
       {/* Stats Section */}
       <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4 lg:px-8">
+        <div className="container-default">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -193,7 +201,7 @@ const ForInstitutions = () => {
 
       {/* Benefits Section */}
       <section className="py-20 lg:py-28">
-        <div className="container mx-auto px-4 lg:px-8">
+        <div className="container-default">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -231,7 +239,7 @@ const ForInstitutions = () => {
 
       {/* Features Section */}
       <section className="py-20 lg:py-28 bg-muted/30">
-        <div className="container mx-auto px-4 lg:px-8">
+        <div className="container-default">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -316,6 +324,7 @@ const ForInstitutions = () => {
       </section>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

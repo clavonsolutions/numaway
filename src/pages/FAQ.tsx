@@ -1,5 +1,8 @@
+import PageHead from "@/components/PageHead";
+import type { JsonLdGraph } from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import PageHero from "@/components/PageHero";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -136,11 +139,33 @@ const faqCategories = [
   }
 ];
 
-const FAQ = () => {
+const faqPageSchema: JsonLdGraph = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqCategories.flatMap((cat) =>
+    cat.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    }))
+  ),
+};
+
+const FAQ = (): JSX.Element => {
   const [activeCategory, setActiveCategory] = useState("getting-started");
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+        title="Frequently Asked Questions: Study Abroad with Numaway"
+        description="Find answers to common questions about studying abroad: applications, visas, scholarships, counselling fees, and more."
+        canonical="/faq"
+        jsonLd={faqPageSchema}
+      />
+
       <Header />
       <main>
         <PageHero
@@ -150,7 +175,7 @@ const FAQ = () => {
         />
 
         <section className="py-16 lg:py-24">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="grid lg:grid-cols-4 gap-8">
               {/* Category Navigation */}
               <ScrollReveal animation="slide-right" className="lg:col-span-1">
@@ -225,7 +250,7 @@ const FAQ = () => {
 
         {/* Still Have Questions CTA */}
         <section className="py-16 bg-muted/50">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <ScrollReveal animation="fade-up">
               <h2 className="text-2xl font-display font-bold mb-4">Still Have Questions?</h2>
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
@@ -250,6 +275,7 @@ const FAQ = () => {
         </section>
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

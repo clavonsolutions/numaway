@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -78,6 +76,28 @@
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 210 20% 92%;
     --sidebar-ring: 179 75% 41%;
+
+    /* Third-party brand colours */
+    --whatsapp: 142 73% 50%;          /* WhatsApp brand green #25D366 */
+
+    /* Phone mockup decorative colours (AppShowcaseSection) */
+    --mock-phone-top: 237 24% 14%;    /* deep navy #1a1a2e */
+    --mock-phone-mid: 218 45% 16%;    /* mid navy #16213e */
+    --mock-phone-bot: 240 32% 10%;    /* near-black #0f0f23 */
+
+    /* Five-tier container width system (ADR-006, MRS §10) */
+    --container-tight: 640px;
+    --container-prose: 768px;
+    --container-default: 1200px;
+    --container-wide: 1440px;
+
+    /* Vertical rhythm (MRS §10, Phase 5) */
+    --section-py: 6rem;
+    --section-py-sm: 4rem;
+    --section-py-xs: 3rem;
+    --block-gap: 2rem;
+    --hero-min-h: 80vh;
+    --hero-min-h-secondary: 60vh;
   }
 
   .dark {
@@ -142,6 +162,70 @@
 }
 
 @layer utilities {
+  /* Five-tier container system (ADR-006, MRS §10) */
+  .container-tight {
+    width: 100%;
+    max-width: var(--container-tight);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 4vw, 1.5rem);
+    padding-right: clamp(1rem, 4vw, 1.5rem);
+  }
+
+  .container-prose {
+    width: 100%;
+    max-width: var(--container-prose);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 4vw, 1.5rem);
+    padding-right: clamp(1rem, 4vw, 1.5rem);
+  }
+
+  .container-default {
+    width: 100%;
+    max-width: var(--container-default);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 4vw, 2rem);
+    padding-right: clamp(1rem, 4vw, 2rem);
+  }
+
+  .container-wide {
+    width: 100%;
+    max-width: var(--container-wide);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 4vw, 2rem);
+    padding-right: clamp(1rem, 4vw, 2rem);
+  }
+
+  .container-bleed {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Section vertical rhythm */
+  .section-y {
+    padding-top: var(--section-py);
+    padding-bottom: var(--section-py);
+  }
+
+  @media (max-width: 1024px) {
+    .section-y {
+      padding-top: var(--section-py-sm);
+      padding-bottom: var(--section-py-sm);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .section-y {
+      padding-top: var(--section-py-xs);
+      padding-bottom: var(--section-py-xs);
+    }
+  }
+
   /* Text gradients */
   .text-gradient-gold {
     @apply bg-clip-text text-transparent;

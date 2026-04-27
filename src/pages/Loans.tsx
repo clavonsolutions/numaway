@@ -1,5 +1,7 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -74,6 +76,12 @@ const loanPartners = [
 
 const Loans = () => (
   <div className="min-h-screen bg-background">
+    <PageHead
+      title="Student Loan Guidance: Finance Your Studies Abroad"
+      description="Understand your student loan options for international study: Nigerian bank loans and country-specific finance schemes."
+      canonical="/loans"
+    />
+
     <Header />
     <PageHero
       title="Interest-Free"
@@ -84,7 +92,7 @@ const Loans = () => (
     <main>
       {/* Why Interest-Free */}
       <section className="py-24">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal>
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
@@ -118,7 +126,7 @@ const Loans = () => (
 
       {/* How It Works */}
       <section className="py-24 bg-muted/50">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal>
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
@@ -153,7 +161,7 @@ const Loans = () => (
 
       {/* Loan Partners */}
       <section className="py-24">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal>
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
@@ -205,7 +213,7 @@ const Loans = () => (
 
       {/* Eligibility */}
       <section className="py-24 bg-gradient-hero text-primary-foreground">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal>
               <div>
@@ -290,7 +298,7 @@ const Loans = () => (
 
       {/* Important Notice */}
       <section className="py-24">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <div className="max-w-3xl mx-auto">
             <ScrollReveal>
               <div className="bg-accent/10 border border-accent/20 rounded-2xl p-8">
@@ -318,7 +326,7 @@ const Loans = () => (
 
       {/* CTA */}
       <section className="py-24 bg-muted/50">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container-default text-center">
           <ScrollReveal>
             <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
               Ready to Fund Your Education?
@@ -345,6 +353,7 @@ const Loans = () => (
     </main>
     
     <Footer />
+      <WhatsAppButton />
   </div>
 );
 

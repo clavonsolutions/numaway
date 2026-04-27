@@ -1,3 +1,4 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -52,12 +53,18 @@ const Courses = () => {
   const tips = [
     "Research post-study work opportunities in your destination country before choosing a course",
     "Consider the total cost of study including living expenses, not just tuition",
-    "Look beyond rankings—focus on course content, industry connections, and employability",
+    "Look beyond rankings, focus on course content, industry connections, and employability",
     "Start your research at least 12 months before your intended start date"
   ];
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="Undergraduate and Postgraduate Courses Abroad"
+      description="Browse thousands of undergraduate and postgraduate courses at international universities. Filter by subject, country, and tuition."
+      canonical="/courses"
+    />
+
       <Header />
       <main>
         <PageHero
@@ -83,7 +90,7 @@ const Courses = () => {
 
         {/* Decision Framework */}
         <section className="py-12 bg-muted/30">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up">
               <div className="bg-card rounded-2xl p-6 lg:p-8 border border-border/50 shadow-soft">
                 <div className="flex items-start gap-4 mb-6">
@@ -112,7 +119,7 @@ const Courses = () => {
 
         {/* Areas of Study */}
         <section className="py-16">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up">
               <h2 className="text-2xl font-display font-bold mb-2">Areas of Study</h2>
               <p className="text-muted-foreground mb-8">Explore courses by field of interest</p>
@@ -183,7 +190,7 @@ const Courses = () => {
 
         {/* FAQs */}
         <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="text-center mb-10">
               <h2 className="text-2xl font-display font-bold mb-2">Frequently Asked Questions</h2>
               <p className="text-muted-foreground">Common questions about choosing and applying for courses</p>
@@ -207,7 +214,7 @@ const Courses = () => {
 
         {/* Sage CTA */}
         <section className="py-16">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up">
               <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-8 lg:p-12 text-primary-foreground relative overflow-hidden">
                 <motion.div 

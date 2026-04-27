@@ -88,7 +88,7 @@ const TrustCenterSection = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container-default relative z-10">
         {/* Header */}
         <ScrollReveal animation="fade-up" className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
@@ -129,7 +129,7 @@ const TrustCenterSection = () => {
               <div className="lg:w-1/3">
                 <h3 className="text-xl font-display font-bold mb-3">Our Commitments to You</h3>
                 <p className="text-muted-foreground text-sm mb-4">
-                  These aren't just policies—they're promises we make to every student we work with.
+                  These aren't just policies, they're promises we make to every student we work with.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Button variant="outline" size="sm" asChild>

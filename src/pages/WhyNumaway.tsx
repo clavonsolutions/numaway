@@ -1,3 +1,4 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -69,11 +70,17 @@ const WhyNumaway = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="Why Choose Numaway: What Sets Us Apart"
+      description="Learn why students and families choose Numaway: proven results, transparent pricing, and AI-assisted guidance."
+      canonical="/about/why-numaway"
+    />
+
       <Header />
       <main className="pt-20">
         {/* Hero */}
         <section className="py-24 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <Breadcrumbs 
               items={[
                 { label: "About", href: "/about" },
@@ -121,7 +128,7 @@ const WhyNumaway = () => {
 
         {/* Reasons */}
         <section className="py-24">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-display font-bold mb-4">
                 What Makes Us Different
@@ -154,7 +161,7 @@ const WhyNumaway = () => {
 
         {/* Checklist */}
         <section className="py-24 bg-muted">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-3xl font-display font-bold mb-6">
@@ -231,7 +238,7 @@ const WhyNumaway = () => {
 
         {/* CTA */}
         <section className="py-24 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

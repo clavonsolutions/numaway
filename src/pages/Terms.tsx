@@ -1,16 +1,24 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { NAP } from "@/lib/nap";
 
 const Terms = () => {
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="Terms of Service: Numaway Platform"
+      description="Read Numaway's terms of service governing use of our platform, counselling services, and AI tools."
+      canonical="/terms"
+    />
+
       <Header />
       <main className="pt-20">
         {/* Hero */}
         <section className="py-20 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <Breadcrumbs
               items={[{ label: "Terms of Service" }]}
               className="mb-6 justify-center text-primary-foreground/70"
@@ -18,21 +26,25 @@ const Terms = () => {
             <h1 className="text-3xl lg:text-4xl font-display font-bold mb-3">
               Terms of Service
             </h1>
-            <p className="text-primary-foreground/70">Last updated: December 2024</p>
+            <p className="text-primary-foreground/70">Effective: {NAP.effectiveDate}</p>
           </div>
         </section>
 
         {/* Content */}
         <section className="py-14">
-          <div className="container mx-auto px-4 max-w-4xl">
+          <div className="container-prose">
+            <div className="bg-secondary/10 border-l-4 border-secondary rounded-r-xl p-5 mb-8">
+              <p className="font-semibold text-secondary mb-1">COUNSEL REVIEW REQUIRED</p>
+              <p className="text-sm text-muted-foreground">Draft terms pending legal counsel sign-off before production deployment.</p>
+            </div>
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <p className="lead text-lg text-muted-foreground mb-8">
-                These Terms of Service ("Terms") govern your access to and use of the NUMAWAY Education website, platforms, applications, services, tools, and related offerings (collectively, the "Services"). By accessing or using NUMAWAY, you confirm that you have read, understood, and agreed to be bound by these Terms.
+                These Terms of Service ("Terms") govern your access to and use of the {NAP.businessName} website, platforms, applications, services, tools, and related offerings (collectively, the "Services"). By accessing or using Numaway, you confirm that you have read, understood, and agreed to be bound by these Terms.
               </p>
 
-              <h2>1. About NUMAWAY Education</h2>
+              <h2>1. About {NAP.businessName}</h2>
               <p>
-                NUMAWAY Education ("NUMAWAY", "we", "our", "us") is an international education advisory and technology-enabled platform that supports students, parents, institutions, and partners in navigating global education pathways.
+                {NAP.businessName} ("Numaway", "we", "our", "us") is an international education advisory and technology-enabled platform that supports students, parents, institutions, and partners in navigating global education pathways.
               </p>
               <p className="font-semibold">
                 NUMAWAY does not act as a university, immigration authority, or visa-issuing body.
@@ -184,8 +196,8 @@ const Terms = () => {
               <h2>18. Contact Us</h2>
               <p>For questions about these Terms:</p>
               <ul>
-                <li><strong>Email:</strong> <a href="mailto:legal@numawayeducation.com">legal@numawayeducation.com</a></li>
-                <li><strong>Website:</strong> <a href="https://numawayeducation.com">https://numawayeducation.com</a></li>
+                <li><strong>Email:</strong> <a href={NAP.mailtoUrl}>{NAP.email}</a></li>
+                <li><strong>Website:</strong> <a href={NAP.canonicalUrl}>{NAP.canonicalUrl}</a></li>
               </ul>
             </div>
           </div>

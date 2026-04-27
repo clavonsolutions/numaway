@@ -130,7 +130,7 @@ const ServicesSection = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <div className="container-default relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <motion.div
@@ -167,7 +167,7 @@ const ServicesSection = () => {
             >
               From your first inquiry to your graduation abroad, NUMAWAY provides
               comprehensive support at every stage of your educational journey.
-              No hidden costs, no surprises — just honest guidance.
+              No hidden costs, no surprises, just honest guidance.
             </motion.p>
 
             <motion.div 

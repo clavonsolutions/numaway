@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -50,11 +51,17 @@ const Search = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="Search Numaway, Universities, Courses and Countries"
+      description="Search Numaway's database of universities, courses, countries, and resources for your study abroad journey."
+      canonical="/search"
+    />
+
       <Header />
       <main className="pt-20">
         {/* Search Header */}
         <section className="py-12 bg-muted">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="max-w-2xl mx-auto">
               <h1 className="text-2xl font-display font-bold text-center mb-6">
                 Search NUMAWAY
@@ -69,7 +76,7 @@ const Search = () => {
 
         {/* Tabs & Results */}
         <section className="py-12">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             {/* Tabs */}
             <div className="flex gap-2 overflow-x-auto pb-4 mb-8">
               {tabs.map((tab) => (

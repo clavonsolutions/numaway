@@ -1,16 +1,24 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { NAP } from "@/lib/nap";
 
 const Disclaimer = () => {
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="Disclaimer: No Guaranteed Outcomes"
+      description="Numaway does not guarantee visa, admission, scholarship, or loan outcomes. Read our full disclaimer."
+      canonical="/disclaimer"
+    />
+
       <Header />
       <main className="pt-20">
         {/* Hero */}
         <section className="py-20 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <Breadcrumbs
               items={[{ label: "Disclaimer" }]}
               className="mb-6 justify-center text-primary-foreground/70"
@@ -18,16 +26,20 @@ const Disclaimer = () => {
             <h1 className="text-3xl lg:text-4xl font-display font-bold mb-3">
               Disclaimer
             </h1>
-            <p className="text-primary-foreground/70">Last updated: December 2024</p>
+            <p className="text-primary-foreground/70">Effective: {NAP.effectiveDate}</p>
           </div>
         </section>
 
         {/* Content */}
         <section className="py-14">
-          <div className="container mx-auto px-4 max-w-4xl">
+          <div className="container-prose">
+            <div className="bg-secondary/10 border-l-4 border-secondary rounded-r-xl p-5 mb-8">
+              <p className="font-semibold text-secondary mb-1">COUNSEL REVIEW REQUIRED</p>
+              <p className="text-sm text-muted-foreground">Draft disclaimer pending legal counsel sign-off before production deployment.</p>
+            </div>
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <p className="lead text-lg text-muted-foreground mb-8">
-                This Disclaimer applies to all users of NUMAWAY Education's website, platforms, applications, services, tools, and related materials (collectively, the "Services"). By accessing or using NUMAWAY, you acknowledge and agree to the terms set out in this Disclaimer.
+                This Disclaimer applies to all users of {NAP.businessName}'s website, platforms, applications, services, tools, and related materials (collectively, the "Services"). By accessing or using Numaway, you acknowledge and agree to the terms set out in this Disclaimer.
               </p>
 
               <h2>1. General Information Only</h2>
@@ -152,8 +164,8 @@ const Disclaimer = () => {
               <h2>13. Contact Information</h2>
               <p>For questions regarding this Disclaimer:</p>
               <ul>
-                <li><strong>Email:</strong> <a href="mailto:legal@numawayeducation.com">legal@numawayeducation.com</a></li>
-                <li><strong>Website:</strong> <a href="https://numawayeducation.com">https://numawayeducation.com</a></li>
+                <li><strong>Email:</strong> <a href={NAP.mailtoUrl}>{NAP.email}</a></li>
+                <li><strong>Website:</strong> <a href={NAP.canonicalUrl}>{NAP.canonicalUrl}</a></li>
               </ul>
             </div>
           </div>

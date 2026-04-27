@@ -1,3 +1,4 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -8,6 +9,12 @@ import { ScrollReveal } from "@/hooks/useScrollAnimation";
 
 const Exams = () => (
   <div className="min-h-screen bg-background">
+    <PageHead
+      title="English and Entrance Exams, IELTS, TOEFL and More"
+      description="Prepare for IELTS, TOEFL, SAT, GRE, and GMAT with Numaway's exam guidance and preparation resources."
+      canonical="/exams"
+    />
+
     <Header />
     <main>
       <PageHero
@@ -17,7 +24,7 @@ const Exams = () => (
       />
 
       <section className="py-16">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal animation="fade-up" className="max-w-3xl mx-auto mb-12">
             <h2 className="text-2xl font-display font-bold mb-4">Which Exam Do You Need?</h2>
             <p className="text-muted-foreground">
@@ -31,7 +38,7 @@ const Exams = () => (
       </section>
 
       <section className="py-16 bg-muted/50">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {exams.map((exam, i) => (
               <ScrollReveal key={exam.slug} animation="fade-up" delay={i * 0.08}>
@@ -54,7 +61,7 @@ const Exams = () => (
       </section>
 
       <section className="py-24">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container-default text-center">
           <ScrollReveal animation="fade-up">
             <h2 className="text-3xl font-display font-bold mb-4">Need Help Planning Your Exams?</h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">

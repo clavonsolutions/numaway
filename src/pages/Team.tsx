@@ -1,3 +1,4 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -82,11 +83,17 @@ const Team = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="Our Team, Counsellors and Global Education Specialists"
+      description="Meet the expert counsellors, advisers, and AI specialists behind Numaway's student support services."
+      canonical="/about/team"
+    />
+
       <Header />
       <main className="pt-20">
         {/* Hero */}
         <section className="py-24 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <Breadcrumbs 
               items={[
                 { label: "About", href: "/about" },
@@ -111,7 +118,7 @@ const Team = () => {
 
         {/* Leadership */}
         <section className="py-24">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-display font-bold mb-4">Leadership Team</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -160,7 +167,7 @@ const Team = () => {
 
         {/* Counsellors */}
         <section className="py-24 bg-muted">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-display font-bold mb-4">Our Counsellors</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -197,7 +204,7 @@ const Team = () => {
 
         {/* Join Us CTA */}
         <section className="py-24">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

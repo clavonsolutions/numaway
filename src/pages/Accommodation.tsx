@@ -1,5 +1,7 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -40,6 +42,12 @@ const accommodationTypes = [
 
 const Accommodation = () => (
   <div className="min-h-screen bg-background">
+    <PageHead
+      title="Student Accommodation Advisory: Find a Home Abroad"
+      description="Numaway's accommodation advisers help you find safe, affordable student housing in your destination country."
+      canonical="/accommodation"
+    />
+
     <Header />
     <PageHero
       title="Student"
@@ -50,7 +58,7 @@ const Accommodation = () => (
     <main>
       {/* Types of Accommodation */}
       <section className="py-24">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal>
             <h2 className="text-3xl lg:text-4xl font-display font-bold text-center mb-4">Types of Accommodation</h2>
             <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
@@ -104,7 +112,7 @@ const Accommodation = () => (
 
       {/* How NUMAWAY Helps */}
       <section className="py-24 bg-muted/50">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-display font-bold mb-6">How NUMAWAY Helps</h2>
@@ -173,7 +181,7 @@ const Accommodation = () => (
 
       {/* Safety Tips */}
       <section className="py-24">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-display font-bold text-center mb-8">Safety & Scam Prevention</h2>
             <div className="bg-destructive/10 border border-destructive/20 rounded-xl p-6">
@@ -199,6 +207,7 @@ const Accommodation = () => (
       </section>
     </main>
     <Footer />
+      <WhatsAppButton />
   </div>
 );
 

@@ -1,6 +1,10 @@
 import { useParams, Link } from "react-router-dom";
+import PageHead from "@/components/PageHead";
+import type { JsonLdGraph } from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { getServiceBySlug, services } from "@/data/services";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, Users, Sparkles, XCircle, Timer, Shield, Clock, Award, DollarSign, TrendingUp, AlertTriangle, Target, Heart } from "lucide-react";
@@ -8,13 +12,20 @@ import { motion } from "framer-motion";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
-const ServiceDetail = () => {
+
+const ServiceDetail = (): JSX.Element => {
   const { slug } = useParams();
   const service = getServiceBySlug(slug || "");
 
   if (!service) {
     return (
       <div className="min-h-screen bg-background">
+        <PageHead
+          title="Service Not Found"
+          description="Browse all Numaway student services for study abroad support, visa guidance, and university applications."
+          canonical="/services"
+          noIndex={true}
+        />
         <Header />
         <main className="pt-20 flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
@@ -28,6 +39,17 @@ const ServiceDetail = () => {
     );
   }
 
+  const serviceSchema: JsonLdGraph = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.description,
+    url: `https://numaway.com/services/${service.slug}`,
+    provider: { "@id": "https://numaway.com/#org" },
+    serviceType: "Educational Consultancy",
+    areaServed: ["AF", "EU"],
+  };
+
   // Service-specific turnaround times
   const turnaroundTimes: Record<string, { estimate: string; note: string }> = {
     "study-abroad-counselling": { estimate: "24–48 hours", note: "Initial consultation booking" },
@@ -36,15 +58,20 @@ const ServiceDetail = () => {
     "visa-preparation": { estimate: "5–7 business days", note: "Complete visa document prep" },
     "accommodation-landing": { estimate: "3–5 business days", note: "Housing guidance report" },
     "exams-support": { estimate: "2–3 business days", note: "Exam planning consultation" },
+    "exam-support": { estimate: "2–3 business days", note: "Exam planning consultation" },
     "scholarships-funding": { estimate: "5–7 business days", note: "Scholarship matching report" },
-    "genie": { estimate: "Instant", note: "24/7 AI availability" }
+    "genie": { estimate: "Instant", note: "24/7 AI availability" },
+    "student-profiling": { estimate: "24–48 hours", note: "Profile assessment and report" },
+    "program-selection": { estimate: "3–5 business days", note: "Shortlist and advisory session" },
+    "pre-departure": { estimate: "1–2 weeks", note: "Full academy completion" },
+    "post-arrival": { estimate: "Ongoing", note: "30/60/90-day check-in programme" },
   };
 
   // Service-specific "What We Don't Do"
   const whatWeDontDo: Record<string, string[]> = {
     "study-abroad-counselling": [
       "We don't guarantee admission to any university",
-      "We don't make decisions for you—we inform and guide",
+      "We don't make decisions for you, we inform and guide",
       "We don't push schools that pay us more over schools that fit you"
     ],
     "application-support": [
@@ -53,7 +80,7 @@ const ServiceDetail = () => {
       "We don't fabricate any information in your applications"
     ],
     "offer-decision-support": [
-      "We don't choose your offer for you—we help you understand options",
+      "We don't choose your offer for you, we help you understand options",
       "We don't negotiate fees with universities on your behalf",
       "We don't guarantee scholarship amounts or discounts"
     ],
@@ -93,12 +120,25 @@ const ServiceDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+        title={`${service.title}: Numaway Student Services`}
+        description={service.shortDescription}
+        canonical={`/services/${service.slug}`}
+        jsonLd={serviceSchema}
+      />
       <Header />
       <main className="pt-20">
         {/* Hero */}
         <section className="py-24 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="max-w-4xl mx-auto text-center">
+              <Breadcrumbs
+                items={[
+                  { label: "Services", href: "/services" },
+                  { label: service.title },
+                ]}
+                className="mb-6 justify-center text-primary-foreground/70"
+              />
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -128,7 +168,7 @@ const ServiceDetail = () => {
 
         {/* Quick Stats Bar */}
         <section className="py-6 bg-secondary/10 border-y border-secondary/20">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 text-center text-sm">
               <div className="flex items-center gap-2">
                 <Timer className="w-4 h-4 text-secondary" />
@@ -151,7 +191,7 @@ const ServiceDetail = () => {
         </section>
 
         <section className="py-16">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="grid lg:grid-cols-3 gap-12">
               {/* Main Content */}
               <div className="lg:col-span-2 space-y-12">
@@ -300,7 +340,7 @@ const ServiceDetail = () => {
                           <p className="italic text-muted-foreground mb-2">
                             "The structured approach made everything less overwhelming. I knew exactly what to expect and when."
                           </p>
-                          <p className="text-sm font-medium">— NUMAWAY Student</p>
+                          <p className="text-sm font-medium">,  NUMAWAY Student</p>
                         </div>
                       </div>
                     </div>
@@ -410,7 +450,7 @@ const ServiceDetail = () => {
 
         {/* Bottom CTA */}
         <section className="py-16 bg-muted/50">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <h2 className="text-2xl font-display font-bold mb-4">Ready to Get Started?</h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
               Book a free consultation and let's discuss how we can help you.
@@ -424,6 +464,7 @@ const ServiceDetail = () => {
         </section>
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };
