@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import MobileNav from "./MobileNav";
 import MegaMenu from "./MegaMenu";
 import ThemeToggle from "./ThemeToggle";
-import numawayLogo from "@/assets/numaway-logo.svg";
+import numawayLogo from "@/assets/numaway-logo.png";
 
 const ICON_STROKE = 1.75;
 
