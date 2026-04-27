@@ -1,19 +1,24 @@
 import { useParams, Link } from "react-router-dom";
+import PageHead from "@/components/PageHead";
+import type { JsonLdGraph } from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { getExamBySlug, exams } from "@/data/exams";
 import { Button } from "@/components/ui/button";
 import { Clock, CreditCard, Calendar, CheckCircle, AlertTriangle, HelpCircle, BookOpen, Target, Sparkles, ChevronRight, FileText, Globe, Lightbulb, Timer } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
-const ExamDetail = () => {
+const ExamDetail = (): JSX.Element => {
   const { slug } = useParams();
   const exam = getExamBySlug(slug || "");
   
   if (!exam) {
     return (
       <div className="min-h-screen bg-background">
+        <PageHead title="Exam Not Found" description="Explore Numaway exam guides for IELTS, TOEFL, GRE, GMAT, SAT, PTE and Duolingo English Test preparation." canonical="/exams" noIndex={true} />
         <Header />
         <main className="pt-20 flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
@@ -29,6 +34,18 @@ const ExamDetail = () => {
   }
 
   const otherExams = exams.filter(e => e.slug !== slug).slice(0, 4);
+
+  const examSchema: JsonLdGraph = {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    name: exam.name,
+    description: exam.description,
+    url: `https://numaway.com/exams/${slug}`,
+    inDefinedTermSet: {
+      "@type": "DefinedTermSet",
+      name: "English Language Proficiency and Standardised Exams",
+    },
+  };
 
   // Generate score requirements by program type
   const scoreRequirements = {
@@ -111,11 +128,21 @@ const ExamDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+        title={`${exam.name} Exam Guide: Scores, Preparation and Registration`}
+        description={exam.description.slice(0, 155)}
+        canonical={`/exams/${slug}`}
+        jsonLd={examSchema}
+      />
       <Header />
       <main className="pt-20">
         {/* Hero Section */}
         <section className="py-20 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
+            <Breadcrumbs
+              items={[{ label: "Exams", href: "/exams" }, { label: exam.name }]}
+              className="mb-6 justify-center text-primary-foreground/70"
+            />
             <h1 className="text-4xl lg:text-5xl font-display font-bold mb-4">{exam.name}</h1>
             <p className="text-xl text-primary-foreground/70 mb-6">{exam.fullName}</p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -136,7 +163,7 @@ const ExamDetail = () => {
         </section>
 
         <section className="py-16">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="grid lg:grid-cols-3 gap-12">
               <div className="lg:col-span-2 space-y-12">
                 {/* What It Is / Who Needs It */}
@@ -524,7 +551,7 @@ const ExamDetail = () => {
 
         {/* CTA Section */}
         <section className="py-16 bg-muted/50">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <ScrollReveal animation="fade-up">
               <h2 className="text-2xl font-display font-bold mb-4">Need Help Planning Your {exam.name}?</h2>
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
@@ -541,6 +568,7 @@ const ExamDetail = () => {
         </section>
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

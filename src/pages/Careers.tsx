@@ -1,3 +1,4 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
@@ -6,10 +7,16 @@ import { ArrowRight } from "lucide-react";
 
 const Careers = () => (
   <div className="min-h-screen bg-background">
+    <PageHead
+      title="Careers at Numaway: Join Our Team"
+      description="Numaway is building the world's most trusted education mobility platform. View open roles and join our team in Kano, Nigeria."
+      canonical="/careers"
+    />
+
     <Header />
     <main className="pt-20">
       <section className="py-24 bg-gradient-hero text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container-default text-center">
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-4xl lg:text-6xl font-display font-bold mb-6">
             Build NUMAWAY With Us
           </motion.h1>
@@ -20,7 +27,7 @@ const Careers = () => (
       </section>
 
       <section className="py-16">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-lg text-muted-foreground mb-8">
               We are always interested in working with counsellors, advisors, operations specialists 
@@ -31,7 +38,7 @@ const Careers = () => (
       </section>
 
       <section className="py-16 bg-muted/50">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <h2 className="text-2xl font-display font-bold text-center mb-8">Why Work With NUMAWAY?</h2>
           <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="bg-card p-6 rounded-xl shadow-soft text-center">
@@ -54,7 +61,7 @@ const Careers = () => (
       </section>
 
       <section className="py-24">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <h2 className="text-2xl font-display font-bold mb-8">Open Positions</h2>
           <div className="space-y-4 max-w-4xl">
             {[
@@ -87,7 +94,7 @@ const Careers = () => (
       </section>
 
       <section className="py-16 bg-muted/50">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container-default text-center">
           <h2 className="text-2xl font-display font-bold mb-4">Don't See a Match?</h2>
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
             We're always looking for talented people. Send us your CV and tell us how you'd like to contribute.

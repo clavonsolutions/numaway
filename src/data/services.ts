@@ -1,12 +1,16 @@
-import { 
-  GraduationCap, 
-  FileCheck, 
-  Home, 
-  CreditCard, 
-  Plane, 
+import {
+  GraduationCap,
+  FileCheck,
+  Home,
+  CreditCard,
+  Plane,
   BookOpen,
-  Building2, 
-  Sparkles
+  Building2,
+  Sparkles,
+  Target,
+  School,
+  Compass,
+  HeadphonesIcon,
 } from "lucide-react";
 
 export interface Service {
@@ -303,6 +307,181 @@ export const services: Service[] = [
       { question: "How accurate is Genie?", answer: "Genie is trained on study abroad knowledge but always recommends verifying important details with your counsellor." }
     ]
   }
+];
+
+  {
+    title: "AI-Powered Student Profiling",
+    slug: "student-profiling",
+    shortDescription: "An intelligent assessment that identifies the right countries, programs, and pathways based on your goals, grades, and budget.",
+    description: "Our AI profiling engine evaluates your academic history, career goals, financial capacity, and immigration feasibility to produce a personalised pathway with country fit, timeline, and scholarship potential.",
+    icon: Target,
+    whoIsItFor: [
+      "Students at the start of their study-abroad journey",
+      "Parents wanting a structured overview of their child's options",
+      "Schools seeking to guide graduating students"
+    ],
+    features: [
+      "AI profile build (grades, goals, budget)",
+      "Country fit analysis",
+      "Program ranking by academic and career match",
+      "Visa likelihood indicators",
+      "Scholarship-fit scoring",
+      "Personalized written study plan"
+    ],
+    howItWorks: [
+      { step: 1, title: "Submit Your Profile", description: "Fill in your academic background, goals, and budget via our consultation form." },
+      { step: 2, title: "AI Analysis", description: "Sage processes your data against 500+ universities and 50+ visa pathways." },
+      { step: 3, title: "Counsellor Review", description: "A senior counsellor validates the AI output and adds human judgement." },
+      { step: 4, title: "Personalised Report", description: "You receive a written pathway you can share with parents or sponsors." }
+    ],
+    outcomes: [
+      "Clarity on which countries and programs fit your profile",
+      "A realistic timeline aligned to admission cycles",
+      "A written plan you can revisit and update"
+    ],
+    faqs: [
+      { question: "Is this service free?", answer: "The initial profiling session is free. Complex assessments requiring extended counsellor time may incur a small fee, explained upfront." },
+      { question: "How accurate is the AI?", answer: "Sage is trained on real admission and visa data, but all outputs are reviewed by a human counsellor before delivery." }
+    ]
+  },
+  {
+    title: "Program & University Selection Advisory",
+    slug: "program-selection",
+    shortDescription: "Expert guidance that helps you choose the right university and program with full clarity and confidence.",
+    description: "We blend AI recommendations with advisory sessions to help you pick the most suitable options academically, financially, and professionally. No pressure, no steering toward schools that pay us more.",
+    icon: School,
+    whoIsItFor: [
+      "Students who know they want to study abroad but aren't sure where",
+      "Students with competing offers who need help comparing options",
+      "Students who want honest advice about their chances at specific universities"
+    ],
+    features: [
+      "University shortlist (ambitious, realistic, safe)",
+      "Academic fit analysis",
+      "Tuition versus budget mapping",
+      "Offer competitiveness scoring",
+      "Career-pathway alignment"
+    ],
+    howItWorks: [
+      { step: 1, title: "Profile Submission", description: "Share your grades, budget, and goals." },
+      { step: 2, title: "Shortlist Generation", description: "Sage proposes a tiered shortlist; your counsellor refines it." },
+      { step: 3, title: "Advisory Session", description: "Discuss each option in depth, pros, cons, and strategic fit." },
+      { step: 4, title: "Decision Support", description: "We stay with you through offer comparison and final choice." }
+    ],
+    outcomes: [
+      "A tiered shortlist of universities that match your profile",
+      "Clear understanding of acceptance likelihood at each",
+      "Confidence in your final university decision"
+    ],
+    faqs: [
+      { question: "Will you push me toward universities that pay you commissions?", answer: "Never. We recommend what fits your profile. Our integrity policy is explicit on this." },
+      { question: "What if none of the shortlisted universities accept me?", answer: "We reassess and help you apply to alternatives. Study plans are iterative, not one-shot." }
+    ]
+  },
+  {
+    title: "Exam Preparation Guidance",
+    slug: "exam-support",
+    shortDescription: "We help you understand which exams you need, what scores are realistic, and how to plan preparation around your application timeline.",
+    description: "We clarify IELTS, TOEFL, PTE, GRE, GMAT, SAT, and other exams, what they are, what scores you need, and how to prepare strategically within your timeline.",
+    icon: BookOpen,
+    whoIsItFor: [
+      "Students unsure which exam is required for their destination",
+      "Students wanting to understand realistic score targets",
+      "Students who need help aligning exam prep with application deadlines"
+    ],
+    features: [
+      "Exam identification (which exams are actually required)",
+      "Score target setting by university and program",
+      "Timeline planning (not too early, not too late)",
+      "Study resource recommendations",
+      "Integration with your overall application timeline"
+    ],
+    howItWorks: [
+      { step: 1, title: "Exam Assessment", description: "We identify which exams are required for your chosen destinations." },
+      { step: 2, title: "Score Target Setting", description: "We explain what scores you realistically need." },
+      { step: 3, title: "Study Plan", description: "Sage can generate a personalised study schedule based on your timeline." },
+      { step: 4, title: "Progress Integration", description: "We align your exam plan with your application deadlines." }
+    ],
+    outcomes: [
+      "Clarity on which exams you need and when to take them",
+      "A realistic study plan that fits your schedule",
+      "Exam and application timelines that work together"
+    ],
+    faqs: [
+      { question: "Do you provide exam coaching?", answer: "We provide guidance and resource recommendations. For intensive coaching, we refer you to specialised partners." },
+      { question: "What if I fail my exam?", answer: "We help you reassess timing and retake strategy as part of your overall plan." }
+    ]
+  },
+  {
+    title: "Pre-Departure Academy",
+    slug: "pre-departure",
+    shortDescription: "Everything you need to feel confident and prepared before you travel.",
+    description: "From cultural orientation to travel planning and academic expectations, Numaway prepares you for a smooth transition into life abroad. Our structured pre-departure programme covers the practical, cultural, and academic dimensions of moving abroad.",
+    icon: Compass,
+    whoIsItFor: [
+      "Students who have received their visa and travel date",
+      "Students nervous about living abroad for the first time",
+      "Parents who want reassurance their child is properly prepared"
+    ],
+    features: [
+      "Pre-departure checklist and briefing",
+      "Cultural adaptation guidance",
+      "Travel planning assistance",
+      "Packing and document checklist",
+      "Airport arrival guidance",
+      "First week survival guide"
+    ],
+    howItWorks: [
+      { step: 1, title: "Academy Enrolment", description: "We confirm your travel date and destination, then assign your pre-departure pack." },
+      { step: 2, title: "Cultural Orientation", description: "A counsellor briefs you on social norms, academic expectations, and daily life." },
+      { step: 3, title: "Document Verification", description: "Final check to ensure every document is in order before you fly." },
+      { step: 4, title: "First Week Plan", description: "You leave with a day-by-day plan for your first week abroad." }
+    ],
+    outcomes: [
+      "Confidence about what to expect on arrival",
+      "All documents verified and organised",
+      "A practical first-week action plan"
+    ],
+    faqs: [
+      { question: "When should I start the Pre-Departure Academy?", answer: "Ideally four to six weeks before your travel date to allow time for any document gaps." },
+      { question: "Is this included in the standard service?", answer: "Yes. Pre-departure support is part of our core student support package at no additional cost." }
+    ]
+  },
+  {
+    title: "Post-Arrival Support",
+    slug: "post-arrival",
+    shortDescription: "We stay with you after you land, structured check-ins, emergency guidance, and long-term pathway coaching.",
+    description: "Numaway conducts structured check-ins during your first 90 days abroad to ensure safety, comfort, and academic readiness. We also support long-term career and migration planning so you are never alone on your global journey.",
+    icon: HeadphonesIcon,
+    whoIsItFor: [
+      "Students who have just arrived at their destination",
+      "Students struggling to settle into life abroad",
+      "Students planning their next step after graduation"
+    ],
+    features: [
+      "30-day, 60-day, and 90-day check-ins",
+      "Emergency guidance and escalation support",
+      "Part-time job and work permit advisory",
+      "Local integration support",
+      "University onboarding assistance",
+      "Career and post-study pathway coaching"
+    ],
+    howItWorks: [
+      { step: 1, title: "Arrival Confirmation", description: "You notify us once you land and complete initial registration at your university." },
+      { step: 2, title: "Check-in Schedule", description: "We set structured monthly check-ins for your first three months." },
+      { step: 3, title: "Support On Demand", description: "Any issue, academic, social, logistical, can be escalated to your counsellor." },
+      { step: 4, title: "Long-Term Planning", description: "As you settle, we begin discussing work permits, career pathways, and post-study options." }
+    ],
+    outcomes: [
+      "Safe, supported landing period with structured guidance",
+      "Confidence in navigating life abroad",
+      "A clear long-term career and post-study pathway"
+    ],
+    faqs: [
+      { question: "What counts as an emergency?", answer: "Any situation affecting your safety, visa status, or academic standing. We help you navigate next steps and connect you with the right support." },
+      { question: "Is this service free?", answer: "Post-arrival check-ins are part of our core package. Extended coaching and career advisory may carry fees, always explained upfront." }
+    ]
+  },
 ];
 
 export const getServiceBySlug = (slug: string): Service | undefined => {

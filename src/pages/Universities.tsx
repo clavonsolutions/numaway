@@ -1,3 +1,4 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -15,6 +16,12 @@ const Universities = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="University Search: Find the Right Institution"
+      description="Search and compare universities by country, ranking, course offering, and tuition. Get matched to your best-fit university."
+      canonical="/universities"
+    />
+
       <Header />
       <main>
         <PageHero
@@ -39,7 +46,7 @@ const Universities = () => {
         </PageHero>
 
         <section className="py-24">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((uni, i) => (
                 <ScrollReveal key={uni.slug} animation="fade-up" delay={i * 0.05}>
@@ -78,7 +85,7 @@ const Universities = () => {
 
         {/* How to Choose a University - Decision Framework */}
         <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="text-center mb-12">
               <h2 className="text-2xl lg:text-3xl font-display font-bold mb-4">How to Choose the Right University</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -145,7 +152,7 @@ const Universities = () => {
 
         {/* University Types Explained */}
         <section className="py-20">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="text-center mb-12">
               <h2 className="text-2xl lg:text-3xl font-display font-bold mb-4">University Types Explained</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -214,7 +221,7 @@ const Universities = () => {
 
         {/* Intake Timelines by Region */}
         <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 rounded-full mb-4">
                 <Calendar className="w-4 h-4 text-secondary" />
@@ -311,7 +318,7 @@ const Universities = () => {
 
         {/* Cost Breakdown */}
         <section className="py-20">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="text-center mb-12">
               <h2 className="text-2xl lg:text-3xl font-display font-bold mb-4">Understanding the True Cost</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -417,7 +424,7 @@ const Universities = () => {
 
         {/* Scholarship & Application Essentials */}
         <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="grid lg:grid-cols-2 gap-12">
               <ScrollReveal animation="fade-up">
                 <h2 className="text-2xl lg:text-3xl font-display font-bold mb-6">Scholarship Basics</h2>
@@ -472,7 +479,7 @@ const Universities = () => {
 
         {/* FAQs */}
         <section className="py-20">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 rounded-full mb-4">
                 <HelpCircle className="w-4 h-4 text-secondary" />
@@ -503,7 +510,7 @@ const Universities = () => {
 
         {/* Talk to Sage CTA */}
         <section className="py-20 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <ScrollReveal animation="fade-up">
               <div className="w-16 h-16 bg-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <Sparkles className="w-8 h-8 text-secondary" />

@@ -1,3 +1,4 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -14,6 +15,12 @@ const Countries = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="Study Abroad by Country, UK, Canada, USA and More"
+      description="Compare study destinations: tuition costs, visa requirements, work rights, and top universities for African students."
+      canonical="/countries"
+    />
+
       <Header />
       <main>
         <PageHero
@@ -41,7 +48,7 @@ const Countries = () => {
         {/* Featured Destinations */}
         {featured.length > 0 && (
           <section className="py-16">
-            <div className="container mx-auto px-4">
+            <div className="container-default">
               <ScrollReveal animation="fade-up">
                 <h2 className="text-2xl font-display font-bold mb-8">Popular Destinations for Nigerian Students</h2>
               </ScrollReveal>
@@ -75,7 +82,7 @@ const Countries = () => {
         {/* Other Destinations */}
         {others.length > 0 && (
           <section className="py-16 bg-muted/50">
-            <div className="container mx-auto px-4">
+            <div className="container-default">
               <ScrollReveal animation="fade-up">
                 <h2 className="text-2xl font-display font-bold mb-8">More Destinations</h2>
               </ScrollReveal>
@@ -102,7 +109,7 @@ const Countries = () => {
 
         {/* CTA */}
         <section className="py-24">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <ScrollReveal animation="fade-up">
               <h2 className="text-3xl font-display font-bold mb-6">Not sure which country is right for you?</h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">

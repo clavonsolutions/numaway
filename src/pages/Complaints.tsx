@@ -1,40 +1,48 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { Shield, AlertTriangle, CheckCircle, Clock, Mail, FileText } from "lucide-react";
+import { Shield, AlertTriangle, CheckCircle, Mail, FileText } from "lucide-react";
+import { NAP } from "@/lib/nap";
 
 const Complaints = () => {
   const stages = [
     {
       icon: Mail,
-      title: "Stage 1 — Acknowledgement",
+      title: "Stage 1, Acknowledgement",
       description: "Complaint acknowledged within 3 business days. Confirmation of receipt and reference number provided."
     },
     {
       icon: FileText,
-      title: "Stage 2 — Initial Review",
+      title: "Stage 2, Initial Review",
       description: "Reviewed by the assigned NUMAWAY Service or Operations Lead. Assessment of facts, documentation, and applicable policies. Target resolution: within 10 business days."
     },
     {
       icon: AlertTriangle,
-      title: "Stage 3 — Formal Escalation",
+      title: "Stage 3, Formal Escalation",
       description: "If not satisfied, complaint is reviewed by Senior Management or Compliance Lead. Independent review with written response. Target resolution: additional 10 business days."
     },
     {
       icon: Shield,
-      title: "Stage 4 — Executive Review",
+      title: "Stage 4, Executive Review",
       description: "For complex or unresolved cases: reviewed by NUMAWAY Executive Leadership. Final internal determination issued and documented."
     }
   ];
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="Complaints Procedure: How to Raise a Concern"
+      description="If you are dissatisfied with Numaway's services, here is how to raise a formal complaint under our FCCPA-aligned procedure."
+      canonical="/complaints"
+    />
+
       <Header />
       <main className="pt-20">
         {/* Hero */}
         <section className="py-20 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <Breadcrumbs
               items={[{ label: "Complaints & Escalation Policy" }]}
               className="mb-6 justify-center text-primary-foreground/70"
@@ -42,16 +50,20 @@ const Complaints = () => {
             <h1 className="text-3xl lg:text-4xl font-display font-bold mb-3">
               Complaints & Escalation Policy
             </h1>
-            <p className="text-primary-foreground/70">Last updated: December 2024</p>
+            <p className="text-primary-foreground/70">Effective: {NAP.effectiveDate}</p>
           </div>
         </section>
 
         {/* Content */}
         <section className="py-14">
-          <div className="container mx-auto px-4 max-w-4xl">
+          <div className="container-prose">
+            <div className="bg-secondary/10 border-l-4 border-secondary rounded-r-xl p-5 mb-8">
+              <p className="font-semibold text-secondary mb-1">COUNSEL REVIEW REQUIRED</p>
+              <p className="text-sm text-muted-foreground">Draft policy pending legal counsel sign-off before production deployment.</p>
+            </div>
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <p className="lead text-lg text-muted-foreground mb-8">
-                NUMAWAY Education ("NUMAWAY", "we", "our", "us") is committed to delivering transparent, professional, and student-first services. We recognize that concerns or complaints may arise and are committed to resolving them fairly, promptly, and consistently.
+                {NAP.businessName} ("Numaway", "we", "our", "us") is committed to delivering transparent, professional, and student-first services. We recognize that concerns or complaints may arise and are committed to resolving them fairly, promptly, and consistently.
               </p>
 
               <h2>1. Scope of This Policy</h2>
@@ -105,8 +117,7 @@ const Complaints = () => {
               <h2>4. How to Submit a Complaint</h2>
               <p>Complaints should be submitted in writing via:</p>
               <ul>
-                <li><strong>Email:</strong> <a href="mailto:complaints@numawayeducation.com">complaints@numawayeducation.com</a></li>
-                <li><strong>Subject line:</strong> "Formal Complaint – [Your Name / Reference]"</li>
+                <li><strong>Email:</strong> <a href={NAP.mailtoUrl}>{NAP.email}</a> (subject: "Formal Complaint")</li>
               </ul>
               <p>Please include:</p>
               <ul>
@@ -182,8 +193,8 @@ const Complaints = () => {
               <h2>11. Contact Information</h2>
               <p>For complaints or escalation:</p>
               <ul>
-                <li><strong>Email:</strong> <a href="mailto:complaints@numawayeducation.com">complaints@numawayeducation.com</a></li>
-                <li><strong>Website:</strong> <a href="https://numawayeducation.com">https://numawayeducation.com</a></li>
+                <li><strong>Email:</strong> <a href={NAP.mailtoUrl}>{NAP.email}</a></li>
+                <li><strong>Website:</strong> <a href={NAP.canonicalUrl}>{NAP.canonicalUrl}</a></li>
               </ul>
             </div>
           </div>

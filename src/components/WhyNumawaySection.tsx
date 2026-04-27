@@ -34,7 +34,7 @@ const differentiators = [
   {
     icon: Zap,
     title: "Tech-Powered Efficiency",
-    description: "Track applications in real-time, get deadline reminders, and manage documents—all from our app.",
+    description: "Track applications in real-time, get deadline reminders, and manage documents, all from our app.",
     highlight: "Modern experience"
   },
   {
@@ -46,7 +46,7 @@ const differentiators = [
   {
     icon: Users,
     title: "End-to-End Support",
-    description: "From course selection to arrival abroad—accommodation, visas, and everything in between.",
+    description: "From course selection to arrival abroad, accommodation, visas, and everything in between.",
     highlight: "Complete journey"
   }
 ];
@@ -64,7 +64,7 @@ const WhyNumawaySection = () => {
       {/* Background - softer */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent" />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container-default relative z-10">
         {/* Header */}
         <ScrollReveal animation="fade-up" className="text-center mb-12">
           <h2 className="text-2xl lg:text-3xl font-display font-bold mb-3">

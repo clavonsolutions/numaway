@@ -1,16 +1,24 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { NAP } from "@/lib/nap";
 
 const Cookies = () => {
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="Cookie Policy: Numaway Website"
+      description="Numaway's cookie policy explains which cookies we set, why, and how to manage your consent preferences."
+      canonical="/cookies"
+    />
+
       <Header />
       <main className="pt-20">
         {/* Hero */}
         <section className="py-20 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <Breadcrumbs
               items={[{ label: "Cookie Policy" }]}
               className="mb-6 justify-center text-primary-foreground/70"
@@ -18,16 +26,20 @@ const Cookies = () => {
             <h1 className="text-3xl lg:text-4xl font-display font-bold mb-3">
               Cookie Policy
             </h1>
-            <p className="text-primary-foreground/70">Last updated: December 2024</p>
+            <p className="text-primary-foreground/70">Effective: {NAP.effectiveDate}</p>
           </div>
         </section>
 
         {/* Content */}
         <section className="py-14">
-          <div className="container mx-auto px-4 max-w-4xl">
+          <div className="container-prose">
+            <div className="bg-secondary/10 border-l-4 border-secondary rounded-r-xl p-5 mb-8">
+              <p className="font-semibold text-secondary mb-1">COUNSEL REVIEW REQUIRED</p>
+              <p className="text-sm text-muted-foreground">Draft cookie policy pending legal counsel sign-off before production deployment.</p>
+            </div>
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <p className="lead text-lg text-muted-foreground mb-8">
-                This Cookie Policy explains how NUMAWAY Education ("NUMAWAY", "we", "our", "us") uses cookies and similar technologies on our website. It describes what cookies are, how we use them, and your choices regarding their use.
+                This Cookie Policy explains how {NAP.businessName} ("Numaway", "we", "our", "us") uses cookies and similar technologies on our website. It describes what cookies are, how we use them, and your choices regarding their use.
               </p>
 
               <h2>1. What Are Cookies?</h2>
@@ -163,8 +175,8 @@ const Cookies = () => {
               <h2>9. Contact Us</h2>
               <p>For questions about cookies or data protection:</p>
               <ul>
-                <li><strong>Email:</strong> <a href="mailto:privacy@numawayeducation.com">privacy@numawayeducation.com</a></li>
-                <li><strong>Website:</strong> <a href="https://numawayeducation.com">https://numawayeducation.com</a></li>
+                <li><strong>Email:</strong> <a href={NAP.mailtoUrl}>{NAP.email}</a></li>
+                <li><strong>Website:</strong> <a href={NAP.canonicalUrl}>{NAP.canonicalUrl}</a></li>
               </ul>
             </div>
           </div>

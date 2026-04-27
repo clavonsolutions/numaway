@@ -41,25 +41,37 @@ const ConsultationFormSection = () => {
     if (step < 2) setStep(prev => prev + 1);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (): Promise<void> => {
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    toast({
-      title: "Consultation Request Received!",
-      description: "Our academic advisor will contact you within 24 hours.",
-    });
-    // Reset form
-    setStep(1);
-    setFormData({
-      userType: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      studyLevel: "",
-      preferredCountry: "",
-    });
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          full_name: `${formData.firstName} ${formData.lastName}`.trim(),
+          email: formData.email,
+          phone: formData.phone || undefined,
+          destination: formData.preferredCountry || undefined,
+          message: `User type: ${formData.userType}. Study level: ${formData.studyLevel || "not specified"}.`,
+          source: "consultation-form",
+        }),
+      });
+      if (!res.ok) throw new Error("submit failed");
+      toast({
+        title: "Consultation Request Received!",
+        description: "Our team will contact you within 24 hours at " + formData.email,
+      });
+      setStep(1);
+      setFormData({ userType: "", firstName: "", lastName: "", email: "", phone: "", studyLevel: "", preferredCountry: "" });
+    } catch {
+      toast({
+        title: "Something went wrong",
+        description: "Please email us directly at connect@numaway.com",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const services = [
@@ -70,7 +82,7 @@ const ConsultationFormSection = () => {
     { icon: BookOpen, title: "IELTS Training/Preparation", desc: "Join our training classes to improve your English and get ready for IELTS and other tests." },
     { icon: Home, title: "Accommodation Support", desc: "We can help you find safe and affordable housing near your university or off-campus." },
     { icon: Users, title: "Alumni Connections", desc: "Talk to past students who have studied at your chosen university and learn from their experience." },
-    { icon: Plane, title: "Pre-Departure Briefing", desc: "Attend our sessions to learn what to expect abroad—from travel tips to living independently." },
+    { icon: Plane, title: "Pre-Departure Briefing", desc: "Attend our sessions to learn what to expect abroad, from travel tips to living independently." },
   ];
 
   const additionalServices = [
@@ -105,7 +117,7 @@ const ConsultationFormSection = () => {
         </svg>
       </div>
       
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container-default">
         {/* Main Consultation Section */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-20">
           {/* Left Content */}

@@ -1,5 +1,9 @@
+import { NAP } from "@/lib/nap";
+import PageHead from "@/components/PageHead";
+import type { JsonLdGraph } from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import PageHero from "@/components/PageHero";
 import { serviceDomains } from "@/data/serviceDomains";
 import { Button } from "@/components/ui/button";
@@ -8,8 +12,35 @@ import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const Services = () => (
+const serviceListSchema: JsonLdGraph = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Numaway Service Domains",
+  description: "Complete ecosystem of study-abroad services for students, universities, and institutions.",
+  url: "https://numaway.com/services",
+  numberOfItems: 9,
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Student-Focused Services", url: "https://numaway.com/services/student-services" },
+    { "@type": "ListItem", position: 2, name: "University Partnership Services", url: "https://numaway.com/services/university-partnerships" },
+    { "@type": "ListItem", position: 3, name: "Digital & AI Services", url: "https://numaway.com/services/digital-services" },
+    { "@type": "ListItem", position: 4, name: "Compliance & Fraud Prevention", url: "https://numaway.com/services/compliance-services" },
+    { "@type": "ListItem", position: 5, name: "Community & Engagement Services", url: "https://numaway.com/services/community-services" },
+    { "@type": "ListItem", position: 6, name: "Consulting & Insights", url: "https://numaway.com/services/consulting-services" },
+    { "@type": "ListItem", position: 7, name: "Events & Marketing Services", url: "https://numaway.com/services/events-services" },
+    { "@type": "ListItem", position: 8, name: "Premium & VIP Services", url: "https://numaway.com/services/premium-services" },
+    { "@type": "ListItem", position: 9, name: "Future Services", url: "https://numaway.com/services/future-services" },
+  ],
+};
+
+const Services = (): JSX.Element => (
   <div className="min-h-screen bg-background">
+    <PageHead
+      title="Study Abroad Services: Full Student Support"
+      description="Explore Numaway's full range of student services: profiling, university selection, application support, visa preparation, and more."
+      canonical="/services"
+      jsonLd={serviceListSchema}
+    />
+
     <Header />
     <main>
       <PageHero
@@ -20,7 +51,7 @@ const Services = () => (
 
       {/* Intro Section */}
       <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <div className="max-w-4xl mx-auto text-center">
             <ScrollReveal animation="fade-up">
               <p className="text-lg text-foreground leading-relaxed mb-8">
@@ -63,7 +94,7 @@ const Services = () => (
 
       {/* Turnaround Time & Trust Banner */}
       <section className="py-8 bg-secondary/10 border-y border-secondary/20">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 text-center">
             <div className="flex items-center gap-2">
               <DollarSign className="w-5 h-5 text-secondary" />
@@ -91,7 +122,7 @@ const Services = () => (
 
       {/* Our Pricing Philosophy */}
       <section className="py-16 bg-card">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal animation="fade-up" className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
@@ -109,7 +140,7 @@ const Services = () => (
                 </div>
                 <h3 className="font-semibold text-lg mb-2">University Commissions</h3>
                 <p className="text-muted-foreground text-sm">
-                  For most partner universities, we're paid by the institution—not by you. This means our services are free for students applying to commission-paying schools.
+                  For most partner universities, we're paid by the institution, not by you. This means our services are free for students applying to commission-paying schools.
                 </p>
               </div>
 
@@ -139,27 +170,22 @@ const Services = () => (
 
       {/* What We DON'T Do */}
       <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal animation="fade-up" className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <h2 className="text-2xl lg:text-3xl font-display font-bold mb-4">
                 What NUMAWAY <span className="text-destructive">Does NOT</span> Do
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Honesty means being clear about our limits. Here's what we don't offer—so you're never misled.
+                Honesty means being clear about our limits. Here is what we do not offer, so you are never misled.
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
                 "We do NOT guarantee visa approval",
                 "We do NOT write fake documents or statements",
-                "We do NOT promise admission to any university",
                 "We do NOT provide licensed immigration advice",
-                "We do NOT book flights or travel on your behalf",
-                "We do NOT offer exam tutoring (we provide guidance only)",
-                "We do NOT process payments to universities directly",
-                "We do NOT make decisions for you—we inform and support",
                 "We do NOT pressure you into decisions"
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-lg shadow-soft">
@@ -180,7 +206,7 @@ const Services = () => (
 
       {/* Evidence & Track Record */}
       <section className="py-16 bg-gradient-to-r from-secondary/5 to-accent/5">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal animation="fade-up" className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
@@ -216,7 +242,7 @@ const Services = () => (
                 </div>
                 <div>
                   <p className="text-lg italic mb-4">
-                    "NUMAWAY didn't just help me get into university—they helped me understand what I was getting into. 
+                    "NUMAWAY didn't just help me get into university, they helped me understand what I was getting into. 
                     The transparency about costs, the honest feedback on my chances, and the structured support made all the difference."
                   </p>
                   <div className="flex items-center gap-3">
@@ -234,7 +260,7 @@ const Services = () => (
 
       {/* Turnaround Times */}
       <section className="py-16 bg-card">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal animation="fade-up" className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
@@ -279,13 +305,13 @@ const Services = () => (
 
       {/* Service Domains Grid */}
       <section className="py-24">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal animation="fade-up" className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
               9 Service Domains, One Complete Ecosystem
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              NUMAWAY is not just an education agency — we're the most complete, intelligent, and globally 
+              NUMAWAY is not just an education agency, we're the most complete, intelligent, and globally 
               standardized mobility ecosystem for students, universities, and institutions.
             </p>
           </ScrollReveal>
@@ -293,7 +319,10 @@ const Services = () => (
           <div className="space-y-12">
             {serviceDomains.map((domain, i) => (
               <ScrollReveal key={domain.slug} animation="fade-up" delay={i * 0.05}>
-                <div className={`group relative overflow-hidden rounded-3xl bg-card shadow-soft hover:shadow-card transition-all ${i % 2 === 0 ? '' : 'lg:flex-row-reverse'}`}>
+                <div
+                  data-service-id={domain.slug}
+                  className={`group relative overflow-hidden rounded-3xl bg-card shadow-soft hover:shadow-card transition-all ${i % 2 === 0 ? '' : 'lg:flex-row-reverse'}`}
+                >
                   <div className="grid lg:grid-cols-2 gap-0">
                     {/* Image Side */}
                     <div className={`relative h-64 lg:h-auto min-h-[350px] ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
@@ -361,7 +390,7 @@ const Services = () => (
 
       {/* Trust Message */}
       <section className="py-16 bg-muted/50">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal animation="fade-up" className="max-w-4xl mx-auto text-center">
             <div className="w-16 h-16 bg-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <Shield className="w-8 h-8 text-secondary" />
@@ -384,7 +413,7 @@ const Services = () => (
           <div className="absolute bottom-20 right-20 w-80 h-80 bg-accent rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
         </div>
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container-default relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <ScrollReveal animation="fade-up">
               <motion.div
@@ -399,7 +428,7 @@ const Services = () => (
                 Ready to Start Your Journey?
               </h2>
               <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-                Our consultation is completely free. No pressure, no hidden fees — just honest guidance 
+                Our consultation is completely free. No pressure, no hidden fees, just honest guidance 
                 from experts who've helped thousands of students achieve their dreams.
               </p>
               
@@ -410,7 +439,7 @@ const Services = () => (
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="gap-2 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10" asChild>
-                  <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer">
+                  <a href={NAP.whatsappUrl} target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="w-4 h-4" /> WhatsApp Us
                   </a>
                 </Button>
@@ -443,7 +472,7 @@ const Services = () => (
 
       {/* Quick Links */}
       <section className="py-16">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <ScrollReveal animation="fade-up" className="text-center">
             <h3 className="text-2xl font-display font-bold mb-8">Quick Links</h3>
             <div className="flex flex-wrap justify-center gap-4">
@@ -468,6 +497,7 @@ const Services = () => (
       </section>
     </main>
     <Footer />
+    <WhatsAppButton />
   </div>
 );
 

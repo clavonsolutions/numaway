@@ -11,7 +11,7 @@ const journeyCards = [
   {
     id: "students",
     title: "Students",
-    description: "We'll guide you to your dream course — from course selection to campus life.",
+    description: "We'll guide you to your dream course, from course selection to campus life.",
     image: studentsImage,
     buttonText: "Sign up",
     link: "/for-students",
@@ -52,7 +52,7 @@ const StartJourneySection = () => {
         </svg>
       </div>
       
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container-default">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

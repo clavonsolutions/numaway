@@ -1,3 +1,4 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -9,6 +10,12 @@ import { ScrollReveal } from "@/hooks/useScrollAnimation";
 const About = () => {
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="About Numaway: Our Mission and Story"
+      description="Numaway is a global education mobility platform built to give every student a clear, intelligent path to their global future."
+      canonical="/about"
+    />
+
       <Header />
       <main>
         <PageHero
@@ -19,7 +26,7 @@ const About = () => {
 
         {/* Our Story */}
         <section className="py-24">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="max-w-3xl mx-auto">
               <h2 className="text-3xl font-display font-bold mb-8">Our Story</h2>
               <div className="prose prose-lg text-muted-foreground space-y-6">
@@ -48,7 +55,7 @@ const About = () => {
 
         {/* Mission */}
         <section className="py-24 bg-muted/50">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
               <ScrollReveal animation="fade-up">
                 <div className="bg-card p-8 rounded-2xl shadow-soft h-full">
@@ -76,7 +83,7 @@ const About = () => {
 
         {/* Values */}
         <section className="py-24">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="text-center mb-12">
               <h2 className="text-3xl font-display font-bold mb-4">Our Values</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -122,7 +129,7 @@ const About = () => {
 
         {/* How We Work */}
         <section className="py-24 bg-muted/50">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-display font-bold mb-6">How We Work</h2>
               <p className="text-lg text-muted-foreground mb-8">
@@ -143,7 +150,7 @@ const About = () => {
 
         {/* CTA */}
         <section className="py-24">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <ScrollReveal animation="fade-up">
               <h2 className="text-3xl font-display font-bold mb-6">Ready to Start Your Journey?</h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">

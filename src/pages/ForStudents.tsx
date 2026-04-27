@@ -1,5 +1,7 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -61,6 +63,12 @@ const ForStudents = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="For Students: Study Abroad with Expert Guidance"
+      description="Numaway supports students at every stage of the study abroad journey: from country selection to visa approval and arrival."
+      canonical="/for-students"
+    />
+
       <Header />
       
       {/* Hero Section */}
@@ -73,7 +81,7 @@ const ForStudents = () => {
           }}
         />
         
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+        <div className="container-default relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -140,7 +148,7 @@ const ForStudents = () => {
 
       {/* Benefits Section */}
       <section className="py-20 lg:py-28">
-        <div className="container mx-auto px-4 lg:px-8">
+        <div className="container-default">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -178,7 +186,7 @@ const ForStudents = () => {
 
       {/* How It Works */}
       <section className="py-20 lg:py-28 bg-muted/30">
-        <div className="container mx-auto px-4 lg:px-8">
+        <div className="container-default">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -227,6 +235,7 @@ const ForStudents = () => {
       </section>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

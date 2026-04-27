@@ -1,8 +1,10 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { Shield, XCircle, CheckCircle, AlertTriangle, Eye, Lock } from "lucide-react";
+import { Shield, XCircle, CheckCircle, Eye, Lock } from "lucide-react";
+import { NAP } from "@/lib/nap";
 
 const FraudPrevention = () => {
   const coreStandards = [
@@ -34,11 +36,17 @@ const FraudPrevention = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="Fraud Prevention: Protect Yourself from Scams"
+      description="Numaway does not charge upfront fees for standard services. Learn how to verify our identity and avoid education fraud."
+      canonical="/fraud-prevention"
+    />
+
       <Header />
       <main className="pt-20">
         {/* Hero */}
         <section className="py-20 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <Breadcrumbs
               items={[{ label: "Fraud Prevention & Ethical Standards" }]}
               className="mb-6 justify-center text-primary-foreground/70"
@@ -46,16 +54,20 @@ const FraudPrevention = () => {
             <h1 className="text-3xl lg:text-4xl font-display font-bold mb-3">
               Fraud Prevention & Ethical Standards
             </h1>
-            <p className="text-primary-foreground/70">Last updated: December 2024</p>
+            <p className="text-primary-foreground/70">Effective: {NAP.effectiveDate}</p>
           </div>
         </section>
 
         {/* Content */}
         <section className="py-14">
-          <div className="container mx-auto px-4 max-w-4xl">
+          <div className="container-prose">
+            <div className="bg-secondary/10 border-l-4 border-secondary rounded-r-xl p-5 mb-8">
+              <p className="font-semibold text-secondary mb-1">COUNSEL REVIEW REQUIRED</p>
+              <p className="text-sm text-muted-foreground">Draft policy pending legal counsel sign-off before production deployment.</p>
+            </div>
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <p className="lead text-lg text-muted-foreground mb-8">
-                NUMAWAY Education operates with <strong>zero tolerance</strong> for fraud, misrepresentation, and unethical conduct. This policy defines our ethical standards, fraud prevention controls, verification measures, escalation routes, and enforcement actions across students, agents, staff, and partner institutions.
+                {NAP.businessName} operates with <strong>zero tolerance</strong> for fraud, misrepresentation, and unethical conduct. This policy defines our ethical standards, fraud prevention controls, verification measures, escalation routes, and enforcement actions across students, agents, staff, and partner institutions.
               </p>
 
               <h2>1. Purpose</h2>
@@ -131,7 +143,7 @@ const FraudPrevention = () => {
               <h2>5. Escalation Routes</h2>
               <p>Suspected fraud or misconduct may be reported to:</p>
               <ul>
-                <li><strong>Internal escalation:</strong> <a href="mailto:compliance@numawayeducation.com">compliance@numawayeducation.com</a></li>
+                <li><strong>Internal escalation:</strong> <a href={NAP.mailtoUrl}>{NAP.email}</a> (subject: "Fraud Report")</li>
                 <li><strong>Anonymous reporting:</strong> Available where legally supported</li>
               </ul>
               <p>All reports are treated confidentially and investigated promptly.</p>
@@ -181,8 +193,8 @@ const FraudPrevention = () => {
               <h2>10. Contact Information</h2>
               <p>For questions or concerns about fraud prevention:</p>
               <ul>
-                <li><strong>Compliance Team:</strong> <a href="mailto:compliance@numawayeducation.com">compliance@numawayeducation.com</a></li>
-                <li><strong>Website:</strong> <a href="https://numawayeducation.com">https://numawayeducation.com</a></li>
+                <li><strong>Compliance Team:</strong> <a href={NAP.mailtoUrl}>{NAP.email}</a></li>
+                <li><strong>Website:</strong> <a href={NAP.canonicalUrl}>{NAP.canonicalUrl}</a></li>
               </ul>
             </div>
           </div>

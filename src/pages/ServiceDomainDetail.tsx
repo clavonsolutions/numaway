@@ -1,4 +1,6 @@
+import { NAP } from "@/lib/nap";
 import { useParams, Link } from "react-router-dom";
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getServiceDomainBySlug, serviceDomains } from "@/data/serviceDomains";
@@ -20,6 +22,7 @@ const ServiceDomainDetail = () => {
   if (!domain) {
     return (
       <div className="min-h-screen bg-background">
+        <PageHead title="Service Not Found" description="Browse all Numaway service domains for study abroad support, visa guidance, scholarships, and university applications." canonical="/services" noIndex={true} />
         <Header />
         <main className="pt-20 flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
@@ -109,6 +112,11 @@ const ServiceDomainDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+        title={`${domain.title} - Numaway Services`}
+        description={domain.description.slice(0, 155)}
+        canonical={`/services/${slug}`}
+      />
       <Header />
       <main className="pt-20">
         {/* Hero Section */}
@@ -122,7 +130,7 @@ const ServiceDomainDetail = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/85 to-primary/70" />
           </div>
           
-          <div className="container mx-auto px-4 relative z-10 py-20">
+          <div className="container-default relative z-10 py-20">
             <div className="max-w-3xl">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -188,7 +196,7 @@ const ServiceDomainDetail = () => {
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="gap-2 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10" asChild>
-                  <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer">
+                  <a href={NAP.whatsappUrl} target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="w-4 h-4" /> WhatsApp Us
                   </a>
                 </Button>
@@ -199,7 +207,7 @@ const ServiceDomainDetail = () => {
 
         {/* Quick Stats Banner */}
         <section className="py-6 bg-secondary/10 border-y border-secondary/20">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 text-center text-sm">
               <div className="flex items-center gap-2">
                 <Timer className="w-4 h-4 text-secondary" />
@@ -223,7 +231,7 @@ const ServiceDomainDetail = () => {
 
         {/* Services Count Overview */}
         <section className="py-12 bg-muted/30">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="max-w-4xl mx-auto text-center">
               <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <Sparkles className="w-4 h-4" />
@@ -238,7 +246,7 @@ const ServiceDomainDetail = () => {
 
         {/* Turnaround & Evidence Section */}
         <section className="py-16 bg-card">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Turnaround Time */}
@@ -301,7 +309,7 @@ const ServiceDomainDetail = () => {
 
         {/* What We DON'T Do */}
         <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
                 <div className="flex items-center justify-center gap-2 mb-4">
@@ -337,7 +345,7 @@ const ServiceDomainDetail = () => {
 
         {/* Pricing Philosophy */}
         <section className="py-16 bg-card">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="max-w-4xl mx-auto">
               <div className="text-center mb-10">
                 <h2 className="text-2xl lg:text-3xl font-display font-bold mb-4">
@@ -388,7 +396,7 @@ const ServiceDomainDetail = () => {
 
         {/* Sub-Services Section */}
         <section className="py-24">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="text-center mb-16">
               <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
                 What's Included
@@ -454,7 +462,7 @@ const ServiceDomainDetail = () => {
 
         {/* Detailed Features Accordion */}
         <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="max-w-4xl mx-auto">
               <h2 className="text-2xl font-display font-bold mb-4 text-center">
                 Complete Service Details
@@ -515,7 +523,7 @@ const ServiceDomainDetail = () => {
             <div className="absolute bottom-20 right-20 w-80 h-80 bg-accent rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
           </div>
           
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container-default relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <ScrollReveal animation="fade-up">
                 <motion.div
@@ -532,7 +540,7 @@ const ServiceDomainDetail = () => {
                 </h2>
                 <p className="text-xl text-primary-foreground/80 mb-8">
                   Our expert counsellors are here to help you navigate your study abroad journey. 
-                  Book a free consultation today — no pressure, no hidden fees.
+                  Book a free consultation today, no pressure, no hidden fees.
                 </p>
                 
                 <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -542,7 +550,7 @@ const ServiceDomainDetail = () => {
                     </Link>
                   </Button>
                   <Button size="lg" variant="outline" className="gap-2 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10" asChild>
-                    <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer">
+                    <a href={NAP.whatsappUrl} target="_blank" rel="noopener noreferrer">
                       <MessageCircle className="w-4 h-4" /> WhatsApp Us
                     </a>
                   </Button>
@@ -554,7 +562,7 @@ const ServiceDomainDetail = () => {
                 </div>
 
                 <p className="text-sm text-primary-foreground/60">
-                  Or email us at <a href="mailto:hello@numaway.com" className="underline hover:text-secondary transition-colors">hello@numaway.com</a>
+                  Or email us at <a href={NAP.mailtoUrl} className="underline hover:text-secondary transition-colors">{NAP.email}</a>
                 </p>
               </ScrollReveal>
             </div>
@@ -563,7 +571,7 @@ const ServiceDomainDetail = () => {
 
         {/* Other Domains */}
         <section className="py-16">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up">
               <h2 className="text-2xl font-display font-bold mb-8 text-center">
                 Explore Other Service Domains

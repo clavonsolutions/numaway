@@ -90,7 +90,7 @@ export const serviceDomains: ServiceDomain[] = [
     header: "For Students & Parents",
     subheader: "Clear guidance, intelligent tools, and end-to-end support for your global future.",
     tagline: "Your Complete Study Abroad Journey",
-    description: "From initial counselling to career success abroad — we support every step of your educational journey with personalized guidance and AI-powered tools. Our consultation and support are completely free.",
+    description: "From initial counselling to career success abroad, we support every step of your educational journey with personalized guidance and AI-powered tools. Our consultation and support are completely free.",
     icon: GraduationCap,
     image: studentCounsellingImg,
     color: "secondary",
@@ -120,7 +120,7 @@ export const serviceDomains: ServiceDomain[] = [
       {
         id: "SS2",
         title: "Program & University Selection Advisory",
-        shortDescription: "Expert guidance that helps you choose the right university and program—with full clarity and confidence.",
+        shortDescription: "Expert guidance that helps you choose the right university and program, with full clarity and confidence.",
         longDescription: "Choosing a program is one of the most important decisions in your global journey. NUMAWAY blends AI recommendations with expert advisory sessions to help you pick the most suitable options academically, financially, and professionally.",
         icon: School,
         features: [
@@ -137,7 +137,7 @@ export const serviceDomains: ServiceDomain[] = [
       {
         id: "SS3",
         title: "Application Preparation & Management",
-        shortDescription: "Complete, compliant, and high-quality university applications handled for you—end to end.",
+        shortDescription: "Complete, compliant, and high-quality university applications handled for you, end to end.",
         longDescription: "NUMAWAY prepares, reviews, and submits your applications through a structured, quality-controlled process. Every document is checked for accuracy, compliance, and clarity before submission.",
         icon: FileCheck,
         features: [
@@ -241,7 +241,7 @@ export const serviceDomains: ServiceDomain[] = [
       {
         id: "SS9",
         title: "Post-Arrival Support",
-        shortDescription: "We stay with you—after you land.",
+        shortDescription: "We stay with you, after you land.",
         longDescription: "NUMAWAY conducts structured check-ins during your first 90 days abroad to ensure safety, comfort, and academic readiness.",
         icon: HeadphonesIcon,
         features: [
@@ -258,7 +258,7 @@ export const serviceDomains: ServiceDomain[] = [
       {
         id: "SS10",
         title: "Career & Long-Term Pathway Coaching",
-        shortDescription: "Plan your future—in education, career, and migration.",
+        shortDescription: "Plan your future, in education, career, and migration.",
         longDescription: "We map your long-term career and post-study pathways, providing structured guidance for work permits, graduate roles, and settlement options.",
         icon: Briefcase,
         features: [
@@ -484,7 +484,7 @@ export const serviceDomains: ServiceDomain[] = [
     header: "Built on Integrity and Trust",
     subheader: "Protecting students, universities, and governments with uncompromising standards.",
     tagline: "Trust, Verified",
-    description: "NUMAWAY's strongest differentiator — rigorous quality control and fraud prevention that protects students and universities alike. We are the most trusted, safe, and university-reliable agency.",
+    description: "NUMAWAY's strongest differentiator, rigorous quality control and fraud prevention that protects students and universities alike. We are the most trusted, safe, and university-reliable agency.",
     icon: Shield,
     image: complianceImg,
     color: "accent",
@@ -511,7 +511,7 @@ export const serviceDomains: ServiceDomain[] = [
         id: "CF2",
         title: "Application & Visa QC Gates",
         shortDescription: "Mandatory reviews before submission to ensure accuracy and compliance.",
-        longDescription: "Multiple quality control checkpoints ensure nothing slips through — protecting both students and institutions.",
+        longDescription: "Multiple quality control checkpoints ensure nothing slips through, protecting both students and institutions.",
         icon: CheckCircle,
         features: [
           "QC before application submission",
@@ -565,7 +565,7 @@ export const serviceDomains: ServiceDomain[] = [
     header: "Empowering Families, Schools, and Communities",
     subheader: "Supporting everyone in your journey toward global education.",
     tagline: "Supporting Everyone in Your Journey",
-    description: "We don't just support students — we engage families, schools, and build lasting communities of success. Parents stay informed, schools get trained, and communities thrive.",
+    description: "We don't just support students, we engage families, schools, and build lasting communities of success. Parents stay informed, schools get trained, and communities thrive.",
     icon: Heart,
     image: communityImg,
     color: "secondary",
