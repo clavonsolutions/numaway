@@ -1,7 +1,11 @@
 /**
- * Sage AI proxy — ADR-016 / MRS §7.5
+ * Sage AI proxy handler — ADR-016 / MRS §7.5
  *
  * POST /api/sage/chat
+ *
+ * This is a plain Node.js request handler. It is imported by server/index.ts
+ * which creates the actual HTTP server. The handler is framework-agnostic:
+ * it works with the built-in node:http module. No Vercel dependency.
  *
  * Security model:
  *   - Validates Supabase Bearer token before any AI call
@@ -10,35 +14,33 @@
  *   - No PII is logged
  *
  * IMPORTANT: When you update content/sage/system-prompt.md, sync SYSTEM_PROMPT below.
+ * ESCALATE TO FOUNDER before changing the system prompt or model (CLAUDE.md policy).
  *
- * Environment variables required (Vercel dashboard or .env.local):
- *   ANTHROPIC_API_KEY         — Anthropic secret key (server-side only)
+ * Environment variables (set in server .env or Digital Ocean App Platform):
+ *   ANTHROPIC_API_KEY         — Anthropic secret key (server-side only, never VITE_*)
  *   ANTHROPIC_MODEL           — Optional; defaults to claude-3-5-haiku-20241022
- *   SUPABASE_URL              — Supabase project URL (or reuse VITE_SUPABASE_URL)
- *   SUPABASE_ANON_KEY         — Supabase anon key (or reuse VITE_SUPABASE_ANON_KEY)
+ *   SUPABASE_URL              — Supabase project URL
+ *   SUPABASE_ANON_KEY         — Supabase anon key
  */
 
+import type { IncomingMessage, ServerResponse } from "node:http";
 import { createClient } from "@supabase/supabase-js";
 
 // ---------------------------------------------------------------------------
-// Minimal handler types — avoids requiring @vercel/node in dependencies.
-// Vercel Node.js runtime provides objects that satisfy these shapes.
+// Config
 // ---------------------------------------------------------------------------
-interface SageRequest {
-  method?: string;
-  headers: Record<string, string | string[] | undefined>;
-  body: unknown;
-}
-
-interface SageResponse {
-  status(code: number): SageResponse;
-  json(data: unknown): void;
-  setHeader(name: string, value: string): void;
-}
+const SUPABASE_URL =
+  process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "";
+const SUPABASE_ANON_KEY =
+  process.env.SUPABASE_ANON_KEY ?? process.env.VITE_SUPABASE_ANON_KEY ?? "";
+const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY ?? "";
+const ANTHROPIC_MODEL =
+  process.env.ANTHROPIC_MODEL ?? "claude-3-5-haiku-20241022";
+const MAX_TOKENS = 1024;
+const MAX_MESSAGES = 40;
 
 // ---------------------------------------------------------------------------
 // System prompt — sync with content/sage/system-prompt.md on every update.
-// ESCALATE TO FOUNDER before changing this content (CLAUDE.md policy).
 // ---------------------------------------------------------------------------
 const SYSTEM_PROMPT = `\
 You are Sage, the AI study abroad counsellor for NUMAWAY Education Services.
@@ -107,19 +109,6 @@ You are operating under the Nigeria Data Protection Act 2023 (NDPA) and GDPR. Do
 log, or repeat back personal information beyond what is needed for the current answer.`;
 
 // ---------------------------------------------------------------------------
-// Config
-// ---------------------------------------------------------------------------
-const SUPABASE_URL =
-  process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "";
-const SUPABASE_ANON_KEY =
-  process.env.SUPABASE_ANON_KEY ?? process.env.VITE_SUPABASE_ANON_KEY ?? "";
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY ?? "";
-const ANTHROPIC_MODEL =
-  process.env.ANTHROPIC_MODEL ?? "claude-3-5-haiku-20241022";
-const MAX_TOKENS = 1024;
-const MAX_MESSAGES = 40; // cap conversation history to prevent abuse
-
-// ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
 interface ChatMessage {
@@ -134,57 +123,85 @@ interface AnthropicContent {
 
 interface AnthropicResponse {
   content: AnthropicContent[];
-  error?: { message: string };
 }
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+/** Send a JSON response and end the response stream. */
+function sendJson(
+  res: ServerResponse,
+  status: number,
+  data: unknown
+): void {
+  const body = JSON.stringify(data);
+  res.writeHead(status, {
+    "Content-Type": "application/json",
+    "Content-Length": Buffer.byteLength(body),
+  });
+  res.end(body);
+}
+
+/** Read and JSON-parse the request body. Returns null on parse failure. */
+function readBody(req: IncomingMessage): Promise<unknown> {
+  return new Promise((resolve) => {
+    let raw = "";
+    req.on("data", (chunk: Buffer) => {
+      raw += chunk.toString("utf8");
+    });
+    req.on("end", () => {
+      try {
+        resolve(JSON.parse(raw));
+      } catch {
+        resolve(null);
+      }
+    });
+    req.on("error", () => {
+      resolve(null);
+    });
+  });
+}
+
+/** Extract the token from an Authorization: Bearer <token> header. */
 function extractBearerToken(
-  authorization: string | string[] | undefined
+  header: string | string[] | undefined
 ): string {
-  const header = Array.isArray(authorization)
-    ? authorization[0]
-    : (authorization ?? "");
-  return header.startsWith("Bearer ") ? header.slice(7).trim() : "";
+  const value = Array.isArray(header) ? header[0] : (header ?? "");
+  return value.startsWith("Bearer ") ? value.slice(7).trim() : "";
 }
 
 function isValidMessage(value: unknown): value is ChatMessage {
   if (typeof value !== "object" || value === null) return false;
-  const msg = value as Record<string, unknown>;
+  const m = value as Record<string, unknown>;
   return (
-    (msg.role === "user" || msg.role === "assistant") &&
-    typeof msg.content === "string" &&
-    msg.content.trim().length > 0
+    (m.role === "user" || m.role === "assistant") &&
+    typeof m.content === "string" &&
+    m.content.trim().length > 0
   );
 }
 
 // ---------------------------------------------------------------------------
-// Handler
+// Handler — exported so server/index.ts can mount it on any route
 // ---------------------------------------------------------------------------
-export default async function handler(
-  req: SageRequest,
-  res: SageResponse
+export async function handleSageChat(
+  req: IncomingMessage,
+  res: ServerResponse
 ): Promise<void> {
-  // CORS header — Vercel adds this automatically for same-origin, but be explicit
-  res.setHeader("Content-Type", "application/json");
-
-  // Only POST
   if (req.method !== "POST") {
-    res.status(405).json({ error: "Method not allowed" });
+    sendJson(res, 405, { error: "Method not allowed" });
     return;
   }
 
   // Extract and validate Bearer token
   const token = extractBearerToken(req.headers["authorization"]);
   if (!token) {
-    res.status(401).json({ error: "Missing authorisation token" });
+    sendJson(res, 401, { error: "Missing authorisation token" });
     return;
   }
 
-  // Validate Supabase session — uses anon key + user JWT; no service-role key needed
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    res.status(503).json({ error: "Auth service is not configured" });
+    sendJson(res, 503, { error: "Auth service is not configured" });
     return;
   }
 
@@ -193,28 +210,28 @@ export default async function handler(
     await supabase.auth.getUser(token);
 
   if (authError ?? !authData.user) {
-    res.status(401).json({ error: "Invalid or expired session" });
+    sendJson(res, 401, { error: "Invalid or expired session" });
     return;
   }
 
-  // Validate request body
-  const body = req.body;
+  // Parse and validate request body
+  const body = await readBody(req);
+
   if (typeof body !== "object" || body === null) {
-    res.status(400).json({ error: "Request body must be a JSON object" });
+    sendJson(res, 400, { error: "Request body must be a JSON object" });
     return;
   }
 
   const rawMessages = (body as Record<string, unknown>).messages;
   if (!Array.isArray(rawMessages) || rawMessages.length === 0) {
-    res.status(400).json({ error: "messages must be a non-empty array" });
+    sendJson(res, 400, { error: "messages must be a non-empty array" });
     return;
   }
 
-  // Validate each message shape and enforce length cap
   const messages = rawMessages.slice(-MAX_MESSAGES);
   for (const msg of messages) {
     if (!isValidMessage(msg)) {
-      res.status(400).json({
+      sendJson(res, 400, {
         error:
           "Each message must have role ('user'|'assistant') and non-empty content string",
       });
@@ -222,16 +239,14 @@ export default async function handler(
     }
   }
 
-  // Ensure last message is from the user
   const lastMsg = messages[messages.length - 1];
   if (!isValidMessage(lastMsg) || lastMsg.role !== "user") {
-    res.status(400).json({ error: "Last message must be from the user" });
+    sendJson(res, 400, { error: "Last message must be from the user" });
     return;
   }
 
-  // Anthropic API key must be configured
   if (!ANTHROPIC_API_KEY) {
-    res.status(503).json({ error: "AI service is not configured" });
+    sendJson(res, 503, { error: "AI service is not configured" });
     return;
   }
 
@@ -256,15 +271,14 @@ export default async function handler(
       }),
     });
   } catch {
-    // Network-level error — do not expose details
-    res.status(502).json({ error: "Could not reach AI service" });
+    // Log status code only — never log the API key or response body
+    sendJson(res, 502, { error: "Could not reach AI service" });
     return;
   }
 
   if (!anthropicRes.ok) {
-    // Log status code only — never log API key or response body that may contain secrets
     console.error("[sage-proxy] Anthropic responded", anthropicRes.status);
-    res.status(502).json({ error: "AI service returned an error" });
+    sendJson(res, 502, { error: "AI service returned an error" });
     return;
   }
 
@@ -272,7 +286,7 @@ export default async function handler(
   try {
     anthropicData = (await anthropicRes.json()) as AnthropicResponse;
   } catch {
-    res.status(502).json({ error: "Could not parse AI service response" });
+    sendJson(res, 502, { error: "Could not parse AI service response" });
     return;
   }
 
@@ -280,9 +294,9 @@ export default async function handler(
     anthropicData.content.find((c) => c.type === "text")?.text ?? "";
 
   if (!reply) {
-    res.status(502).json({ error: "AI service returned an empty response" });
+    sendJson(res, 502, { error: "AI service returned an empty response" });
     return;
   }
 
-  res.status(200).json({ reply });
+  sendJson(res, 200, { reply });
 }

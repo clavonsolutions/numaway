@@ -13,7 +13,10 @@
     "preview": "vite preview",
     "ci:no-lovable-strings": "bash scripts/ci/no-lovable-strings.sh",
     "ci:prerender-coverage": "bash scripts/ci/prerender-coverage.sh",
-    "ci:js-disabled-content-check": "bash scripts/ci/js-disabled-content-check.sh"
+    "ci:js-disabled-content-check": "bash scripts/ci/js-disabled-content-check.sh",
+    "server:build": "tsc --project server/tsconfig.server.json",
+    "server:start": "node dist-server/server/index.js",
+    "server:dev": "npm run server:build && npm run server:start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
