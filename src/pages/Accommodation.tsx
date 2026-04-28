@@ -113,6 +113,14 @@ const Accommodation = () => (
       {/* How NUMAWAY Helps */}
       <section className="py-24 bg-muted/50">
         <div className="container-default">
+          <img
+            src="/images/heroes/student-campus-2.jpg"
+            alt="Students arriving at university campus accommodation"
+            className="w-full rounded-xl object-cover h-56 mb-12"
+            loading="lazy"
+            width="1200"
+            height="224"
+          />
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-display font-bold mb-6">How NUMAWAY Helps</h2>

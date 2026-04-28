@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # CI gate: link-check (MRS §15.3)
-# Checks all internal href links in built HTML resolve to existing HTML files.
+# Checks that internal <a href> links in built HTML resolve to existing HTML files.
+# Excludes: static asset hrefs (CSS/JS/images), SPA-only routes (auth/portal/admin),
+# and dynamic detail pages intentionally not prerendered (e.g. /universities/:slug).
 
 set -euo pipefail
 
@@ -10,13 +12,26 @@ CHECKED=0
 
 echo "▸ Running link-check gate..."
 
-# Extract all href links from built HTML and check they exist
 while IFS= read -r -d '' html_file; do
-  # Extract internal hrefs (starting with /)
   hrefs=$(grep -oi 'href="/[^"#?]*"' "$html_file" 2>/dev/null | sed 's/href="//;s/"//' | sort -u || true)
 
   while IFS= read -r href; do
     [ -z "$href" ] && continue
+
+    # Skip static asset paths — not HTML navigable pages
+    [[ "$href" =~ \.(css|js|png|ico|svg|json|xml|webp|jpg|jpeg|gif|woff2?|ttf|eot|pdf|map|txt|zip)$ ]] && continue
+
+    # Skip SPA-only routes intentionally excluded from prerender (auth, portal, admin)
+    case "$href" in
+      /admin|/admin/*|/app|/app/*|/login|/register|/forgot-password) continue ;;
+    esac
+
+    # Skip dynamic detail pages without getStaticPaths (SPA-handled at runtime, not prerendered)
+    case "$href" in
+      /universities/*|/courses/area/*|/courses/*/|/careers/*) continue ;;
+    esac
+    # Skip individual course slugs (no getStaticPaths — SPA-only)
+    [[ "$href" =~ ^/courses/[^/]+$ ]] && [[ "$href" != "/courses" ]] && continue
 
     # Normalise: /foo → dist/foo.html or dist/foo/index.html
     target_file="${DIST}${href%.html}.html"
@@ -33,7 +48,7 @@ done < <(find "$DIST" -name '*.html' -print0)
 
 if [ $FAILED -eq 1 ]; then
   echo ""
-  echo "✗ GATE FAILED: link-check — all internal links must resolve to built HTML files."
+  echo "✗ GATE FAILED: link-check — all internal HTML page links must resolve to built HTML files."
   exit 1
 fi
 

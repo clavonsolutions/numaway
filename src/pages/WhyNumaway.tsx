@@ -126,6 +126,20 @@ const WhyNumaway = () => {
           </div>
         </section>
 
+        {/* Why Numaway visual */}
+        <section className="py-12">
+          <div className="container-default">
+            <img
+              src="/images/heroes/student-graduate-1.jpg"
+              alt="Student who succeeded in their study abroad journey with Numaway"
+              className="w-full rounded-xl object-cover h-52"
+              loading="lazy"
+              width="1200"
+              height="208"
+            />
+          </div>
+        </section>
+
         {/* Reasons */}
         <section className="py-24">
           <div className="container-default">

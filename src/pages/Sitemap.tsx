@@ -82,7 +82,7 @@ const Sitemap = (): JSX.Element => (
                 { label: "Student Profiling", href: "/services/student-profiling" },
                 { label: "Programme Selection", href: "/services/program-selection" },
                 { label: "Application Support", href: "/services/application-support" },
-                { label: "Exam Support", href: "/services/exam-support" },
+                { label: "Exams Support", href: "/services/exams-support" },
                 { label: "Visa Preparation", href: "/services/visa-preparation" },
                 { label: "Pre-Departure Prep", href: "/services/pre-departure" },
                 { label: "Post-Arrival Support", href: "/services/post-arrival" },

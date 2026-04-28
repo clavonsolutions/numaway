@@ -162,11 +162,16 @@ export const routes: RouteRecord[] = [
       // Services
       { path: "services", element: <Services /> },
       // Individual STU sub-service pages (static, take precedence over domain :slug)
+      { path: "services/study-abroad-counselling", element: <ServiceDetail /> },
+      { path: "services/application-support", element: <ServiceDetail /> },
+      { path: "services/offer-decision-support", element: <ServiceDetail /> },
+      { path: "services/visa-preparation", element: <ServiceDetail /> },
+      { path: "services/accommodation-landing", element: <ServiceDetail /> },
+      { path: "services/exams-support", element: <ServiceDetail /> },
+      { path: "services/scholarships-funding", element: <ServiceDetail /> },
+      { path: "services/genie", element: <ServiceDetail /> },
       { path: "services/student-profiling", element: <ServiceDetail /> },
       { path: "services/program-selection", element: <ServiceDetail /> },
-      { path: "services/application-support", element: <ServiceDetail /> },
-      { path: "services/exam-support", element: <ServiceDetail /> },
-      { path: "services/visa-preparation", element: <ServiceDetail /> },
       { path: "services/pre-departure", element: <ServiceDetail /> },
       { path: "services/post-arrival", element: <ServiceDetail /> },
       // Service domain pages (dynamic)

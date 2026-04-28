@@ -117,6 +117,20 @@ const Courses = () => {
           </div>
         </section>
 
+        {/* Courses visual */}
+        <section className="py-0 bg-muted/30">
+          <div className="container-default pt-0 pb-8">
+            <img
+              src="/images/heroes/student-diploma-4.jpg"
+              alt="Student holding a diploma after completing their university programme"
+              className="w-full rounded-xl object-cover h-52"
+              loading="lazy"
+              width="1200"
+              height="208"
+            />
+          </div>
+        </section>
+
         {/* Areas of Study */}
         <section className="py-16">
           <div className="container-default">

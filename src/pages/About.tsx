@@ -49,6 +49,14 @@ const About = () => {
                   The result is a study abroad experience that is structured, transparent and built around you.
                 </p>
               </div>
+              <img
+                src="/images/about/about-mission.jpg"
+                alt="Numaway team members helping a student plan their study abroad journey"
+                className="w-full rounded-xl object-cover h-56 mt-8"
+                loading="lazy"
+                width="800"
+                height="224"
+              />
             </ScrollReveal>
           </div>
         </section>
@@ -161,7 +169,7 @@ const About = () => {
                   <a href="/consultation">Book Free Consultation</a>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <a href="/team">Meet Our Team</a>
+                  <a href="/about/team">Meet Our Team</a>
                 </Button>
               </div>
             </ScrollReveal>

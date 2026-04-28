@@ -16,9 +16,6 @@ if [ ! -f "$SITEMAP_ROOT" ]; then
   exit 1
 fi
 
-# Combine all sitemap XML files for checking
-ALL_SITEMAP_CONTENT=$(cat public/sitemap*.xml 2>/dev/null || cat "$SITEMAP_ROOT")
-
 required_paths=(
   "/about"
   "/about/team"
@@ -63,7 +60,7 @@ required_paths=(
 )
 
 for path in "${required_paths[@]}"; do
-  if ! echo "$ALL_SITEMAP_CONTENT" | grep -q "$path"; then
+  if ! grep -qF "$path" public/sitemap*.xml; then
     echo "  ✗ Missing from sitemap: $path"
     FAILED=1
   fi

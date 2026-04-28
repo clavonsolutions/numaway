@@ -252,6 +252,14 @@ const FAQ = (): JSX.Element => {
         <section className="py-16 bg-muted/50">
           <div className="container-default text-center">
             <ScrollReveal animation="fade-up">
+              <img
+                src="/images/heroes/student-1-600.jpg"
+                alt="Student getting answers to their study abroad questions from a Numaway counsellor"
+                className="w-full max-w-3xl mx-auto rounded-xl object-cover h-52 mb-10"
+                loading="lazy"
+                width="800"
+                height="208"
+              />
               <h2 className="text-2xl font-display font-bold mb-4">Still Have Questions?</h2>
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                 Our team is here to help. Book a free consultation, chat with Sage, or send us a message.

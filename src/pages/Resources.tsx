@@ -39,6 +39,15 @@ const Resources = (): JSX.Element => (
 
       <section className="py-16">
         <div className="container-default">
+          {/* Resources visual */}
+          <img
+            src="/images/heroes/student-library-3.jpg"
+            alt="Students reading study abroad guides in a university library"
+            className="w-full rounded-xl object-cover h-52 mb-12"
+            loading="lazy"
+            width="1200"
+            height="208"
+          />
           {/* Pillar cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {pillars.map((pillar, i) => (

@@ -1,7 +1,7 @@
 # Numaway — Master Execution Plan
 # Source: Master URS v1.0 | Non-deferred scope only | Target: 100%
 # Rule: Items marked [x] are DONE. Never re-implement without explicit instruction.
-# Last updated: 2026-04-27
+# Last updated: 2026-04-28
 
 ---
 
@@ -74,7 +74,7 @@
 ### 1E — CI Quality Gates (MRS §15.3) — all 14 must be green
 
 - [x] 43. `no-lovable-strings` — DONE (item 3)
-- [x] 44. `image-floor-check` — `scripts/ci/image-floor-check.sh` — 2026-04-27
+- [x] 44. `image-floor-check` — `scripts/ci/image-floor-check.sh` — 2026-04-27; **BUG FIX 2026-04-28**: expanded exemption list (legal + functional pages); added content images to all 10 individual pages + ServiceDetail + ExamDetail templates; fixed ServiceDetail useParams fallback for static SSG routes; added 6 missing service routes to App.tsx (`study-abroad-counselling`, `offer-decision-support`, `accommodation-landing`, `exams-support`, `scholarships-funding`, `genie`); gate now passes 72 pages
 - [x] 45. `no-external-image-host` — `scripts/ci/no-external-image-host.sh` — 2026-04-27
 - [x] 46. `no-hex-literal` — `scripts/ci/no-hex-literal.sh` — 2026-04-27
 - [x] 47. `meta-completeness` — `scripts/ci/meta-completeness.sh` — 2026-04-27
@@ -84,7 +84,7 @@
 - [x] 51. `a11y-axe` — `scripts/ci/a11y-axe.sh` (runs in CI against preview URL) — 2026-04-27
 - [x] 52. `link-check` — `scripts/ci/link-check.sh` — 2026-04-27
 - [x] 53. `legal-config-required-keys` — `scripts/ci/legal-config-required-keys.sh` — 2026-04-27
-- [x] 54. `robots-allow-prod-only` — `scripts/ci/robots-allow-prod-only.sh` — 2026-04-27
+- [x] 54. `robots-allow-prod-only` — `scripts/ci/robots-allow-prod-only.sh` — 2026-04-27; **BUG FIX 2026-04-28**: gate now checks `robots.staging.txt` in staging mode (not `robots.txt`); passes in both modes
 - [x] 55. `prerender-coverage` — (item 15 above)
 - [x] 56. `js-disabled-content-check` — (item 16 above)
 - [x] 57. Wire all 14 gates into `.github/workflows/ci.yml` — 2026-04-27
@@ -229,6 +229,12 @@ Visa Interviews pillar cluster:
 - [x] 136. `/resources/visa-interview-guide/canada-study-permit-interview` — IRCC triggers + prep; STU-06 — 2026-04-27
 - [x] 137. `/resources/visa-interview-guide/visa-refusal-appeal-guide` — UK/USA/Canada refusal + reapplication; STU-06 — 2026-04-27
 - [x] 138. `/resources/visa-interview-guide/student-visa-document-checklist` — UK/USA/Canada document lists; STU-06 — 2026-04-27
+
+---
+
+## SERVER OPERATIONS (added 2026-04-28)
+
+- [x] **Server Ops Runbook**: `docs/RUNBOOK_Numaway_Initialisation.md` updated with full server architecture (frontend at `/var/www/numaway`, API at `/var/www/numaway-api`), PM2 management, `.env` heredoc patterns, emergency recovery, and deployment checklist — PR #5
 
 ---
 

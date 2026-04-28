@@ -79,6 +79,18 @@ const Countries = () => {
           </section>
         )}
 
+        {/* Destination visual */}
+        <div className="container-default py-0">
+          <img
+            src="/images/heroes/student-graduate-1.jpg"
+            alt="Student celebrating graduation after studying abroad"
+            className="w-full rounded-xl object-cover h-52 -mt-6 mb-0"
+            loading="lazy"
+            width="1200"
+            height="208"
+          />
+        </div>
+
         {/* Other Destinations */}
         {others.length > 0 && (
           <section className="py-16 bg-muted/50">

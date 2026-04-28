@@ -286,6 +286,18 @@ const ExamDetail = (): JSX.Element => {
                   </ScrollReveal>
                 )}
 
+                {/* Exam study illustration */}
+                <ScrollReveal animation="fade-up">
+                  <img
+                    src="/images/heroes/student-library-3.jpg"
+                    alt="Student preparing for an English proficiency exam with study materials"
+                    className="w-full rounded-xl object-cover h-52"
+                    loading="lazy"
+                    width="800"
+                    height="208"
+                  />
+                </ScrollReveal>
+
                 {/* Preparation Plans */}
                 <ScrollReveal animation="fade-up">
                   <div>
