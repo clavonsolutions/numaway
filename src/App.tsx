@@ -59,6 +59,7 @@ import ServiceDetail from "./pages/ServiceDetail";
 import LocaleRedirect from "./pages/LocaleRedirect";
 import PillarPage from "./pages/PillarPage";
 import ResourceArticle from "./pages/ResourceArticle";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Admin
 import AdminLayout from "./layouts/AdminLayout";
@@ -249,10 +250,10 @@ export const routes: RouteRecord[] = [
       { path: "register", element: <Register /> },
       { path: "forgot-password", element: <ForgotPassword /> },
 
-      // Student App Portal (SPA, excluded from SSG)
+      // Student App Portal (SPA, excluded from SSG — auth required)
       {
         path: "app",
-        element: <StudentLayout />,
+        element: <ProtectedRoute><StudentLayout /></ProtectedRoute>,
         children: [
           { index: true, element: <StudentDashboard /> },
           { path: "applications", element: <StudentApplications /> },
@@ -263,10 +264,10 @@ export const routes: RouteRecord[] = [
       },
       { path: "app/page", element: <AppPage /> },
 
-      // Admin Portal (SPA, excluded from SSG)
+      // Admin Portal (SPA, excluded from SSG — admin role required)
       {
         path: "admin",
-        element: <AdminLayout />,
+        element: <ProtectedRoute requireRole="admin"><AdminLayout /></ProtectedRoute>,
         children: [
           { index: true, element: <AdminDashboard /> },
           { path: "leads", element: <AdminLeads /> },

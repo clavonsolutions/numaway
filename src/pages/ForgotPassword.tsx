@@ -1,131 +1,135 @@
-import { useState } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { useState, type FormEvent } from "react";
+import { Link } from "react-router-dom";
+import PageHead from "@/components/PageHead";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { motion } from "framer-motion";
-import { Mail, ArrowLeft, CheckCircle } from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { Mail, ArrowLeft, CheckCircle, Loader2 } from "lucide-react";
 
-const ForgotPassword = () => {
+const ForgotPassword = (): JSX.Element => {
   const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
-    setIsLoading(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsLoading(false);
-    setIsSubmitted(true);
-  };
+    setError(null);
+    setLoading(true);
+
+    const { error: resetError } = await supabase.auth.resetPasswordForEmail(
+      email.trim(),
+      { redirectTo: `${window.location.origin}/reset-password` }
+    );
+
+    setLoading(false);
+
+    if (resetError) {
+      setError("Something went wrong. Please try again.");
+      return;
+    }
+
+    setSent(true);
+  }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main className="pt-20 min-h-[calc(100vh-80px)] flex items-center">
-        <div className="container-default py-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-md mx-auto"
+    <div className="min-h-screen bg-background flex flex-col">
+      <PageHead
+        title="Reset Your Password"
+        description="Request a password reset link for your NUMAWAY account."
+        canonical="/forgot-password"
+      />
+
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <Link
+            to="/login"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
           >
-            <a
-              href="/login"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Login
-            </a>
+            <ArrowLeft className="w-4 h-4" />
+            Back to sign in
+          </Link>
 
-            {!isSubmitted ? (
-              <div className="bg-card rounded-2xl p-8 shadow-card">
-                <div className="text-center mb-8">
-                  <div className="w-16 h-16 bg-gradient-gold rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Mail className="w-8 h-8 text-secondary-foreground" />
-                  </div>
-                  <h1 className="text-2xl font-display font-bold mb-2">
-                    Reset Your Password
-                  </h1>
-                  <p className="text-muted-foreground">
-                    Enter your email address and we'll send you a link to reset your password.
-                  </p>
+          {!sent ? (
+            <div className="bg-card rounded-2xl shadow-card p-8">
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 bg-gradient-gold rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Mail className="w-8 h-8 text-secondary-foreground" />
                 </div>
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Email Address
-                    </label>
-                    <Input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="you@example.com"
-                      required
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    variant="gold"
-                    className="w-full"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Sending..." : "Send Reset Link"}
-                  </Button>
-                </form>
-
-                <p className="text-center text-sm text-muted-foreground mt-6">
-                  Remember your password?{" "}
-                  <a href="/login" className="text-secondary hover:underline">
-                    Sign in
-                  </a>
+                <h1 className="text-2xl font-display font-bold mb-2">Reset your password</h1>
+                <p className="text-muted-foreground text-sm">
+                  Enter your email and we will send you a secure reset link.
                 </p>
               </div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="bg-card rounded-2xl p-8 shadow-card text-center"
-              >
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="w-8 h-8 text-green-600" />
+
+              {error && (
+                <div className="mb-4 p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-sm text-destructive">
+                  {error}
                 </div>
-                <h2 className="text-2xl font-display font-bold mb-2">
-                  Check Your Email
-                </h2>
-                <p className="text-muted-foreground mb-6">
-                  We've sent a password reset link to <strong>{email}</strong>. 
-                  Click the link in the email to reset your password.
-                </p>
-                <div className="space-y-3">
-                  <Button variant="gold" className="w-full" asChild>
-                    <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer">
-                      Open Gmail
-                    </a>
-                  </Button>
-                  <Button variant="outline" className="w-full" asChild>
-                    <a href="/login">Return to Login</a>
-                  </Button>
+              )}
+
+              <form onSubmit={(e) => { void handleSubmit(e); }} className="space-y-4">
+                <div>
+                  <label htmlFor="reset-email" className="block text-sm font-medium mb-1.5">
+                    Email address
+                  </label>
+                  <input
+                    id="reset-email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 text-sm"
+                  />
                 </div>
-                <p className="text-sm text-muted-foreground mt-6">
-                  Didn't receive the email?{" "}
-                  <button
-                    onClick={() => setIsSubmitted(false)}
-                    className="text-secondary hover:underline"
-                  >
-                    Try again
-                  </button>
-                </p>
-              </motion.div>
-            )}
-          </motion.div>
+
+                <Button
+                  type="submit"
+                  variant="default"
+                  size="lg"
+                  className="w-full gap-2"
+                  disabled={loading}
+                >
+                  {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {loading ? "Sending..." : "Send reset link"}
+                </Button>
+              </form>
+
+              <p className="text-center text-sm text-muted-foreground mt-6">
+                Remembered it?{" "}
+                <Link to="/login" className="text-secondary font-medium hover:underline">
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          ) : (
+            <div className="bg-card rounded-2xl shadow-card p-8 text-center">
+              <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-8 h-8 text-secondary" />
+              </div>
+              <h2 className="text-2xl font-display font-bold mb-2">Check your email</h2>
+              <p className="text-muted-foreground text-sm mb-6">
+                A password reset link has been sent to <strong>{email}</strong>.
+                It expires in 1 hour.
+              </p>
+              <Button variant="outline" className="w-full" asChild>
+                <Link to="/login">Back to sign in</Link>
+              </Button>
+              <p className="text-sm text-muted-foreground mt-4">
+                Didn't receive it?{" "}
+                <button
+                  onClick={() => setSent(false)}
+                  className="text-secondary hover:underline"
+                  type="button"
+                >
+                  Try again
+                </button>
+              </p>
+            </div>
+          )}
         </div>
-      </main>
-      <Footer />
+      </div>
     </div>
   );
 };

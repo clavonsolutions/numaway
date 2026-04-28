@@ -1,322 +1,301 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, type FormEvent } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { 
-  User, Mail, Phone, MapPin, GraduationCap, Briefcase, 
-  Globe, Edit2, Save, Camera, Shield, Bell, Trash2
+import {
+  User, GraduationCap, Globe, Shield, Loader2, Save,
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/lib/supabase";
+import { useToast } from "@/hooks/use-toast";
 
-const StudentProfile = () => {
-  const [isEditing, setIsEditing] = useState(false);
+const COUNTRIES = [
+  "United Kingdom", "Canada", "United States", "Australia",
+  "Germany", "Ireland", "Netherlands", "UAE", "Other",
+];
+const INTAKES = ["September 2025", "January 2026", "May 2026", "September 2026", "Later"];
+const QUALIFICATIONS = ["O-Level / WAEC", "A-Level / NABTEB", "Diploma / HND", "Bachelor's Degree", "Master's Degree", "PhD"];
+const BUDGETS = ["Under $10,000/yr", "$10,000–$20,000/yr", "$20,000–$40,000/yr", "$40,000+/yr"];
+
+const StudentProfile = (): JSX.Element => {
+  const { profile } = useAuth();
+  const { toast } = useToast();
+  const [saving, setSaving] = useState(false);
+
+  // Form fields
+  const [fullName, setFullName] = useState(profile?.full_name ?? "");
+  const [phone, setPhone] = useState(profile?.phone ?? "");
+  const [nationality, setNationality] = useState(profile?.nationality ?? "");
+  const [dob, setDob] = useState(profile?.date_of_birth ?? "");
+  const [qualification, setQualification] = useState(profile?.highest_qualification ?? "");
+  const [targetCountry, setTargetCountry] = useState(profile?.target_country ?? "");
+  const [targetIntake, setTargetIntake] = useState(profile?.target_intake ?? "");
+  const [budget, setBudget] = useState(profile?.budget_range ?? "");
+
+  async function handleSave(e: FormEvent<HTMLFormElement>): Promise<void> {
+    e.preventDefault();
+    if (!profile) return;
+    setSaving(true);
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        full_name: fullName.trim(),
+        phone: phone.trim() || null,
+        nationality: nationality || null,
+        date_of_birth: dob || null,
+        highest_qualification: qualification || null,
+        target_country: targetCountry || null,
+        target_intake: targetIntake || null,
+        budget_range: budget || null,
+      })
+      .eq("id", profile.id);
+
+    setSaving(false);
+
+    if (error) {
+      toast({ title: "Save failed", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Profile updated", description: "Your changes have been saved." });
+    }
+  }
+
+  const initials = (profile?.full_name ?? "S")
+    .split(" ")
+    .map((n) => n[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+
+  const memberSince = profile?.created_at
+    ? new Date(profile.created_at).toLocaleDateString("en-GB", { month: "long", year: "numeric" })
+    : "";
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-display font-bold">Profile</h1>
-          <p className="text-muted-foreground">Manage your personal information and preferences</p>
-        </div>
-        <Button onClick={() => setIsEditing(!isEditing)}>
-          {isEditing ? (
-            <>
-              <Save className="w-4 h-4 mr-2" />
-              Save Changes
-            </>
-          ) : (
-            <>
-              <Edit2 className="w-4 h-4 mr-2" />
-              Edit Profile
-            </>
-          )}
-        </Button>
+      <div>
+        <h1 className="text-2xl font-display font-bold">Profile</h1>
+        <p className="text-muted-foreground">Manage your personal information and study preferences</p>
       </div>
 
-      {/* Profile Header */}
+      {/* Profile header */}
       <Card>
         <CardContent className="p-6">
           <div className="flex flex-col sm:flex-row items-center gap-6">
-            <div className="relative">
-              <div className="w-24 h-24 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                <span className="text-3xl font-display font-bold text-primary-foreground">JD</span>
-              </div>
-              {isEditing && (
-                <button className="absolute bottom-0 right-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                  <Camera className="w-4 h-4 text-primary-foreground" />
-                </button>
-              )}
+            <div className="w-24 h-24 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+              <span className="text-3xl font-display font-bold text-primary-foreground">{initials}</span>
             </div>
             <div className="text-center sm:text-left flex-1">
-              <h2 className="text-2xl font-display font-bold">John Doe</h2>
-              <p className="text-muted-foreground">john.doe@email.com</p>
+              <h2 className="text-2xl font-display font-bold">{profile?.full_name ?? "Student"}</h2>
+              <p className="text-muted-foreground">{profile?.email}</p>
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-3">
                 <Badge>Student</Badge>
-                <Badge variant="outline">Verified</Badge>
-                <Badge variant="secondary">3 Active Applications</Badge>
+                {profile?.target_country && (
+                  <Badge variant="outline">{profile.target_country}</Badge>
+                )}
               </div>
             </div>
-            <div className="text-center sm:text-right">
-              <p className="text-sm text-muted-foreground">Member since</p>
-              <p className="font-medium">January 2025</p>
-            </div>
+            {memberSince && (
+              <div className="text-center sm:text-right">
+                <p className="text-sm text-muted-foreground">Member since</p>
+                <p className="font-medium">{memberSince}</p>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
 
       <Tabs defaultValue="personal" className="space-y-6">
         <TabsList>
-          <TabsTrigger value="personal">Personal Info</TabsTrigger>
+          <TabsTrigger value="personal">Personal</TabsTrigger>
           <TabsTrigger value="academic">Academic</TabsTrigger>
           <TabsTrigger value="preferences">Preferences</TabsTrigger>
           <TabsTrigger value="security">Security</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="personal">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <User className="w-5 h-5" />
-                Personal Information
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>First Name</Label>
-                  <Input defaultValue="John" disabled={!isEditing} />
-                </div>
-                <div className="space-y-2">
-                  <Label>Last Name</Label>
-                  <Input defaultValue="Doe" disabled={!isEditing} />
-                </div>
-                <div className="space-y-2">
-                  <Label>Email</Label>
-                  <Input defaultValue="john.doe@email.com" type="email" disabled={!isEditing} />
-                </div>
-                <div className="space-y-2">
-                  <Label>Phone</Label>
-                  <Input defaultValue="+1 234 567 8900" type="tel" disabled={!isEditing} />
-                </div>
-                <div className="space-y-2">
-                  <Label>Date of Birth</Label>
-                  <Input defaultValue="1998-05-15" type="date" disabled={!isEditing} />
-                </div>
-                <div className="space-y-2">
-                  <Label>Nationality</Label>
-                  <Select disabled={!isEditing}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Indian" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="indian">Indian</SelectItem>
-                      <SelectItem value="nigerian">Nigerian</SelectItem>
-                      <SelectItem value="pakistani">Pakistani</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label>Address</Label>
-                <Textarea 
-                  defaultValue="123 Main Street, Mumbai, Maharashtra 400001, India" 
-                  disabled={!isEditing}
-                  rows={2}
-                />
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="academic">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <GraduationCap className="w-5 h-5" />
-                Academic Background
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>Highest Qualification</Label>
-                  <Select disabled={!isEditing}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Bachelor's Degree" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="bachelors">Bachelor's Degree</SelectItem>
-                      <SelectItem value="masters">Master's Degree</SelectItem>
-                      <SelectItem value="phd">PhD</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label>Field of Study</Label>
-                  <Input defaultValue="Computer Science" disabled={!isEditing} />
-                </div>
-                <div className="space-y-2">
-                  <Label>University/College</Label>
-                  <Input defaultValue="University of Mumbai" disabled={!isEditing} />
-                </div>
-                <div className="space-y-2">
-                  <Label>Graduation Year</Label>
-                  <Input defaultValue="2024" disabled={!isEditing} />
-                </div>
-                <div className="space-y-2">
-                  <Label>GPA/Percentage</Label>
-                  <Input defaultValue="8.5/10" disabled={!isEditing} />
-                </div>
-              </div>
-
-              <div className="border-t pt-6">
-                <h4 className="font-semibold mb-4">Test Scores</h4>
-                <div className="grid sm:grid-cols-3 gap-4">
-                  <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="text-sm text-muted-foreground">IELTS</p>
-                    <p className="text-xl font-bold">7.5</p>
+        {/* Personal + Academic + Preferences all save together */}
+        <form onSubmit={(e) => { void handleSave(e); }}>
+          <TabsContent value="personal">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <User className="w-5 h-5" />
+                  Personal Information
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="prof-name">Full name</Label>
+                    <Input
+                      id="prof-name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="Amina Abubakar"
+                    />
                   </div>
-                  <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="text-sm text-muted-foreground">GRE</p>
-                    <p className="text-xl font-bold">320</p>
+                  <div className="space-y-2">
+                    <Label htmlFor="prof-email">Email</Label>
+                    <Input id="prof-email" value={profile?.email ?? ""} disabled />
                   </div>
-                  <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="text-sm text-muted-foreground">TOEFL</p>
-                    <p className="text-xl font-bold text-muted-foreground">N/A</p>
+                  <div className="space-y-2">
+                    <Label htmlFor="prof-phone">Phone</Label>
+                    <Input
+                      id="prof-phone"
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="+234 800 000 0000"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="prof-dob">Date of birth</Label>
+                    <Input
+                      id="prof-dob"
+                      type="date"
+                      value={dob}
+                      onChange={(e) => setDob(e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="prof-nationality">Nationality</Label>
+                    <Input
+                      id="prof-nationality"
+                      value={nationality}
+                      onChange={(e) => setNationality(e.target.value)}
+                      placeholder="Nigerian"
+                    />
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+                <Button type="submit" className="gap-2" disabled={saving}>
+                  {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                  {saving ? "Saving..." : "Save changes"}
+                </Button>
+              </CardContent>
+            </Card>
+          </TabsContent>
 
-        <TabsContent value="preferences">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Globe className="w-5 h-5" />
-                Study Preferences
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>Preferred Countries</Label>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge>Canada</Badge>
-                    <Badge>Germany</Badge>
-                    <Badge>Australia</Badge>
-                    {isEditing && <Badge variant="outline">+ Add</Badge>}
+          <TabsContent value="academic">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <GraduationCap className="w-5 h-5" />
+                  Academic Background
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="prof-qual">Highest qualification</Label>
+                    <Select value={qualification} onValueChange={setQualification}>
+                      <SelectTrigger id="prof-qual">
+                        <SelectValue placeholder="Select..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {QUALIFICATIONS.map((q) => (
+                          <SelectItem key={q} value={q}>{q}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <Label>Preferred Intake</Label>
-                  <Select disabled={!isEditing}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Fall 2025" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="fall-2025">Fall 2025</SelectItem>
-                      <SelectItem value="spring-2026">Spring 2026</SelectItem>
-                      <SelectItem value="fall-2026">Fall 2026</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label>Program Level</Label>
-                  <Select disabled={!isEditing}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Master's" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="bachelors">Bachelor's</SelectItem>
-                      <SelectItem value="masters">Master's</SelectItem>
-                      <SelectItem value="phd">PhD</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label>Budget Range</Label>
-                  <Select disabled={!isEditing}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="$20,000 - $40,000/year" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="low">Under $20,000/year</SelectItem>
-                      <SelectItem value="mid">$20,000 - $40,000/year</SelectItem>
-                      <SelectItem value="high">$40,000+/year</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
+                <Button type="submit" className="gap-2" disabled={saving}>
+                  {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                  {saving ? "Saving..." : "Save changes"}
+                </Button>
+              </CardContent>
+            </Card>
+          </TabsContent>
 
-              <div className="border-t pt-6">
-                <h4 className="font-semibold mb-4 flex items-center gap-2">
-                  <Bell className="w-4 h-4" />
-                  Notification Preferences
-                </h4>
-                <div className="space-y-3">
-                  {["Email notifications", "SMS alerts", "Application updates", "Scholarship alerts", "Newsletter"].map((pref) => (
-                    <label key={pref} className="flex items-center gap-3 cursor-pointer">
-                      <input type="checkbox" defaultChecked className="w-4 h-4 rounded" disabled={!isEditing} />
-                      <span>{pref}</span>
-                    </label>
-                  ))}
+          <TabsContent value="preferences">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Globe className="w-5 h-5" />
+                  Study Preferences
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="prof-country">Target country</Label>
+                    <Select value={targetCountry} onValueChange={setTargetCountry}>
+                      <SelectTrigger id="prof-country">
+                        <SelectValue placeholder="Select..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {COUNTRIES.map((c) => (
+                          <SelectItem key={c} value={c}>{c}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="prof-intake">Target intake</Label>
+                    <Select value={targetIntake} onValueChange={setTargetIntake}>
+                      <SelectTrigger id="prof-intake">
+                        <SelectValue placeholder="Select..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {INTAKES.map((i) => (
+                          <SelectItem key={i} value={i}>{i}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="prof-budget">Budget range</Label>
+                    <Select value={budget} onValueChange={setBudget}>
+                      <SelectTrigger id="prof-budget">
+                        <SelectValue placeholder="Select..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {BUDGETS.map((b) => (
+                          <SelectItem key={b} value={b}>{b}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+                <Button type="submit" className="gap-2" disabled={saving}>
+                  {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                  {saving ? "Saving..." : "Save changes"}
+                </Button>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </form>
 
         <TabsContent value="security">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield className="w-5 h-5" />
-                Security Settings
+                Security
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
-                  <div>
-                    <p className="font-medium">Change Password</p>
-                    <p className="text-sm text-muted-foreground">Update your account password</p>
-                  </div>
-                  <Button variant="outline">Change</Button>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+                <div>
+                  <p className="font-medium">Change password</p>
+                  <p className="text-sm text-muted-foreground">
+                    Reset via the forgot-password flow
+                  </p>
                 </div>
-                <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
-                  <div>
-                    <p className="font-medium">Two-Factor Authentication</p>
-                    <p className="text-sm text-muted-foreground">Add an extra layer of security</p>
-                  </div>
-                  <Button variant="outline">Enable</Button>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
-                  <div>
-                    <p className="font-medium">Active Sessions</p>
-                    <p className="text-sm text-muted-foreground">Manage your logged in devices</p>
-                  </div>
-                  <Button variant="outline">View</Button>
-                </div>
+                <Button variant="outline" asChild>
+                  <a href="/forgot-password">Reset</a>
+                </Button>
               </div>
-
-              <div className="border-t pt-6">
-                <h4 className="font-semibold text-destructive mb-4">Danger Zone</h4>
-                <div className="flex items-center justify-between p-4 border border-destructive/20 rounded-lg">
-                  <div>
-                    <p className="font-medium">Delete Account</p>
-                    <p className="text-sm text-muted-foreground">Permanently delete your account and all data</p>
-                  </div>
-                  <Button variant="destructive">
-                    <Trash2 className="w-4 h-4 mr-2" />
-                    Delete
-                  </Button>
+              <div className="flex items-center justify-between p-4 border border-destructive/20 rounded-lg">
+                <div>
+                  <p className="font-medium text-destructive">Delete account</p>
+                  <p className="text-sm text-muted-foreground">
+                    Contact connect@numaway.com to request account deletion per the NDPA.
+                  </p>
                 </div>
               </div>
             </CardContent>

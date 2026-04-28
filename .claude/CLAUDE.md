@@ -50,8 +50,8 @@ Colour palette: **5-token system** — Navy #0A1E3F, Teal #1AB6B4, Gold #D9A441,
 State: Zustand (client) + TanStack Query (server)
 Forms: React Hook Form + Zod
 Animation: Framer Motion
-Database: TBD — Phase 8 decision (escalate to founder)
-Auth: TBD — Phase 8 decision (escalate to founder)
+Database: Supabase PostgreSQL (ADR-015) — `supabase/migrations/001_initial_schema.sql`
+Auth: Supabase Auth (ADR-016) — email/password, `@supabase/supabase-js`, NDPA consent at signup
 Hosting: Vercel
 Payments: Paystack + Flutterwave (Phase 8, no card data on Numaway servers)
 AI: Anthropic Claude API for Sage assistant — server-side only, never browser-direct
@@ -136,6 +136,8 @@ Service IDs (STU-01..STU-10) are stable references. Every service component carr
 - **ADR-012** — Brand voice: 5 attributes + forbidden vocabulary list
 - **ADR-013** — Lovable-tagger removed; CI gate prevents reintroduction
 - **ADR-014** — Audience scope: Africa + Europe primary; en-NG/en-GB/en-US at launch
+- **ADR-015** — Database: Supabase PostgreSQL; schema in `supabase/migrations/001_initial_schema.sql`; 7 tables + RLS; apply via `supabase db push`; registered 2026-04-28
+- **ADR-016** — Auth: Supabase Auth (email/password); `@supabase/supabase-js` client; session via `onAuthStateChange`; NDPA consent recorded at registration; registered 2026-04-28
 
 ---
 
