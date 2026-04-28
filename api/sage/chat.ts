@@ -143,20 +143,41 @@ function sendJson(
   res.end(body);
 }
 
-/** Read and JSON-parse the request body. Returns null on parse failure. */
+/**
+ * Read and JSON-parse the request body.
+ * Returns null on parse failure or if the payload exceeds MAX_BODY_BYTES.
+ *
+ * Chunks are collected as Buffers and concatenated before decoding so that
+ * multi-byte UTF-8 characters split across chunk boundaries are handled
+ * correctly. A hard size cap prevents memory-exhaustion DoS attacks.
+ */
+const MAX_BODY_BYTES = 1024 * 1024; // 1 MB
+
 function readBody(req: IncomingMessage): Promise<unknown> {
   return new Promise((resolve) => {
-    let raw = "";
+    const chunks: Buffer[] = [];
+    let received = 0;
+
     req.on("data", (chunk: Buffer) => {
-      raw += chunk.toString("utf8");
+      received += chunk.length;
+      if (received > MAX_BODY_BYTES) {
+        // Destroy the socket immediately to free resources.
+        req.destroy();
+        resolve(null);
+        return;
+      }
+      chunks.push(chunk);
     });
+
     req.on("end", () => {
       try {
-        resolve(JSON.parse(raw));
+        const raw = Buffer.concat(chunks).toString("utf8");
+        resolve(raw ? JSON.parse(raw) : null);
       } catch {
         resolve(null);
       }
     });
+
     req.on("error", () => {
       resolve(null);
     });

@@ -58,33 +58,51 @@ function applyCors(req: IncomingMessage, res: ServerResponse): void {
 // ---------------------------------------------------------------------------
 const server = createServer(
   async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
-    applyCors(req, res);
+    try {
+      applyCors(req, res);
 
-    // Preflight
-    if (req.method === "OPTIONS") {
-      res.writeHead(204);
-      res.end();
-      return;
+      // Preflight
+      if (req.method === "OPTIONS") {
+        res.writeHead(204);
+        res.end();
+        return;
+      }
+
+      // Parse pathname separately from query string so routing is not
+      // broken by query parameters (e.g. /health?v=1 must still match /health).
+      const { pathname } = new URL(
+        req.url ?? "/",
+        `http://${req.headers["host"] ?? "localhost"}`
+      );
+
+      // Health check — used by Digital Ocean health monitor and PM2
+      if (pathname === "/health" && req.method === "GET") {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ status: "ok" }));
+        return;
+      }
+
+      // Sage AI proxy
+      if (pathname === "/api/sage/chat") {
+        await handleSageChat(req, res);
+        return;
+      }
+
+      // 404
+      res.writeHead(404, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Not found" }));
+    } catch (err) {
+      // Catch unexpected errors so the request is always closed and the
+      // process does not accumulate unhandled promise rejections.
+      console.error(
+        "[numaway-api] Unhandled request error:",
+        err instanceof Error ? err.message : String(err)
+      );
+      if (!res.headersSent) {
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Internal server error" }));
+      }
     }
-
-    const url = req.url ?? "/";
-
-    // Health check — used by Digital Ocean health monitor and PM2
-    if (url === "/health" && req.method === "GET") {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ status: "ok" }));
-      return;
-    }
-
-    // Sage AI proxy
-    if (url === "/api/sage/chat") {
-      await handleSageChat(req, res);
-      return;
-    }
-
-    // 404
-    res.writeHead(404, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ error: "Not found" }));
   }
 );
 
