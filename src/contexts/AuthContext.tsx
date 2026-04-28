@@ -41,13 +41,16 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   }
 
   useEffect(() => {
-    // Hydrate session on mount
+    // Hydrate session on mount.
+    // setLoading(false) is in .finally() so a network/storage error during
+    // hydration cannot leave the app in a permanent loading state.
     supabase.auth.getSession().then(({ data: { session: s } }) => {
       setSession(s);
       setUser(s?.user ?? null);
       if (s?.user) {
         void fetchProfile(s.user.id);
       }
+    }).finally(() => {
       setLoading(false);
     });
 

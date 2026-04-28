@@ -201,28 +201,81 @@ create table if not exists public.sage_conversations (
 );
 
 -- ============================================================
+-- ROLE-CHECK HELPER FUNCTIONS
+-- security definer = runs as the defining role, bypassing RLS.
+-- This prevents the infinite-recursion that would occur if an RLS
+-- policy on public.profiles used an EXISTS subquery against the same
+-- table to determine whether the caller is an admin.
+-- All admin/staff checks in every policy MUST use these functions.
+-- ============================================================
+
+create or replace function public.is_admin()
+returns boolean language sql security definer
+set search_path = public
+as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and role = 'admin'
+  );
+$$;
+
+create or replace function public.is_staff()
+returns boolean language sql security definer
+set search_path = public
+as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and role in ('admin', 'counsellor')
+  );
+$$;
+
+-- ============================================================
+-- ROLE ESCALATION GUARD
+-- Prevents any authenticated user from changing their own role
+-- (or another user's role) unless they are already an admin.
+-- The trigger fires BEFORE every UPDATE on profiles; is_admin()
+-- is security definer so the check itself cannot cause recursion.
+-- ============================================================
+
+create or replace function public.prevent_role_escalation()
+returns trigger language plpgsql security definer
+set search_path = public
+as $$
+begin
+  if new.role <> old.role and not public.is_admin() then
+    raise exception 'Only admins may change the role column';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists profiles_prevent_role_escalation on public.profiles;
+create trigger profiles_prevent_role_escalation
+  before update on public.profiles
+  for each row execute procedure public.prevent_role_escalation();
+
+-- ============================================================
 -- ROW LEVEL SECURITY
 -- ============================================================
 
--- profiles: users see and edit only their own row; admins see all
+-- profiles
 alter table public.profiles enable row level security;
 
 create policy "Users: select own profile"
   on public.profiles for select
   using (auth.uid() = id);
 
+-- Admins see every profile row.
+-- Uses is_admin() (security definer) to avoid recursive EXISTS on this table.
+create policy "Admins: select all profiles"
+  on public.profiles for select
+  using (public.is_admin());
+
+-- Users may update their own row.
+-- Role changes are blocked at the trigger level (prevent_role_escalation).
 create policy "Users: update own profile"
   on public.profiles for update
   using (auth.uid() = id);
-
-create policy "Admins: select all profiles"
-  on public.profiles for select
-  using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role = 'admin'
-    )
-  );
 
 -- applications
 alter table public.applications enable row level security;
@@ -235,18 +288,16 @@ create policy "Students: insert own applications"
   on public.applications for insert
   with check (student_id = auth.uid());
 
+-- Students may only update applications that are still in draft status.
+-- Once a counsellor advances an application past draft, the student
+-- can no longer self-service update it, preventing status escalation.
 create policy "Students: update own applications"
   on public.applications for update
-  using (student_id = auth.uid());
+  using (student_id = auth.uid() and status = 'draft');
 
 create policy "Staff: manage all applications"
   on public.applications for all
-  using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role in ('admin', 'counsellor')
-    )
-  );
+  using (public.is_staff());
 
 -- documents
 alter table public.documents enable row level security;
@@ -257,12 +308,7 @@ create policy "Students: manage own documents"
 
 create policy "Staff: manage all documents"
   on public.documents for all
-  using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role in ('admin', 'counsellor')
-    )
-  );
+  using (public.is_staff());
 
 -- consultations
 alter table public.consultations enable row level security;
@@ -273,24 +319,14 @@ create policy "Students: select own consultations"
 
 create policy "Staff: manage all consultations"
   on public.consultations for all
-  using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role in ('admin', 'counsellor')
-    )
-  );
+  using (public.is_staff());
 
 -- leads (admin/counsellor only)
 alter table public.leads enable row level security;
 
 create policy "Staff: manage all leads"
   on public.leads for all
-  using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role in ('admin', 'counsellor')
-    )
-  );
+  using (public.is_staff());
 
 -- messages
 alter table public.messages enable row level security;
@@ -310,14 +346,10 @@ create policy "Students: manage own sage history"
   on public.sage_conversations for all
   using (student_id = auth.uid());
 
+-- Uses is_admin() (security definer) to avoid recursive EXISTS on profiles.
 create policy "Admins: read all sage history"
   on public.sage_conversations for select
-  using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role = 'admin'
-    )
-  );
+  using (public.is_admin());
 
 -- ============================================================
 -- STORAGE BUCKETS (run as supabase admin or via dashboard)

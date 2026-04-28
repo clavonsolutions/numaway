@@ -43,12 +43,13 @@ const StudentDashboard = (): JSX.Element => {
   useEffect(() => {
     if (!profile) return;
 
+    // Fetch all applications (no limit) so stats are accurate.
+    // The recent-list in the UI shows at most 3 via .slice(0, 3).
     supabase
       .from("applications")
       .select("*")
       .eq("student_id", profile.id)
       .order("updated_at", { ascending: false })
-      .limit(3)
       .then(({ data }) => {
         setApplications(data ?? []);
         setLoading(false);
@@ -159,7 +160,7 @@ const StudentDashboard = (): JSX.Element => {
               </CardContent>
             </Card>
           ) : (
-            applications.map((app, i) => (
+            applications.slice(0, 3).map((app, i) => (
               <motion.div
                 key={app.id}
                 initial={{ opacity: 0, x: -20 }}
