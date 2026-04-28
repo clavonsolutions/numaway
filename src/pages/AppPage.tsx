@@ -17,7 +17,7 @@ const AppPage = () => (
     <Header />
     <main className="pt-20">
       <section className="py-24 bg-gradient-hero text-primary-foreground overflow-hidden">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
               <span className="inline-flex items-center gap-2 bg-secondary/20 rounded-full px-4 py-2 mb-6">
@@ -56,7 +56,7 @@ const AppPage = () => (
 
       {/* Designed for Nigerian Students */}
       <section className="py-24">
-        <div className="container mx-auto px-4">
+        <div className="container-default">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-display font-bold mb-6">Designed for Nigerian Students</h2>
             <p className="text-muted-foreground mb-8">
@@ -85,7 +85,7 @@ const AppPage = () => (
 
       {/* Availability */}
       <section className="py-16 bg-muted/50">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container-default text-center">
           <h2 className="text-2xl font-display font-bold mb-4">Availability</h2>
           <p className="text-muted-foreground mb-6">We are launching the NUMAWAY App in phases:</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
@@ -103,7 +103,7 @@ const AppPage = () => (
 
       {/* Early Access */}
       <section id="early-access" className="py-24">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container-default text-center">
           <h2 className="text-3xl font-display font-bold mb-4">Join the Early Access List</h2>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
             Be the first to try the NUMAWAY App when it launches.

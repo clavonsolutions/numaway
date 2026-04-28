@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getUniversityBySlug, universities } from "@/data/universities";
@@ -15,6 +16,7 @@ const UniversityDetail = () => {
   if (!uni) {
     return (
       <div className="min-h-screen bg-background">
+        <PageHead title="University Not Found" description="Browse 150+ partner universities worldwide. Numaway helps students from Nigeria and Africa apply to top institutions." canonical="/universities" noIndex={true} />
         <Header />
         <main className="pt-20 flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
@@ -45,13 +47,18 @@ const UniversityDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+        title={`${uni.name} - Rankings, Courses and How to Apply`}
+        description={uni.description.slice(0, 155)}
+        canonical={`/universities/${slug}`}
+      />
       <Header />
       <main className="pt-20">
         {/* Hero Section with Snapshot */}
         <section className="relative h-80 lg:h-96 bg-gradient-hero">
           <img src={uni.image} alt={uni.name} className="absolute inset-0 w-full h-full object-cover opacity-30" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary to-transparent" />
-          <div className="container mx-auto px-4 h-full flex items-end pb-8 relative z-10">
+          <div className="container-default h-full flex items-end pb-8 relative z-10">
             <div className="flex items-end gap-6">
               {uni.logo && (
                 <motion.div 
@@ -95,7 +102,7 @@ const UniversityDetail = () => {
 
         {/* Quick Stats Bar */}
         <section className="bg-card border-b border-border">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="flex flex-wrap justify-center lg:justify-between gap-4 py-4">
               <div className="flex items-center gap-2 text-sm">
                 <Building2 className="w-4 h-4 text-secondary" />
@@ -127,7 +134,7 @@ const UniversityDetail = () => {
         </section>
 
         <section className="py-16">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="grid lg:grid-cols-3 gap-12">
               <div className="lg:col-span-2 space-y-12">
                 {/* Overview */}

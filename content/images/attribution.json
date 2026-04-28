@@ -1,0 +1,224 @@
+{
+  "_comment": "Image attribution register. Source: Pexels (pexels.com/license). Pexels License allows free commercial use without mandatory attribution. We credit photographers voluntarily as best practice.",
+  "_schema": "localPath | pexelsId | pexelsUrl | description | licence | downloadedAt | usedOn",
+  "images": [
+    {
+      "localPath": "public/images/heroes/student-graduate-1.jpg",
+      "srcsetVariants": [
+        "public/images/heroes/student-1-300.jpg",
+        "public/images/heroes/student-1-600.jpg"
+      ],
+      "pexelsId": 12497063,
+      "pexelsUrl": "https://www.pexels.com/photo/woman-in-a-graduation-gown-12497063/",
+      "description": "Woman in graduation gown holding diploma",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/", "hero section"]
+    },
+    {
+      "localPath": "public/images/heroes/student-campus-2.jpg",
+      "srcsetVariants": [
+        "public/images/heroes/student-2-300.jpg",
+        "public/images/heroes/student-2-600.jpg"
+      ],
+      "pexelsId": 30714883,
+      "pexelsUrl": "https://www.pexels.com/photo/happy-young-women-posing-outdoors-at-obafemi-awolowo-university-30714883/",
+      "description": "Happy young women posing outdoors at Obafemi Awolowo University",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/", "hero section"]
+    },
+    {
+      "localPath": "public/images/heroes/student-library-3.jpg",
+      "srcsetVariants": [
+        "public/images/heroes/student-3-300.jpg",
+        "public/images/heroes/student-3-600.jpg"
+      ],
+      "pexelsId": 6549369,
+      "pexelsUrl": "https://www.pexels.com/photo/a-woman-reading-a-book-6549369/",
+      "description": "Woman reading a book in a library setting",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/", "hero section"]
+    },
+    {
+      "localPath": "public/images/heroes/student-diploma-4.jpg",
+      "srcsetVariants": [
+        "public/images/heroes/student-4-300.jpg",
+        "public/images/heroes/student-4-600.jpg"
+      ],
+      "pexelsId": 8093002,
+      "pexelsUrl": "https://www.pexels.com/photo/a-graduate-holding-her-diploma-8093002/",
+      "description": "Graduate holding her diploma and smiling",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/", "hero section"]
+    },
+    {
+      "localPath": "public/images/heroes/student-airport-5.jpg",
+      "srcsetVariants": [
+        "public/images/heroes/student-5-300.jpg",
+        "public/images/heroes/student-5-600.jpg"
+      ],
+      "pexelsId": 13404735,
+      "pexelsUrl": "https://www.pexels.com/photo/woman-at-the-airport-13404735/",
+      "description": "Woman with luggage at the airport",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/", "hero section"]
+    },
+    {
+      "localPath": "public/images/services/service-counselling.jpg",
+      "pexelsId": 7176132,
+      "pexelsUrl": "https://www.pexels.com/photo/teacher-in-a-checked-suit-in-a-room-with-two-students-7176132/",
+      "description": "Teacher in checked suit with two students — counselling session",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/services", "student counselling service card"]
+    },
+    {
+      "localPath": "public/images/services/service-university.jpg",
+      "pexelsId": 12091126,
+      "pexelsUrl": "https://www.pexels.com/photo/view-of-a-campus-12091126/",
+      "description": "Aerial view of a university campus",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/services", "university partnership service card"]
+    },
+    {
+      "localPath": "public/images/services/service-digital.jpg",
+      "pexelsId": 3861957,
+      "pexelsUrl": "https://www.pexels.com/photo/graph-on-laptop-screen-3861957/",
+      "description": "Data graph displayed on laptop screen",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/services", "digital and AI services card"]
+    },
+    {
+      "localPath": "public/images/services/service-compliance.jpg",
+      "pexelsId": 19825346,
+      "pexelsUrl": "https://www.pexels.com/photo/the-word-compliance-written-in-scrabble-letters-19825346/",
+      "description": "The word COMPLIANCE spelled in Scrabble tiles",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/services", "compliance services card"]
+    },
+    {
+      "localPath": "public/images/services/service-consulting.jpg",
+      "pexelsId": 8124410,
+      "pexelsUrl": "https://www.pexels.com/photo/statistics-on-a-desk-in-office-8124410/",
+      "description": "Statistics and charts on office desk",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/services", "consulting services card"]
+    },
+    {
+      "localPath": "public/images/services/service-events.jpg",
+      "pexelsId": 27945914,
+      "pexelsUrl": "https://www.pexels.com/photo/a-large-crowd-of-people-sitting-in-a-large-auditorium-27945914/",
+      "description": "Large crowd seated in an auditorium — events setting",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/services", "events services card"]
+    },
+    {
+      "localPath": "public/images/services/service-future.jpg",
+      "pexelsId": 30547568,
+      "pexelsUrl": "https://www.pexels.com/photo/abstract-digital-circuitry-with-glowing-effects-30547568/",
+      "description": "Abstract digital circuitry with glowing blue effects",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/services", "future services card"]
+    },
+    {
+      "localPath": "public/images/services/service-community.jpg",
+      "pexelsId": 7683616,
+      "pexelsUrl": "https://www.pexels.com/photo/college-students-standing-on-a-footbridge-7683616/",
+      "description": "College students standing on a campus footbridge",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/services", "community services card"]
+    },
+    {
+      "localPath": "public/images/services/service-premium.jpg",
+      "pexelsId": 7820689,
+      "pexelsUrl": "https://www.pexels.com/photo/photo-of-a-person-s-hand-pressing-a-bell-7820689/",
+      "description": "Person's hand pressing a concierge bell — premium service",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/services", "premium services card"]
+    },
+    {
+      "localPath": "public/images/journey/journey-students.jpg",
+      "pexelsId": 34211750,
+      "pexelsUrl": "https://www.pexels.com/photo/african-school-students-engaged-in-classroom-activity-34211750/",
+      "description": "African school students engaged in classroom activity",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/for-students", "student journey section"]
+    },
+    {
+      "localPath": "public/images/journey/journey-agents.jpg",
+      "pexelsId": 5256820,
+      "pexelsUrl": "https://www.pexels.com/photo/close-up-photo-of-people-doing-handshake-5256820/",
+      "description": "Close-up of a professional handshake — agent partnership",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/for-agents", "agent journey section"]
+    },
+    {
+      "localPath": "public/images/journey/journey-institutions.jpg",
+      "pexelsId": 8730173,
+      "pexelsUrl": "https://www.pexels.com/photo/elegant-people-in-a-conference-room-8730173/",
+      "description": "Professionals in a conference room — institutional partnership",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/for-institutions", "institution journey section"]
+    },
+    {
+      "localPath": "public/images/testimonials/testimonial-aisha.jpg",
+      "pexelsId": 29852895,
+      "pexelsUrl": "https://www.pexels.com/photo/professional-corporate-headshot-of-smiling-woman-29852895/",
+      "description": "Professional corporate headshot of smiling woman",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/", "testimonial — Aisha O."]
+    },
+    {
+      "localPath": "public/images/testimonials/testimonial-chioma.jpg",
+      "pexelsId": 16306778,
+      "pexelsUrl": "https://www.pexels.com/photo/portrait-of-a-smiling-woman-in-a-shirt-16306778/",
+      "description": "Portrait of a smiling woman in a shirt",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/", "testimonial — Chioma A."]
+    },
+    {
+      "localPath": "public/images/testimonials/testimonial-emeka.jpg",
+      "pexelsId": 5940858,
+      "pexelsUrl": "https://www.pexels.com/photo/confident-black-man-in-formal-outfit-in-library-5940858/",
+      "description": "Confident man in formal outfit in a library",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/", "testimonial — Emeka N."]
+    },
+    {
+      "localPath": "public/images/about/about-team.jpg",
+      "pexelsId": 8547344,
+      "pexelsUrl": "https://www.pexels.com/photo/people-working-at-the-office-8547344/",
+      "description": "Team of professionals working at the office",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/about", "/about/team", "team section"]
+    },
+    {
+      "localPath": "public/images/about/about-mission.jpg",
+      "pexelsId": 8617950,
+      "pexelsUrl": "https://www.pexels.com/photo/a-person-in-a-blazer-pointing-at-a-map-of-the-world-8617950/",
+      "description": "Person in blazer pointing at a world map — global mission",
+      "licence": "Pexels License",
+      "downloadedAt": "2026-04-27",
+      "usedOn": ["/about", "mission section"]
+    }
+  ]
+}

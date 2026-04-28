@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getAreaBySlug, getCoursesByArea, areasOfStudy } from "@/data/courses";
@@ -15,6 +16,7 @@ const AreaOfStudy = () => {
   if (!area) {
     return (
       <div className="min-h-screen bg-background">
+        <PageHead title="Area of Study Not Found" description="Explore areas of study including Business, Computer Science, Engineering, Health, Law, Arts and more with Numaway." canonical="/courses" noIndex={true} />
         <Header />
         <main className="pt-20 flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
@@ -75,11 +77,16 @@ const AreaOfStudy = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+        title={`Study ${area.name} Abroad - Top Universities and Career Paths`}
+        description={area.description.slice(0, 155)}
+        canonical={`/courses/area/${slug}`}
+      />
       <Header />
       <main className="pt-20">
         {/* Hero Section */}
         <section className="py-20 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <span className="text-6xl mb-4 block">{area.icon}</span>
             <h1 className="text-3xl lg:text-4xl font-display font-bold mb-4">{area.name}</h1>
             <p className="text-lg text-primary-foreground/70 max-w-2xl mx-auto">{area.description}</p>
@@ -101,7 +108,7 @@ const AreaOfStudy = () => {
         </section>
 
         <section className="py-16">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="grid lg:grid-cols-3 gap-12">
               <div className="lg:col-span-2 space-y-12">
                 {/* Field Overview */}
@@ -479,7 +486,7 @@ const AreaOfStudy = () => {
 
         {/* CTA Section */}
         <section className="py-16 bg-muted/50">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <ScrollReveal animation="fade-up">
               <h2 className="text-2xl font-display font-bold mb-4">Ready to Start Your {area.name} Journey?</h2>
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">

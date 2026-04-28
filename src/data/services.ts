@@ -306,9 +306,7 @@ export const services: Service[] = [
       { question: "Is Genie replacing human counsellors?", answer: "No. Genie handles quick questions and planning. Humans handle advising, reviewing your profile, and helping with decisions." },
       { question: "How accurate is Genie?", answer: "Genie is trained on study abroad knowledge but always recommends verifying important details with your counsellor." }
     ]
-  }
-];
-
+  },
   {
     title: "AI-Powered Student Profiling",
     slug: "student-profiling",

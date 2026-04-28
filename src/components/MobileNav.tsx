@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronRight, MapPin, GraduationCap, BookOpen, FileText, Briefcase, Home, Building, MessageCircle } from "lucide-react";
+
+const ICON_STROKE = 1.75;
 import { Button } from "@/components/ui/button";
 
 interface MobileNavProps {
@@ -131,7 +133,7 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
                   onClick={onClose}
                   className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6" strokeWidth={ICON_STROKE} />
                 </button>
               </div>
             </div>
@@ -140,11 +142,11 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
             <div className="p-4 space-y-6">
               {/* CTA Buttons */}
               <div className="flex gap-3">
-                <Button variant="gold" className="flex-1" asChild>
-                  <a href="/consultation" onClick={onClose}>Free Consultation</a>
+                <Button variant="hero" className="flex-1 font-display" asChild>
+                  <a href="/consultation" onClick={onClose}>Book a consultation</a>
                 </Button>
-                <Button variant="outline" className="flex-1" asChild>
-                  <a href="/login" onClick={onClose}>Login</a>
+                <Button variant="outline" className="flex-1 font-display" asChild>
+                  <a href="/login" onClick={onClose}>Log in</a>
                 </Button>
               </div>
 
@@ -157,10 +159,11 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
                       className="w-full flex items-center justify-between p-4 hover:bg-muted transition-colors"
                     >
                       <div className="flex items-center gap-3">
-                        <section.icon className="w-5 h-5 text-secondary" />
+                        <section.icon className="w-5 h-5 text-secondary" strokeWidth={ICON_STROKE} />
                         <span className="font-medium">{section.label}</span>
                       </div>
                       <ChevronRight
+                        strokeWidth={ICON_STROKE}
                         className={`w-5 h-5 text-muted-foreground transition-transform ${
                           activeSection === section.id ? "rotate-90" : ""
                         }`}
@@ -207,7 +210,7 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
                       onClick={onClose}
                       className="flex items-center gap-2 p-3 text-sm hover:bg-muted rounded-lg transition-colors"
                     >
-                      <link.icon className="w-4 h-4 text-muted-foreground" />
+                      <link.icon className="w-4 h-4 text-muted-foreground" strokeWidth={ICON_STROKE} />
                       {link.label}
                     </a>
                   ))}

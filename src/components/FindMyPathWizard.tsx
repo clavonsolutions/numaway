@@ -106,7 +106,7 @@ const FindMyPathWizard = () => {
       {/* Background - softer */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-secondary/3" />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container-default relative z-10">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-10">

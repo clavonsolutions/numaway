@@ -15,7 +15,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+        display: ["Montserrat", "system-ui", "sans-serif"],
+        accent: ["Playfair Display", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -78,6 +79,12 @@ export default {
         xl: "calc(var(--radius) + 4px)",
         "2xl": "calc(var(--radius) + 8px)",
         "3xl": "calc(var(--radius) + 16px)",
+      },
+      maxWidth: {
+        tight: '640px',
+        prose: '768px',
+        default: '1200px',
+        wide: '1440px',
       },
       spacing: {
         '18': '4.5rem',

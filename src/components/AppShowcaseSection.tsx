@@ -173,7 +173,7 @@ const AppShowcaseSection = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <div className="container-default relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -202,7 +202,7 @@ const AppShowcaseSection = () => {
             <div className="relative">
               {/* Secondary phone - behind (hidden on mobile) */}
               <div className="absolute -left-8 top-8 w-[180px] h-[360px] hidden xl:block">
-                <div className="w-full h-full bg-gradient-to-b from-[#1a1a2e] via-[#16213e] to-[#0f0f23] rounded-[2.5rem] shadow-xl opacity-60 transform -rotate-6">
+                <div className="w-full h-full bg-gradient-to-b from-[hsl(var(--mock-phone-top))] via-[hsl(var(--mock-phone-mid))] to-[hsl(var(--mock-phone-bot))] rounded-[2.5rem] shadow-xl opacity-60 transform -rotate-6">
                   <div className="absolute inset-2 bg-muted rounded-[2rem] flex items-center justify-center">
                     <div className="text-muted-foreground/50 text-sm text-center p-4">
                       <BookOpen className="w-8 h-8 mx-auto mb-2 opacity-50" />
@@ -215,7 +215,7 @@ const AppShowcaseSection = () => {
               {/* Main Phone Device */}
               <div className="relative w-[240px] sm:w-[260px] md:w-[280px] h-[480px] sm:h-[520px] md:h-[560px] z-10">
                 {/* Phone Frame */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e] via-[#16213e] to-[#0f0f23] rounded-[3rem] shadow-2xl shadow-primary/20">
+                <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--mock-phone-top))] via-[hsl(var(--mock-phone-mid))] to-[hsl(var(--mock-phone-bot))] rounded-[3rem] shadow-2xl shadow-primary/20">
                   {/* Dynamic Island */}
                   <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-7 bg-black rounded-full z-20" />
                   

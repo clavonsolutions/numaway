@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -38,6 +39,7 @@ const CourseDetail = () => {
   if (!course) {
     return (
       <div className="min-h-screen bg-background">
+        <PageHead title="Course Not Found" description="Browse undergraduate and postgraduate courses across 10 areas of study. Numaway matches you to the right course and university." canonical="/courses" noIndex={true} />
         <Header />
         <main className="pt-20 flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
@@ -100,6 +102,11 @@ const CourseDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+        title={`${course.name} - Study Abroad with Numaway`}
+        description={course.overview.slice(0, 155)}
+        canonical={`/courses/${slug}`}
+      />
       <Header />
       <main className="pt-20">
         {/* Hero Section */}
@@ -113,7 +120,7 @@ const CourseDetail = () => {
             />
           </div>
           
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container-default relative z-10">
             <Breadcrumbs 
               items={[
                 { label: "Courses", href: "/courses" },
@@ -146,7 +153,7 @@ const CourseDetail = () => {
 
         {/* Quick Navigation */}
         <section className="py-4 bg-muted/50 border-b border-border/50 sticky top-16 z-30 backdrop-blur-md">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="flex overflow-x-auto gap-4 scrollbar-hide">
               {["Overview", "Requirements", "Curriculum", "Careers", "Costs", "Scholarships", "FAQs"].map((item) => (
                 <a
@@ -161,7 +168,7 @@ const CourseDetail = () => {
           </div>
         </section>
 
-        <div className="container mx-auto px-4 py-12">
+        <div className="container-default py-12">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-16">

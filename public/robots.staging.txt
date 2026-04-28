@@ -1,0 +1,6 @@
+# robots.txt — STAGING (crawlers blocked)
+# This file is used for preview/staging deployments.
+# Copy to robots.txt on staging builds: cp public/robots.staging.txt public/robots.txt
+
+User-agent: *
+Disallow: /
