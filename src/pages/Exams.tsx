@@ -37,6 +37,19 @@ const Exams = () => (
         </div>
       </section>
 
+      <section className="py-0">
+        <div className="container-default py-8">
+          <img
+            src="/images/heroes/student-library-3.jpg"
+            alt="Student studying in a library preparing for international exams"
+            className="w-full rounded-xl object-cover h-52"
+            loading="lazy"
+            width="1200"
+            height="208"
+          />
+        </div>
+      </section>
+
       <section className="py-16 bg-muted/50">
         <div className="container-default">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

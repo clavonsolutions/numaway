@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import PageHead from "@/components/PageHead";
 import type { JsonLdGraph } from "@/components/PageHead";
 import Header from "@/components/Header";
@@ -14,7 +14,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 
 const ServiceDetail = (): JSX.Element => {
-  const { slug } = useParams();
+  const { slug: paramSlug } = useParams();
+  const { pathname } = useLocation();
+  // Static routes (e.g. services/application-support) have no :slug param — fall back to pathname
+  const slug = paramSlug || pathname.split("/").filter(Boolean).pop();
   const service = getServiceBySlug(slug || "");
 
   if (!service) {
@@ -117,6 +120,23 @@ const ServiceDetail = (): JSX.Element => {
     "We don't take shortcuts with your future",
     "We don't compromise on honesty or ethics"
   ];
+
+  const serviceImages: Record<string, string> = {
+    "study-abroad-counselling": "/images/services/service-counselling.jpg",
+    "application-support": "/images/heroes/student-2-600.jpg",
+    "offer-decision-support": "/images/heroes/student-graduate-1.jpg",
+    "visa-preparation": "/images/services/service-compliance.jpg",
+    "accommodation-landing": "/images/heroes/student-campus-2.jpg",
+    "exams-support": "/images/heroes/student-library-3.jpg",
+    "scholarships-funding": "/images/services/service-premium.jpg",
+    "genie": "/images/services/service-digital.jpg",
+    "student-profiling": "/images/services/service-counselling.jpg",
+    "program-selection": "/images/heroes/student-diploma-4.jpg",
+    "exam-support": "/images/heroes/student-library-3.jpg",
+    "pre-departure": "/images/heroes/student-airport-5.jpg",
+    "post-arrival": "/images/heroes/student-campus-2.jpg",
+  };
+  const serviceImage = serviceImages[service.slug] ?? "/images/heroes/student-library-3.jpg";
 
   return (
     <div className="min-h-screen bg-background">
@@ -317,6 +337,14 @@ const ServiceDetail = (): JSX.Element => {
                       <TrendingUp className="w-6 h-6 text-secondary" />
                       Evidence of Impact
                     </h2>
+                    <img
+                      src={serviceImage}
+                      alt={`${service.title} — students consulting with a Numaway adviser`}
+                      className="w-full rounded-xl object-cover h-52 mb-6"
+                      loading="lazy"
+                      width="800"
+                      height="208"
+                    />
                     <div className="grid sm:grid-cols-3 gap-4 mb-6">
                       <div className="bg-card rounded-xl p-4 text-center shadow-soft">
                         <div className="text-2xl font-bold text-secondary">97%</div>

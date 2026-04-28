@@ -193,6 +193,20 @@ const Scholarships = () => {
           </div>
         </section>
 
+        {/* Scholarships visual */}
+        <section className="py-12">
+          <div className="container-default">
+            <img
+              src="/images/heroes/student-diploma-4.jpg"
+              alt="Students who secured scholarships to study abroad"
+              className="w-full rounded-xl object-cover h-52"
+              loading="lazy"
+              width="1200"
+              height="208"
+            />
+          </div>
+        </section>
+
         {/* Featured Scholarships */}
         <section className="py-24 bg-muted/50">
           <div className="container-default">
