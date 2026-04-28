@@ -238,19 +238,19 @@ Visa Interviews pillar cluster:
 
 ---
 
-## PHASE 8 — Portal & Admin Polish (MRS §16.8) — founder decisions required first
+## PHASE 8 — Portal & Admin Polish (MRS §16.8)
 
-- [ ] 139. **ESCALATE** — Database decision to Sagir (candidates: MongoDB Atlas, Supabase PostgreSQL, PlanetScale); register as new ADR; bump Master URS to v1.1
-- [ ] 140. **ESCALATE** — Auth decision to Sagir (candidates: NextAuth/Auth.js, Clerk, Supabase Auth, custom JWT); register as new ADR
-- [ ] 141. `/login` — wire auth once decision is made; Helmet; NDPA-compliant data handling
-- [ ] 142. `/register` — student registration; Zod validation; NDPA consent checkbox; Helmet
-- [ ] 143. `/forgot-password` — password reset flow; Helmet
-- [ ] 144. `/app/dashboard` — student dashboard: applications summary, upcoming tasks, Sage widget; EmptyState variants 3 + 8
-- [ ] 145. `/app/applications` — application list + status; EmptyState variant 3; `data-service-id` per STU domain
-- [ ] 146. `/app/documents` — document upload + Sage scan; EmptyState variant 4; Tier 3 — security-audit required
-- [ ] 147. `/app/sage` — authenticated Sage chat; Anthropic Claude API server-side proxy; system prompt from `/content/sage/system-prompt.md`; EmptyState variant 7; Tier 3
-- [ ] 148. `/app/profile` — student profile; EmptyState variant 9; data minimisation per NDPA
-- [ ] 149. `/admin/dashboard` — operational overview; Tier 3 — security-audit + founder sign-off
+- [x] 139. **Database decision**: Supabase PostgreSQL selected (ADR-015); schema in `supabase/migrations/001_initial_schema.sql`; 7 tables: profiles, applications, documents, consultations, leads, messages, sage_conversations; full RLS policies; apply via `supabase db push` — 2026-04-28
+- [x] 140. **Auth decision**: Supabase Auth selected (ADR-016); email/password via `@supabase/supabase-js`; `onAuthStateChange` session management; auto-refresh + persist; `src/contexts/AuthContext.tsx` provider + `useAuth()` hook — 2026-04-28
+- [x] 141. `/login` — wired to `supabase.auth.signInWithPassword`; redirect-back via `location.state.from`; show/hide password; error display; Helmet — 2026-04-28
+- [x] 142. `/register` — `supabase.auth.signUp` + profile upsert; Zod validation; NDPA consent checkbox (records `ndpa_consent_at`); email confirmation screen; Helmet — 2026-04-28
+- [x] 143. `/forgot-password` — `supabase.auth.resetPasswordForEmail` with redirectTo; success state; removed simulated timeout; Helmet — 2026-04-28
+- [x] 144. `/app/dashboard` — real Supabase data: live application count, recent applications; dynamic welcome with `profile.full_name`; loading skeleton; empty state CTA; ProtectedRoute guard — 2026-04-28
+- [x] 145. `/app/applications` — full Supabase fetch for all 8 statuses; STATUS_LABEL + STATUS_CSS maps; tabs with real counts; empty state; ProtectedRoute guard — 2026-04-28
+- [x] 146. `/app/documents` — upload to `student-documents` Storage bucket; download via signed URL (60s); delete from storage + DB; 10 MB validation; drag-and-drop; ProtectedRoute guard — 2026-04-28
+- [x] 147. `/app/sage` — authenticated Sage chat; calls `/api/sage/chat` proxy with Bearer token; never calls Anthropic API from browser; conversation history sent; suggested questions; ProtectedRoute guard — 2026-04-28
+- [x] 148. `/app/profile` — `profiles.update` on save; 4 tabs (Personal, Academic, Preferences, Security); `useToast()` feedback; data minimisation per NDPA; ProtectedRoute guard — 2026-04-28
+- [ ] 149. `/admin/dashboard` — operational overview; Tier 3 — security-audit + founder sign-off (admin pages still use stub data — Phase 8b)
 - [ ] 150. `/admin/students` — student records; NDPA data minimisation; Tier 3
 - [ ] 151. `/admin/applications` — application management; Tier 3
 - [ ] 152. `/admin/consultations` — consultation scheduling; Tier 3
@@ -258,6 +258,17 @@ Visa Interviews pillar cluster:
 - [ ] 154. `/admin/messages` — messaging centre; EmptyState variant 5; Tier 3
 - [ ] 155. `/admin/reports` — funnel performance sliced by `service_id` per MRS §7.5; Tier 3
 - [ ] 156. `/admin/settings` — system config; canonical NAP edit gate; Tier 3
+
+### Phase 8 supporting infrastructure
+- [x] `src/lib/supabase.ts` — SSG-safe Supabase client singleton (placeholder fallbacks, no throw at init) — 2026-04-28
+- [x] `src/lib/database.types.ts` — full typed Database interface for all 7 tables — 2026-04-28
+- [x] `src/components/ProtectedRoute.tsx` — session + role guard; spinner while loading; redirects to `/login` (preserves `state.from`) or `/401` — 2026-04-28
+- [x] `supabase/migrations/001_initial_schema.sql` — handle_new_user trigger; update_updated_at trigger; full RLS; storage bucket note — 2026-04-28
+- [x] `.env.local.example` — documents VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY, VITE_SAGE_API_BASE_URL — 2026-04-28
+- [ ] `api/sage.ts` — Vercel serverless proxy: validates Bearer token via Supabase, calls Anthropic Claude API with system prompt, never exposes API key to browser (PENDING)
+- [ ] `content/sage/system-prompt.md` — Sage system prompt file (PENDING)
+- [ ] Apply `supabase/migrations/001_initial_schema.sql` to Supabase project dashboard (OPS — awaiting Sagir)
+- [ ] Create `student-documents` Storage bucket with RLS in Supabase dashboard (OPS — awaiting Sagir)
 
 ---
 
