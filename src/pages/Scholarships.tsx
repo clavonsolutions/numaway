@@ -1,3 +1,4 @@
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -117,6 +118,12 @@ const Scholarships = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+      title="Scholarship Search and Application Support"
+      description="Find and apply for international scholarships with Numaway's expert advisers and AI-powered scholarship matching."
+      canonical="/scholarships"
+    />
+
       <Header />
       <main>
         <PageHero
@@ -154,7 +161,7 @@ const Scholarships = () => {
 
         {/* Scholarship Types */}
         <section className="py-24">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="text-center mb-16">
               <h2 className="text-3xl font-display font-bold mb-4">Types of Scholarships</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -188,7 +195,7 @@ const Scholarships = () => {
 
         {/* Featured Scholarships */}
         <section className="py-24 bg-muted/50">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="text-center mb-16">
               <h2 className="text-3xl font-display font-bold mb-4">Featured Scholarships</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -229,7 +236,7 @@ const Scholarships = () => {
 
         {/* How We Help */}
         <section className="py-24">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <ScrollReveal animation="fade-up" className="text-center mb-16">
               <h2 className="text-3xl font-display font-bold mb-4">How NUMAWAY Helps You Win Scholarships</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -258,7 +265,7 @@ const Scholarships = () => {
           <div className="absolute inset-0" style={{
             background: 'radial-gradient(ellipse 80% 50% at 50% 0%, hsl(179 75% 41% / 0.2), transparent)'
           }} />
-          <div className="container mx-auto px-4 text-center relative z-10">
+          <div className="container-default text-center relative z-10">
             <ScrollReveal animation="fade-up">
               <h2 className="text-3xl font-display font-bold mb-4 text-white">
                 Don't Miss Out on Funding Opportunities

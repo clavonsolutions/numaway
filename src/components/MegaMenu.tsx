@@ -1,5 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, MapPin, GraduationCap, BookOpen, FileText, Briefcase, ArrowRight } from "lucide-react";
+
+const ICON_STROKE = 1.75;
 import { countries } from "@/data/countries";
 
 interface MegaMenuProps {
@@ -165,6 +167,7 @@ const MegaMenu = ({ activeMenu, onMenuChange, isScrolled = true }: MegaMenuProps
           >
             {item.label}
             <ChevronDown
+              strokeWidth={ICON_STROKE}
               className={`w-3.5 h-3.5 transition-transform duration-300 ${
                 activeMenu === item.id ? "rotate-180" : ""
               }`}
@@ -210,7 +213,7 @@ const MegaMenu = ({ activeMenu, onMenuChange, isScrolled = true }: MegaMenuProps
                       className="flex items-center justify-center gap-2 mt-5 py-3 text-sm font-medium text-secondary hover:text-secondary/80 transition-colors group"
                     >
                       {item.content.allLabel}
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight strokeWidth={ICON_STROKE} className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </a>
                   </div>
                 )}
@@ -245,7 +248,7 @@ const MegaMenu = ({ activeMenu, onMenuChange, isScrolled = true }: MegaMenuProps
                         className="flex items-center gap-2 text-sm font-medium text-secondary hover:text-secondary/80 transition-colors group"
                       >
                         {item.content.allLabel}
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight strokeWidth={ICON_STROKE} className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </a>
                     </div>
                   </div>

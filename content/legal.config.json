@@ -1,0 +1,50 @@
+{
+  "_comment": "Single source of canonical NAP and legal config. CI gate legal-config-required-keys validates this file. Never hardcode these values in components — import from this file.",
+
+  "canonical_business_name": "Numaway Education Services Limited",
+  "canonical_company_number": "TBD",
+
+  "canonical_postal_address": {
+    "street": "Mai Kwano Plaza, Zaria Road",
+    "city": "Kano",
+    "postal_code": "700102",
+    "lga": "Tarauni LGA",
+    "state": "Kano State",
+    "country": "Nigeria",
+    "country_code": "NG"
+  },
+
+  "canonical_email": "connect@numaway.com",
+  "canonical_phone": "+2349065050363",
+  "canonical_whatsapp": "+2349065050363",
+  "canonical_whatsapp_number_only": "9065050363",
+
+  "dpo_name": "TBD",
+  "dpo_email": "TBD",
+  "dpo_appointment_date": "TBD",
+
+  "jurisdiction": "Nigeria",
+  "governing_law": "Nigerian law",
+  "arbitration_venue": "TBD",
+
+  "ndpa_registration_number": "TBD",
+  "gdpr_representative": "TBD",
+
+  "effective_date": "2026-04-27",
+  "last_reviewed_date": "2026-04-27",
+  "next_review_due_date": "2027-04-27",
+
+  "complaint_resolution_timeline_days": 14,
+  "refund_cooling_off_days": 7,
+  "refund_processing_days": 10,
+
+  "social_media": {
+    "facebook": "https://facebook.com/numaway",
+    "instagram": "https://instagram.com/numaway",
+    "twitter": "https://twitter.com/numaway",
+    "linkedin": "https://linkedin.com/company/numaway"
+  },
+
+  "domain": "numaway.com",
+  "canonical_url": "https://numaway.com"
+}

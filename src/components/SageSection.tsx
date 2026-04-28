@@ -26,7 +26,7 @@ const SageSection = () => {
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <div className="container-default relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <motion.div

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import numawayLogo from "@/assets/numaway-logo.svg";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
+import { NAP } from "@/lib/nap";
 
 const Footer = () => {
   const footerLinks = {
@@ -47,6 +48,7 @@ const Footer = () => {
       { label: "Disclaimer", href: "/disclaimer" },
       { label: "Complaints", href: "/complaints" },
       { label: "Fraud Prevention", href: "/fraud-prevention" },
+      { label: "Sitemap", href: "/sitemap" },
     ],
   };
 
@@ -125,7 +127,7 @@ const Footer = () => {
       </div>
 
       {/* Main Footer */}
-      <div className="container mx-auto px-4 lg:px-8 py-20 relative z-10">
+      <div className="container-wide py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-12">
           {/* Brand Column */}
           <ScrollReveal animation="fade-up" className="lg:col-span-2">
@@ -143,21 +145,21 @@ const Footer = () => {
             
             {/* AI Badge */}
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-2 mb-6">
-              <Sparkles className="w-4 h-4 text-gold" />
+              <Sparkles className="w-4 h-4 text-gold" strokeWidth={1.75} />
               <span className="text-sm text-white/80">Powered by AI Sage</span>
             </div>
 
             {/* Contact Info */}
             <div className="space-y-3">
-              <a href="mailto:hello@numaway.com" className="flex items-center gap-3 text-white/70 hover:text-secondary transition-all duration-300 group">
+              <a href={NAP.mailtoUrl} className="flex items-center gap-3 text-white/70 hover:text-secondary transition-all duration-300 group">
                 <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
-                  <Mail className="w-5 h-5" />
+                  <Mail className="w-5 h-5" strokeWidth={1.75} />
                 </div>
-                <span>hello@numaway.com</span>
+                <span>{NAP.email}</span>
               </a>
-              <a href="https://wa.me/2348000000000" className="flex items-center gap-3 text-white/70 hover:text-secondary transition-all duration-300 group">
+              <a href={NAP.whatsappUrl} className="flex items-center gap-3 text-white/70 hover:text-secondary transition-all duration-300 group">
                 <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
-                  <Phone className="w-5 h-5" />
+                  <Phone className="w-5 h-5" strokeWidth={1.75} />
                 </div>
                 <span>WhatsApp Support</span>
               </a>
@@ -175,7 +177,7 @@ const Footer = () => {
                     className="text-white/70 hover:text-secondary transition-colors inline-flex items-center gap-1 group"
                   >
                     <span>{link.label}</span>
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" strokeWidth={1.75} />
                   </a>
                 </li>
               ))}
@@ -193,7 +195,7 @@ const Footer = () => {
                     className="text-white/70 hover:text-secondary transition-colors inline-flex items-center gap-1 group"
                   >
                     <span>{link.label}</span>
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" strokeWidth={1.75} />
                   </a>
                 </li>
               ))}
@@ -211,7 +213,7 @@ const Footer = () => {
                     className="text-white/70 hover:text-secondary transition-colors inline-flex items-center gap-1 group"
                   >
                     <span>{link.label}</span>
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" strokeWidth={1.75} />
                   </a>
                 </li>
               ))}
@@ -249,12 +251,13 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10 relative z-10">
-        <div className="container mx-auto px-4 lg:px-8 py-6">
+        <div className="container-wide py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Copyright */}
-            <p className="text-sm text-white/60">
-              © {new Date().getFullYear()} NUMAWAY Education. All rights reserved.
-            </p>
+            {/* Copyright + canonical address stamp (MRS §13.3) */}
+            <div className="text-sm text-white/60 text-center md:text-left">
+              <p>{NAP.businessName}. {NAP.address.city}, {NAP.address.country}.</p>
+              <p>© {new Date().getFullYear()} Numaway. All rights reserved.</p>
+            </div>
 
             {/* Legal Links */}
             <div className="flex items-center gap-6">
@@ -280,7 +283,7 @@ const Footer = () => {
                   className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/70 hover:bg-secondary hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-glow"
                   aria-label={social.label}
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-5 h-5" strokeWidth={1.75} />
                 </a>
               ))}
             </div>

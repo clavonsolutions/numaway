@@ -4,13 +4,6 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Import student images
-import student1 from "@/assets/hero-student-1.jpg";
-import student2 from "@/assets/hero-student-2.jpg";
-import student3 from "@/assets/hero-student-3.jpg";
-import student4 from "@/assets/hero-student-4.jpg";
-import student5 from "@/assets/hero-student-5.jpg";
-
 const HeroSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -25,11 +18,36 @@ const HeroSection = () => {
   ];
 
   const students = [
-    { image: student1, country: "Australia", flag: "🇦🇺" },
-    { image: student2, country: "USA", flag: "🇺🇸" },
-    { image: student3, country: "UK", flag: "🇬🇧" },
-    { image: student4, country: "Canada", flag: "🇨🇦" },
-    { image: student5, country: "Ireland", flag: "🇮🇪" },
+    {
+      src: "/images/heroes/student-1-600.jpg",
+      srcSet: "/images/heroes/student-1-300.jpg 300w, /images/heroes/student-1-600.jpg 600w",
+      country: "Australia",
+      flag: "🇦🇺",
+    },
+    {
+      src: "/images/heroes/student-2-600.jpg",
+      srcSet: "/images/heroes/student-2-300.jpg 300w, /images/heroes/student-2-600.jpg 600w",
+      country: "USA",
+      flag: "🇺🇸",
+    },
+    {
+      src: "/images/heroes/student-3-600.jpg",
+      srcSet: "/images/heroes/student-3-300.jpg 300w, /images/heroes/student-3-600.jpg 600w",
+      country: "UK",
+      flag: "🇬🇧",
+    },
+    {
+      src: "/images/heroes/student-4-600.jpg",
+      srcSet: "/images/heroes/student-4-300.jpg 300w, /images/heroes/student-4-600.jpg 600w",
+      country: "Canada",
+      flag: "🇨🇦",
+    },
+    {
+      src: "/images/heroes/student-5-600.jpg",
+      srcSet: "/images/heroes/student-5-300.jpg 300w, /images/heroes/student-5-600.jpg 600w",
+      country: "Ireland",
+      flag: "🇮🇪",
+    },
   ];
 
   const appFeatures = [
@@ -172,7 +190,7 @@ const HeroSection = () => {
           </svg>
         </div>
 
-        <div className="container mx-auto px-4 lg:px-8 relative z-10 pt-24 pb-16">
+        <div className="container-default relative z-10 pt-24 pb-16">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
             <div className="text-left">
@@ -344,8 +362,10 @@ const HeroSection = () => {
                     }}
                   >
                     <motion.img
-                      src={student.image}
-                      alt={`Student in ${student.country}`}
+                      src={student.src}
+                      srcSet={student.srcSet}
+                      sizes="(max-width: 640px) 300px, 600px"
+                      alt={`Student studying abroad in ${student.country}`}
                       className="w-full h-full object-cover"
                       initial={{ scale: 1.05 }}
                       animate={{ scale: 1 }}
@@ -413,8 +433,10 @@ const HeroSection = () => {
                     transition={{ duration: 0.5, delay: 0.3 + index * 0.08 }}
                   >
                     <img
-                      src={student.image}
-                      alt={`Student in ${student.country}`}
+                      src={student.src}
+                      srcSet={student.srcSet}
+                      sizes="(max-width: 640px) 120px, 300px"
+                      alt={`Student studying abroad in ${student.country}`}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-white/5" />

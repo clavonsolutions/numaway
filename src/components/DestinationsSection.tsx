@@ -63,7 +63,7 @@ const DestinationsSection = () => {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold/3 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <div className="container-wide relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

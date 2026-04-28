@@ -20,13 +20,15 @@ export default defineConfig({
     chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
-        manualChunks: {
-          "vendor-react": ["react", "react-dom"],
-          "vendor-router": ["react-router-dom"],
-          "vendor-motion": ["framer-motion"],
-          "vendor-query": ["@tanstack/react-query"],
-          "vendor-forms": ["react-hook-form", "zod", "@hookform/resolvers"],
-          "vendor-ui": ["lucide-react", "class-variance-authority", "clsx", "tailwind-merge"],
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return undefined;
+          if (id.includes("/react/") || id.includes("/react-dom/")) return "vendor-react";
+          if (id.includes("/react-router-dom/")) return "vendor-router";
+          if (id.includes("/framer-motion/")) return "vendor-motion";
+          if (id.includes("/@tanstack/react-query")) return "vendor-query";
+          if (id.includes("/react-hook-form/") || id.includes("/zod/") || id.includes("/@hookform/")) return "vendor-forms";
+          if (id.includes("/lucide-react/") || id.includes("/class-variance-authority/") || id.includes("/clsx/") || id.includes("/tailwind-merge/")) return "vendor-ui";
+          return undefined;
         },
       },
     },

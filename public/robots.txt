@@ -1,3 +1,7 @@
+# robots.txt — PRODUCTION (crawlers allowed)
+# For staging/preview deployments, replace with robots.staging.txt
+# Generator: scripts/generate-sitemap.cjs (runs as postbuild)
+
 User-agent: Googlebot
 Allow: /
 
@@ -12,3 +16,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://numaway.com/sitemap.xml

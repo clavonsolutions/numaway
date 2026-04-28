@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -9,10 +10,15 @@ const CareerDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageHead
+        title="Careers at Numaway - Join Our Team"
+        description="Explore career opportunities at Numaway. Join a passionate team helping students from Africa and beyond achieve their international education goals."
+        canonical={`/careers/${slug}`}
+      />
       <Header />
       <main className="pt-20">
         <section className="py-24 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container-default text-center">
             <h1 className="text-3xl lg:text-5xl font-display font-bold mb-4">Job Position</h1>
             <div className="flex flex-wrap justify-center gap-4 text-primary-foreground/70">
               <span className="flex items-center gap-1"><Briefcase className="w-4 h-4" />Department</span>
@@ -22,7 +28,7 @@ const CareerDetail = () => {
           </div>
         </section>
         <section className="py-16">
-          <div className="container mx-auto px-4">
+          <div className="container-default">
             <div className="grid lg:grid-cols-3 gap-12">
               <div className="lg:col-span-2 space-y-8">
                 <div>

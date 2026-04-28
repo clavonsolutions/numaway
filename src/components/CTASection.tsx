@@ -1,3 +1,4 @@
+import { NAP } from "@/lib/nap";
 import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle, Shield, Clock, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,7 +19,7 @@ const CTASection = () => {
         </svg>
       </div>
       
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container-default">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -126,7 +127,7 @@ const CTASection = () => {
                   </a>
                 </Button>
                 <Button variant="hero-outline" size="xl" asChild className="w-full sm:w-auto">
-                  <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer">
+                  <a href={NAP.whatsappUrl} target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="w-5 h-5" />
                     Talk to Us on WhatsApp
                   </a>

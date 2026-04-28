@@ -26,7 +26,7 @@ const ForgotPassword = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-20 min-h-[calc(100vh-80px)] flex items-center">
-        <div className="container mx-auto px-4 py-16">
+        <div className="container-default py-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
