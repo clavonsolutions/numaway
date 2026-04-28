@@ -32,8 +32,8 @@ else
     echo "✗ GATE FAILED: robots-allow-prod-only"
     exit 1
   fi
-  if ! grep -q "Disallow: /" "$STAGING_ROBOTS"; then
-    echo "  ✗ public/robots.staging.txt is missing Disallow: / — crawler leak risk on staging"
+  if ! grep -qE "^Disallow: /$" "$STAGING_ROBOTS"; then
+    echo "  ✗ public/robots.staging.txt is missing 'Disallow: /' — crawler leak risk on staging"
     echo "✗ GATE FAILED: robots-allow-prod-only"
     exit 1
   fi

@@ -172,7 +172,6 @@ export const routes: RouteRecord[] = [
       { path: "services/genie", element: <ServiceDetail /> },
       { path: "services/student-profiling", element: <ServiceDetail /> },
       { path: "services/program-selection", element: <ServiceDetail /> },
-      { path: "services/exam-support", element: <ServiceDetail /> },
       { path: "services/pre-departure", element: <ServiceDetail /> },
       { path: "services/post-arrival", element: <ServiceDetail /> },
       // Service domain pages (dynamic)

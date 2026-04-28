@@ -169,7 +169,7 @@ const About = () => {
                   <a href="/consultation">Book Free Consultation</a>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <a href="/team">Meet Our Team</a>
+                  <a href="/about/team">Meet Our Team</a>
                 </Button>
               </div>
             </ScrollReveal>

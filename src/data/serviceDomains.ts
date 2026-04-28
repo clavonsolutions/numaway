@@ -422,7 +422,7 @@ export const serviceDomains: ServiceDomain[] = [
         ],
         whoItsFor: "Students seeking intelligent guidance",
         ctaText: "Try AI Profiling",
-        ctaLink: "/genie"
+        ctaLink: "/services/genie"
       },
       {
         id: "DS3",
@@ -456,7 +456,7 @@ export const serviceDomains: ServiceDomain[] = [
         ],
         whoItsFor: "Students preparing visa applications",
         ctaText: "Check Visa Readiness",
-        ctaLink: "/genie"
+        ctaLink: "/services/genie"
       },
       {
         id: "DS5",
@@ -473,7 +473,7 @@ export const serviceDomains: ServiceDomain[] = [
         ],
         whoItsFor: "Students writing applications",
         ctaText: "Generate SOP",
-        ctaLink: "/genie"
+        ctaLink: "/services/genie"
       }
     ]
   },
