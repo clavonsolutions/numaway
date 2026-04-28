@@ -617,7 +617,7 @@ pm2 logs numaway-api --lines 10 --nostream
 ### Restart after a config change
 ```bash
 cd /var/www/numaway-api
-pm2 restart 0 --update-env
+pm2 restart numaway-api --update-env
 sleep 3
 pm2 logs numaway-api --lines 5 --nostream
 ```
@@ -634,7 +634,7 @@ pm2 start server.js --name numaway-api
 pm2 save
 ```
 
-**Common mistake:** Running `pm2 restart 0 --update-env` from `/root` and then assuming
+**Common mistake:** Running `pm2 restart numaway-api --update-env` from `/root` and then assuming
 the `.env` in `/var/www/numaway-api/` was updated. The restart command does not rewrite
 the `.env` file. The `.env` must be edited separately (see below).
 
@@ -672,7 +672,7 @@ SUPABASE_URL=[https://vubbhwkxeriagyjpirde.supabase.co](https://...)
 
 After editing, always restart:
 ```bash
-pm2 restart 0 --update-env
+pm2 restart numaway-api --update-env
 sleep 3
 pm2 logs numaway-api --lines 5 --nostream
 ```
@@ -685,19 +685,48 @@ This creates `/root/.env` which is silently ignored by the API. The API reads fr
 
 ## Git Credentials on the Server
 
-The server authenticates to GitHub using a username/password PAT (Personal Access Token).
-When prompted:
+The server authenticates to GitHub using an SSH deploy key. This is the recommended
+approach: no token is stored on disk in plaintext.
 
-- Username: `bakarsagir`
-- Password: your GitHub PAT (not your GitHub account password)
+### One-time SSH key setup (if not already done)
 
-To avoid being prompted on every pull, configure git credential caching:
 ```bash
-cd /var/www/numaway
-git config credential.helper 'store --file /root/.git-credentials'
+# Generate a key with no passphrase (the server is not interactive)
+ssh-keygen -t ed25519 -C "numaway-server-deploy" -f /root/.ssh/numaway_deploy -N ""
+
+# Print the public key — copy this output
+cat /root/.ssh/numaway_deploy.pub
 ```
 
-Then run one `git pull` with credentials. Subsequent pulls will use the stored token.
+Add the public key to GitHub:
+1. Go to github.com/clavonsolutions/numaway → Settings → Deploy keys
+2. Click "Add deploy key"
+3. Title: `numaway-server` | Key: paste the output above | Allow write access: NO
+4. Click "Add key"
+
+Configure SSH to use this key for GitHub:
+```bash
+cat >> /root/.ssh/config << 'EOF'
+Host github.com
+  IdentityFile /root/.ssh/numaway_deploy
+  StrictHostKeyChecking no
+EOF
+chmod 600 /root/.ssh/config
+```
+
+Switch the remote URL to SSH:
+```bash
+cd /var/www/numaway
+git remote set-url origin git@github.com:clavonsolutions/numaway.git
+```
+
+Verify the connection:
+```bash
+ssh -T git@github.com
+# Expected: "Hi clavonsolutions/numaway! You've successfully authenticated..."
+```
+
+Subsequent `git pull` commands will use the deploy key silently.
 
 ---
 
@@ -746,7 +775,7 @@ SUPABASE_SERVICE_ROLE_KEY=YOUR_KEY
 ANTHROPIC_API_KEY=YOUR_KEY
 ALLOWED_ORIGIN=https://numaway.com
 ENVEOF
-pm2 restart 0 --update-env
+pm2 restart numaway-api --update-env
 sleep 3
 pm2 logs numaway-api --lines 5 --nostream
 ```
