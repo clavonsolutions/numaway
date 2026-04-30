@@ -34,12 +34,21 @@ const SUGGESTED: { icon: typeof GraduationCap; text: string }[] = [
  * Post a message to the server-side Sage proxy.
  * The proxy endpoint authenticates the request using the Supabase session token
  * and attaches the Anthropic API key server-side.
+ *
+ * URL resolution:
+ *   Production: Nginx proxies /api/* to the numaway-api server — base is same origin.
+ *   Local dev:  set VITE_SAGE_API_BASE_URL=http://localhost:3001 in .env.local.
  */
+const BASE_URL = (
+  import.meta.env.VITE_SAGE_API_BASE_URL as string | undefined ?? ""
+).replace(/\/$/, "");
+const SAGE_CHAT_URL = `${BASE_URL}/api/sage/chat`;
+
 async function callSageApi(
   messages: { role: "user" | "assistant"; content: string }[],
   sessionToken: string
 ): Promise<string> {
-  const response = await fetch("/api/sage/chat", {
+  const response = await fetch(SAGE_CHAT_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

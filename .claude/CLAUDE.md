@@ -52,7 +52,7 @@ Forms: React Hook Form + Zod
 Animation: Framer Motion
 Database: Supabase PostgreSQL (ADR-015) — `supabase/migrations/001_initial_schema.sql`
 Auth: Supabase Auth (ADR-016) — email/password, `@supabase/supabase-js`, NDPA consent at signup
-Hosting: Vercel
+Hosting: Digital Ocean Droplet — Nginx serves static frontend from dist/; PM2 manages API server (server/index.ts, port 3001); Nginx proxies /api/* to API server
 Payments: Paystack + Flutterwave (Phase 8, no card data on Numaway servers)
 AI: Anthropic Claude API for Sage assistant — server-side only, never browser-direct
 Image sources: Pexels / Unsplash / Pixabay via MCP — self-hosted under /public/images
@@ -149,7 +149,7 @@ Service IDs (STU-01..STU-10) are stable references. Every service component carr
 3. State the Tier classification and the Master URS section reference before generating code.
 4. Apply skills as needed: `@typescript-patterns`, `@api-design`, `@security-audit`,
    `@gdpr-ndpr`, `@accessibility`, `@performance-optimisation`, `@testing-strategy`,
-   `@vercel-deployment`, `@ai-integration` (for Sage).
+   `@ai-integration` (for Sage).
 5. Run subagent gates per Tier:
    - Tier 1: pre-commit gate only.
    - Tier 2: `/review` + pre-commit + CI pipeline.

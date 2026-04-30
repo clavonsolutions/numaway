@@ -265,9 +265,10 @@ Visa Interviews pillar cluster:
 - [x] `src/components/ProtectedRoute.tsx` — session + role guard; spinner while loading; redirects to `/login` (preserves `state.from`) or `/401` — 2026-04-28
 - [x] `supabase/migrations/001_initial_schema.sql` — handle_new_user trigger; update_updated_at trigger; full RLS; storage bucket note — 2026-04-28
 - [x] `.env.local.example` — documents VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY, VITE_SAGE_API_BASE_URL — 2026-04-28
-- [x] `api/sage/chat.ts` — Vercel serverless proxy: validates Bearer token via `supabase.auth.getUser`, calls Anthropic Messages API via fetch, ANTHROPIC_API_KEY never sent to browser, input validation + 40-message cap + role enforcement, errors stripped before client response — 2026-04-28
-- [x] `content/sage/system-prompt.md` — canonical Sage system prompt: NDPA-aware, STU-01..STU-10 scope, brand voice, forbidden vocab, escalation guidance — 2026-04-28 (requires founder review before production deployment)
-- [x] `vercel.json` — Vercel build config: nodejs20.x runtime for api/, SPA rewrites for /app/* and /admin/* — 2026-04-28
+- [x] `api/sage/chat.ts` — Sage proxy handler: plain Node.js IncomingMessage/ServerResponse (no framework), own body parsing, Supabase auth validation, Anthropic Messages API via fetch, ANTHROPIC_API_KEY never browser-side, 40-message cap, errors stripped — 2026-04-28
+- [x] `server/index.ts` — Digital Ocean API server: bare Node.js HTTP, routes POST /api/sage/chat + GET /health, CORS for local dev, PM2-managed on port 3001 — 2026-04-28
+- [x] `server/tsconfig.server.json` — server TypeScript config: CommonJS, emits to dist-server/, separate from Vite app config — 2026-04-28
+- [x] `content/sage/system-prompt.md` — canonical Sage system prompt: NDPA-aware, STU-01..STU-10 scope, brand voice, forbidden vocab, escalation guidance — **APPROVED by Sagir 2026-04-28**
 - [ ] Apply `supabase/migrations/001_initial_schema.sql` to Supabase project dashboard (OPS — awaiting Sagir)
 - [ ] Create `student-documents` Storage bucket with RLS in Supabase dashboard (OPS — awaiting Sagir)
 
