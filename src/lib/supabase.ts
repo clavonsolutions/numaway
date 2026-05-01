@@ -3,19 +3,30 @@
  * Uses VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables.
  * Only the public anon key is exposed to the browser.
  * Service-role key is server-side only (Sage proxy, Edge Functions).
+ *
+ * SSG SAFETY NOTE:
+ * @supabase/supabase-js v2 calls validateSupabaseUrl() inside createClient(),
+ * which throws "Invalid supabaseUrl" if the URL does not match ^https?://.
+ * Vite's SSR/SSG transform replaces undefined VITE_* env vars with the string
+ * "undefined" (not the JS value undefined). Since "undefined" is truthy, the
+ * || operator fallback does NOT fire. We must use an explicit regex test to
+ * detect any value that is not a valid HTTP(S) URL before calling createClient.
  */
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "./database.types";
 
-// Fall back to placeholder strings during SSG prerender (no browser env available).
-// The client will exist but API calls will fail at runtime — caught by AuthContext.
-// In the browser, the env vars must be set via .env.local (see .env.local.example).
-const supabaseUrl =
-  (import.meta.env.VITE_SUPABASE_URL as string | undefined) ||
-  "https://placeholder.supabase.co";
-const supabaseAnonKey =
-  (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined) ||
-  "placeholder-anon-key";
+const HTTPS_RE = /^https?:\/\//i;
+
+const rawUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+const rawKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+
+// Explicit format guard — handles undefined, "", and the string "undefined"
+// that Vite substitutes for missing vars in SSR/SSG Node.js context.
+const supabaseUrl: string =
+  rawUrl && HTTPS_RE.test(rawUrl) ? rawUrl : "https://placeholder.supabase.co";
+
+const supabaseAnonKey: string =
+  rawKey && rawKey !== "undefined" ? rawKey : "placeholder-anon-key";
 
 export const supabase: SupabaseClient<Database> = createClient<Database>(
   supabaseUrl,
