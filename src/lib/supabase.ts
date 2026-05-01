@@ -11,22 +11,40 @@
  * "undefined" (not the JS value undefined). Since "undefined" is truthy, the
  * || operator fallback does NOT fire. We must use an explicit regex test to
  * detect any value that is not a valid HTTP(S) URL before calling createClient.
+ *
+ * GUARD RATIONALE:
+ * - URL: HTTPS_RE.test() rejects undefined, "", "undefined", and "null"
+ *   in one pass — no separate string checks needed.
+ * - Key: must not be the strings "undefined" or "null" (Vite / CI substitutions)
+ *   and must be at least 20 characters; Supabase anon keys are JWTs and are
+ *   several hundred characters long — anything shorter is clearly malformed.
  */
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "./database.types";
 
 const HTTPS_RE = /^https?:\/\//i;
 
+// Sentinel strings that Vite or CI pipelines may substitute for a missing var.
+const SENTINEL_STRINGS = new Set(["undefined", "null"]);
+
+// Minimum plausible length for a Supabase anon key (real JWTs are 200+ chars).
+const MIN_KEY_LENGTH = 20;
+
 const rawUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const rawKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
 
-// Explicit format guard — handles undefined, "", and the string "undefined"
-// that Vite substitutes for missing vars in SSR/SSG Node.js context.
+// URL guard: HTTPS_RE already rejects "", "undefined", and "null" — all fail
+// the regex — so no separate sentinel check is required for the URL.
 const supabaseUrl: string =
   rawUrl && HTTPS_RE.test(rawUrl) ? rawUrl : "https://placeholder.supabase.co";
 
+// Key guard: reject missing, empty, sentinel strings, and obviously short values.
 const supabaseAnonKey: string =
-  rawKey && rawKey !== "undefined" ? rawKey : "placeholder-anon-key";
+  rawKey &&
+  !SENTINEL_STRINGS.has(rawKey) &&
+  rawKey.length >= MIN_KEY_LENGTH
+    ? rawKey
+    : "placeholder-anon-key";
 
 export const supabase: SupabaseClient<Database> = createClient<Database>(
   supabaseUrl,
