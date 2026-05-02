@@ -99,9 +99,17 @@ jobs:
   seo-gates:
     name: SEO Gates
     runs-on: ubuntu-latest
-    needs: []
+    # Must run after build so the dist/ artefact (which contains the generated
+    # sitemaps) is available. Sitemaps are build artefacts, not committed files.
+    needs: [build]
     steps:
       - uses: actions/checkout@v4
+
+      - name: Download dist artefact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
 
       - name: Gate — sitemap-coverage
         run: bash scripts/ci/sitemap-coverage.sh
