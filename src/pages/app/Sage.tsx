@@ -101,7 +101,7 @@ const SageChat = (): JSX.Element => {
     }
 
     const userMsg: Message = {
-      id: Date.now().toString(),
+      id: crypto.randomUUID(),
       role: "user",
       content: text,
       timestamp: new Date(),
@@ -123,7 +123,7 @@ const SageChat = (): JSX.Element => {
       setMessages((prev) => [
         ...prev,
         {
-          id: (Date.now() + 1).toString(),
+          id: crypto.randomUUID(),
           role: "assistant",
           content: reply,
           timestamp: new Date(),

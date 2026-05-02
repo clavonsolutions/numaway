@@ -101,9 +101,9 @@ const SagePage = (): JSX.Element => {
     if (!session?.access_token) {
       setMessages((prev) => [
         ...prev,
-        { id: Date.now().toString(), role: "user", content },
+        { id: crypto.randomUUID(), role: "user", content },
         {
-          id: (Date.now() + 1).toString(),
+          id: crypto.randomUUID(),
           role: "assistant",
           content: "To chat with Sage you need a free Numaway account. Sign in or create one — it takes under a minute.",
         },
@@ -112,17 +112,19 @@ const SagePage = (): JSX.Element => {
       return;
     }
 
-    const userMsg: Message = { id: Date.now().toString(), role: "user", content };
+    const userMsg: Message = { id: crypto.randomUUID(), role: "user", content };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setLoading(true);
     setApiError(false);
 
     try {
-      const history = [...messages, userMsg].map((m) => ({
-        role: m.role,
-        content: m.content,
-      }));
+      // Filter out the initial "init" assistant message before sending to the
+      // Anthropic API — the API requires the first message to have role "user".
+      // This mirrors the same guard in app/Sage.tsx which filters "welcome".
+      const history = [...messages, userMsg]
+        .filter((m) => m.id !== "init")
+        .map((m) => ({ role: m.role, content: m.content }));
 
       const res = await fetch(SAGE_CHAT_URL, {
         method: "POST",
@@ -138,14 +140,14 @@ const SagePage = (): JSX.Element => {
       const data = (await res.json()) as { reply: string };
       setMessages((prev) => [
         ...prev,
-        { id: (Date.now() + 1).toString(), role: "assistant", content: data.reply },
+        { id: crypto.randomUUID(), role: "assistant", content: data.reply },
       ]);
     } catch {
       setApiError(true);
       setMessages((prev) => [
         ...prev,
         {
-          id: (Date.now() + 1).toString(),
+          id: crypto.randomUUID(),
           role: "assistant",
           content: "Sage is temporarily unavailable. Please book a consultation and a human counsellor will respond within 24 hours.",
         },
