@@ -132,7 +132,7 @@ const SagePage = (): JSX.Element => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${session.access_token}`,
         },
-        body: JSON.stringify({ messages: history }),
+        body: JSON.stringify({ messages: history.slice(1) }),
       });
 
       if (!res.ok) throw new Error(`Server ${res.status}`);
