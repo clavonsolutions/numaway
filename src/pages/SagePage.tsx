@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
 import PageHead from "@/components/PageHead";
 import Header from "@/components/Header";
@@ -59,7 +60,16 @@ const TypingDots = (): JSX.Element => (
   </div>
 );
 
+// Sage chat endpoint — same path used by the authenticated portal.
+// Production: same-origin (Nginx proxies /api/* to the API server).
+// Local dev: set VITE_SAGE_API_BASE_URL=http://localhost:3001 in .env.local.
+const BASE_URL = (
+  import.meta.env.VITE_SAGE_API_BASE_URL as string | undefined ?? ""
+).replace(/\/$/, "");
+const SAGE_CHAT_URL = `${BASE_URL}/api/sage/chat`;
+
 const SagePage = (): JSX.Element => {
+  const { session } = useAuth();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "init",
@@ -72,8 +82,14 @@ const SagePage = (): JSX.Element => {
   const [apiError, setApiError] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  // Track whether the initial render has passed so we don't scroll on mount.
+  const mountedRef = useRef(false);
 
   useEffect(() => {
+    if (!mountedRef.current) {
+      mountedRef.current = true;
+      return;
+    }
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
@@ -81,37 +97,57 @@ const SagePage = (): JSX.Element => {
     const content = text.trim();
     if (!content || loading) return;
 
-    const userMsg: Message = { id: Date.now().toString(), role: "user", content };
+    // Unauthenticated users see a prompt to sign in rather than a silent 401.
+    if (!session?.access_token) {
+      setMessages((prev) => [
+        ...prev,
+        { id: crypto.randomUUID(), role: "user", content },
+        {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content: "To chat with Sage you need a free Numaway account. Sign in or create one — it takes under a minute.",
+        },
+      ]);
+      setInput("");
+      return;
+    }
+
+    const userMsg: Message = { id: crypto.randomUUID(), role: "user", content };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setLoading(true);
     setApiError(false);
 
     try {
-      const history = [...messages, userMsg].map((m) => ({
-        role: m.role,
-        content: m.content,
-      }));
+      // Filter out the initial "init" assistant message before sending to the
+      // Anthropic API — the API requires the first message to have role "user".
+      // This mirrors the same guard in app/Sage.tsx which filters "welcome".
+      const history = [...messages, userMsg]
+        .filter((m) => m.id !== "init")
+        .map((m) => ({ role: m.role, content: m.content }));
 
-      const res = await fetch("/api/sage", {
+      const res = await fetch(SAGE_CHAT_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: history }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({ messages: history.slice(1) }),
       });
 
-      if (!res.ok) throw new Error("API error");
+      if (!res.ok) throw new Error(`Server ${res.status}`);
 
-      const data = (await res.json()) as { content: string };
+      const data = (await res.json()) as { reply: string };
       setMessages((prev) => [
         ...prev,
-        { id: (Date.now() + 1).toString(), role: "assistant", content: data.content },
+        { id: crypto.randomUUID(), role: "assistant", content: data.reply },
       ]);
     } catch {
       setApiError(true);
       setMessages((prev) => [
         ...prev,
         {
-          id: (Date.now() + 1).toString(),
+          id: crypto.randomUUID(),
           role: "assistant",
           content: "Sage is temporarily unavailable. Please book a consultation and a human counsellor will respond within 24 hours.",
         },
@@ -119,7 +155,7 @@ const SagePage = (): JSX.Element => {
     } finally {
       setLoading(false);
     }
-  }, [loading, messages]);
+  }, [loading, messages, session]);
 
   const handleKey = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -129,6 +165,7 @@ const SagePage = (): JSX.Element => {
   };
 
   const isFirstLoad = messages.length === 1;
+  const isAuthenticated = Boolean(session?.access_token);
 
   return (
     <div className="min-h-screen bg-background">
@@ -138,7 +175,8 @@ const SagePage = (): JSX.Element => {
         canonical="/sage"
       />
 
-      <Header />
+      {/* transparent={false} — this page starts with bg-background, not a dark hero */}
+      <Header transparent={false} />
 
       <main className="pt-16">
         {/* Split layout: info panel left, chat right */}
@@ -317,6 +355,21 @@ const SagePage = (): JSX.Element => {
                 </motion.div>
               )}
             </AnimatePresence>
+
+            {/* Sign-in banner — shown when user is not authenticated */}
+            {!isAuthenticated && (
+              <div className="mx-4 sm:mx-8 mb-2 px-4 py-3 bg-primary/6 border border-primary/15 rounded-xl text-xs text-foreground/80 flex items-center justify-between gap-4">
+                <span>Sign in to chat with Sage.</span>
+                <div className="flex items-center gap-3 shrink-0">
+                  <Link to="/login" className="font-medium text-secondary underline underline-offset-2">
+                    Sign in
+                  </Link>
+                  <Link to="/register" className="font-medium text-secondary underline underline-offset-2">
+                    Create account
+                  </Link>
+                </div>
+              </div>
+            )}
 
             {/* API error banner */}
             {apiError && (

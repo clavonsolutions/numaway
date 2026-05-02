@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { MessageSquare, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SageIcon from "@/components/icons/SageIcon";
+import { Link } from "react-router-dom";
 const SageSection = () => {
   return (
     <section className="py-24 bg-gradient-hero relative overflow-hidden">
@@ -77,9 +78,11 @@ const SageSection = () => {
               ))}
             </ul>
 
-            <Button variant="hero" size="lg">
-              Try Sage Now
-              <ArrowRight className="w-4 h-4" />
+            <Button variant="hero" size="lg" asChild>
+              <Link to="/sage">
+                Try Sage Now
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </Button>
           </motion.div>
 

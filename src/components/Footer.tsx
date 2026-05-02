@@ -30,6 +30,7 @@ const Footer = () => {
       { label: "Accommodation Support", href: "/services/accommodation-landing" },
       { label: "Scholarship Guidance", href: "/services/scholarships-funding" },
       { label: "Exams Support", href: "/services/exams-support" },
+      { label: "✨ Sage AI Counsellor", href: "/sage" },
     ],
     company: [
       { label: "About NUMAWAY", href: "/about" },

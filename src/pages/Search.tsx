@@ -57,7 +57,7 @@ const Search = () => {
       canonical="/search"
     />
 
-      <Header />
+      <Header transparent={false} />
       <main className="pt-20">
         {/* Search Header */}
         <section className="py-12 bg-muted">

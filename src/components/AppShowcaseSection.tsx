@@ -265,7 +265,7 @@ const AppShowcaseSection = () => {
                       {/* App Store Buttons */}
                       <div className="mt-auto pt-3 flex gap-2">
                         <a 
-                          href="#" 
+                          href="/app" 
                           className="flex items-center gap-1.5 bg-black hover:bg-black/80 rounded-lg px-3 py-2.5 transition-colors border border-white/10 flex-1"
                         >
                           <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
@@ -277,7 +277,7 @@ const AppShowcaseSection = () => {
                           </div>
                         </a>
                         <a 
-                          href="#" 
+                          href="/app" 
                           className="flex items-center gap-1.5 bg-black hover:bg-black/80 rounded-lg px-3 py-2.5 transition-colors border border-white/10 flex-1"
                         >
                           <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
@@ -315,7 +315,7 @@ const AppShowcaseSection = () => {
               className="flex gap-3 mt-6"
             >
               <a 
-                href="#" 
+                href="/app" 
                 className="flex items-center gap-2 bg-black hover:bg-black/80 rounded-xl px-4 py-3 transition-colors"
               >
                 <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
@@ -327,7 +327,7 @@ const AppShowcaseSection = () => {
                 </div>
               </a>
               <a 
-                href="#" 
+                href="/app" 
                 className="flex items-center gap-2 bg-black hover:bg-black/80 rounded-xl px-4 py-3 transition-colors"
               >
                 <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
