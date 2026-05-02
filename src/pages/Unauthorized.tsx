@@ -16,7 +16,7 @@ const Unauthorized = (): JSX.Element => {
         canonical="/401"
         noIndex={true}
       />
-      <Header />
+      <Header transparent={false} />
       <main className="pt-20 flex items-center justify-center min-h-[60vh]">
         <div className="text-center px-4 max-w-lg mx-auto">
           <p className="text-8xl font-display font-bold text-primary/20 mb-2 select-none">401</p>

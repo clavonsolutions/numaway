@@ -9,19 +9,29 @@ import numawayLogo from "@/assets/numaway-logo.png";
 
 const ICON_STROKE = 1.75;
 
-const Header = (): JSX.Element => {
+interface HeaderProps {
+  /** When false, the header is always rendered in its scrolled (solid) state.
+   *  Use on pages whose top section has a light background (no dark hero). */
+  transparent?: boolean;
+}
+
+const Header = ({ transparent = true }: HeaderProps): JSX.Element => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = (): void => {
-      setIsScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // isScrolled is true either because the user has scrolled, or because
+  // transparent mode is disabled (light-background pages).
+  const isScrolled = scrolled || !transparent;
 
   return (
     <>

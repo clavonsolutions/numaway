@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { Smartphone, Sparkles, CheckCircle, ArrowRight, Clock, MessageCircle, FileText, Bell } from "lucide-react";
 
 const features = [
@@ -122,8 +123,10 @@ const AppPage = () => (
               <option>Postgraduate</option>
             </select>
           </form>
-          <Button variant="hero" size="lg" className="mt-6">
-            Join Waiting List <ArrowRight className="w-4 h-4" />
+          <Button variant="hero" size="lg" className="mt-6" asChild>
+            <Link to="/consultation">
+              Join Waiting List <ArrowRight className="w-4 h-4" />
+            </Link>
           </Button>
         </div>
       </section>

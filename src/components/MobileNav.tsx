@@ -83,6 +83,7 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
         { label: "Application Support", href: "/services/application-support" },
         { label: "Visa Preparation", href: "/services/visa-preparation" },
         { label: "Accommodation", href: "/services/accommodation-landing" },
+        { label: "✨ Sage AI Counsellor", href: "/sage" },
       ],
     },
   ];

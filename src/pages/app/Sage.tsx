@@ -81,8 +81,14 @@ const SageChat = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  // Prevent scrollIntoView firing on the initial render (welcome message).
+  const mountedRef = useRef(false);
 
   useEffect(() => {
+    if (!mountedRef.current) {
+      mountedRef.current = true;
+      return;
+    }
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
