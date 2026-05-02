@@ -1,7 +1,7 @@
 # Numaway — Master Execution Plan
 # Source: Master URS v1.0 | Non-deferred scope only | Target: 100%
 # Rule: Items marked [x] are DONE. Never re-implement without explicit instruction.
-# Last updated: 2026-04-28
+# Last updated: 2026-05-02
 
 ---
 
@@ -260,7 +260,7 @@ Visa Interviews pillar cluster:
 - [ ] 156. `/admin/settings` — system config; canonical NAP edit gate; Tier 3
 
 ### Phase 8 supporting infrastructure
-- [x] `src/lib/supabase.ts` — SSG-safe Supabase client singleton (placeholder fallbacks, no throw at init) — 2026-04-28
+- [x] `src/lib/supabase.ts` — SSG-safe Supabase client singleton (placeholder fallbacks, no throw at init) — 2026-04-28; **HARDENED 2026-05-01**: `SENTINEL_STRINGS` Set rejects "undefined"/"null" from CI/CD pipelines; `MIN_KEY_LENGTH = 20` rejects stub/short keys; `HTTPS_RE` guards URL (PR #8)
 - [x] `src/lib/database.types.ts` — full typed Database interface for all 7 tables — 2026-04-28
 - [x] `src/components/ProtectedRoute.tsx` — session + role guard; spinner while loading; redirects to `/login` (preserves `state.from`) or `/401` — 2026-04-28
 - [x] `supabase/migrations/001_initial_schema.sql` — handle_new_user trigger; update_updated_at trigger; full RLS; storage bucket note — 2026-04-28
@@ -271,6 +271,15 @@ Visa Interviews pillar cluster:
 - [x] `content/sage/system-prompt.md` — canonical Sage system prompt: NDPA-aware, STU-01..STU-10 scope, brand voice, forbidden vocab, escalation guidance — **APPROVED by Sagir 2026-04-28**
 - [ ] Apply `supabase/migrations/001_initial_schema.sql` to Supabase project dashboard (OPS — awaiting Sagir)
 - [ ] Create `student-documents` Storage bucket with RLS in Supabase dashboard (OPS — awaiting Sagir)
+
+### Phase 8 hotfixes and stability (2026-05-01 to 2026-05-02)
+- [x] **Sage scroll-on-mount fix** — `useRef` guard prevents `scrollIntoView` firing on initial render in both `SagePage.tsx` and `app/Sage.tsx`; scroll only triggers on new messages/loading state changes — PR #9
+- [x] **Sage API history guard** — initial assistant message (`id: "init"` / `id: "welcome"`) filtered before API call; Anthropic requires first message to have role `"user"`; prevents 400 errors on first message — PR #9
+- [x] **Message ID collision fix** — all `Date.now().toString()` IDs replaced with `crypto.randomUUID()` in both Sage pages; eliminates React key collisions under rapid sending — PR #9
+- [x] **Header transparent prop** — `transparent={false}` applied to Sage, Search, and all error pages (`NotFound`, `ServerError`, `Forbidden`, `Unauthorized`) that use `bg-background` at top; prevents invisible nav text — PR #9
+- [x] **Site-wide link audit** — `SageSection.tsx` "Try Sage Now" button wired to `/sage` (was completely unlinked); Sage added to Footer services list and MobileNav services section; `AppShowcaseSection` App Store/Play Store `href="#"` changed to `/app`; AppPage "Join Waiting List" wired to `/consultation` — PR #9
+- [x] **Sitemap gitignore + CI fix** — `public/sitemap*.xml` added to `.gitignore` (build artefacts, not source files); `git rm --cached` untracked existing files; `scripts/ci/sitemap-coverage.sh` auto-detects `dist/` (CI) vs `public/` (local dev); `ci.yml` `seo-gates` job now `needs: [build]` and downloads dist artefact; eliminates production `git pull` conflicts — PR #10
+- [x] **Gemini regression fix** — Gemini code assist applied `.slice(1)` to an already-filtered `history` array in `SagePage.tsx`, stripping the first user message from every API call; reverted to correct `history` (filter-only, no slice) — PR #10
 
 ---
 
@@ -284,8 +293,8 @@ Visa Interviews pillar cluster:
 | status.numaway.com | Not built | Engineering | Build with Statuspage/Better Stack (referenced from /500) |
 | EU GDPR Representative | Not appointed | Sagir | Appoint when EU traffic/contracts cross threshold |
 | Sub-processor list | Internal only | Engineering + Legal | Publish at `/legal/sub-processors` before DPA execution |
-| Phase 8 DB decision (item 139) | Deferred | Sagir | Founder decision before Phase 8 kickoff |
-| Phase 8 auth decision (item 140) | Deferred | Sagir | Founder decision before Phase 8 kickoff |
+| Phase 8 DB decision (item 139) | Done — Supabase PostgreSQL (ADR-015) | Sagir | Resolved 2026-04-28 |
+| Phase 8 auth decision (item 140) | Done — Supabase Auth (ADR-016) | Sagir | Resolved 2026-04-28 |
 
 ---
 
@@ -307,7 +316,9 @@ Visa Interviews pillar cluster:
 | ADR-012 | Brand voice: 5 attributes + forbidden vocabulary | Locked |
 | ADR-013 | Lovable-tagger removed; CI gate prevents reintroduction | Locked |
 | ADR-014 | Audience scope: global (Africa + Europe primary); en-NG/en-GB/en-US at launch | Locked |
-| ADR-015+ | Next ADRs (Phase 8 DB, auth, any new decisions) | Pending — escalate to Sagir |
+| ADR-015 | Database: Supabase PostgreSQL; schema in `supabase/migrations/001_initial_schema.sql` | Locked — 2026-04-28 |
+| ADR-016 | Auth: Supabase Auth (email/password); `@supabase/supabase-js`; NDPA consent at signup | Locked — 2026-04-28 |
+| ADR-017+ | Next ADRs — escalate to Sagir before registering | Pending |
 
 ---
 
