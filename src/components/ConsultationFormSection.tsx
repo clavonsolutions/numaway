@@ -1,8 +1,10 @@
+"use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, Check, Users, GraduationCap, Globe, FileCheck, Plane, Home, BookOpen, Handshake, MessageSquare, UserCheck, Video, CalendarCheck } from "lucide-react";
+import { ChevronRight, Check, Users, GraduationCap, Globe, FileCheck, Plane, Home, BookOpen, Handshake, MessageSquare, UserCheck, Video, CalendarCheck, Search, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 
 interface QuickFormData {
@@ -17,6 +19,8 @@ interface QuickFormData {
 
 const ConsultationFormSection = () => {
   const { toast } = useToast();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<QuickFormData>({
@@ -33,6 +37,13 @@ const ConsultationFormSection = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
   const handleNext = () => {
     if (step === 1 && (!formData.userType || !formData.firstName || !formData.lastName || !formData.email)) {
       toast({ title: "Please fill all required fields", variant: "destructive" });
@@ -44,7 +55,7 @@ const ConsultationFormSection = () => {
   const handleSubmit = async (): Promise<void> => {
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/leads", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -118,6 +129,57 @@ const ConsultationFormSection = () => {
       </div>
       
       <div className="container-default">
+        {/* Search Section Moved from Hero */}
+        <div className="max-w-3xl mx-auto mb-20 text-center lg:text-left lg:mx-0">
+          {/* Search Bar */}
+          <motion.form
+            onSubmit={handleSearch}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+            className="w-full mb-6"
+          >
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-secondary/40 via-gold/30 to-secondary/40 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-500" />
+              
+              <div className="relative flex items-center bg-white rounded-full p-1.5 shadow-elevated border-2 border-transparent group-focus-within:border-secondary/50 transition-colors">
+                <div className="flex-1 flex items-center gap-3 px-5">
+                  <Search className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search for courses, universities..."
+                    className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground py-3 text-base"
+                  />
+                </div>
+                <Button type="submit" variant="hero" size="lg" className="rounded-full px-6 shadow-lg">
+                  Search
+                </Button>
+              </div>
+            </div>
+          </motion.form>
+
+          {/* Trust Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
+            className="flex items-center gap-3 lg:justify-start justify-center"
+          >
+            <div className="flex items-center gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-gold text-gold" />
+              ))}
+            </div>
+            <span className="text-muted-foreground text-sm font-medium">
+              Rated 4.9 • <span className="text-muted-foreground/70">Trusted by 10,000+ students</span>
+            </span>
+          </motion.div>
+        </div>
+
         {/* Main Consultation Section */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-20">
           {/* Left Content */}

@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, Menu } from "lucide-react";
@@ -50,9 +51,9 @@ const Header = ({ transparent = true }: HeaderProps): JSX.Element => {
             {/* Logo */}
             <a href="/" className="flex items-center group flex-shrink-0">
               <img
-                src={numawayLogo}
+                src={numawayLogo.src}
                 alt="NUMAWAY Education"
-                className={`h-9 sm:h-10 w-auto object-contain transition-all duration-300 group-hover:scale-105 ${
+                className={`h-10 sm:h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105 ${
                   isScrolled ? "" : "brightness-0 invert"
                 }`}
               />

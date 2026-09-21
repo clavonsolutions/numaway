@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Search,
@@ -11,7 +12,7 @@ import {
   UserCircle,
   type LucideIcon,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const ICON_STROKE = 1.75;
 
@@ -118,7 +119,7 @@ const EmptyState = ({
       {cta && (
         cta.href ? (
           <Button variant="outline" asChild>
-            <Link to={cta.href}>{cta.label}</Link>
+            <Link href={cta.href}>{cta.label}</Link>
           </Button>
         ) : (
           <Button variant="outline" onClick={cta.onClick}>

@@ -1,25 +1,55 @@
+"use client";
+
 /**
  * ProtectedRoute — redirects unauthenticated users to /login.
  * Supports an optional `requireRole` prop for admin-only surfaces.
  * Shows a spinner while the auth state is loading.
  */
-import { Navigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "@/lib/react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Loader2 } from "lucide-react";
+import { useEffect } from "react";
 
 interface ProtectedRouteProps {
   children: JSX.Element;
-  requireRole?: "admin" | "counsellor";
+  allowedRoles?: ("student" | "counsellor" | "admin" | "super_admin")[];
 }
 
 const ProtectedRoute = ({
   children,
-  requireRole,
-}: ProtectedRouteProps): JSX.Element => {
+  allowedRoles,
+}: ProtectedRouteProps): JSX.Element | null => {
   const { session, profile, loading } = useAuth();
+  const navigate = useNavigate();
   const location = useLocation();
+  const pathname = location.pathname;
 
-  if (loading) {
+  // If we're already on a login page, bypass protection entirely
+  const isLoginPage = pathname?.endsWith("/login");
+
+  useEffect(() => {
+    if (isLoginPage) return;
+
+    if (!loading) {
+      if (!session) {
+        // Redirect to /admin/login if the route is for staff, otherwise /login
+        const isStaffRoute = allowedRoles && !allowedRoles.includes("student");
+        const loginPath = isStaffRoute ? "/admin/login" : "/login";
+        navigate(`${loginPath}?redirect=${encodeURIComponent(pathname || "/")}`, { replace: true });
+      } else if (allowedRoles && profile?.role) {
+        // super_admin overrides automatically
+        if (profile.role !== "super_admin" && !allowedRoles.includes(profile.role)) {
+          navigate("/401", { replace: true }); // unauthorized
+        }
+      }
+    }
+  }, [loading, session, profile, allowedRoles, navigate, pathname]);
+
+  if (isLoginPage) {
+    return children;
+  }
+
+  if (loading || !session) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -27,16 +57,21 @@ const ProtectedRoute = ({
     );
   }
 
-  if (!session) {
-    // Preserve the attempted URL so login can redirect back
-    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+  if (allowedRoles) {
+    if (!profile?.role) {
+      // Still loading profile, or profile doesn't exist
+      return (
+        <div className="min-h-screen bg-background flex items-center justify-center">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </div>
+      );
+    }
+    if (profile.role !== "super_admin" && !allowedRoles.includes(profile.role)) {
+      return null;
+    }
   }
 
-  if (requireRole && profile?.role !== requireRole && profile?.role !== "admin") {
-    return <Navigate to="/401" replace />;
-  }
-
-  return children;
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;

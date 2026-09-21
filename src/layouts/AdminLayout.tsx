@@ -1,4 +1,5 @@
-import { Outlet, useLocation, Link, useNavigate } from "react-router-dom";
+"use client";
+import { useLocation, Link, useNavigate } from "@/lib/react-router-dom";
 import { useState } from "react";
 import {
   LayoutDashboard,
@@ -19,17 +20,18 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 
 const navItems = [
-  { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
-  { label: "Leads", href: "/admin/leads", icon: Users },
-  { label: "Students", href: "/admin/students", icon: GraduationCap },
-  { label: "Applications", href: "/admin/applications", icon: FileText },
-  { label: "Consultations", href: "/admin/consultations", icon: Calendar },
-  { label: "Messages", href: "/admin/messages", icon: MessageSquare },
-  { label: "Reports", href: "/admin/reports", icon: BarChart3 },
-  { label: "Settings", href: "/admin/settings", icon: Settings },
+  { label: "Dashboard", href: "/admin", icon: LayoutDashboard, roles: ["counsellor", "admin", "super_admin"] },
+  { label: "Leads", href: "/admin/leads", icon: Users, roles: ["admin", "super_admin"] },
+  { label: "Students", href: "/admin/students", icon: GraduationCap, roles: ["counsellor", "admin", "super_admin"] },
+  { label: "Applications", href: "/admin/applications", icon: FileText, roles: ["counsellor", "admin", "super_admin"] },
+  { label: "Consultations", href: "/admin/consultations", icon: Calendar, roles: ["counsellor", "admin", "super_admin"] },
+  { label: "Messages", href: "/admin/messages", icon: MessageSquare, roles: ["counsellor", "admin", "super_admin"] },
+  { label: "Reports", href: "/admin/reports", icon: BarChart3, roles: ["admin", "super_admin"] },
+  { label: "Users", href: "/admin/users", icon: Users, roles: ["super_admin"] },
+  { label: "Settings", href: "/admin/settings", icon: Settings, roles: ["super_admin"] },
 ];
 
-const AdminLayout = (): JSX.Element => {
+const AdminLayout = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const location = useLocation();
   const navigate = useNavigate();
   const { profile, signOut } = useAuth();
@@ -75,7 +77,7 @@ const AdminLayout = (): JSX.Element => {
       >
         {/* Logo row */}
         <div className="h-16 flex items-center justify-between px-4 border-b border-primary-foreground/10">
-          <Link to="/admin" className="flex items-center gap-2">
+          <Link href="/admin" className="flex items-center gap-2">
             <span className="font-display font-bold text-lg">
               {sidebarOpen ? "NUMAWAY Admin" : "N"}
             </span>
@@ -91,10 +93,12 @@ const AdminLayout = (): JSX.Element => {
 
         {/* Navigation */}
         <nav className="p-4 space-y-1">
-          {navItems.map((item) => (
+          {navItems
+            .filter((item) => profile?.role && item.roles.includes(profile.role))
+            .map((item) => (
             <Link
               key={item.href}
-              to={item.href}
+              href={item.href}
               className={[
                 "flex items-center gap-3 px-4 py-3 rounded-xl transition-colors",
                 isActive(item.href)
@@ -166,14 +170,14 @@ const AdminLayout = (): JSX.Element => {
             <Button variant="ghost" size="icon" className="relative" aria-label="Notifications">
               <Bell className="w-5 h-5" />
             </Button>
-            <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
+            <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
               View site
             </Link>
           </div>
         </header>
 
         <main className="p-4 lg:p-8">
-          <Outlet />
+          {children}
         </main>
       </div>
     </div>

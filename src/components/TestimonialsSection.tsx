@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import {
@@ -150,7 +151,7 @@ const TestimonialsSection = () => {
                         <div className="relative">
                           <div className="absolute -inset-1 bg-gradient-to-br from-secondary to-gold rounded-full opacity-50 blur-sm group-hover:opacity-75 transition-opacity" />
                           <img
-                            src={testimonial.image}
+                            src={(testimonial.image as any)?.src || testimonial.image as any}
                             alt={testimonial.name}
                             className="relative w-14 h-14 rounded-full object-cover border-2 border-background"
                           />

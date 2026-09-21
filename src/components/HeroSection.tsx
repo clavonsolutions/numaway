@@ -1,20 +1,19 @@
+"use client";
 import { motion } from "framer-motion";
-import { Search, ArrowRight, Sparkles, Star, BookOpen, Brain, FileCheck } from "lucide-react";
+import { ArrowRight, Sparkles, BookOpen, Brain, FileCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const navigate = useNavigate();
 
   const destinations = [
     { name: "United Kingdom", flag: "🇬🇧", slug: "united-kingdom" },
     { name: "Canada", flag: "🇨🇦", slug: "canada" },
     { name: "United States", flag: "🇺🇸", slug: "united-states" },
-    { name: "Australia", flag: "🇦🇺", slug: "australia" },
     { name: "Germany", flag: "🇩🇪", slug: "germany" },
-    { name: "Ireland", flag: "🇮🇪", slug: "ireland" },
+    { name: "Turkey", flag: "🇹🇷", slug: "turkey" },
+    { name: "Egypt", flag: "🇪🇬", slug: "egypt" },
+    { name: "China", flag: "🇨🇳", slug: "china" },
+    { name: "India", flag: "🇮🇳", slug: "india" },
   ];
 
   const students = [
@@ -67,13 +66,6 @@ const HeroSection = () => {
       description: "Track all your applications in one place with real-time status updates."
     }
   ];
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
-    }
-  };
 
   // Generate floating particles
   const particles = Array.from({ length: 30 }, (_, i) => ({
@@ -190,7 +182,7 @@ const HeroSection = () => {
           </svg>
         </div>
 
-        <div className="container-default relative z-10 pt-24 pb-16">
+        <div className="container-default relative z-10 pt-16 pb-16">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
             <div className="text-left">
@@ -199,7 +191,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                className="relative inline-flex mb-6 group"
+                className="relative inline-flex mb-12 mt-4 group"
               >
                 {/* Animated gradient border */}
                 <div className="absolute -inset-[1px] rounded-full bg-gradient-to-r from-secondary via-gold to-accent opacity-75 blur-[2px] group-hover:opacity-100 transition-opacity" />
@@ -238,74 +230,29 @@ const HeroSection = () => {
                 Expert guidance for Nigerian students seeking global education.
               </motion.p>
 
-              {/* Search Bar */}
-              <motion.form
-                onSubmit={handleSearch}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                className="max-w-xl mb-6"
-              >
-                <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-secondary/40 via-gold/30 to-secondary/40 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-500" />
-                  
-                  <div className="relative flex items-center bg-white rounded-full p-1.5 shadow-elevated border-2 border-transparent group-focus-within:border-secondary/50 transition-colors">
-                    <div className="flex-1 flex items-center gap-3 px-5">
-                      <Search className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                      <input
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search for courses, universities..."
-                        className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground py-3 text-base"
-                      />
-                    </div>
-                    <Button type="submit" variant="hero" size="lg" className="rounded-full px-6 shadow-lg">
-                      Search
-                    </Button>
-                  </div>
-                </div>
-              </motion.form>
-
-              {/* Trust Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="flex items-center gap-3"
-              >
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-gold text-gold" />
-                  ))}
-                </div>
-                <span className="text-white/70 text-sm font-medium">
-                  Rated 4.9 • <span className="text-white/50">Trusted by 10,000+ students</span>
-                </span>
-              </motion.div>
-
               {/* Popular Destinations */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                className="flex flex-wrap items-center gap-2 mt-8"
+                className="flex flex-wrap items-center gap-2 mt-16"
               >
                 <span className="text-sm text-white/50">Popular:</span>
-                {destinations.slice(0, 4).map((dest, index) => (
+                {destinations.map((dest, index) => (
                   <motion.a
                     key={dest.slug}
                     href={`/countries/${dest.slug}`}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: 0.55 + index * 0.05 }}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/10 hover:border-white/25 rounded-full text-sm text-white transition-all duration-300"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/5 hover:bg-white/15 backdrop-blur-md border border-white/10 hover:border-white/25 rounded-full text-sm text-white transition-all duration-300 shadow-sm"
                   >
                     <span>{dest.flag}</span>
                     <span className="font-medium">{dest.name}</span>
                   </motion.a>
                 ))}
               </motion.div>
+
             </div>
 
             {/* Right Content - Student Cards Fan Gallery */}
@@ -314,7 +261,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              className="relative hidden lg:flex justify-center items-center h-[480px] xl:h-[560px]"
+              className="relative hidden lg:flex justify-center items-center h-[540px] xl:h-[600px]"
             >
               {students.map((student, index) => {
                 const offset = index - 2;
@@ -322,8 +269,8 @@ const HeroSection = () => {
                 const xOffset = offset * 130;
                 const zIndex = 5 - Math.abs(offset);
                 // Subtle height differences
-                const heights = [260, 290, 320, 290, 260];
-                const widths = [150, 165, 180, 165, 150];
+                const heights = [360, 400, 450, 400, 360];
+                const widths = [180, 200, 220, 200, 180];
                 const yOffsets = [25, 10, 0, 10, 25];
                 const rotation = offset * 2;
 
@@ -399,14 +346,14 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="relative flex lg:hidden justify-center items-center h-[280px] sm:h-[320px]"
+              className="relative flex lg:hidden justify-center items-center h-[340px] sm:h-[400px]"
             >
               {students.slice(0, 5).map((student, index) => {
                 const offset = index - 2;
                 const xOffset = offset * 70;
                 const zIndex = 5 - Math.abs(offset);
-                const heights = [170, 190, 210, 190, 170];
-                const widths = [90, 105, 120, 105, 90];
+                const heights = [220, 250, 280, 250, 220];
+                const widths = [110, 130, 150, 130, 110];
                 const yOffsets = [18, 8, 0, 8, 18];
                 const rotation = offset * 2;
 

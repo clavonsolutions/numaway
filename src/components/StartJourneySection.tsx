@@ -1,7 +1,8 @@
+"use client";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 import studentsImage from "@/assets/journey-students.jpg";
 import agentsImage from "@/assets/journey-agents.jpg";
@@ -81,7 +82,7 @@ const StartJourneySection = () => {
                 {/* Image */}
                 <div className="relative h-52 overflow-hidden">
                   <img
-                    src={card.image}
+                    src={(card.image as any)?.src || card.image as any}
                     alt={card.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -101,7 +102,7 @@ const StartJourneySection = () => {
                     className="w-fit bg-primary hover:bg-primary/90 text-primary-foreground"
                     asChild
                   >
-                    <Link to={card.link}>
+                    <Link href={card.link}>
                       {card.buttonText}
                     </Link>
                   </Button>

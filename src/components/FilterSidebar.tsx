@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { X, ChevronDown, ChevronUp, SlidersHorizontal } from "lucide-react";

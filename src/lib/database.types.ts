@@ -29,7 +29,7 @@ export interface Database {
           budget_range: string | null;
           ndpa_consent: boolean;
           ndpa_consent_at: string | null;
-          role: "student" | "admin" | "counsellor";
+          role: "student" | "admin" | "counsellor" | "super_admin";
           avatar_url: string | null;
           created_at: string;
           updated_at: string;

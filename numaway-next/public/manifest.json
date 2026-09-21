@@ -1,0 +1,39 @@
+{
+  "name": "Numaway Education",
+  "short_name": "Numaway",
+  "description": "Study abroad support for students from Africa and beyond — counselling, university matching, visa preparation and AI guidance.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A1E3F",
+  "theme_color": "#0A1E3F",
+  "orientation": "portrait-primary",
+  "lang": "en-NG",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Book a consultation",
+      "url": "/consultation",
+      "description": "Book a free study abroad consultation"
+    },
+    {
+      "name": "Ask Sage",
+      "url": "/sage",
+      "description": "Chat with Numaway AI assistant"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 import { ArrowRight, Globe } from "lucide-react";
 import { AnimatedCounter } from "@/hooks/useAnimatedCounter";
@@ -9,6 +10,7 @@ const countries = [
     universities: 150,
     flag: "🇬🇧",
     gradient: "from-blue-600 to-red-600",
+    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800",
   },
   {
     name: "United States",
@@ -16,6 +18,7 @@ const countries = [
     universities: 200,
     flag: "🇺🇸",
     gradient: "from-blue-700 to-red-500",
+    image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&q=80&w=800",
   },
   {
     name: "Canada",
@@ -23,6 +26,7 @@ const countries = [
     universities: 100,
     flag: "🇨🇦",
     gradient: "from-red-600 to-red-700",
+    image: "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&q=80&w=800",
   },
   {
     name: "Australia",
@@ -30,6 +34,7 @@ const countries = [
     universities: 80,
     flag: "🇦🇺",
     gradient: "from-blue-800 to-yellow-500",
+    image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&q=80&w=800",
   },
   {
     name: "Germany",
@@ -37,6 +42,7 @@ const countries = [
     universities: 90,
     flag: "🇩🇪",
     gradient: "from-black to-yellow-500",
+    image: "https://images.unsplash.com/photo-1534313314376-a72289b6181e?auto=format&fit=crop&q=80&w=800",
   },
   {
     name: "Ireland",
@@ -44,6 +50,7 @@ const countries = [
     universities: 40,
     flag: "🇮🇪",
     gradient: "from-green-600 to-orange-500",
+    image: "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?auto=format&fit=crop&q=80&w=800",
   },
 ];
 
@@ -102,18 +109,21 @@ const DestinationsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.08, ease: [0.4, 0, 0.2, 1] }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative overflow-hidden rounded-3xl bg-card border border-border/50 hover:border-secondary/30 shadow-soft hover:shadow-elevated transition-all duration-500"
+              className="group relative overflow-hidden rounded-3xl bg-card border border-border/50 hover:border-secondary/30 shadow-soft hover:shadow-elevated transition-all duration-500 flex flex-col"
             >
-              {/* Gradient Background with animation */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${country.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-              
+              {/* Image Banner */}
+              <div className="h-40 relative overflow-hidden flex-shrink-0">
+                <img src={country.image} alt={country.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+              </div>
+
               {/* Shine effect on hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10">
+                <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
               </div>
               
-              <div className="relative p-6 lg:p-8">
-                <div className="flex items-start justify-between mb-5">
+              <div className="relative p-6 pt-0 lg:p-8 lg:pt-0 z-20 flex-1 flex flex-col">
+                <div className="flex items-start justify-between mb-5 -mt-8">
                   {/* Flag with animated background */}
                   <div className="relative">
                     <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${country.gradient} opacity-20 blur-xl scale-150`} />
@@ -122,14 +132,14 @@ const DestinationsSection = () => {
                   
                   {/* Arrow button with enhanced styling */}
                   <motion.div 
-                    className="w-12 h-12 rounded-xl bg-muted/80 flex items-center justify-center group-hover:bg-secondary group-hover:text-secondary-foreground transition-all duration-300 shadow-sm"
+                    className="w-12 h-12 rounded-xl bg-muted/80 flex items-center justify-center group-hover:bg-secondary group-hover:text-secondary-foreground transition-all duration-300 shadow-sm mt-8"
                     whileHover={{ scale: 1.1, rotate: -10 }}
                   >
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
                   </motion.div>
                 </div>
                 
-                <h3 className="text-xl lg:text-2xl font-display font-bold text-foreground mb-2 group-hover:text-secondary transition-colors">
+                <h3 className="text-xl lg:text-2xl font-display font-bold text-foreground mb-2 group-hover:text-secondary transition-colors mt-auto">
                   {country.name}
                 </h3>
                 <p className="text-muted-foreground font-medium">

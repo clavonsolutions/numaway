@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { X, Plus, GraduationCap, MapPin, Trophy, DollarSign, Calendar, Briefcase, Award, ArrowRight } from "lucide-react";
