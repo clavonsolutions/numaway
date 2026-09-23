@@ -42,7 +42,7 @@ const SUGGESTED: { icon: typeof GraduationCap; text: string }[] = [
  *   Local dev:  set VITE_SAGE_API_BASE_URL=http://localhost:3001 in .env.local.
  */
 const BASE_URL = (
-  process.env.NEXT_PUBLIC_SAGE_API_BASE_URL || "" as string | undefined ?? ""
+  (process.env.NEXT_PUBLIC_SAGE_API_BASE_URL || "") as string | undefined ?? ""
 ).replace(/\/$/, "");
 const SAGE_CHAT_URL = `${BASE_URL}/api/sage/chat`;
 
