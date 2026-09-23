@@ -18,3 +18,4 @@
 - Continued the smooth transition of React Router paradigms into Next.js App Router patterns, ensuring any files using interactivity or Framer Motion hooks correctly leverage the `"use client"` directive to prevent server-side build errors.
 
 - Fixed TypeScript compilation issues for Next.js migration deployment
+- Fixed a Turbopack build syntax error in Sage.tsx by correctly isolating mixed || and ?? operators with parentheses.
