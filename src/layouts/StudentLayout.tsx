@@ -13,7 +13,7 @@ const navItems = [
   { icon: User, label: "Profile", path: "/app/profile" },
 ];
 
-const StudentLayout = ({ children }: { children: React.ReactNode }): JSX.Element => {
+const StudentLayoutInner = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const location = useLocation();
   const navigate = useNavigate();
   const { profile, signOut } = useAuth();
@@ -130,5 +130,16 @@ const StudentLayout = ({ children }: { children: React.ReactNode }): JSX.Element
     </div>
   );
 };
+
+import { Suspense } from "react";
+const StudentLayout = (props: { children: React.ReactNode }) => (
+  <Suspense fallback={
+    <div className="min-h-screen bg-muted/30 flex items-center justify-center">
+      <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  }>
+    <StudentLayoutInner {...props} />
+  </Suspense>
+);
 
 export default StudentLayout;

@@ -31,7 +31,7 @@ const navItems = [
   { label: "Settings", href: "/admin/settings", icon: Settings, roles: ["super_admin"] },
 ];
 
-const AdminLayout = ({ children }: { children: React.ReactNode }): JSX.Element => {
+const AdminLayoutInner = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const location = useLocation();
   const navigate = useNavigate();
   const { profile, signOut } = useAuth();
@@ -183,5 +183,16 @@ const AdminLayout = ({ children }: { children: React.ReactNode }): JSX.Element =
     </div>
   );
 };
+
+import { Suspense } from "react";
+const AdminLayout = (props: { children: React.ReactNode }) => (
+  <Suspense fallback={
+    <div className="min-h-screen bg-muted flex items-center justify-center">
+      <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  }>
+    <AdminLayoutInner {...props} />
+  </Suspense>
+);
 
 export default AdminLayout;

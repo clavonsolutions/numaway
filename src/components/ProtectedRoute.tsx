@@ -15,7 +15,7 @@ interface ProtectedRouteProps {
   allowedRoles?: ("student" | "counsellor" | "admin" | "super_admin")[];
 }
 
-const ProtectedRoute = ({
+const ProtectedRouteInner = ({
   children,
   allowedRoles,
 }: ProtectedRouteProps): JSX.Element | null => {
@@ -73,5 +73,16 @@ const ProtectedRoute = ({
 
   return <>{children}</>;
 };
+
+import { Suspense } from "react";
+const ProtectedRoute = (props: ProtectedRouteProps) => (
+  <Suspense fallback={
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <Loader2 className="w-8 h-8 animate-spin text-primary" />
+    </div>
+  }>
+    <ProtectedRouteInner {...props} />
+  </Suspense>
+);
 
 export default ProtectedRoute;

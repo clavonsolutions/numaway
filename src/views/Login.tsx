@@ -11,7 +11,7 @@ interface LoginProps {
   portalType?: "student" | "admin";
 }
 
-const Login = ({ portalType = "student" }: LoginProps): JSX.Element => {
+const LoginInner = ({ portalType = "student" }: LoginProps): JSX.Element => {
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -177,6 +177,17 @@ const Login = ({ portalType = "student" }: LoginProps): JSX.Element => {
     </div>
   );
 };
+
+import { Suspense } from "react";
+const Login = (props: LoginProps) => (
+  <Suspense fallback={
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center">
+      <Loader2 className="w-8 h-8 animate-spin text-primary" />
+    </div>
+  }>
+    <LoginInner {...props} />
+  </Suspense>
+);
 
 export default Login;
 

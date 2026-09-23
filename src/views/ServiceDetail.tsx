@@ -14,7 +14,7 @@ import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 
-const ServiceDetail = (): JSX.Element => {
+const ServiceDetailInner = (): JSX.Element => {
   const { slug: paramSlug } = useParams();
   const { pathname } = useLocation();
   // Static routes (e.g. services/application-support) have no :slug param — fall back to pathname
@@ -497,5 +497,16 @@ const ServiceDetail = (): JSX.Element => {
     </div>
   );
 };
+
+import { Suspense } from "react";
+const ServiceDetail = () => (
+  <Suspense fallback={
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  }>
+    <ServiceDetailInner />
+  </Suspense>
+);
 
 export default ServiceDetail;

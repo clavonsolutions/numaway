@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "@/lib/react-router-dom";
 import PageHead from "@/components/PageHead";
@@ -13,7 +13,7 @@ import { countries } from "@/data/countries";
 import { courses } from "@/data/courses";
 import { exams } from "@/data/exams";
 
-const Search = () => {
+const SearchInner = () => {
   const [searchParams] = useSearchParams();
   const initialQuery = searchParams.get("q") || "";
   const [query, setQuery] = useState(initialQuery);
@@ -269,6 +269,17 @@ const Search = () => {
     </div>
   );
 };
+
+import { Suspense } from "react";
+const Search = () => (
+  <Suspense fallback={
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  }>
+    <SearchInner />
+  </Suspense>
+);
 
 export default Search;
 
