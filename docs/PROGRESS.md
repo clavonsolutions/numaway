@@ -334,6 +334,19 @@ Visa Interviews pillar cluster:
 | Polish/EU virtual address | Pending Clavon-level |
 | "Nigerian Student Index" annual report | Phase 6+ — Marketing-led |
 
+
+
+| Surface | Activation trigger |
+|---|---|
+| Partner Portal (UNI domain) | First 2 paying university partnerships signed |
+| Ambassador & Referral Surface | First ambassador cohort ≥10 |
+| B2B AI Profiling (DIG-02 white-label) | 2 pilot institutions sign 12-month subscription |
+| Compliance Consulting (COM-03/CON-03) | First paid consulting engagement signed |
+| French content (fr-CA/fr-FR) | Numaway formally enters French-speaking markets |
+| Polish/EU virtual address | Pending Clavon-level |
+| "Nigerian Student Index" annual report | Phase 6+ — Marketing-led |
+
+
 ---
 
 ## NOTES FOR EVERY SESSION
