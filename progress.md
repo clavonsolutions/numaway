@@ -19,3 +19,5 @@
 
 - Fixed TypeScript compilation issues for Next.js migration deployment
 - Fixed a Turbopack build syntax error in Sage.tsx by correctly isolating mixed || and ?? operators with parentheses.
+- **Authentication System Migration:** 
+  - Decoupled from the Supabase SDK getUser method and migrated API routes to use a custom jose-based JWT approach (erifyToken). 

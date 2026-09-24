@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -99,7 +99,7 @@ const SagePage = (): JSX.Element => {
     if (!content || loading) return;
 
     // Unauthenticated users see a prompt to sign in rather than a silent 401.
-    if (!session?.access_token) {
+    if (!session?.user) {
       setMessages((prev) => [
         ...prev,
         { id: crypto.randomUUID(), role: "user", content },
@@ -131,7 +131,6 @@ const SagePage = (): JSX.Element => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${session.access_token}`,
         },
         body: JSON.stringify({ messages: history }),
       });
@@ -166,7 +165,7 @@ const SagePage = (): JSX.Element => {
   };
 
   const isFirstLoad = messages.length === 1;
-  const isAuthenticated = Boolean(session?.access_token);
+  const isAuthenticated = Boolean(session?.user);
 
   return (
     <div className="min-h-screen bg-background">

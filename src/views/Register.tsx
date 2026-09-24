@@ -1,7 +1,6 @@
-// @ts-nocheck
-﻿"use client";
+"use client";
 import { useState, type FormEvent } from "react";
-import { Link, useNavigate } from "@/lib/react-router-dom";
+import { Link } from "@/lib/react-router-dom";
 import PageHead from "@/components/PageHead";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
@@ -22,7 +21,7 @@ const TARGET_COUNTRIES = [
 const INTAKES = ["September 2025", "January 2026", "May 2026", "September 2026", "Later"];
 
 const Register = (): JSX.Element => {
-  const navigate = useNavigate();
+
 
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -45,52 +44,51 @@ const Register = (): JSX.Element => {
     setError(null);
     setLoading(true);
 
-    // 1. Create the Supabase auth user
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email: email.trim(),
-      password,
-      options: {
-        data: {
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.trim(),
+          password,
           full_name: fullName.trim(),
-          phone: phone.trim(),
-        },
-      },
-    });
-
-    if (authError) {
-      setLoading(false);
-      setError(authError.message);
-      return;
-    }
-
-    const userId = authData.user?.id;
-
-    if (userId) {
-      // 2. Upsert profile row (trigger also creates one, but we want the extra fields)
-      await supabase.from("profiles").upsert({
-        id: userId,
-        email: email.trim(),
-        full_name: fullName.trim(),
-        phone: phone.trim() || null,
-        target_country: targetCountry || null,
-        target_intake: targetIntake || null,
-        ndpa_consent: true,
-        ndpa_consent_at: new Date().toISOString(),
-        role: "student",
+        }),
       });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Failed to register.");
+        setLoading(false);
+        return;
+      }
+
+      const userId = data.user?.id;
+
+      if (userId) {
+        // Upsert profile row to add the extra fields
+        const payload = {
+          id: userId,
+          email: email.trim(),
+          full_name: fullName.trim(),
+          phone: phone.trim() || null,
+          target_country: targetCountry || null,
+          target_intake: targetIntake || null,
+          ndpa_consent: true,
+          ndpa_consent_at: new Date().toISOString(),
+          role: "student",
+        };
+        // @ts-expect-error type inference failure
+        await supabase.from("profiles").upsert(payload);
+      }
+
+      setSuccess(true);
+    } catch (err) {
+      console.error(err);
+      setError("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
-    setSuccess(true);
-
-    // If email confirmation is disabled (dev), navigate immediately
-    if (authData.session) {
-      navigate("/app", { replace: true });
-    }
-  }
-
-  if (success && !supabase.auth) {
-    // Unreachable branch — just satisfies TS
   }
 
   return (
@@ -118,10 +116,9 @@ const Register = (): JSX.Element => {
               <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <UserPlus className="w-8 h-8 text-secondary" />
               </div>
-              <h2 className="text-xl font-display font-bold mb-2">Check your inbox</h2>
+              <h2 className="text-xl font-display font-bold mb-2">Welcome aboard!</h2>
               <p className="text-muted-foreground text-sm mb-6">
-                We sent a confirmation link to <strong>{email}</strong>. Click it to activate
-                your account, then sign in.
+                Your account has been created. Check your inbox for a welcome email.
               </p>
               <Button asChild variant="default" size="lg" className="w-full">
                 <Link to="/login">Go to sign in</Link>
@@ -296,5 +293,3 @@ const Register = (): JSX.Element => {
 };
 
 export default Register;
-
-

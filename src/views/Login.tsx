@@ -3,7 +3,6 @@ import { useState, useEffect, type FormEvent } from "react";
 import { Link, useNavigate, useLocation } from "@/lib/react-router-dom";
 import PageHead from "@/components/PageHead";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/lib/supabase";
 import { Eye, EyeOff, Loader2, LogIn } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -18,7 +17,7 @@ const LoginInner = ({ portalType = "student" }: LoginProps): JSX.Element => {
   const defaultRoute = portalType === "admin" ? "/admin" : "/app";
   const from = (location.state as { from?: string } | null)?.from ?? defaultRoute;
 
-  const { session, profile } = useAuth();
+  const { session, profile, refreshAuth } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,6 +31,7 @@ const LoginInner = ({ portalType = "student" }: LoginProps): JSX.Element => {
         if (["admin", "counsellor", "super_admin"].includes(profile.role)) {
           navigate(from, { replace: true });
         } else {
+          // eslint-disable-next-line react-hooks/set-state-in-effect
           setError("You do not have permission to access the admin portal.");
         }
       } else {
@@ -49,19 +49,26 @@ const LoginInner = ({ portalType = "student" }: LoginProps): JSX.Element => {
     setError(null);
     setLoading(true);
 
-    const { error: authError } = await supabase.auth.signInWithPassword({
-      email: email.trim(),
-      password,
-    });
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim(), password }),
+      });
 
-    setLoading(false);
-
-    if (authError) {
-      setError("Invalid email or password. Please try again.");
-      return;
+      const data = await res.json();
+      
+      if (!res.ok) {
+        setError(data.error || "Invalid email or password. Please try again.");
+      } else {
+        await refreshAuth();
+        navigate(from, { replace: true });
+      }
+    } catch {
+      setError("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
-
-    navigate(from, { replace: true });
   }
 
   return (
@@ -190,5 +197,3 @@ const Login = (props: LoginProps) => (
 );
 
 export default Login;
-
-

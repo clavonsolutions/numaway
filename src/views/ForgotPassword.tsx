@@ -1,9 +1,8 @@
-﻿"use client";
+"use client";
 import { useState, type FormEvent } from "react";
 import { Link } from "@/lib/react-router-dom";
 import PageHead from "@/components/PageHead";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/lib/supabase";
 import { Mail, ArrowLeft, CheckCircle, Loader2 } from "lucide-react";
 
 const ForgotPassword = (): JSX.Element => {
@@ -17,18 +16,27 @@ const ForgotPassword = (): JSX.Element => {
     setError(null);
     setLoading(true);
 
-    const { error: resetError } = await supabase.auth.resetPasswordForEmail(
-      email.trim(),
-      { redirectTo: `${window.location.origin}/reset-password` }
-    );
-
-    setLoading(false);
-
-    if (resetError) {
-      setError("Something went wrong. Please try again.");
+    try {
+      const res = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      
+      const data = await res.json();
+      
+      if (!res.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        setLoading(false);
+        return;
+      }
+    } catch {
+      setError("An unexpected error occurred.");
+      setLoading(false);
       return;
     }
-
+    
+    setLoading(false);
     setSent(true);
   }
 
@@ -118,7 +126,7 @@ const ForgotPassword = (): JSX.Element => {
                 <Link to="/login">Back to sign in</Link>
               </Button>
               <p className="text-sm text-muted-foreground mt-4">
-                Didn't receive it?{" "}
+                Didn&apos;t receive it?{" "}
                 <button
                   onClick={() => setSent(false)}
                   className="text-secondary hover:underline"
@@ -136,5 +144,3 @@ const ForgotPassword = (): JSX.Element => {
 };
 
 export default ForgotPassword;
-
-

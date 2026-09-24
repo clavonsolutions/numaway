@@ -1,9 +1,9 @@
 "use client";
 
 /**
- * AuthContext — ADR-016 (Auth: Supabase Auth)
- * Provides auth state (session, user, profile) to the entire app.
- * Wrap in RootLayout so every route has access.
+ * AuthContext — Custom JWT Auth
+ * Provides auth state to the entire app.
+ * Hydrates state from /api/auth/me endpoint.
  */
 import {
   createContext,
@@ -11,78 +11,67 @@ import {
   useEffect,
   useState,
   type ReactNode,
+  useCallback,
 } from "react";
-import type { Session, User } from "@supabase/supabase-js";
-import { supabase } from "@/lib/supabase";
 import type { Profile } from "@/lib/database.types";
+import { useRouter, usePathname } from "next/navigation";
 
 interface AuthState {
-  session: Session | null;
-  user: User | null;
+  // session is kept for compatibility with old components, but is just a mock now
+  session: { user: Profile } | null;
+  user: Profile | null;
   profile: Profile | null;
   loading: boolean;
   signOut: () => Promise<void>;
+  refreshAuth: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthState | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }): JSX.Element {
-  const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const pathname = usePathname();
 
-  // Fetch the profile row for the current user
-  async function fetchProfile(userId: string): Promise<void> {
-    const { data } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", userId)
-      .single();
-    setProfile(data ?? null);
-  }
-
-  useEffect(() => {
-    // Hydrate session on mount.
-    // setLoading(false) is in .finally() so a network/storage error during
-    // hydration cannot leave the app in a permanent loading state.
-    supabase.auth.getSession().then(({ data: { session: s } }) => {
-      setSession(s);
-      setUser(s?.user ?? null);
-      if (s?.user) {
-        void fetchProfile(s.user.id);
-      }
-    }).finally(() => {
-      setLoading(false);
-    });
-
-    // Listen for auth state changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, s) => {
-      setSession(s);
-      setUser(s?.user ?? null);
-      if (s?.user) {
-        void fetchProfile(s.user.id);
+  const fetchProfile = useCallback(async () => {
+    try {
+      const res = await fetch("/api/auth/me");
+      if (res.ok) {
+        const data = await res.json();
+        setProfile(data.user);
       } else {
         setProfile(null);
       }
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
+    } catch (error) {
+      console.error("Auth fetch error:", error);
+      setProfile(null);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void fetchProfile();
+  }, [fetchProfile, pathname]); // Re-fetch on navigation to ensure sync (optional)
+
   async function signOut(): Promise<void> {
-    await supabase.auth.signOut();
-    setSession(null);
-    setUser(null);
-    setProfile(null);
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      setProfile(null);
+      router.push("/login");
+    } catch (e) {
+      console.error("Logout failed", e);
+    }
   }
 
+  // user and profile are effectively the same in this custom auth setup
+  const user = profile;
+  const session = profile ? { user: profile } : null;
+
   return (
-    <AuthContext.Provider value={{ session, user, profile, loading, signOut }}>
+    <AuthContext.Provider value={{ session, user, profile, loading, signOut, refreshAuth: fetchProfile }}>
       {children}
     </AuthContext.Provider>
   );

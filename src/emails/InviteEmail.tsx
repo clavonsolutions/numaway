@@ -12,13 +12,17 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-export const InviteEmail = () => (
+interface InviteEmailProps {
+  inviteUrl: string;
+}
+
+export const InviteEmail = ({ inviteUrl }: InviteEmailProps) => (
   <Html>
     <Head />
     <Preview>You have been invited to join NUMAWAY</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Heading style={h1}>You're Invited!</Heading>
+        <Heading style={h1}>You&apos;re Invited!</Heading>
         <Text style={text}>
           You have been invited to join the NUMAWAY platform as a member of our team or as a partner.
         </Text>
@@ -26,7 +30,7 @@ export const InviteEmail = () => (
           Click the button below to accept the invitation and set up your account.
         </Text>
         <Section style={btnContainer}>
-          <Button style={button} href="{{ .ConfirmationURL }}">
+          <Button style={button} href={inviteUrl}>
             Accept Invitation
           </Button>
         </Section>

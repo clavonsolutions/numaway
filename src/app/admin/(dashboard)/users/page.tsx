@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Users, Search, Plus, Loader2, Shield, User, GraduationCap } from "lucide-react";
+import { Search, Plus, Loader2, Shield, User, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/lib/supabase";
@@ -78,13 +78,10 @@ const AdminUsers = () => {
     setInviting(true);
 
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      
       const res = await fetch("/api/admin/users", {
         method: "POST",
         headers: { 
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${session?.access_token || ""}`
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({ email: inviteEmail, name: inviteName, role: inviteRole })
       });
@@ -105,8 +102,9 @@ const AdminUsers = () => {
         role: inviteRole,
         created_at: new Date().toISOString()
       }, ...users]);
-    } catch (err: any) {
-      toast({ title: "Invite Failed", description: err.message, variant: "destructive" });
+    } catch (err: unknown) {
+      const errMsg = err instanceof Error ? err.message : String(err);
+      toast({ title: "Invite Failed", description: errMsg, variant: "destructive" });
     } finally {
       setInviting(false);
     }
@@ -154,7 +152,7 @@ const AdminUsers = () => {
               <select 
                 className="w-full px-3 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
                 value={inviteRole}
-                onChange={(e) => setInviteRole(e.target.value as any)}
+                onChange={(e) => setInviteRole(e.target.value as "admin" | "counsellor")}
               >
                 <option value="counsellor">Counsellor</option>
                 <option value="admin">Admin</option>

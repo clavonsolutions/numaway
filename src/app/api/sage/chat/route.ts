@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { verifyToken } from "@/lib/jwt";
 
 // ---------------------------------------------------------------------------
 // Config
 // ---------------------------------------------------------------------------
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
+
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY ?? "";
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL ?? "claude-3-5-haiku-20241022";
 const MAX_TOKENS = 1024;
@@ -116,14 +115,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing authorisation token" }, { status: 401 });
     }
 
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-      return NextResponse.json({ error: "Auth service is not configured" }, { status: 503 });
-    }
-
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    const { data: authData, error: authError } = await supabase.auth.getUser(token);
-
-    if (authError ?? !authData.user) {
+    const payload = await verifyToken(token);
+    if (!payload || !payload.sub) {
       return NextResponse.json({ error: "Invalid or expired session" }, { status: 401 });
     }
 

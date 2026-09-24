@@ -12,7 +12,11 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-export const WelcomeEmail = () => (
+interface WelcomeEmailProps {
+  userName?: string;
+}
+
+export const WelcomeEmail = ({ userName }: WelcomeEmailProps = {}) => (
   <Html>
     <Head />
     <Preview>Confirm your email address - NUMAWAY</Preview>
@@ -20,15 +24,18 @@ export const WelcomeEmail = () => (
       <Container style={container}>
         <Heading style={h1}>Welcome to NUMAWAY Education!</Heading>
         <Text style={text}>
-          Thank you for signing up. Please confirm your email address to get started on your study abroad journey.
+          Hi {userName ? userName : "there"},
+        </Text>
+        <Text style={text}>
+          Thank you for signing up. We are excited to have you on board. Log in to get started on your study abroad journey.
         </Text>
         <Section style={btnContainer}>
-          <Button style={button} href="{{ .ConfirmationURL }}">
-            Confirm your email
+          <Button style={button} href="https://numaway.com/login">
+            Log In
           </Button>
         </Section>
         <Text style={text}>
-          If you didn't request this, you can safely ignore this email.
+          If you didn&apos;t request this, you can safely ignore this email.
         </Text>
         <Hr style={hr} />
         <Text style={footer}>

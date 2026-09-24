@@ -12,7 +12,11 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-export const ResetPasswordEmail = () => (
+interface ResetPasswordEmailProps {
+  resetLink?: string;
+}
+
+export const ResetPasswordEmail = ({ resetLink = "{{ .ConfirmationURL }}" }: ResetPasswordEmailProps) => (
   <Html>
     <Head />
     <Preview>Reset your NUMAWAY password</Preview>
@@ -23,12 +27,12 @@ export const ResetPasswordEmail = () => (
           You requested to reset the password for your NUMAWAY account. Click the button below to set a new password.
         </Text>
         <Section style={btnContainer}>
-          <Button style={button} href="{{ .ConfirmationURL }}">
+          <Button style={button} href={resetLink}>
             Reset Password
           </Button>
         </Section>
         <Text style={text}>
-          If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.
+          If you didn&apos;t request a password reset, you can safely ignore this email. Your password will remain unchanged.
         </Text>
         <Hr style={hr} />
         <Text style={footer}>

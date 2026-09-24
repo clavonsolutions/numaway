@@ -13,17 +13,17 @@ async function generateHtml() {
   }
 
   // Generate Welcome HTML
-  const welcomeHtml = await render(WelcomeEmail());
+  const welcomeHtml = await render(WelcomeEmail({ userName: "Student" }));
   fs.writeFileSync(path.join(outputDir, "welcome.html"), welcomeHtml);
   console.log("✅ Generated welcome.html");
 
   // Generate Reset Password HTML
-  const resetPasswordHtml = await render(ResetPasswordEmail());
+  const resetPasswordHtml = await render(ResetPasswordEmail({ resetLink: "{{ .ConfirmationURL }}" }));
   fs.writeFileSync(path.join(outputDir, "reset-password.html"), resetPasswordHtml);
   console.log("✅ Generated reset-password.html");
 
   // Generate Invite HTML
-  const inviteHtml = await render(InviteEmail());
+  const inviteHtml = await render(InviteEmail({ inviteUrl: "{{ .ConfirmationURL }}" }));
   fs.writeFileSync(path.join(outputDir, "invite.html"), inviteHtml);
   console.log("✅ Generated invite.html");
 

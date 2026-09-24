@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { r2Client, R2_BUCKET } from "@/lib/r2";
-import { createClient } from "@supabase/supabase-js";
+import { verifyToken } from "@/lib/jwt";
 
 export async function POST(req: Request) {
   try {
@@ -10,15 +10,13 @@ export async function POST(req: Request) {
     const token = authHeader?.startsWith("Bearer ") ? authHeader.slice(7).trim() : "";
     if (!token) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
-    const { data: { user } } = await supabase.auth.getUser(token);
-    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
+    const payload = await verifyToken(token);
+    if (!payload || !payload.sub) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     const { filename, contentType } = await req.json();
     if (!filename) return NextResponse.json({ error: "Missing filename" }, { status: 400 });
 
     const ext = filename.split(".").pop() ?? "bin";
-    const objectKey = "${user.id}/${Date.now()}.";
+    const objectKey = `${payload.sub}/${Date.now()}.${ext}`;
 
     const command = new PutObjectCommand({
       Bucket: R2_BUCKET,
